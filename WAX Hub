@@ -2673,8 +2673,9 @@ local script = G2L["64"];
 	
 	local player = Players.LocalPlayer
 	local flingLoop = nil
+	local flinging = false
 	
-	-- Создаём детектор (как в оригинале)
+	-- Создаём детектор
 	if not ReplicatedStorage:FindFirstChild("juisdfj0i32i0eidsuf0iok") then
 		local detection = Instance.new("Decal")
 		detection.Name = "juisdfj0i32i0eidsuf0iok"
@@ -2692,27 +2693,46 @@ local script = G2L["64"];
 				return 
 			end
 	
-			while isEnabled and not (c and c.Parent and hrp and hrp.Parent) do
-				RunService.Heartbeat:Wait()
-				c = player.Character
-				hrp = c and c:FindFirstChild("HumanoidRootPart")
+			-- Получаем персонажа
+			c = player.Character
+			if not c then return end
+	
+			hrp = c:FindFirstChild("HumanoidRootPart")
+			if not hrp then return end
+	
+			-- Проверяем, касается ли персонаж чего-то
+			local touching = false
+			for _, part in pairs(hrp:GetTouchingParts()) do
+				if part and part.Parent and part.Parent ~= c then
+					-- Проверяем, что это не триггер и не пуля
+					if part.CanCollide and not part:IsA("Terrain") then
+						touching = true
+						break
+					end
+				end
 			end
 	
-			if isEnabled and hrp then
+			-- Если касается другого объекта - применяем флинг
+			if touching and not flinging then
+				flinging = true
 				vel = hrp.Velocity
 				hrp.Velocity = vel * 10000 + Vector3.new(0, 10000, 0)
-				RunService.RenderStepped:Wait()
+	
+				task.wait(0.05)
 	
 				if c and c.Parent and hrp and hrp.Parent then
 					hrp.Velocity = vel
 				end
 	
-				RunService.Stepped:Wait()
+				task.wait(0.05)
 	
 				if c and c.Parent and hrp and hrp.Parent then
 					hrp.Velocity = vel + Vector3.new(0, movel, 0)
 					movel = movel * -1
 				end
+	
+				task.wait(0.1)
+				flinging = false
 			end
 		end)
 	end
@@ -2726,6 +2746,7 @@ local script = G2L["64"];
 				flingLoop:Disconnect()
 				flingLoop = nil
 			end
+			flinging = false
 			startFling()
 			print("💥 Touch Fling: ВКЛ")
 		else
@@ -2733,7 +2754,21 @@ local script = G2L["64"];
 				flingLoop:Disconnect()
 				flingLoop = nil
 			end
+			flinging = false
 			print("💥 Touch Fling: ВЫКЛ")
+		end
+	end)
+	
+	-- ===== ПРИ ПЕРЕРОЖДЕНИИ =====
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		flinging = false
+		if isEnabled then
+			if flingLoop then
+				flingLoop:Disconnect()
+				flingLoop = nil
+			end
+			startFling()
 		end
 	end)
 	
