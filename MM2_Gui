@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 51 | Scripts: 9 | Modules: 0 | Tags: 0
+-- Instances: 62 | Scripts: 10 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.MM2_Gui
@@ -21,8 +21,8 @@ G2L["1"]["ResetOnSpawn"] = false;
 G2L["2"] = Instance.new("Frame", G2L["1"]);
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2"]["Size"] = UDim2.new(0, 297, 0, 375);
-G2L["2"]["Position"] = UDim2.new(0.71104, 0, 0.33827, 0);
+G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
+G2L["2"]["Position"] = UDim2.new(0.70667, 0, 0.1337, 0);
 G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Name"] = [[MainFrame]];
 G2L["2"]["BackgroundTransparency"] = 0.25;
@@ -75,367 +75,441 @@ G2L["8"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 G2L["9"] = Instance.new("TextLabel", G2L["2"]);
 G2L["9"]["BorderSizePixel"] = 0;
 G2L["9"]["TextSize"] = 14;
-G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["9"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["9"]["Size"] = UDim2.new(0, 215, 0, 21);
 G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9"]["Name"] = [[MM2_Hero]];
 G2L["9"]["Position"] = UDim2.new(0.13805, 0, 0.20619, 0);
 
 
+-- StarterGui.MM2_Gui.MainFrame.MM2_Hero.UICorner
+G2L["a"] = Instance.new("UICorner", G2L["9"]);
+G2L["a"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Hero.UIStroke
+G2L["b"] = Instance.new("UIStroke", G2L["9"]);
+G2L["b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
 -- StarterGui.MM2_Gui.MainFrame.MM2_Sheriff
-G2L["a"] = Instance.new("TextLabel", G2L["2"]);
-G2L["a"]["BorderSizePixel"] = 0;
-G2L["a"]["TextSize"] = 14;
-G2L["a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["a"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a"]["Size"] = UDim2.new(0, 215, 0, 21);
-G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a"]["Name"] = [[MM2_Sheriff]];
-G2L["a"]["Position"] = UDim2.new(0.13805, 0, 0.2921, 0);
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_Murder
-G2L["b"] = Instance.new("TextLabel", G2L["2"]);
-G2L["b"]["BorderSizePixel"] = 0;
-G2L["b"]["TextSize"] = 14;
-G2L["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["b"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["b"]["Size"] = UDim2.new(0, 215, 0, 21);
-G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["b"]["Name"] = [[MM2_Murder]];
-G2L["b"]["Position"] = UDim2.new(0.138, 0, 0.379, 0);
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_ESP
-G2L["c"] = Instance.new("TextButton", G2L["2"]);
+G2L["c"] = Instance.new("TextLabel", G2L["2"]);
 G2L["c"]["BorderSizePixel"] = 0;
-G2L["c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["c"]["TextSize"] = 20;
-G2L["c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["c"]["TextSize"] = 14;
 G2L["c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["c"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["c"]["Size"] = UDim2.new(0, 215, 0, 21);
 G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["c"]["Text"] = [[    ESP]];
-G2L["c"]["Name"] = [[MM2_ESP]];
-G2L["c"]["Position"] = UDim2.new(0.0202, 0, 0.51203, 0);
+G2L["c"]["Name"] = [[MM2_Sheriff]];
+G2L["c"]["Position"] = UDim2.new(0.13805, 0, 0.2921, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_ESP.ImageLabel
-G2L["d"] = Instance.new("ImageLabel", G2L["c"]);
-G2L["d"]["BorderSizePixel"] = 0;
-G2L["d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["d"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["d"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["d"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+-- StarterGui.MM2_Gui.MainFrame.MM2_Sheriff.UICorner
+G2L["d"] = Instance.new("UICorner", G2L["c"]);
+G2L["d"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_ESP.UIStroke
+-- StarterGui.MM2_Gui.MainFrame.MM2_Sheriff.UIStroke
 G2L["e"] = Instance.new("UIStroke", G2L["c"]);
 G2L["e"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
+-- StarterGui.MM2_Gui.MainFrame.MM2_Murder
+G2L["f"] = Instance.new("TextLabel", G2L["2"]);
+G2L["f"]["BorderSizePixel"] = 0;
+G2L["f"]["TextSize"] = 14;
+G2L["f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["f"]["Size"] = UDim2.new(0, 215, 0, 21);
+G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["Name"] = [[MM2_Murder]];
+G2L["f"]["Position"] = UDim2.new(0.138, 0, 0.379, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Murder.UICorner
+G2L["10"] = Instance.new("UICorner", G2L["f"]);
+G2L["10"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Murder.UIStroke
+G2L["11"] = Instance.new("UIStroke", G2L["f"]);
+G2L["11"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["11"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP
+G2L["12"] = Instance.new("TextButton", G2L["2"]);
+G2L["12"]["BorderSizePixel"] = 0;
+G2L["12"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["12"]["TextSize"] = 20;
+G2L["12"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["12"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["12"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["12"]["Text"] = [[    ESP]];
+G2L["12"]["Name"] = [[MM2_ESP]];
+G2L["12"]["Position"] = UDim2.new(0.01684, 0, 0.46069, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.ImageLabel
+G2L["13"] = Instance.new("ImageLabel", G2L["12"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["13"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.UIStroke
+G2L["14"] = Instance.new("UIStroke", G2L["12"]);
+G2L["14"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["14"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
 -- StarterGui.MM2_Gui.MainFrame.MM2_ESP.UICorner
-G2L["f"] = Instance.new("UICorner", G2L["c"]);
-G2L["f"]["CornerRadius"] = UDim.new(0, 15);
+G2L["15"] = Instance.new("UICorner", G2L["12"]);
+G2L["15"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ESP.LocalScript
-G2L["10"] = Instance.new("LocalScript", G2L["c"]);
+G2L["16"] = Instance.new("LocalScript", G2L["12"]);
 
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm
-G2L["11"] = Instance.new("TextButton", G2L["2"]);
-G2L["11"]["BorderSizePixel"] = 0;
-G2L["11"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["11"]["TextSize"] = 20;
-G2L["11"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["11"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["11"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["11"]["Text"] = [[    AutoFarm]];
-G2L["11"]["Name"] = [[MM2_Autofarm]];
-G2L["11"]["Position"] = UDim2.new(0.0202, 0, 0.6424, 0);
+G2L["17"] = Instance.new("TextButton", G2L["2"]);
+G2L["17"]["BorderSizePixel"] = 0;
+G2L["17"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["17"]["TextSize"] = 20;
+G2L["17"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["17"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["17"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["17"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["17"]["Text"] = [[    AutoFarm]];
+G2L["17"]["Name"] = [[MM2_Autofarm]];
+G2L["17"]["Position"] = UDim2.new(0.01684, 0, 0.57151, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.ImageLabel
-G2L["12"] = Instance.new("ImageLabel", G2L["11"]);
-G2L["12"]["BorderSizePixel"] = 0;
-G2L["12"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["12"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["12"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["12"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+G2L["18"] = Instance.new("ImageLabel", G2L["17"]);
+G2L["18"]["BorderSizePixel"] = 0;
+G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["18"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.UIStroke
-G2L["13"] = Instance.new("UIStroke", G2L["11"]);
-G2L["13"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["13"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["19"] = Instance.new("UIStroke", G2L["17"]);
+G2L["19"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["19"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.UICorner
-G2L["14"] = Instance.new("UICorner", G2L["11"]);
-G2L["14"]["CornerRadius"] = UDim.new(0, 15);
+G2L["1a"] = Instance.new("UICorner", G2L["17"]);
+G2L["1a"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.LocalScript
-G2L["15"] = Instance.new("LocalScript", G2L["11"]);
+G2L["1b"] = Instance.new("LocalScript", G2L["17"]);
 
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles
-G2L["16"] = Instance.new("TextButton", G2L["2"]);
-G2L["16"]["BorderSizePixel"] = 0;
-G2L["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["16"]["TextSize"] = 20;
-G2L["16"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["16"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["16"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["16"]["Text"] = [[    Info]];
-G2L["16"]["Name"] = [[MM2_ShowRoles]];
-G2L["16"]["Position"] = UDim2.new(0.50505, 0, 0.51203, 0);
+G2L["1c"] = Instance.new("TextButton", G2L["2"]);
+G2L["1c"]["BorderSizePixel"] = 0;
+G2L["1c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["1c"]["TextSize"] = 20;
+G2L["1c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1c"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1c"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1c"]["Text"] = [[    Info]];
+G2L["1c"]["Name"] = [[MM2_ShowRoles]];
+G2L["1c"]["Position"] = UDim2.new(0.50168, 0, 0.46069, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.ImageLabel
-G2L["17"] = Instance.new("ImageLabel", G2L["16"]);
-G2L["17"]["BorderSizePixel"] = 0;
-G2L["17"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["17"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["17"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["17"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+G2L["1d"] = Instance.new("ImageLabel", G2L["1c"]);
+G2L["1d"]["BorderSizePixel"] = 0;
+G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["1d"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UIStroke
-G2L["18"] = Instance.new("UIStroke", G2L["16"]);
-G2L["18"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["18"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["1e"] = Instance.new("UIStroke", G2L["1c"]);
+G2L["1e"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UICorner
-G2L["19"] = Instance.new("UICorner", G2L["16"]);
-G2L["19"]["CornerRadius"] = UDim.new(0, 15);
+G2L["1f"] = Instance.new("UICorner", G2L["1c"]);
+G2L["1f"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
-G2L["1a"] = Instance.new("LocalScript", G2L["16"]);
+G2L["20"] = Instance.new("LocalScript", G2L["1c"]);
 
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP
-G2L["1b"] = Instance.new("TextButton", G2L["2"]);
-G2L["1b"]["BorderSizePixel"] = 0;
-G2L["1b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["1b"]["TextSize"] = 20;
-G2L["1b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1b"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1b"]["Text"] = [[    GunESP]];
-G2L["1b"]["Name"] = [[MM2_GunESP]];
-G2L["1b"]["Position"] = UDim2.new(0.50505, 0, 0.63963, 0);
+G2L["21"] = Instance.new("TextButton", G2L["2"]);
+G2L["21"]["BorderSizePixel"] = 0;
+G2L["21"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["21"]["TextSize"] = 20;
+G2L["21"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["21"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["21"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["21"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["21"]["Text"] = [[    GunESP]];
+G2L["21"]["Name"] = [[MM2_GunESP]];
+G2L["21"]["Position"] = UDim2.new(0.50168, 0, 0.56874, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.ImageLabel
-G2L["1c"] = Instance.new("ImageLabel", G2L["1b"]);
-G2L["1c"]["BorderSizePixel"] = 0;
-G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1c"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["1c"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1c"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+G2L["22"] = Instance.new("ImageLabel", G2L["21"]);
+G2L["22"]["BorderSizePixel"] = 0;
+G2L["22"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["22"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.UIStroke
-G2L["1d"] = Instance.new("UIStroke", G2L["1b"]);
-G2L["1d"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["1d"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["23"] = Instance.new("UIStroke", G2L["21"]);
+G2L["23"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["23"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.UICorner
-G2L["1e"] = Instance.new("UICorner", G2L["1b"]);
-G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
+G2L["24"] = Instance.new("UICorner", G2L["21"]);
+G2L["24"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.LocalScript
-G2L["1f"] = Instance.new("LocalScript", G2L["1b"]);
+G2L["25"] = Instance.new("LocalScript", G2L["21"]);
 
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer
-G2L["20"] = Instance.new("TextButton", G2L["2"]);
-G2L["20"]["BorderSizePixel"] = 0;
-G2L["20"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["20"]["TextSize"] = 20;
-G2L["20"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["20"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["20"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["20"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["20"]["Text"] = [[   MurderWIN]];
-G2L["20"]["Name"] = [[MM2_KillMurderer]];
-G2L["20"]["Position"] = UDim2.new(0.0202, 0, 0.76706, 0);
+G2L["26"] = Instance.new("TextButton", G2L["2"]);
+G2L["26"]["BorderSizePixel"] = 0;
+G2L["26"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["26"]["TextSize"] = 20;
+G2L["26"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["26"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["26"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["Text"] = [[   MurderWIN]];
+G2L["26"]["Name"] = [[MM2_KillMurderer]];
+G2L["26"]["Position"] = UDim2.new(0.01684, 0, 0.67906, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.ImageLabel
-G2L["21"] = Instance.new("ImageLabel", G2L["20"]);
-G2L["21"]["BorderSizePixel"] = 0;
-G2L["21"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["21"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["21"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["21"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+G2L["27"] = Instance.new("ImageLabel", G2L["26"]);
+G2L["27"]["BorderSizePixel"] = 0;
+G2L["27"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["27"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["27"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["27"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["27"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.UIStroke
-G2L["22"] = Instance.new("UIStroke", G2L["20"]);
-G2L["22"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["22"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.UICorner
-G2L["23"] = Instance.new("UICorner", G2L["20"]);
-G2L["23"]["CornerRadius"] = UDim.new(0, 15);
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.LocalScript
-G2L["24"] = Instance.new("LocalScript", G2L["20"]);
-
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_PickGun
-G2L["25"] = Instance.new("TextButton", G2L["2"]);
-G2L["25"]["BorderSizePixel"] = 0;
-G2L["25"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["25"]["TextSize"] = 20;
-G2L["25"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["25"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["25"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["25"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["25"]["Text"] = [[    PickUpGun]];
-G2L["25"]["Name"] = [[MM2_PickGun]];
-G2L["25"]["Position"] = UDim2.new(0.50505, 0, 0.76429, 0);
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.ImageLabel
-G2L["26"] = Instance.new("ImageLabel", G2L["25"]);
-G2L["26"]["BorderSizePixel"] = 0;
-G2L["26"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["26"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["26"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["26"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
-G2L["27"] = Instance.new("LocalScript", G2L["25"]);
-
-
-
--- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UIStroke
-G2L["28"] = Instance.new("UIStroke", G2L["25"]);
+G2L["28"] = Instance.new("UIStroke", G2L["26"]);
 G2L["28"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["28"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UICorner
-G2L["29"] = Instance.new("UICorner", G2L["25"]);
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.UICorner
+G2L["29"] = Instance.new("UICorner", G2L["26"]);
 G2L["29"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Color
-G2L["2a"] = Instance.new("TextButton", G2L["2"]);
-G2L["2a"]["BorderSizePixel"] = 0;
-G2L["2a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["2a"]["TextSize"] = 20;
-G2L["2a"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["2a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2a"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["2a"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["2a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2a"]["Text"] = [[      Color]];
-G2L["2a"]["Name"] = [[Settings_Color]];
-G2L["2a"]["Position"] = UDim2.new(0.01891, 0, 0.88915, 0);
-
-
--- StarterGui.MM2_Gui.MainFrame.Settings_Color.LocalScript
-G2L["2b"] = Instance.new("LocalScript", G2L["2a"]);
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.LocalScript
+G2L["2a"] = Instance.new("LocalScript", G2L["26"]);
 
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Color.ImageLabel
-G2L["2c"] = Instance.new("ImageLabel", G2L["2a"]);
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun
+G2L["2b"] = Instance.new("TextButton", G2L["2"]);
+G2L["2b"]["BorderSizePixel"] = 0;
+G2L["2b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["2b"]["TextSize"] = 20;
+G2L["2b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["2b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2b"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2b"]["Text"] = [[    PickUpGun]];
+G2L["2b"]["Name"] = [[MM2_PickGun]];
+G2L["2b"]["Position"] = UDim2.new(0.50168, 0, 0.67629, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.ImageLabel
+G2L["2c"] = Instance.new("ImageLabel", G2L["2b"]);
 G2L["2c"]["BorderSizePixel"] = 0;
 G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2c"]["Image"] = [[rbxassetid://71447950485901]];
 G2L["2c"]["Size"] = UDim2.new(0, 23, 0, 23);
 G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2c"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+G2L["2c"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Color.UICorner
-G2L["2d"] = Instance.new("UICorner", G2L["2a"]);
-G2L["2d"]["CornerRadius"] = UDim.new(0, 15);
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
+G2L["2d"] = Instance.new("LocalScript", G2L["2b"]);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Color.UIStroke
-G2L["2e"] = Instance.new("UIStroke", G2L["2a"]);
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UIStroke
+G2L["2e"] = Instance.new("UIStroke", G2L["2b"]);
 G2L["2e"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["2e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UICorner
+G2L["2f"] = Instance.new("UICorner", G2L["2b"]);
+G2L["2f"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color
+G2L["30"] = Instance.new("TextButton", G2L["2"]);
+G2L["30"]["BorderSizePixel"] = 0;
+G2L["30"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["30"]["TextSize"] = 20;
+G2L["30"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["30"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["30"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["30"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["30"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["30"]["Text"] = [[      Color]];
+G2L["30"]["Name"] = [[Settings_Color]];
+G2L["30"]["Position"] = UDim2.new(0.01555, 0, 0.78625, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.LocalScript
+G2L["31"] = Instance.new("LocalScript", G2L["30"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.ImageLabel
+G2L["32"] = Instance.new("ImageLabel", G2L["30"]);
+G2L["32"]["BorderSizePixel"] = 0;
+G2L["32"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["32"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["32"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["32"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["32"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.UICorner
+G2L["33"] = Instance.new("UICorner", G2L["30"]);
+G2L["33"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.UIStroke
+G2L["34"] = Instance.new("UIStroke", G2L["30"]);
+G2L["34"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["34"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide
-G2L["2f"] = Instance.new("TextButton", G2L["2"]);
-G2L["2f"]["BorderSizePixel"] = 0;
-G2L["2f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["2f"]["TextSize"] = 20;
-G2L["2f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["2f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["2f"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2f"]["Text"] = [[      Hide Gui]];
-G2L["2f"]["Name"] = [[MM2_Settings_Hide]];
-G2L["2f"]["Position"] = UDim2.new(0.50385, 0, 0.88421, 0);
+G2L["35"] = Instance.new("TextButton", G2L["2"]);
+G2L["35"]["BorderSizePixel"] = 0;
+G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["35"]["TextSize"] = 20;
+G2L["35"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["35"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["35"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["35"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["35"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["35"]["Text"] = [[      Hide Gui]];
+G2L["35"]["Name"] = [[MM2_Settings_Hide]];
+G2L["35"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
-G2L["30"] = Instance.new("LocalScript", G2L["2f"]);
+G2L["36"] = Instance.new("LocalScript", G2L["35"]);
 
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.ImageLabel
-G2L["31"] = Instance.new("ImageLabel", G2L["2f"]);
-G2L["31"]["BorderSizePixel"] = 0;
-G2L["31"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["31"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["31"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["31"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["31"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+G2L["37"] = Instance.new("ImageLabel", G2L["35"]);
+G2L["37"]["BorderSizePixel"] = 0;
+G2L["37"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["37"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["37"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["37"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["37"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UICorner
-G2L["32"] = Instance.new("UICorner", G2L["2f"]);
-G2L["32"]["CornerRadius"] = UDim.new(0, 15);
+G2L["38"] = Instance.new("UICorner", G2L["35"]);
+G2L["38"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UIStroke
-G2L["33"] = Instance.new("UIStroke", G2L["2f"]);
-G2L["33"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["33"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["39"] = Instance.new("UIStroke", G2L["35"]);
+G2L["39"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["39"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui
+G2L["3a"] = Instance.new("TextButton", G2L["2"]);
+G2L["3a"]["BorderSizePixel"] = 0;
+G2L["3a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["3a"]["TextSize"] = 20;
+G2L["3a"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3a"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3a"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["3a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3a"]["Text"] = [[    Delete Gui]];
+G2L["3a"]["Name"] = [[MM2_DeleteGui]];
+G2L["3a"]["Position"] = UDim2.new(0.26816, 0, 0.89139, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui.LocalScript
+G2L["3b"] = Instance.new("LocalScript", G2L["3a"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui.ImageLabel
+G2L["3c"] = Instance.new("ImageLabel", G2L["3a"]);
+G2L["3c"]["BorderSizePixel"] = 0;
+G2L["3c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3c"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["3c"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3c"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui.UICorner
+G2L["3d"] = Instance.new("UICorner", G2L["3a"]);
+G2L["3d"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui.UIStroke
+G2L["3e"] = Instance.new("UIStroke", G2L["3a"]);
+G2L["3e"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["3e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.MM2_Gui.MainFrame.WAX_MM2.LocalScript
@@ -495,8 +569,8 @@ local script = G2L["6"];
 end;
 task.spawn(C_6);
 -- StarterGui.MM2_Gui.MainFrame.MM2_ESP.LocalScript
-local function C_10()
-local script = G2L["10"];
+local function C_16()
+local script = G2L["16"];
 	-- ==========================================
 	-- MM2_ESP (ВКЛ/ВЫКЛ) - ИСПРАВЛЕННЫЙ
 	-- ==========================================
@@ -729,10 +803,10 @@ local script = G2L["10"];
 	
 	print("✅ MM2_ESP загружена!")
 end;
-task.spawn(C_10);
+task.spawn(C_16);
 -- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.LocalScript
-local function C_15()
-local script = G2L["15"];
+local function C_1b()
+local script = G2L["1b"];
 	-- ==========================================
 	-- MM2_AutoFarm (РАБОЧАЯ ВЕРСИЯ)
 	-- ==========================================
@@ -1089,12 +1163,12 @@ local script = G2L["15"];
 	
 	print("✅ MM2_AutoFarm загружена!")
 end;
-task.spawn(C_15);
+task.spawn(C_1b);
 -- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
-local function C_1a()
-local script = G2L["1a"];
+local function C_20()
+local script = G2L["20"];
 	-- ==========================================
-	-- MM2_ShowRoles (ИСПРАВЛЕННЫЙ)
+	-- MM2_ShowRoles (ИСПРАВЛЕННЫЙ ПОИСК)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -1104,52 +1178,45 @@ local script = G2L["1a"];
 	local isActive = false
 	local updateLoop = nil
 	
-	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ ======
-	local mainFrame = button.Parent.Parent
+	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ (ПРЯМО В MAINFRAME) ======
+	local mainFrame = button.Parent  -- Кнопка находится в MainFrame
 	local murderText = mainFrame:FindFirstChild("MM2_Murder")
 	local sheriffText = mainFrame:FindFirstChild("MM2_Sheriff")
 	local heroText = mainFrame:FindFirstChild("MM2_Hero")
 	
+	print("🔍 MM2_Murder найден:", murderText ~= nil)
+	print("🔍 MM2_Sheriff найден:", sheriffText ~= nil)
+	print("🔍 MM2_Hero найден:", heroText ~= nil)
+	
 	if not murderText or not sheriffText then
-		warn("❌ Текстлейблы не найдены!")
+		warn("❌ Текстлейблы не найдены в MainFrame!")
 		return
 	end
 	
-	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ (С ДРУГИМ ПУТЁМ) ======
+	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
 	local function fetchRoles()
-		-- Пробуем через ReplicatedStorage
 		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
 		if not getPlayerData then
-			-- Пробуем через RemoteEvent (если есть)
-			local remoteEvent = ReplicatedStorage:FindFirstChild("GetPlayerDataEvent", true)
-			if remoteEvent then
-				getPlayerData = remoteEvent
-			else
-				warn("❌ GetPlayerData не найден!")
-				return
-			end
+			warn("❌ GetPlayerData не найден в ReplicatedStorage!")
+			return
 		end
 	
-		local data
-		local success, err = pcall(function()
-			if getPlayerData:IsA("RemoteFunction") then
-				data = getPlayerData:InvokeServer()
-			elseif getPlayerData:IsA("RemoteEvent") then
-				-- Для RemoteEvent нужно использовать OnClientEvent
-				warn("⚠️ Это RemoteEvent, а не RemoteFunction!")
-				return
-			end
+		print("🔄 Вызов GetPlayerData...")
+		local success, data = pcall(function()
+			return getPlayerData:InvokeServer()
 		end)
 	
 		if not success then
-			warn("❌ Ошибка вызова:", err)
+			warn("❌ Ошибка InvokeServer:", data)
 			return
 		end
 	
-		if not data or type(data) ~= "table" then
-			warn("❌ Данные пустые или не таблица!")
+		if not data then
+			warn("❌ Данные пустые!")
 			return
 		end
+	
+		print("📊 Данные получены!")
 	
 		local Murder = ""
 		local Sheriff = ""
@@ -1165,32 +1232,30 @@ local script = G2L["1a"];
 			end
 		end
 	
-		-- Обновляем текстлейблы (принудительно)
-		if isActive then
-			if Murder ~= "" then
-				murderText.Text = "🔴 Маньяк: " .. Murder
-				murderText.TextColor3 = Color3.fromRGB(255, 50, 50)
-			else
-				murderText.Text = "🔴 Маньяк: ❓"
-				murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
-			end
+		print("🔴 Маньяк:", Murder or "❓")
+		print("🔵 Шериф:", Sheriff or "❓")
+		print("🟡 Герой:", Hero or "❓")
 	
-			if Sheriff ~= "" then
-				sheriffText.Text = "🔵 Шериф: " .. Sheriff
-				sheriffText.TextColor3 = Color3.fromRGB(50, 150, 255)
-			else
-				sheriffText.Text = "🔵 Шериф: ❓"
-				sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
-			end
+		-- Обновляем текст
+		if isActive then
+			murderText.Text = Murder ~= "" and ("🔴 Маньяк: " .. Murder) or "🔴 Маньяк: ❓"
+			murderText.TextColor3 = Murder ~= "" and Color3.fromRGB(255, 50, 50) or Color3.fromRGB(255, 100, 100)
+	
+			sheriffText.Text = Sheriff ~= "" and ("🔵 Шериф: " .. Sheriff) or "🔵 Шериф: ❓"
+			sheriffText.TextColor3 = Sheriff ~= "" and Color3.fromRGB(50, 150, 255) or Color3.fromRGB(100, 150, 255)
 	
 			if heroText then
-				if Hero ~= "" then
-					heroText.Text = "🟡 Герой: " .. Hero
-					heroText.TextColor3 = Color3.fromRGB(255, 200, 0)
-				else
-					heroText.Text = "🟡 Герой: ❓"
-					heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
-				end
+				heroText.Text = Hero ~= "" and ("🟡 Герой: " .. Hero) or "🟡 Герой: ❓"
+				heroText.TextColor3 = Hero ~= "" and Color3.fromRGB(255, 200, 0) or Color3.fromRGB(200, 150, 0)
+			end
+		else
+			murderText.Text = "🔴 Маньяк: ❓"
+			murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
+			sheriffText.Text = "🔵 Шериф: ❓"
+			sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
+			if heroText then
+				heroText.Text = "🟡 Герой: ❓"
+				heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
 			end
 		end
 	end
@@ -1241,10 +1306,10 @@ local script = G2L["1a"];
 	
 	print("✅ MM2_ShowRoles загружена!")
 end;
-task.spawn(C_1a);
+task.spawn(C_20);
 -- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.LocalScript
-local function C_1f()
-local script = G2L["1f"];
+local function C_25()
+local script = G2L["25"];
 	-- ==========================================
 	-- MM2_GunESP (ПОДСВЕТКА GunDrop)
 	-- ==========================================
@@ -1334,10 +1399,10 @@ local script = G2L["1f"];
 	
 	print("✅ MM2_GunESP загружена (подсветка GunDrop)!")
 end;
-task.spawn(C_1f);
+task.spawn(C_25);
 -- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.LocalScript
-local function C_24()
-local script = G2L["24"];
+local function C_2a()
+local script = G2L["2a"];
 	-- ==========================================
 	-- MM2_KillMurderer (УБИТЬ УБИЙЦУ)
 	-- ==========================================
@@ -1433,10 +1498,10 @@ local script = G2L["24"];
 	
 	print("✅ MM2_KillMurderer загружена!")
 end;
-task.spawn(C_24);
+task.spawn(C_2a);
 -- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
-local function C_27()
-local script = G2L["27"];
+local function C_2d()
+local script = G2L["2d"];
 	-- ==========================================
 	-- MM2_PickGun (ТЕЛЕПОРТ К ПИСТОЛЕТУ И ОБРАТНО)
 	-- ==========================================
@@ -1491,10 +1556,10 @@ local script = G2L["27"];
 	
 	print("✅ MM2_PickGun загружена!")
 end;
-task.spawn(C_27);
+task.spawn(C_2d);
 -- StarterGui.MM2_Gui.MainFrame.Settings_Color.LocalScript
-local function C_2b()
-local script = G2L["2b"];
+local function C_31()
+local script = G2L["31"];
 	-- ==========================================
 	-- СМЕНА ЦВЕТОВОЙ ТЕМЫ ХАБА (С РАДУГОЙ)
 	-- ==========================================
@@ -1674,10 +1739,10 @@ local script = G2L["2b"];
 	applyTheme(1)
 	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
 end;
-task.spawn(C_2b);
+task.spawn(C_31);
 -- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
-local function C_30()
-local script = G2L["30"];
+local function C_36()
+local script = G2L["36"];
 	-- ==========================================
 	-- MM2_Settings_Hide (НАЗНАЧЕНИЕ БИНДА)
 	-- ==========================================
@@ -1725,6 +1790,45 @@ local script = G2L["30"];
 	
 	print("✅ MM2_Settings_Hide ЗАГРУЖЕНА!")
 end;
-task.spawn(C_30);
+task.spawn(C_36);
+-- StarterGui.MM2_Gui.MainFrame.MM2_DeleteGui.LocalScript
+local function C_3b()
+local script = G2L["3b"];
+	-- ==========================================
+	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	
+	button.MouseButton1Click:Connect(function()
+		local playerGui = player:WaitForChild("PlayerGui")
+	
+		-- Ищем MM2_Gui
+		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
+	
+		if mm2Gui then
+			mm2Gui:Destroy()
+			print("🗑️ MM2_Gui удалён из игры!")
+	
+			-- Уведомление
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "MM2 GUI",
+				Text = "MM2 GUI удалён!",
+				Duration = 2
+			})
+		else
+			print("❌ MM2_Gui не найден в PlayerGui!")
+	
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "MM2 GUI",
+				Text = "MM2 GUI не найден!",
+				Duration = 2
+			})
+		end
+	end)
+	
+	print("✅ MM2_DeleteGui загружена!")
+end;
+task.spawn(C_3b);
 
 return G2L["1"], require;
