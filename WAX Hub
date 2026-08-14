@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 56 | Scripts: 6 | Modules: 0 | Tags: 0
+-- Instances: 97 | Scripts: 13 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.ScreenGui
@@ -42,6 +42,7 @@ G2L["4"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["5"] = Instance.new("ScrollingFrame", G2L["2"]);
 G2L["5"]["Active"] = true;
 G2L["5"]["BorderSizePixel"] = 0;
+G2L["5"]["CanvasPosition"] = Vector2.new(0, 100);
 G2L["5"]["Name"] = [[RightFrame]];
 G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["5"]["Size"] = UDim2.new(0, 423, 0, 335);
@@ -195,7 +196,7 @@ G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["14"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl
 G2L["15"] = Instance.new("TextButton", G2L["5"]);
 G2L["15"]["BorderSizePixel"] = 0;
 G2L["15"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -206,27 +207,27 @@ G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["15"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["15"]["Text"] = [[      Cntrl TP]];
-G2L["15"]["Name"] = [[Universal_CntrlDel]];
+G2L["15"]["Name"] = [[Universal_Cntrl]];
 G2L["15"]["Position"] = UDim2.new(0.01891, 0, 0.01938, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.UICorner
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.UICorner
 G2L["16"] = Instance.new("UICorner", G2L["15"]);
 G2L["16"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.UIStroke
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.UIStroke
 G2L["17"] = Instance.new("UIStroke", G2L["15"]);
 G2L["17"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["17"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.LocalScript
 G2L["18"] = Instance.new("LocalScript", G2L["15"]);
 
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.ImageLabel
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.ImageLabel
 G2L["19"] = Instance.new("ImageLabel", G2L["15"]);
 G2L["19"]["BorderSizePixel"] = 0;
 G2L["19"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -236,7 +237,7 @@ G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["19"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel
 G2L["1a"] = Instance.new("TextButton", G2L["5"]);
 G2L["1a"]["BorderSizePixel"] = 0;
 G2L["1a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -247,27 +248,27 @@ G2L["1a"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["1a"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1a"]["Text"] = [[      Cntrl Delete]];
-G2L["1a"]["Name"] = [[Universal_Cntrl]];
+G2L["1a"]["Name"] = [[Universal_CntrlDel]];
 G2L["1a"]["Position"] = UDim2.new(0.01891, 0, 0.07752, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.UICorner
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.UICorner
 G2L["1b"] = Instance.new("UICorner", G2L["1a"]);
 G2L["1b"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.UIStroke
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.UIStroke
 G2L["1c"] = Instance.new("UIStroke", G2L["1a"]);
 G2L["1c"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["1c"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.LocalScript
 G2L["1d"] = Instance.new("LocalScript", G2L["1a"]);
 
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.ImageLabel
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.ImageLabel
 G2L["1e"] = Instance.new("ImageLabel", G2L["1a"]);
 G2L["1e"]["BorderSizePixel"] = 0;
 G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -277,217 +278,567 @@ G2L["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1e"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.TextLabel
-G2L["1f"] = Instance.new("TextLabel", G2L["2"]);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK
+G2L["1f"] = Instance.new("TextButton", G2L["5"]);
 G2L["1f"]["BorderSizePixel"] = 0;
-G2L["1f"]["TextSize"] = 20;
 G2L["1f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1f"]["TextSize"] = 20;
 G2L["1f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["1f"]["BackgroundTransparency"] = 0.2;
-G2L["1f"]["Size"] = UDim2.new(0, 605, 0, 50);
+G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1f"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1f"]["Text"] = [[            WAX HUB]];
+G2L["1f"]["Text"] = [[      Anti AFK]];
+G2L["1f"]["Name"] = [[Universal_AntiAFK]];
+G2L["1f"]["Position"] = UDim2.new(0.019, 0, 0.137, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.TextLabel.UICorner
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK.UICorner
 G2L["20"] = Instance.new("UICorner", G2L["1f"]);
 G2L["20"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.TextLabel.UIStroke
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK.UIStroke
 G2L["21"] = Instance.new("UIStroke", G2L["1f"]);
 G2L["21"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["21"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK.LocalScript
 G2L["22"] = Instance.new("LocalScript", G2L["1f"]);
-G2L["22"]["Name"] = [[Dragable]];
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame
-G2L["23"] = Instance.new("Frame", G2L["2"]);
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK.ImageLabel
+G2L["23"] = Instance.new("ImageLabel", G2L["1f"]);
 G2L["23"]["BorderSizePixel"] = 0;
 G2L["23"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["23"]["Size"] = UDim2.new(0, 179, 0, 336);
-G2L["23"]["Position"] = UDim2.new(0, 0, 0.1292, 0);
+G2L["23"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["23"]["Size"] = UDim2.new(0, 23, 0, 23);
 G2L["23"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["23"]["Name"] = [[LeftFrame]];
-G2L["23"]["BackgroundTransparency"] = 0.45;
+G2L["23"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.UIStroke
-G2L["24"] = Instance.new("UIStroke", G2L["23"]);
-G2L["24"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["24"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom
+G2L["24"] = Instance.new("TextButton", G2L["5"]);
+G2L["24"]["BorderSizePixel"] = 0;
+G2L["24"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["24"]["TextSize"] = 20;
+G2L["24"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["24"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["24"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["24"]["Size"] = UDim2.new(0, 406, 0, 39);
+G2L["24"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["24"]["Text"] = [[      Infinity zoom]];
+G2L["24"]["Name"] = [[Universal_InfinityZoom]];
+G2L["24"]["Position"] = UDim2.new(0.019, 0, 0.196, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.UICorner
-G2L["25"] = Instance.new("UICorner", G2L["23"]);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom.UICorner
+G2L["25"] = Instance.new("UICorner", G2L["24"]);
 G2L["25"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Home
-G2L["26"] = Instance.new("TextButton", G2L["23"]);
-G2L["26"]["BorderSizePixel"] = 0;
-G2L["26"]["TextSize"] = 24;
-G2L["26"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["26"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["26"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["26"]["BackgroundTransparency"] = 0.7;
-G2L["26"]["Size"] = UDim2.new(0, 164, 0, 47);
-G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["26"]["Text"] = [[Home]];
-G2L["26"]["Name"] = [[Home]];
-G2L["26"]["Position"] = UDim2.new(0.03816, 0, 0.02365, 0);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom.UIStroke
+G2L["26"] = Instance.new("UIStroke", G2L["24"]);
+G2L["26"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["26"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Home.UIStroke
-G2L["27"] = Instance.new("UIStroke", G2L["26"]);
-G2L["27"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["27"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom.LocalScript
+G2L["27"] = Instance.new("LocalScript", G2L["24"]);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Home.UICorner
-G2L["28"] = Instance.new("UICorner", G2L["26"]);
-G2L["28"]["CornerRadius"] = UDim.new(0, 25);
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom.ImageLabel
+G2L["28"] = Instance.new("ImageLabel", G2L["24"]);
+G2L["28"]["BorderSizePixel"] = 0;
+G2L["28"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["28"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Games
-G2L["29"] = Instance.new("TextButton", G2L["23"]);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam
+G2L["29"] = Instance.new("TextButton", G2L["5"]);
 G2L["29"]["BorderSizePixel"] = 0;
-G2L["29"]["TextSize"] = 24;
+G2L["29"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["29"]["TextSize"] = 20;
 G2L["29"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["29"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["29"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["29"]["BackgroundTransparency"] = 0.7;
-G2L["29"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["29"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["29"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["29"]["Text"] = [[Games]];
-G2L["29"]["Name"] = [[Games]];
-G2L["29"]["Position"] = UDim2.new(0.038, 0, 0.18, 0);
+G2L["29"]["Text"] = [[      FreeCam]];
+G2L["29"]["Name"] = [[Universal_FreeCam]];
+G2L["29"]["Position"] = UDim2.new(0.01664, 0, 0.25414, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Games.UIStroke
-G2L["2a"] = Instance.new("UIStroke", G2L["29"]);
-G2L["2a"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["2a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam.UICorner
+G2L["2a"] = Instance.new("UICorner", G2L["29"]);
+G2L["2a"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Games.UICorner
-G2L["2b"] = Instance.new("UICorner", G2L["29"]);
-G2L["2b"]["CornerRadius"] = UDim.new(0, 25);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam.UIStroke
+G2L["2b"] = Instance.new("UIStroke", G2L["29"]);
+G2L["2b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["2b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts
-G2L["2c"] = Instance.new("TextButton", G2L["23"]);
-G2L["2c"]["BorderSizePixel"] = 0;
-G2L["2c"]["TextSize"] = 24;
-G2L["2c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2c"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["2c"]["BackgroundTransparency"] = 0.7;
-G2L["2c"]["Size"] = UDim2.new(0, 164, 0, 47);
-G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2c"]["Text"] = [[Universal Scripts]];
-G2L["2c"]["Name"] = [[Universal Scripts]];
-G2L["2c"]["Position"] = UDim2.new(0.038, 0, 0.336, 0);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam.LocalScript
+G2L["2c"] = Instance.new("LocalScript", G2L["29"]);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts.UIStroke
-G2L["2d"] = Instance.new("UIStroke", G2L["2c"]);
-G2L["2d"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["2d"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam.ImageLabel
+G2L["2d"] = Instance.new("ImageLabel", G2L["29"]);
+G2L["2d"]["BorderSizePixel"] = 0;
+G2L["2d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2d"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["2d"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["2d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2d"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts.UICorner
-G2L["2e"] = Instance.new("UICorner", G2L["2c"]);
-G2L["2e"]["CornerRadius"] = UDim.new(0, 25);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly
+G2L["2e"] = Instance.new("TextButton", G2L["5"]);
+G2L["2e"]["BorderSizePixel"] = 0;
+G2L["2e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["2e"]["TextSize"] = 20;
+G2L["2e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["2e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2e"]["Size"] = UDim2.new(0, 406, 0, 39);
+G2L["2e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2e"]["Text"] = [[      Fly]];
+G2L["2e"]["Name"] = [[Ultimate_Fly]];
+G2L["2e"]["Position"] = UDim2.new(0.017, 0, 0.312, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll
-G2L["2f"] = Instance.new("TextButton", G2L["23"]);
-G2L["2f"]["BorderSizePixel"] = 0;
-G2L["2f"]["TextSize"] = 24;
-G2L["2f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["2f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["2f"]["BackgroundTransparency"] = 0.7;
-G2L["2f"]["Size"] = UDim2.new(0, 164, 0, 47);
-G2L["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2f"]["Text"] = [[Troll]];
-G2L["2f"]["Name"] = [[Troll]];
-G2L["2f"]["Position"] = UDim2.new(0.038, 0, 0.497, 0);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.UICorner
+G2L["2f"] = Instance.new("UICorner", G2L["2e"]);
+G2L["2f"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll.UIStroke
-G2L["30"] = Instance.new("UIStroke", G2L["2f"]);
-G2L["30"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["30"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.LocalScript
+G2L["30"] = Instance.new("LocalScript", G2L["2e"]);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll.UICorner
-G2L["31"] = Instance.new("UICorner", G2L["2f"]);
-G2L["31"]["CornerRadius"] = UDim.new(0, 25);
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.ImageLabel
+G2L["31"] = Instance.new("ImageLabel", G2L["2e"]);
+G2L["31"]["BorderSizePixel"] = 0;
+G2L["31"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["31"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["31"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["31"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["31"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal
-G2L["32"] = Instance.new("TextButton", G2L["23"]);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.Ultimate_FlySpeed
+G2L["32"] = Instance.new("TextBox", G2L["2e"]);
+G2L["32"]["CursorPosition"] = -1;
+G2L["32"]["Name"] = [[Ultimate_FlySpeed]];
 G2L["32"]["BorderSizePixel"] = 0;
-G2L["32"]["TextSize"] = 24;
+G2L["32"]["TextSize"] = 14;
 G2L["32"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["32"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["32"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["32"]["BackgroundTransparency"] = 0.7;
-G2L["32"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["32"]["Size"] = UDim2.new(0, 78, 0, 19);
+G2L["32"]["Position"] = UDim2.new(0.18719, 0, 0.23077, 0);
 G2L["32"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["32"]["Text"] = [[Universal]];
-G2L["32"]["Name"] = [[Universal]];
-G2L["32"]["Position"] = UDim2.new(0.038, 0, 0.655, 0);
+G2L["32"]["Text"] = [[speed]];
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal.UIStroke
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.Ultimate_FlySpeed.UIStroke
 G2L["33"] = Instance.new("UIStroke", G2L["32"]);
 G2L["33"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["33"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal.UICorner
-G2L["34"] = Instance.new("UICorner", G2L["32"]);
-G2L["34"]["CornerRadius"] = UDim.new(0, 25);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.UIStroke
+G2L["34"] = Instance.new("UIStroke", G2L["2e"]);
+G2L["34"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["34"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.LeftFrame.Settings
-G2L["35"] = Instance.new("TextButton", G2L["23"]);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed
+G2L["35"] = Instance.new("TextButton", G2L["5"]);
 G2L["35"]["BorderSizePixel"] = 0;
-G2L["35"]["TextSize"] = 24;
+G2L["35"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["35"]["TextSize"] = 20;
 G2L["35"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["35"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["35"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["35"]["BackgroundTransparency"] = 0.7;
-G2L["35"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["35"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["35"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["35"]["Text"] = [[Settings]];
-G2L["35"]["Name"] = [[Settings]];
-G2L["35"]["Position"] = UDim2.new(0.038, 0, 0.812, 0);
+G2L["35"]["Text"] = [[      WalkSpeed]];
+G2L["35"]["Name"] = [[Ultimate_WalkSpeed]];
+G2L["35"]["Position"] = UDim2.new(0.017, 0, 0.37, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.UICorner
+G2L["36"] = Instance.new("UICorner", G2L["35"]);
+G2L["36"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.LocalScript
+G2L["37"] = Instance.new("LocalScript", G2L["35"]);
+
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.ImageLabel
+G2L["38"] = Instance.new("ImageLabel", G2L["35"]);
+G2L["38"]["BorderSizePixel"] = 0;
+G2L["38"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["38"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["38"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["38"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.Ultimate_Speed
+G2L["39"] = Instance.new("TextBox", G2L["35"]);
+G2L["39"]["CursorPosition"] = -1;
+G2L["39"]["Name"] = [[Ultimate_Speed]];
+G2L["39"]["BorderSizePixel"] = 0;
+G2L["39"]["TextSize"] = 14;
+G2L["39"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["39"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["39"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["39"]["Size"] = UDim2.new(0, 78, 0, 19);
+G2L["39"]["Position"] = UDim2.new(0.31034, 0, 0.25641, 0);
+G2L["39"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["39"]["Text"] = [[Speed]];
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.Ultimate_Speed.UIStroke
+G2L["3a"] = Instance.new("UIStroke", G2L["39"]);
+G2L["3a"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["3a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.UIStroke
+G2L["3b"] = Instance.new("UIStroke", G2L["35"]);
+G2L["3b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["3b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower
+G2L["3c"] = Instance.new("TextButton", G2L["5"]);
+G2L["3c"]["BorderSizePixel"] = 0;
+G2L["3c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["3c"]["TextSize"] = 20;
+G2L["3c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3c"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3c"]["Size"] = UDim2.new(0, 406, 0, 39);
+G2L["3c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3c"]["Text"] = [[      JumpPower]];
+G2L["3c"]["Name"] = [[Ultimate_JumpPower]];
+G2L["3c"]["Position"] = UDim2.new(0.017, 0, 0.428, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.UICorner
+G2L["3d"] = Instance.new("UICorner", G2L["3c"]);
+G2L["3d"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.LocalScript
+G2L["3e"] = Instance.new("LocalScript", G2L["3c"]);
+
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.ImageLabel
+G2L["3f"] = Instance.new("ImageLabel", G2L["3c"]);
+G2L["3f"]["BorderSizePixel"] = 0;
+G2L["3f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3f"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["3f"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["3f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3f"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.Ultimate_Power
+G2L["40"] = Instance.new("TextBox", G2L["3c"]);
+G2L["40"]["CursorPosition"] = -1;
+G2L["40"]["Name"] = [[Ultimate_Power]];
+G2L["40"]["BorderSizePixel"] = 0;
+G2L["40"]["TextSize"] = 14;
+G2L["40"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["40"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["40"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["40"]["Size"] = UDim2.new(0, 78, 0, 19);
+G2L["40"]["Position"] = UDim2.new(0.31034, 0, 0.25641, 0);
+G2L["40"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["40"]["Text"] = [[Power]];
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.Ultimate_Power.UIStroke
+G2L["41"] = Instance.new("UIStroke", G2L["40"]);
+G2L["41"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["41"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.UIStroke
+G2L["42"] = Instance.new("UIStroke", G2L["3c"]);
+G2L["42"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["42"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling
+G2L["43"] = Instance.new("TextButton", G2L["5"]);
+G2L["43"]["BorderSizePixel"] = 0;
+G2L["43"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["43"]["TextSize"] = 20;
+G2L["43"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["43"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["43"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["43"]["Size"] = UDim2.new(0, 406, 0, 39);
+G2L["43"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["43"]["Text"] = [[      AntiFling]];
+G2L["43"]["Name"] = [[Universal_AntiFling]];
+G2L["43"]["Position"] = UDim2.new(0.01664, 0, 0.4867, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling.UICorner
+G2L["44"] = Instance.new("UICorner", G2L["43"]);
+G2L["44"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling.UIStroke
+G2L["45"] = Instance.new("UIStroke", G2L["43"]);
+G2L["45"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["45"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling.LocalScript
+G2L["46"] = Instance.new("LocalScript", G2L["43"]);
+
+
+
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling.ImageLabel
+G2L["47"] = Instance.new("ImageLabel", G2L["43"]);
+G2L["47"]["BorderSizePixel"] = 0;
+G2L["47"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["47"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["47"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["47"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["47"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.TextLabel
+G2L["48"] = Instance.new("TextLabel", G2L["2"]);
+G2L["48"]["BorderSizePixel"] = 0;
+G2L["48"]["TextSize"] = 20;
+G2L["48"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["48"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["48"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["48"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["48"]["BackgroundTransparency"] = 0.2;
+G2L["48"]["Size"] = UDim2.new(0, 605, 0, 50);
+G2L["48"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["48"]["Text"] = [[            WAX HUB]];
+
+
+-- StarterGui.ScreenGui.MainFrame.TextLabel.UICorner
+G2L["49"] = Instance.new("UICorner", G2L["48"]);
+G2L["49"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.ScreenGui.MainFrame.TextLabel.UIStroke
+G2L["4a"] = Instance.new("UIStroke", G2L["48"]);
+G2L["4a"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["4a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
+G2L["4b"] = Instance.new("LocalScript", G2L["48"]);
+G2L["4b"]["Name"] = [[Dragable]];
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame
+G2L["4c"] = Instance.new("Frame", G2L["2"]);
+G2L["4c"]["BorderSizePixel"] = 0;
+G2L["4c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4c"]["Size"] = UDim2.new(0, 179, 0, 336);
+G2L["4c"]["Position"] = UDim2.new(0, 0, 0.1292, 0);
+G2L["4c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4c"]["Name"] = [[LeftFrame]];
+G2L["4c"]["BackgroundTransparency"] = 0.45;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.UIStroke
+G2L["4d"] = Instance.new("UIStroke", G2L["4c"]);
+G2L["4d"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["4d"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.UICorner
+G2L["4e"] = Instance.new("UICorner", G2L["4c"]);
+G2L["4e"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Home
+G2L["4f"] = Instance.new("TextButton", G2L["4c"]);
+G2L["4f"]["BorderSizePixel"] = 0;
+G2L["4f"]["TextSize"] = 24;
+G2L["4f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["4f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["4f"]["BackgroundTransparency"] = 0.7;
+G2L["4f"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4f"]["Text"] = [[Home]];
+G2L["4f"]["Name"] = [[Home]];
+G2L["4f"]["Position"] = UDim2.new(0.03816, 0, 0.02365, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Home.UIStroke
+G2L["50"] = Instance.new("UIStroke", G2L["4f"]);
+G2L["50"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["50"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Home.UICorner
+G2L["51"] = Instance.new("UICorner", G2L["4f"]);
+G2L["51"]["CornerRadius"] = UDim.new(0, 25);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Games
+G2L["52"] = Instance.new("TextButton", G2L["4c"]);
+G2L["52"]["BorderSizePixel"] = 0;
+G2L["52"]["TextSize"] = 24;
+G2L["52"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["52"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["52"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["52"]["BackgroundTransparency"] = 0.7;
+G2L["52"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["52"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["52"]["Text"] = [[Games]];
+G2L["52"]["Name"] = [[Games]];
+G2L["52"]["Position"] = UDim2.new(0.038, 0, 0.18, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Games.UIStroke
+G2L["53"] = Instance.new("UIStroke", G2L["52"]);
+G2L["53"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["53"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Games.UICorner
+G2L["54"] = Instance.new("UICorner", G2L["52"]);
+G2L["54"]["CornerRadius"] = UDim.new(0, 25);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts
+G2L["55"] = Instance.new("TextButton", G2L["4c"]);
+G2L["55"]["BorderSizePixel"] = 0;
+G2L["55"]["TextSize"] = 24;
+G2L["55"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["55"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["55"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["55"]["BackgroundTransparency"] = 0.7;
+G2L["55"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["55"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["55"]["Text"] = [[Universal Scripts]];
+G2L["55"]["Name"] = [[Universal Scripts]];
+G2L["55"]["Position"] = UDim2.new(0.038, 0, 0.336, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts.UIStroke
+G2L["56"] = Instance.new("UIStroke", G2L["55"]);
+G2L["56"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["56"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal Scripts.UICorner
+G2L["57"] = Instance.new("UICorner", G2L["55"]);
+G2L["57"]["CornerRadius"] = UDim.new(0, 25);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll
+G2L["58"] = Instance.new("TextButton", G2L["4c"]);
+G2L["58"]["BorderSizePixel"] = 0;
+G2L["58"]["TextSize"] = 24;
+G2L["58"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["58"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["58"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["58"]["BackgroundTransparency"] = 0.7;
+G2L["58"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["58"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["58"]["Text"] = [[Troll]];
+G2L["58"]["Name"] = [[Troll]];
+G2L["58"]["Position"] = UDim2.new(0.038, 0, 0.497, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll.UIStroke
+G2L["59"] = Instance.new("UIStroke", G2L["58"]);
+G2L["59"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["59"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Troll.UICorner
+G2L["5a"] = Instance.new("UICorner", G2L["58"]);
+G2L["5a"]["CornerRadius"] = UDim.new(0, 25);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal
+G2L["5b"] = Instance.new("TextButton", G2L["4c"]);
+G2L["5b"]["BorderSizePixel"] = 0;
+G2L["5b"]["TextSize"] = 24;
+G2L["5b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["5b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5b"]["BackgroundTransparency"] = 0.7;
+G2L["5b"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["5b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5b"]["Text"] = [[Universal]];
+G2L["5b"]["Name"] = [[Universal]];
+G2L["5b"]["Position"] = UDim2.new(0.038, 0, 0.655, 0);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal.UIStroke
+G2L["5c"] = Instance.new("UIStroke", G2L["5b"]);
+G2L["5c"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5c"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Universal.UICorner
+G2L["5d"] = Instance.new("UICorner", G2L["5b"]);
+G2L["5d"]["CornerRadius"] = UDim.new(0, 25);
+
+
+-- StarterGui.ScreenGui.MainFrame.LeftFrame.Settings
+G2L["5e"] = Instance.new("TextButton", G2L["4c"]);
+G2L["5e"]["BorderSizePixel"] = 0;
+G2L["5e"]["TextSize"] = 24;
+G2L["5e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["5e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5e"]["BackgroundTransparency"] = 0.7;
+G2L["5e"]["Size"] = UDim2.new(0, 164, 0, 47);
+G2L["5e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5e"]["Text"] = [[Settings]];
+G2L["5e"]["Name"] = [[Settings]];
+G2L["5e"]["Position"] = UDim2.new(0.038, 0, 0.812, 0);
 
 
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.Settings.UIStroke
-G2L["36"] = Instance.new("UIStroke", G2L["35"]);
-G2L["36"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["36"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["5f"] = Instance.new("UIStroke", G2L["5e"]);
+G2L["5f"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.Settings.UICorner
-G2L["37"] = Instance.new("UICorner", G2L["35"]);
-G2L["37"]["CornerRadius"] = UDim.new(0, 25);
+G2L["60"] = Instance.new("UICorner", G2L["5e"]);
+G2L["60"]["CornerRadius"] = UDim.new(0, 25);
 
 
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.SwitchTabs
-G2L["38"] = Instance.new("LocalScript", G2L["23"]);
-G2L["38"]["Name"] = [[SwitchTabs]];
+G2L["61"] = Instance.new("LocalScript", G2L["4c"]);
+G2L["61"]["Name"] = [[SwitchTabs]];
 
 
 -- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.LocalScript
@@ -625,7 +976,7 @@ local script = G2L["13"];
 		},
 		{
 			name = "РАДУГА 🌈",
-			textColor = nil,  -- Особый режим
+			textColor = nil,
 			strokeColor = nil
 		}
 	}
@@ -637,7 +988,6 @@ local script = G2L["13"];
 		local theme = themes[themeIndex]
 		if not theme then return end
 	
-		-- Если включена радуга — выключаем
 		if rainbowActive then
 			rainbowActive = false
 			if rainbowConnection then
@@ -651,13 +1001,12 @@ local script = G2L["13"];
 			rainbowActive = true
 			print("🌈 РАДУГА АКТИВИРОВАНА!")
 	
-			-- Получаем все TextLabel и TextButton
 			local textObjects = {}
 			local strokeObjects = {}
 	
 			local function collectObjects(parent)
 				for _, child in pairs(parent:GetChildren()) do
-					if child:IsA("TextButton") or child:IsA("TextLabel") then
+					if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
 						table.insert(textObjects, child)
 					end
 					if child:IsA("UIStroke") then
@@ -669,20 +1018,16 @@ local script = G2L["13"];
 	
 			collectObjects(mainFrame)
 	
-			-- Анимация радуги (плавное переливание)
 			local hue = 0
 			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
-				hue = (hue + dt * 0.3) % 1  -- Скорость перелива (0.3 - медленно, 1 - быстро)
+				hue = (hue + dt * 0.3) % 1
 	
-				-- Конвертируем HSV в RGB
 				local color = Color3.fromHSV(hue, 1, 1)
 	
-				-- Меняем цвет текста
 				for _, obj in pairs(textObjects) do
 					obj.TextColor3 = color
 				end
 	
-				-- Меняем цвет обводки (чуть темнее/насыщеннее)
 				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
 				for _, obj in pairs(strokeObjects) do
 					obj.Color = strokeColor
@@ -698,7 +1043,7 @@ local script = G2L["13"];
 	
 		local function applyToAll(parent)
 			for _, child in pairs(parent:GetChildren()) do
-				if child:IsA("TextButton") or child:IsA("TextLabel") then
+				if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
 					child.TextColor3 = theme.textColor
 				end
 	
@@ -728,64 +1073,44 @@ local script = G2L["13"];
 	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
 end;
 task.spawn(C_13);
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.LocalScript
 local function C_18()
 local script = G2L["18"];
 	-- ==========================================
-	-- Universal_CntrlDel (Ctrl+Click Delete)
+	-- Universal_Cntrl (Ctrl+Click Teleport)
 	-- ==========================================
 	local button = script.Parent
 	local isEnabled = false
 	
-	local Plr = game.Players.LocalPlayer
-	local Mouse = Plr:GetMouse()
-	local UserInputService = game:GetService("UserInputService")
+	local UIS = game:GetService("UserInputService")
+	local Player = game.Players.LocalPlayer
+	local Mouse = Player:GetMouse()
 	
-	-- Функция удаления
-	local function deletePart()
-		if not Mouse.Target then return end
-	
-		-- Проверка, чтобы не удалить важные объекты (опционально)
-		local target = Mouse.Target
-		if target:IsA("BasePart") then
-			target:Destroy()
-			print("🗑️ Удален: " .. target.Name)
-		else
-			print("⚠️ Это не BasePart!")
+	local function Teleport(pos)
+		local Char = Player.Character
+		if Char and Char:FindFirstChild("HumanoidRootPart") then
+			Char:MoveTo(pos)
 		end
 	end
 	
-	-- Обработка клика с Ctrl
 	local function onInputBegan(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 and UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-			if isEnabled then
-				deletePart()
+		if input.UserInputType == Enum.UserInputType.MouseButton1 and UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
+			if isEnabled and Mouse.Target then
+				Teleport(Mouse.Hit.p)
 			end
 		end
 	end
 	
-	-- Включаем/выключаем при нажатии на кнопку
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
 		_G.Misc = _G.Misc or {}
-		_G.Misc.CtrlDel = isEnabled
-		print("🔴 Ctrl+Click Delete:", isEnabled and "ВКЛ" or "ВЫКЛ")
+		_G.Misc.CtrlClick = isEnabled
 	end)
 	
-	-- Подключаем событие
-	UserInputService.InputBegan:Connect(onInputBegan)
-	
-	-- Уведомление при первом запуске
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "CTRL + Click Delete",
-		Text = "Hold Ctrl + click to delete parts! (rejoin if mistake)",
-		Duration = 6,
-	})
-	
-	print("✅ Universal_CntrlDel загружен!")
+	UIS.InputBegan:Connect(onInputBegan)
 end;
 task.spawn(C_18);
--- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.LocalScript
 local function C_1d()
 local script = G2L["1d"];
 	-- ==========================================
@@ -855,9 +1180,902 @@ local script = G2L["1d"];
 	print("✅ Universal_Cntrl загружен!")
 end;
 task.spawn(C_1d);
--- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiAFK.LocalScript
 local function C_22()
 local script = G2L["22"];
+	-- ==========================================
+	-- MISC_AntiAFK
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local VirtualUser = game:GetService("VirtualUser")
+	
+	local isEnabled = false
+	local antiAfkConnection = nil
+	
+	-- ТОГГЛ
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+	
+		if isEnabled then
+			print("🟢 АНТИ-АФК ВКЛЮЧЕН!")
+			if antiAfkConnection then
+				antiAfkConnection:Disconnect()
+				antiAfkConnection = nil
+			end
+			antiAfkConnection = player.Idled:Connect(function()
+				pcall(function()
+					VirtualUser:CaptureController()
+					VirtualUser:ClickButton2(Vector2.new())
+					print("🔄 АНТИ-АФК СРАБОТАЛ!")
+				end)
+			end)
+		else
+			print("🔴 АНТИ-АФК ВЫКЛЮЧЕН!")
+			if antiAfkConnection then
+				antiAfkConnection:Disconnect()
+				antiAfkConnection = nil
+			end
+		end
+	end)
+	
+	print("✅ MISC_AntiAFK ЗАГРУЖЕНА!")
+end;
+task.spawn(C_22);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_InfinityZoom.LocalScript
+local function C_27()
+local script = G2L["27"];
+	-- ==========================================
+	-- Universal_InfiniteZoom (БЕСКОНЕЧНЫЙ ЗУМ)
+	-- ==========================================
+	local button = script.Parent
+	local isEnabled = false
+	
+	local UserInputService = game:GetService("UserInputService")
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local camera = workspace.CurrentCamera
+	
+	local currentMaxZoom = player.CameraMaxZoomDistance
+	local defaultMaxZoom = 100
+	
+	-- Обработка скролла мыши
+	local function onMouseWheel(input, gameProcessed)
+		if not isEnabled or gameProcessed then return end
+	
+		if input.UserInputType == Enum.UserInputType.MouseWheel then
+			local currentZoom = (camera.CFrame.Position - camera.Focus.Position).Magnitude
+	
+			if input.Position.Z < 0 then
+				if currentZoom >= currentMaxZoom * 0.9 then
+					currentMaxZoom = currentMaxZoom * 1.5
+					player.CameraMaxZoomDistance = currentMaxZoom
+				end
+			end
+		end
+	end
+	
+	-- ТОГГЛ
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+	
+		if isEnabled then
+			player.CameraMaxZoomDistance = currentMaxZoom
+			_G.Misc = _G.Misc or {}
+			_G.Misc.InfiniteZoom = true
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Infinite Zoom",
+				Text = "Infinite zoom enabled!",
+				Duration = 3
+			})
+			print("🔍 Infinite Zoom: ВКЛ")
+		else
+			player.CameraMaxZoomDistance = defaultMaxZoom
+			currentMaxZoom = defaultMaxZoom
+			_G.Misc.InfiniteZoom = false
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Infinite Zoom",
+				Text = "Infinite zoom disabled!",
+				Duration = 3
+			})
+			print("🔍 Infinite Zoom: ВЫКЛ")
+		end
+	end)
+	
+	-- Подключаем событие
+	UserInputService.InputChanged:Connect(onMouseWheel)
+	
+	print("✅ Universal_InfiniteZoom загружен!")
+end;
+task.spawn(C_27);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_FreeCam.LocalScript
+local function C_2c()
+local script = G2L["2c"];
+	-- ==========================================
+	-- Universal_FreeCam (СВОБОДНАЯ КАМЕРА)
+	-- ==========================================
+	local button = script.Parent
+	local isEnabled = false
+	
+	local pi    = math.pi
+	local abs   = math.abs
+	local clamp = math.clamp
+	local exp   = math.exp
+	local rad   = math.rad
+	local sign  = math.sign
+	local sqrt  = math.sqrt
+	local tan   = math.tan
+	
+	local ContextActionService = game:GetService("ContextActionService")
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local UserInputService = game:GetService("UserInputService")
+	
+	local LocalPlayer = Players.LocalPlayer
+	if not LocalPlayer then
+		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+		LocalPlayer = Players.LocalPlayer
+	end
+	
+	local Camera = workspace.CurrentCamera
+	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+		local newCamera = workspace.CurrentCamera
+		if newCamera then
+			Camera = newCamera
+		end
+	end)
+	
+	------------------------------------------------------------------------
+	local INPUT_PRIORITY = Enum.ContextActionPriority.High.Value
+	
+	local NAV_GAIN = Vector3.new(1, 1, 1)*64
+	local PAN_GAIN = Vector2.new(0.75, 1)*8
+	local FOV_GAIN = 300
+	
+	local PITCH_LIMIT = rad(90)
+	
+	local VEL_STIFFNESS = 1.5
+	local PAN_STIFFNESS = 1.0
+	local FOV_STIFFNESS = 4.0
+	
+	------------------------------------------------------------------------
+	local Spring = {} do
+		Spring.__index = Spring
+	
+		function Spring.new(freq, pos)
+			local self = setmetatable({}, Spring)
+			self.f = freq
+			self.p = pos
+			self.v = pos*0
+			return self
+		end
+	
+		function Spring:Update(dt, goal)
+			local f = self.f*2*pi
+			local p0 = self.p
+			local v0 = self.v
+	
+			local offset = goal - p0
+			local decay = exp(-f*dt)
+	
+			local p1 = goal + (v0*dt - offset*(f*dt + 1))*decay
+			local v1 = (f*dt*(offset*f - v0) + v0)*decay
+	
+			self.p = p1
+			self.v = v1
+	
+			return p1
+		end
+	
+		function Spring:Reset(pos)
+			self.p = pos
+			self.v = pos*0
+		end
+	end
+	
+	------------------------------------------------------------------------
+	local cameraPos = Vector3.new()
+	local cameraRot = Vector2.new()
+	local cameraFov = 0
+	
+	local velSpring = Spring.new(VEL_STIFFNESS, Vector3.new())
+	local panSpring = Spring.new(PAN_STIFFNESS, Vector2.new())
+	local fovSpring = Spring.new(FOV_STIFFNESS, 0)
+	
+	------------------------------------------------------------------------
+	local Input = {} do
+		local thumbstickCurve do
+			local K_CURVATURE = 2.0
+			local K_DEADZONE = 0.15
+	
+			local function fCurve(x)
+				return (exp(K_CURVATURE*x) - 1)/(exp(K_CURVATURE) - 1)
+			end
+	
+			local function fDeadzone(x)
+				return fCurve((x - K_DEADZONE)/(1 - K_DEADZONE))
+			end
+	
+			function thumbstickCurve(x)
+				return sign(x)*clamp(fDeadzone(abs(x)), 0, 1)
+			end
+		end
+	
+		local gamepad = {
+			ButtonX = 0,
+			ButtonY = 0,
+			DPadDown = 0,
+			DPadUp = 0,
+			ButtonL2 = 0,
+			ButtonR2 = 0,
+			Thumbstick1 = Vector2.new(),
+			Thumbstick2 = Vector2.new(),
+		}
+	
+		local keyboard = {
+			W = 0, A = 0, S = 0, D = 0,
+			E = 0, Q = 0,
+			U = 0, H = 0, J = 0, K = 0,
+			I = 0, Y = 0,
+			Up = 0, Down = 0,
+			LeftShift = 0, RightShift = 0,
+		}
+	
+		local mouse = {
+			Delta = Vector2.new(),
+			MouseWheel = 0,
+		}
+	
+		local NAV_GAMEPAD_SPEED  = Vector3.new(1, 1, 1)
+		local NAV_KEYBOARD_SPEED = Vector3.new(1, 1, 1)
+		local PAN_MOUSE_SPEED    = Vector2.new(1, 1)*(pi/64)
+		local PAN_GAMEPAD_SPEED  = Vector2.new(1, 1)*(pi/8)
+		local FOV_WHEEL_SPEED    = 1.0
+		local FOV_GAMEPAD_SPEED  = 0.25
+		local NAV_ADJ_SPEED      = 0.75
+		local NAV_SHIFT_MUL      = 0.25
+	
+		local navSpeed = 1
+	
+		function Input.Vel(dt)
+			navSpeed = clamp(navSpeed + dt*(keyboard.Up - keyboard.Down)*NAV_ADJ_SPEED, 0.01, 4)
+	
+			local kGamepad = Vector3.new(
+				thumbstickCurve(gamepad.Thumbstick1.x),
+				thumbstickCurve(gamepad.ButtonR2) - thumbstickCurve(gamepad.ButtonL2),
+				thumbstickCurve(-gamepad.Thumbstick1.y)
+			)*NAV_GAMEPAD_SPEED
+	
+			local kKeyboard = Vector3.new(
+				keyboard.D - keyboard.A + keyboard.K - keyboard.H,
+				keyboard.E - keyboard.Q + keyboard.I - keyboard.Y,
+				keyboard.S - keyboard.W + keyboard.J - keyboard.U
+			)*NAV_KEYBOARD_SPEED
+	
+			local shift = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift)
+	
+			return (kGamepad + kKeyboard)*(navSpeed*(shift and NAV_SHIFT_MUL or 1))
+		end
+	
+		function Input.Pan(dt)
+			local kGamepad = Vector2.new(
+				thumbstickCurve(gamepad.Thumbstick2.y),
+				thumbstickCurve(-gamepad.Thumbstick2.x)
+			)*PAN_GAMEPAD_SPEED
+			local kMouse = mouse.Delta*PAN_MOUSE_SPEED
+			mouse.Delta = Vector2.new()
+			return kGamepad + kMouse
+		end
+	
+		function Input.Fov(dt)
+			local kGamepad = (gamepad.ButtonX - gamepad.ButtonY)*FOV_GAMEPAD_SPEED
+			local kMouse = mouse.MouseWheel*FOV_WHEEL_SPEED
+			mouse.MouseWheel = 0
+			return kGamepad + kMouse
+		end
+	
+		function Input.StartCapture()
+			ContextActionService:BindActionAtPriority("FreecamKeyboard", function(action, state, input)
+				keyboard[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY,
+			Enum.KeyCode.W, Enum.KeyCode.U,
+			Enum.KeyCode.A, Enum.KeyCode.H,
+			Enum.KeyCode.S, Enum.KeyCode.J,
+			Enum.KeyCode.D, Enum.KeyCode.K,
+			Enum.KeyCode.E, Enum.KeyCode.I,
+			Enum.KeyCode.Q, Enum.KeyCode.Y,
+			Enum.KeyCode.Up, Enum.KeyCode.Down
+			)
+	
+			ContextActionService:BindActionAtPriority("FreecamMousePan", function(action, state, input)
+				local delta = input.Delta
+				mouse.Delta = Vector2.new(-delta.y, -delta.x)
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY, Enum.UserInputType.MouseMovement)
+	
+			ContextActionService:BindActionAtPriority("FreecamMouseWheel", function(action, state, input)
+				mouse.MouseWheel = -input.Position.z
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY, Enum.UserInputType.MouseWheel)
+	
+			ContextActionService:BindActionAtPriority("FreecamGamepadButton", function(action, state, input)
+				gamepad[input.KeyCode.Name] = state == Enum.UserInputState.Begin and 1 or 0
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY, Enum.KeyCode.ButtonX, Enum.KeyCode.ButtonY)
+	
+			ContextActionService:BindActionAtPriority("FreecamGamepadTrigger", function(action, state, input)
+				gamepad[input.KeyCode.Name] = input.Position.z
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY, Enum.KeyCode.ButtonR2, Enum.KeyCode.ButtonL2)
+	
+			ContextActionService:BindActionAtPriority("FreecamGamepadThumbstick", function(action, state, input)
+				gamepad[input.KeyCode.Name] = input.Position
+				return Enum.ContextActionResult.Sink
+			end, false, INPUT_PRIORITY, Enum.KeyCode.Thumbstick1, Enum.KeyCode.Thumbstick2)
+		end
+	
+		function Input.StopCapture()
+			navSpeed = 1
+			for k, v in pairs(gamepad) do gamepad[k] = v*0 end
+			for k, v in pairs(keyboard) do keyboard[k] = v*0 end
+			for k, v in pairs(mouse) do mouse[k] = v*0 end
+			ContextActionService:UnbindAction("FreecamKeyboard")
+			ContextActionService:UnbindAction("FreecamMousePan")
+			ContextActionService:UnbindAction("FreecamMouseWheel")
+			ContextActionService:UnbindAction("FreecamGamepadButton")
+			ContextActionService:UnbindAction("FreecamGamepadTrigger")
+			ContextActionService:UnbindAction("FreecamGamepadThumbstick")
+		end
+	end
+	
+	local function GetFocusDistance(cameraFrame)
+		local znear = 0.1
+		local viewport = Camera.ViewportSize
+		local projy = 2*tan(cameraFov/2)
+		local projx = viewport.x/viewport.y*projy
+		local fx = cameraFrame.rightVector
+		local fy = cameraFrame.upVector
+		local fz = cameraFrame.lookVector
+	
+		local minDist = 512
+	
+		for x = 0, 1, 0.5 do
+			for y = 0, 1, 0.5 do
+				local cx = (x - 0.5)*projx
+				local cy = (y - 0.5)*projy
+				local offset = fx*cx - fy*cy + fz
+				local origin = cameraFrame.p + offset*znear
+				local part, hit = workspace:FindPartOnRay(Ray.new(origin, offset.unit*minDist))
+				local dist = (hit - origin).magnitude
+				if minDist > dist then
+					minDist = dist
+				end
+			end
+		end
+	
+		return fz:Dot(fz)*minDist
+	end
+	
+	local function StepFreecam(dt)
+		local vel = velSpring:Update(dt, Input.Vel(dt))
+		local pan = panSpring:Update(dt, Input.Pan(dt))
+		local fov = fovSpring:Update(dt, Input.Fov(dt))
+	
+		local zoomFactor = sqrt(tan(rad(70/2))/tan(rad(cameraFov/2)))
+	
+		cameraFov = clamp(cameraFov + fov*FOV_GAIN*(dt/zoomFactor), 1, 120)
+		cameraRot = cameraRot + pan*PAN_GAIN*(dt/zoomFactor)
+		cameraRot = Vector2.new(clamp(cameraRot.x, -PITCH_LIMIT, PITCH_LIMIT), cameraRot.y%(2*pi))
+	
+		local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
+		cameraPos = cameraCFrame.p
+	
+		Camera.CFrame = cameraCFrame
+		Camera.Focus = cameraCFrame*CFrame.new(0, 0, -GetFocusDistance(cameraCFrame))
+		Camera.FieldOfView = cameraFov
+	end
+	
+	local savedCFrame = nil
+	local savedFocus = nil
+	local savedFov = nil
+	local savedCameraType = nil
+	
+	local function StartFreecam()
+		local cameraCFrame = Camera.CFrame
+		cameraRot = Vector2.new(cameraCFrame:toEulerAnglesYXZ())
+		cameraPos = cameraCFrame.p
+		cameraFov = Camera.FieldOfView
+	
+		savedCFrame = Camera.CFrame
+		savedFocus = Camera.Focus
+		savedFov = Camera.FieldOfView
+		savedCameraType = Camera.CameraType
+	
+		velSpring:Reset(Vector3.new())
+		panSpring:Reset(Vector2.new())
+		fovSpring:Reset(0)
+	
+		Camera.CameraType = Enum.CameraType.Custom
+		RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+		Input.StartCapture()
+	end
+	
+	local function StopFreecam()
+		Input.StopCapture()
+		RunService:UnbindFromRenderStep("Freecam")
+	
+		if savedCFrame then
+			Camera.CFrame = savedCFrame
+			Camera.Focus = savedFocus
+			Camera.FieldOfView = savedFov
+			Camera.CameraType = savedCameraType or Enum.CameraType.Custom
+		end
+	end
+	
+	-- ТОГГЛ
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+	
+		if isEnabled then
+			StartFreecam()
+			_G.Misc = _G.Misc or {}
+			_G.Misc.Freecam = true
+			print("🎥 Freecam: ВКЛ")
+		else
+			StopFreecam()
+			_G.Misc.Freecam = false
+			print("🎥 Freecam: ВЫКЛ")
+		end
+	end)
+	
+	print("✅ Universal_FreeCam загружен!")
+end;
+task.spawn(C_2c);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_Fly.LocalScript
+local function C_30()
+local script = G2L["30"];
+	-- ==========================================
+	-- Ultimate_Fly
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local runService = game:GetService("RunService")
+	local uis = game:GetService("UserInputService")
+	
+	local isEnabled = false
+	local flyLoop = nil
+	local bg = nil
+	local bv = nil
+	local ctrl = {f = 0, b = 0, l = 0, r = 0}
+	
+	-- Находим поле для ввода скорости ВНУТРИ КНОПКИ
+	local speedBox = button:FindFirstChild("Ultimate_FlySpeed")
+	
+	if not speedBox then
+		warn("❌ Ultimate_FlySpeed не найден внутри кнопки!")
+	end
+	
+	-- ===== ПОЛУЧЕНИЕ СКОРОСТИ =====
+	local function getSpeed()
+		if speedBox then
+			local val = tonumber(speedBox.Text)
+			if val and val > 0 then
+				return math.clamp(val, 5, 500)
+			end
+		end
+		return 50
+	end
+	
+	-- ===== ОСТАНОВКА =====
+	local function stopFly()
+		if flyLoop then
+			flyLoop:Disconnect()
+			flyLoop = nil
+		end
+		if bg then bg:Destroy() bg = nil end
+		if bv then bv:Destroy() bv = nil end
+	
+		local char = player.Character
+		if char then
+			local humanoid = char:FindFirstChildOfClass("Humanoid")
+			if humanoid then humanoid.PlatformStand = false end
+			local animate = char:FindFirstChild("Animate")
+			if animate then animate.Disabled = false end
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+	end
+	
+	-- ===== ЗАПУСК =====
+	local function startFly()
+		local char = player.Character
+		if not char then return end
+	
+		local torso = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso")
+		if not torso then return end
+	
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if not humanoid then return end
+	
+		stopFly()
+	
+		if char:FindFirstChild("Animate") then
+			char.Animate.Disabled = true
+		end
+	
+		humanoid.PlatformStand = true
+	
+		bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+	
+		bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0, 0.1, 0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+	
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+	
+		flyLoop = runService.RenderStepped:Connect(function()
+			if not isEnabled or not player.Character then
+				stopFly()
+				return
+			end
+	
+			local torso = player.Character:FindFirstChild("Torso") or player.Character:FindFirstChild("UpperTorso")
+			if not torso then return end
+	
+			local currentSpeed = getSpeed()
+			if currentSpeed < 5 then currentSpeed = 5 end
+	
+			local moveX = ctrl.l + ctrl.r
+			local moveZ = ctrl.f + ctrl.b
+	
+			local cam = workspace.CurrentCamera
+			local forward = cam.CFrame.LookVector
+			local right = cam.CFrame.RightVector
+	
+			if moveX ~= 0 or moveZ ~= 0 then
+				bv.velocity = (forward * moveZ + right * moveX) * currentSpeed
+			else
+				bv.velocity = Vector3.new(0, 0, 0)
+			end
+	
+			bg.cframe = cam.CFrame
+		end)
+	end
+	
+	-- ===== КЛАВИШИ =====
+	uis.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed or not isEnabled then return end
+		if input.KeyCode == Enum.KeyCode.W then ctrl.f = 1
+		elseif input.KeyCode == Enum.KeyCode.S then ctrl.b = -1
+		elseif input.KeyCode == Enum.KeyCode.A then ctrl.l = -1
+		elseif input.KeyCode == Enum.KeyCode.D then ctrl.r = 1
+		end
+	end)
+	
+	uis.InputEnded:Connect(function(input, gameProcessed)
+		if gameProcessed or not isEnabled then return end
+		if input.KeyCode == Enum.KeyCode.W then ctrl.f = 0
+		elseif input.KeyCode == Enum.KeyCode.S then ctrl.b = 0
+		elseif input.KeyCode == Enum.KeyCode.A then ctrl.l = 0
+		elseif input.KeyCode == Enum.KeyCode.D then ctrl.r = 0
+		end
+	end)
+	
+	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+		if isEnabled then
+			startFly()
+			print("✈️ Полёт ВКЛ, скорость:", getSpeed())
+		else
+			stopFly()
+			print("✈️ Полёт ВЫКЛ")
+		end
+	end)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isEnabled then
+			stopFly()
+			task.wait(0.5)
+			startFly()
+		end
+	end)
+	
+	print("✅ Ultimate_Fly загружена!")
+end;
+task.spawn(C_30);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_WalkSpeed.LocalScript
+local function C_37()
+local script = G2L["37"];
+	-- ==========================================
+	-- Ultimate_WalkSpeed (СКОРОСТЬ ХОДЬБЫ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	
+	local isEnabled = false
+	local defaultSpeed = 16
+	
+	-- Находим поле для ввода скорости внутри кнопки
+	local speedBox = button:FindFirstChild("Ultimate_Speed")
+	
+	if not speedBox then
+		warn("❌ Ultimate_Speed не найден внутри кнопки!")
+	end
+	
+	-- ===== ПОЛУЧЕНИЕ СКОРОСТИ =====
+	local function getSpeed()
+		if speedBox then
+			local val = tonumber(speedBox.Text)
+			if val and val > 0 then
+				return math.clamp(val, 1, 500)
+			end
+		end
+		return 50
+	end
+	
+	-- ===== ПРИМЕНЕНИЕ СКОРОСТИ =====
+	local function applySpeed()
+		local char = player.Character
+		if not char then return end
+	
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if not humanoid then return end
+	
+		if isEnabled then
+			local speed = getSpeed()
+			humanoid.WalkSpeed = speed
+			print("🚶 Скорость установлена:", speed)
+		else
+			humanoid.WalkSpeed = defaultSpeed
+		end
+	end
+	
+	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+		applySpeed()
+		print("🚶 WalkSpeed:", isEnabled and "ВКЛ" or "ВЫКЛ")
+	end)
+	
+	-- ===== ОБНОВЛЕНИЕ ПРИ ИЗМЕНЕНИИ ПОЛЯ =====
+	if speedBox then
+		speedBox:GetPropertyChangedSignal("Text"):Connect(function()
+			if isEnabled then
+				applySpeed()
+			end
+		end)
+	end
+	
+	-- ===== ПРИ ПЕРЕРОЖДЕНИИ =====
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isEnabled then
+			applySpeed()
+		end
+	end)
+	
+	print("✅ Ultimate_WalkSpeed загружена!")
+end;
+task.spawn(C_37);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Ultimate_JumpPower.LocalScript
+local function C_3e()
+local script = G2L["3e"];
+	-- ==========================================
+	-- Ultimate_JumpPower (СИЛА ПРЫЖКА)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	
+	local isEnabled = false
+	local defaultJumpPower = 50
+	local currentPower = 50
+	
+	-- Находим поле для ввода силы внутри кнопки
+	local powerBox = button:FindFirstChild("Ultimate_Power")
+	
+	if not powerBox then
+		warn("❌ Ultimate_Power не найден внутри кнопки!")
+	end
+	
+	-- ===== ПОЛУЧЕНИЕ СИЛЫ =====
+	local function getPower()
+		if powerBox then
+			local val = tonumber(powerBox.Text)
+			if val and val > 0 then
+				return math.clamp(val, 1, 1000)
+			end
+		end
+		return 100
+	end
+	
+	-- ===== ПРИМЕНЕНИЕ СИЛЫ (ПРЯМОЕ) =====
+	local function applyPower()
+		local char = player.Character
+		if not char then return end
+	
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if not humanoid then return end
+	
+		if isEnabled then
+			local power = getPower()
+			currentPower = power
+			humanoid.JumpPower = power
+			print("🦘 Сила прыжка установлена:", power)
+		else
+			humanoid.JumpPower = defaultJumpPower
+			currentPower = defaultJumpPower
+			print("🦘 Сила прыжка сброшена:", defaultJumpPower)
+		end
+	end
+	
+	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
+	button.MouseButton1Click:Connect(function()
+		isEnabled = not isEnabled
+		applyPower()
+		print("🦘 JumpPower:", isEnabled and "ВКЛ" or "ВЫКЛ")
+	end)
+	
+	-- ===== ПРИНУДИТЕЛЬНОЕ ПРИМЕНЕНИЕ =====
+	local function forceApply()
+		while wait(0.1) do
+			if isEnabled and player.Character then
+				local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+				if humanoid then
+					-- Если сила прыжка сбилась — возвращаем
+					if humanoid.JumpPower ~= currentPower then
+						humanoid.JumpPower = currentPower
+						print("🔄 Восстановлена сила прыжка:", currentPower)
+					end
+					-- Ломаем лимит силы прыжка (если есть ограничение)
+					humanoid.UseJumpPower = true
+				end
+			end
+			wait(0.1)
+		end
+	end
+	
+	-- Запускаем принудительное применение
+	coroutine.wrap(forceApply)()
+	
+	-- ===== ОБНОВЛЕНИЕ ПРИ ИЗМЕНЕНИИ ПОЛЯ =====
+	if powerBox then
+		powerBox:GetPropertyChangedSignal("Text"):Connect(function()
+			if isEnabled then
+				applyPower()
+			end
+		end)
+	
+		powerBox.FocusLost:Connect(function(enterPressed)
+			if enterPressed and isEnabled then
+				applyPower()
+			end
+		end)
+	end
+	
+	-- ===== ПРИ ПЕРЕРОЖДЕНИИ =====
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isEnabled then
+			applyPower()
+		end
+	end)
+	
+	print("✅ Ultimate_JumpPower загружена!")
+end;
+task.spawn(C_3e);
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_AntiFling.LocalScript
+local function C_46()
+local script = G2L["46"];
+	-- ==========================================
+	-- Universal_AntiFling (ВКЛ/ВЫКЛ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local runService = game:GetService("RunService")
+	
+	local isEnabled = false
+	local antiFlingLoop = nil
+	local connections = {}
+	
+	-- ===== ОТКЛЮЧЕНИЕ КОЛЛИЗИЙ У ВСЕХ ИГРОКОВ =====
+	local function setupCharacterCollision(character)
+		local function disableCollide(part)
+			if isEnabled and part:IsA("BasePart") then
+				part.CanCollide = false
+			end
+		end
+	
+		for _, part in ipairs(character:GetChildren()) do
+			disableCollide(part)
+		end
+	
+		local childAddedConn = character.ChildAdded:Connect(disableCollide)
+	
+		local steppedConn = runService.Stepped:Connect(function()
+			if isEnabled and character:IsDescendantOf(workspace) then
+				for _, part in ipairs(character:GetChildren()) do
+					if part:IsA("BasePart") and part.CanCollide then
+						part.CanCollide = false
+					end
+				end
+			end
+		end)
+	
+		character.Destroying:Connect(function()
+			childAddedConn:Disconnect()
+			steppedConn:Disconnect()
+		end)
+	end
+	
+	local function trackPlayer(plr)
+		if plr == player then return end
+		local charAddedConn = plr.CharacterAdded:Connect(setupCharacterCollision)
+		if plr.Character then
+			setupCharacterCollision(plr.Character)
+		end
+		connections[plr] = charAddedConn
+	end
+	
+	local function untrackPlayer(plr)
+		if connections[plr] then
+			connections[plr]:Disconnect()
+			connections[plr] = nil
+		end
+	end
+	
+	-- ===== ВКЛЮЧЕНИЕ =====
+	local function enableAntiFling()
+		for _, plr in ipairs(game.Players:GetPlayers()) do
+			trackPlayer(plr)
+		end
+		game.Players.PlayerAdded:Connect(trackPlayer)
+		game.Players.PlayerRemoving:Connect(untrackPlayer)
+	end
+	
+	-- ===== ВЫКЛЮЧЕНИЕ (ВОССТАНОВЛЕНИЕ КОЛЛИЗИЙ) =====
+	local function disableAntiFling()
+		for plr, conn in pairs(connections) do
+			conn:Disconnect()
+			connections[plr] = nil
+		end
+		-- Восстанавливаем коллизии у всех игроков
+		for _, plr in pairs(game.Players:GetPlayers()) do
+			if plr ~= player and plr.Character then
+				for _, part in pairs(plr.Character:GetChildren()) do
+					if part:IsA("BasePart") then
+						part.CanCollide = true
+					end
+				end
+			end
+		end
+	end
+	
+	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
+	local function toggleAntiFling()
+		isEnabled = not isEnabled
+	
+		if isEnabled then
+			enableAntiFling()
+			print("🛡️ Анти-флинг ВКЛЮЧЕН")
+		else
+			disableAntiFling()
+			print("🛡️ Анти-флинг ВЫКЛЮЧЕН")
+		end
+	end
+	
+	button.MouseButton1Click:Connect(toggleAntiFling)
+	
+	print("✅ Universal_AntiFling загружена!")
+end;
+task.spawn(C_46);
+-- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
+local function C_4b()
+local script = G2L["4b"];
 	-- ==========================================
 	-- ПЕРЕТАСКИВАНИЕ (ТЯНЕТ ВЕСЬ MAINFRAME)
 	-- ==========================================
@@ -935,10 +2153,10 @@ local script = G2L["22"];
 	
 	print("✅ Перетаскивание обновлено! Тянет MainFrame")
 end;
-task.spawn(C_22);
+task.spawn(C_4b);
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.SwitchTabs
-local function C_38()
-local script = G2L["38"];
+local function C_61()
+local script = G2L["61"];
 	-- ==========================================
 	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ПОЛНАЯ ВЕРСИЯ)
 	-- ==========================================
@@ -981,7 +2199,14 @@ local script = G2L["38"];
 			for _, child in pairs(rightFrame:GetChildren()) do
 				if child:IsA("TextButton") and (
 					child.Name == "Universal_Cntrl" or
-						child.Name == "Universal_CntrlDel"
+						child.Name == "Universal_CntrlDel" or
+						child.Name == "Universal_AntiAFK" or
+						child.Name == "Universal_InfinityZoom" or
+						child.Name == "Universal_FreeCam" or
+						child.Name == "Ultimate_Fly" or
+						child.Name == "Ultimate_WalkSpeed" or
+						child.Name == "Ultimate_JumpPower" or
+						child.Name == "Universal_AntiFling"
 					) then
 					child.Visible = true
 					print("🔹 Показан: " .. child.Name)
@@ -1027,6 +2252,6 @@ local script = G2L["38"];
 	switchTab("Home")
 	print("✅ Переключение вкладок загружено!")
 end;
-task.spawn(C_38);
+task.spawn(C_61);
 
 return G2L["1"], require;
