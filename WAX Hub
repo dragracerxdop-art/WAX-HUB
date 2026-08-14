@@ -459,17 +459,20 @@ task.spawn(C_e);
 local function C_13()
 local script = G2L["13"];
 	-- ==========================================
-	-- СМЕНА ЦВЕТОВОЙ ТЕМЫ ХАБА
+	-- СМЕНА ЦВЕТОВОЙ ТЕМЫ ХАБА (С РАДУГОЙ)
 	-- ==========================================
 	local button = script.Parent
-	local mainFrame = button.Parent.Parent  -- Поднимаемся к MainFrame
+	local mainFrame = button.Parent.Parent
+	
+	local rainbowActive = false
+	local rainbowConnection = nil
 	
 	-- ===== ЦВЕТА ДЛЯ ТЕМ =====
 	local themes = {
 		{
 			name = "Фиолетовый",
-			textColor = Color3.fromRGB(200, 100, 255),
-			strokeColor = Color3.fromRGB(150, 50, 200)
+			textColor = Color3.fromRGB(180, 80, 255),
+			strokeColor = Color3.fromRGB(130, 30, 200)
 		},
 		{
 			name = "Красный",
@@ -492,55 +495,142 @@ local script = G2L["13"];
 			strokeColor = Color3.fromRGB(200, 100, 0)
 		},
 		{
+			name = "Желтый",
+			textColor = Color3.fromRGB(255, 255, 50),
+			strokeColor = Color3.fromRGB(200, 200, 0)
+		},
+		{
+			name = "Голубой",
+			textColor = Color3.fromRGB(50, 255, 255),
+			strokeColor = Color3.fromRGB(0, 200, 200)
+		},
+		{
+			name = "Розовый",
+			textColor = Color3.fromRGB(255, 100, 200),
+			strokeColor = Color3.fromRGB(200, 50, 150)
+		},
+		{
+			name = "Бирюзовый",
+			textColor = Color3.fromRGB(50, 200, 200),
+			strokeColor = Color3.fromRGB(0, 150, 150)
+		},
+		{
+			name = "Лайм",
+			textColor = Color3.fromRGB(150, 255, 50),
+			strokeColor = Color3.fromRGB(100, 200, 0)
+		},
+		{
+			name = "Коралловый",
+			textColor = Color3.fromRGB(255, 100, 80),
+			strokeColor = Color3.fromRGB(200, 50, 30)
+		},
+		{
 			name = "Белый",
 			textColor = Color3.fromRGB(255, 255, 255),
-			strokeColor = Color3.fromRGB(200, 200, 200)
+			strokeColor = Color3.fromRGB(180, 180, 180)
+		},
+		{
+			name = "Серый",
+			textColor = Color3.fromRGB(180, 180, 180),
+			strokeColor = Color3.fromRGB(120, 120, 120)
+		},
+		{
+			name = "Неоновый",
+			textColor = Color3.fromRGB(0, 255, 200),
+			strokeColor = Color3.fromRGB(0, 200, 150)
+		},
+		{
+			name = "РАДУГА 🌈",
+			textColor = nil,  -- Особый режим
+			strokeColor = nil
 		}
 	}
 	
-	local currentTheme = 1  -- Начинаем с первого
+	local currentTheme = 1
 	
 	-- ===== ФУНКЦИЯ ПРИМЕНЕНИЯ ТЕМЫ =====
 	local function applyTheme(themeIndex)
 		local theme = themes[themeIndex]
 		if not theme then return end
 	
+		-- Если включена радуга — выключаем
+		if rainbowActive then
+			rainbowActive = false
+			if rainbowConnection then
+				rainbowConnection:Disconnect()
+				rainbowConnection = nil
+			end
+		end
+	
+		-- ===== РАДУГА =====
+		if theme.name == "РАДУГА 🌈" then
+			rainbowActive = true
+			print("🌈 РАДУГА АКТИВИРОВАНА!")
+	
+			-- Получаем все TextLabel и TextButton
+			local textObjects = {}
+			local strokeObjects = {}
+	
+			local function collectObjects(parent)
+				for _, child in pairs(parent:GetChildren()) do
+					if child:IsA("TextButton") or child:IsA("TextLabel") then
+						table.insert(textObjects, child)
+					end
+					if child:IsA("UIStroke") then
+						table.insert(strokeObjects, child)
+					end
+					collectObjects(child)
+				end
+			end
+	
+			collectObjects(mainFrame)
+	
+			-- Анимация радуги (плавное переливание)
+			local hue = 0
+			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
+				hue = (hue + dt * 0.3) % 1  -- Скорость перелива (0.3 - медленно, 1 - быстро)
+	
+				-- Конвертируем HSV в RGB
+				local color = Color3.fromHSV(hue, 1, 1)
+	
+				-- Меняем цвет текста
+				for _, obj in pairs(textObjects) do
+					obj.TextColor3 = color
+				end
+	
+				-- Меняем цвет обводки (чуть темнее/насыщеннее)
+				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
+				for _, obj in pairs(strokeObjects) do
+					obj.Color = strokeColor
+				end
+			end)
+	
+			print("✅ РАДУГА включена!")
+			return
+		end
+	
+		-- ===== ОБЫЧНЫЕ ЦВЕТА =====
 		print("🎨 Применяем тему: " .. theme.name)
 	
-		-- Меняем цвет всех TextButton и TextLabel
-		local function changeTextColor(parent)
+		local function applyToAll(parent)
 			for _, child in pairs(parent:GetChildren()) do
 				if child:IsA("TextButton") or child:IsA("TextLabel") then
 					child.TextColor3 = theme.textColor
 				end
-				-- Рекурсивно обходим всех потомков
-				if child:IsA("Frame") or child:IsA("ScrollingFrame") or child:IsA("ScreenGui") then
-					changeTextColor(child)
-				end
-			end
-		end
 	
-		-- Меняем цвет обводки (UIStroke) у всех фреймов
-		local function changeStrokeColor(parent)
-			for _, child in pairs(parent:GetChildren()) do
 				if child:IsA("UIStroke") then
 					child.Color = theme.strokeColor
 				end
-				-- Рекурсивно обходим всех потомков
-				if child:IsA("Frame") or child:IsA("ScrollingFrame") or child:IsA("ScreenGui") or child:IsA("TextButton") then
-					changeStrokeColor(child)
-				end
+	
+				applyToAll(child)
 			end
 		end
 	
-		-- Применяем ко всему MainFrame
-		changeTextColor(mainFrame)
-		changeStrokeColor(mainFrame)
-	
+		applyToAll(mainFrame)
 		print("✅ Тема " .. theme.name .. " применена!")
 	end
 	
-	-- ===== НАЖАТИЕ НА КНОПКУ (СЛЕДУЮЩАЯ ТЕМА) =====
+	-- ===== НАЖАТИЕ НА КНОПКУ =====
 	button.MouseButton1Click:Connect(function()
 		currentTheme = currentTheme + 1
 		if currentTheme > #themes then
@@ -551,7 +641,7 @@ local script = G2L["13"];
 	
 	-- ===== СТАРТУЕМ С ПЕРВОЙ ТЕМОЙ =====
 	applyTheme(1)
-	print("✅ Скрипт смены тем загружен!")
+	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
 end;
 task.spawn(C_13);
 -- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
