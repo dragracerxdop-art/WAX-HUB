@@ -191,7 +191,7 @@ G2L["15"] = Instance.new("LocalScript", G2L["11"]);
 
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_Info
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles
 G2L["16"] = Instance.new("TextButton", G2L["2"]);
 G2L["16"]["BorderSizePixel"] = 0;
 G2L["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -202,11 +202,11 @@ G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["16"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["16"]["Text"] = [[    Info]];
-G2L["16"]["Name"] = [[MM2_Info]];
+G2L["16"]["Name"] = [[MM2_ShowRoles]];
 G2L["16"]["Position"] = UDim2.new(0.50505, 0, 0.51203, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_Info.ImageLabel
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.ImageLabel
 G2L["17"] = Instance.new("ImageLabel", G2L["16"]);
 G2L["17"]["BorderSizePixel"] = 0;
 G2L["17"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -216,18 +216,18 @@ G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["17"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_Info.UIStroke
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UIStroke
 G2L["18"] = Instance.new("UIStroke", G2L["16"]);
 G2L["18"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["18"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_Info.UICorner
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UICorner
 G2L["19"] = Instance.new("UICorner", G2L["16"]);
 G2L["19"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.MM2_Gui.MainFrame.MM2_Info.LocalScript
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
 G2L["1a"] = Instance.new("LocalScript", G2L["16"]);
 
 
@@ -396,7 +396,7 @@ G2L["2e"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["2e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide
 G2L["2f"] = Instance.new("TextButton", G2L["2"]);
 G2L["2f"]["BorderSizePixel"] = 0;
 G2L["2f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -407,16 +407,16 @@ G2L["2f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["2f"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2f"]["Text"] = [[      Hide Gui]];
-G2L["2f"]["Name"] = [[Settings_Hide]];
+G2L["2f"]["Name"] = [[MM2_Settings_Hide]];
 G2L["2f"]["Position"] = UDim2.new(0.50385, 0, 0.88421, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide.LocalScript
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
 G2L["30"] = Instance.new("LocalScript", G2L["2f"]);
 
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide.ImageLabel
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.ImageLabel
 G2L["31"] = Instance.new("ImageLabel", G2L["2f"]);
 G2L["31"]["BorderSizePixel"] = 0;
 G2L["31"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -426,12 +426,12 @@ G2L["31"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["31"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide.UICorner
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UICorner
 G2L["32"] = Instance.new("UICorner", G2L["2f"]);
 G2L["32"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide.UIStroke
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UIStroke
 G2L["33"] = Instance.new("UIStroke", G2L["2f"]);
 G2L["33"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["33"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
@@ -536,10 +536,10 @@ local script = G2L["10"];
 	
 	-- ====== ЦВЕТА РОЛЕЙ ======
 	local COLORS = {
-		Murderer = Color3.fromRGB(255, 0, 0),    -- КРАСНЫЙ
-		Sheriff = Color3.fromRGB(0, 100, 255),   -- СИНИЙ
-		Hero = Color3.fromRGB(255, 200, 0),      -- ЖЁЛТЫЙ
-		Default = Color3.fromRGB(0, 255, 0)      -- ЗЕЛЁНЫЙ (обычные)
+		Murderer = Color3.fromRGB(255, 0, 0),
+		Sheriff = Color3.fromRGB(0, 100, 255),
+		Hero = Color3.fromRGB(255, 200, 0),
+		Default = Color3.fromRGB(0, 255, 0)
 	}
 	
 	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
@@ -568,10 +568,8 @@ local script = G2L["10"];
 		local hrp = char:FindFirstChild("HumanoidRootPart")
 		if not hrp then return nil end
 	
-		-- Выбираем цвет в зависимости от роли
-		local color = COLORS[role] or COLORS.Default  -- если нет роли — ЗЕЛЁНЫЙ
+		local color = COLORS[role] or COLORS.Default
 	
-		-- Подсветка персонажа
 		local highlight = Instance.new("Highlight")
 		highlight.Parent = char
 		highlight.FillColor = color
@@ -580,7 +578,6 @@ local script = G2L["10"];
 		highlight.OutlineTransparency = 0
 		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	
-		-- Имя над головой
 		local billboard = Instance.new("BillboardGui")
 		billboard.Parent = hrp
 		billboard.Size = UDim2.new(0, 200, 0, 30)
@@ -598,7 +595,6 @@ local script = G2L["10"];
 		textLabel.TextStrokeTransparency = 0.3
 		textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	
-		-- Если есть роль — добавляем её в скобках
 		if role and role ~= "" then
 			local roleNames = {
 				Murderer = "🔴 Убийца",
@@ -613,13 +609,14 @@ local script = G2L["10"];
 	
 	-- ====== УДАЛЕНИЕ ВСЕГО ESP ======
 	local function clearESP()
-		for _, data in pairs(espObjects) do
+		for name, data in pairs(espObjects) do
 			if data.highlight and data.highlight.Parent then
 				data.highlight:Destroy()
 			end
 			if data.billboard and data.billboard.Parent then
 				data.billboard:Destroy()
 			end
+			espObjects[name] = nil
 		end
 		espObjects = {}
 	end
@@ -633,11 +630,9 @@ local script = G2L["10"];
 	
 		local roles = fetchRoles() or {}
 	
-		-- Проходим по всем игрокам
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr == player then continue end
 	
-			-- Проверяем, жив ли персонаж
 			if not plr.Character or not plr.Character:FindFirstChild("HumanoidRootPart") then
 				if espObjects[plr.Name] then
 					if espObjects[plr.Name].highlight then
@@ -651,16 +646,13 @@ local script = G2L["10"];
 				continue
 			end
 	
-			-- Если ESP уже есть для этого игрока — обновляем цвет если роль изменилась
 			if espObjects[plr.Name] then
 				local role = roles[plr.Name]
 				local color = COLORS[role] or COLORS.Default
-				-- Обновляем цвет подсветки
 				if espObjects[plr.Name].highlight then
 					espObjects[plr.Name].highlight.FillColor = color
 					espObjects[plr.Name].highlight.OutlineColor = color
 				end
-				-- Обновляем цвет текста
 				if espObjects[plr.Name].text then
 					espObjects[plr.Name].text.TextColor3 = color
 					if role and role ~= "" then
@@ -677,7 +669,6 @@ local script = G2L["10"];
 				continue
 			end
 	
-			-- Создаём ESP для этого игрока
 			local role = roles[plr.Name]
 			local esp = createESP(plr, role)
 			if esp then
@@ -700,14 +691,9 @@ local script = G2L["10"];
 		updateESP()
 	
 		updateLoop = RunService.Heartbeat:Connect(function()
-			if not isActive then
-				if updateLoop then
-					updateLoop:Disconnect()
-					updateLoop = nil
-				end
-				return
+			if isActive then
+				updateESP()
 			end
-			updateESP()
 		end)
 	end
 	
@@ -1113,11 +1099,11 @@ local script = G2L["15"];
 	print("✅ MM2_AutoFarm загружена!")
 end;
 task.spawn(C_15);
--- StarterGui.MM2_Gui.MainFrame.MM2_Info.LocalScript
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
 local function C_1a()
 local script = G2L["1a"];
 	-- ==========================================
-	-- MM2_ShowRoles (ВКЛ/ВЫКЛ ПОКАЗ РОЛЕЙ)
+	-- MM2_ShowRoles (С ОТЛАДКОЙ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -1127,44 +1113,45 @@ local script = G2L["1a"];
 	local isActive = false
 	local updateLoop = nil
 	
-	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ В MAINFRAME ======
-	local mainFrame = button.Parent.Parent  -- Поднимаемся к MainFrame
+	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ ======
+	local mainFrame = button.Parent.Parent
 	local murderText = mainFrame:FindFirstChild("MM2_Murder")
 	local sheriffText = mainFrame:FindFirstChild("MM2_Sheriff")
 	local heroText = mainFrame:FindFirstChild("MM2_Hero")
 	
+	print("🔍 MM2_Murder найден:", murderText ~= nil)
+	print("🔍 MM2_Sheriff найден:", sheriffText ~= nil)
+	print("🔍 MM2_Hero найден:", heroText ~= nil)
+	
 	if not murderText or not sheriffText then
-		warn("❌ MM2_Murder или MM2_Sheriff не найдены в MainFrame!")
+		warn("❌ Текстлейблы не найдены!")
 		return
-	end
-	
-	-- 👇 ДЕЛАЕМ ТАБЛИЧКИ ВСЕГДА ВИДИМЫМИ
-	murderText.Visible = true
-	sheriffText.Visible = true
-	if heroText then heroText.Visible = true end
-	
-	-- 👇 УСТАНАВЛИВАЕМ ЗНАКИ ВОПРОСА ПО УМОЛЧАНИЮ
-	murderText.Text = "🔴 Маньяк: ❓"
-	murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
-	
-	sheriffText.Text = "🔵 Шериф: ❓"
-	sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
-	
-	if heroText then
-		heroText.Text = "🟡 Герой: ❓"
-		heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
 	end
 	
 	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
 	local function fetchRoles()
 		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
-		if not getPlayerData then return end
+		if not getPlayerData then
+			warn("❌ GetPlayerData не найден в ReplicatedStorage!")
+			return
+		end
 	
+		print("🔄 Вызов GetPlayerData...")
 		local success, data = pcall(function()
 			return getPlayerData:InvokeServer()
 		end)
 	
-		if not success or not data then return end
+		if not success then
+			warn("❌ Ошибка InvokeServer:", data)
+			return
+		end
+	
+		if not data then
+			warn("❌ Данные пустые!")
+			return
+		end
+	
+		print("📊 Данные получены:", data)
 	
 		local Murder = ""
 		local Sheriff = ""
@@ -1180,41 +1167,27 @@ local script = G2L["1a"];
 			end
 		end
 	
-		-- 👇 ЕСЛИ ВКЛЮЧЕНО — ПОКАЗЫВАЕМ ИМЕНА
-		if isActive then
-			if Murder ~= "" then
-				murderText.Text = "🔴 Маньяк: " .. Murder
-				murderText.TextColor3 = Color3.fromRGB(255, 50, 50)
-			else
-				murderText.Text = "🔴 Маньяк: ❓"
-				murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
-			end
+		print("🔴 Маньяк:", Murder or "❓")
+		print("🔵 Шериф:", Sheriff or "❓")
+		print("🟡 Герой:", Hero or "❓")
 	
-			if Sheriff ~= "" then
-				sheriffText.Text = "🔵 Шериф: " .. Sheriff
-				sheriffText.TextColor3 = Color3.fromRGB(50, 150, 255)
-			else
-				sheriffText.Text = "🔵 Шериф: ❓"
-				sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
-			end
+		-- Обновляем текст
+		if isActive then
+			murderText.Text = Murder ~= "" and ("🔴 Маньяк: " .. Murder) or "🔴 Маньяк: ❓"
+			murderText.TextColor3 = Murder ~= "" and Color3.fromRGB(255, 50, 50) or Color3.fromRGB(255, 100, 100)
+	
+			sheriffText.Text = Sheriff ~= "" and ("🔵 Шериф: " .. Sheriff) or "🔵 Шериф: ❓"
+			sheriffText.TextColor3 = Sheriff ~= "" and Color3.fromRGB(50, 150, 255) or Color3.fromRGB(100, 150, 255)
 	
 			if heroText then
-				if Hero ~= "" then
-					heroText.Text = "🟡 Герой: " .. Hero
-					heroText.TextColor3 = Color3.fromRGB(255, 200, 0)
-				else
-					heroText.Text = "🟡 Герой: ❓"
-					heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
-				end
+				heroText.Text = Hero ~= "" and ("🟡 Герой: " .. Hero) or "🟡 Герой: ❓"
+				heroText.TextColor3 = Hero ~= "" and Color3.fromRGB(255, 200, 0) or Color3.fromRGB(200, 150, 0)
 			end
 		else
-			-- 👇 ЕСЛИ ВЫКЛЮЧЕНО — ПОКАЗЫВАЕМ ТОЛЬКО ВОПРОСЫ
 			murderText.Text = "🔴 Маньяк: ❓"
 			murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
-	
 			sheriffText.Text = "🔵 Шериф: ❓"
 			sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
-	
 			if heroText then
 				heroText.Text = "🟡 Герой: ❓"
 				heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
@@ -1222,20 +1195,12 @@ local script = G2L["1a"];
 		end
 	end
 	
-	-- ====== ЗАПУСК ОБНОВЛЕНИЯ ======
+	-- ====== ЗАПУСК ======
 	local function startUpdate()
 		if isActive then return end
 		isActive = true
-	
 		print("🟢 Показ ролей ВКЛЮЧЕН!")
-	
-		if updateLoop then
-			updateLoop:Disconnect()
-			updateLoop = nil
-		end
-	
 		fetchRoles()
-	
 		updateLoop = RunService.Heartbeat:Connect(function()
 			if not isActive then
 				if updateLoop then
@@ -1248,22 +1213,16 @@ local script = G2L["1a"];
 		end)
 	end
 	
-	-- ====== ОСТАНОВКА ======
 	local function stopUpdate()
 		isActive = false
-	
 		if updateLoop then
 			updateLoop:Disconnect()
 			updateLoop = nil
 		end
-	
-		-- 👇 ВОЗВРАЩАЕМ ВОПРОСЫ
 		fetchRoles()
-	
 		print("🔴 Показ ролей ВЫКЛЮЧЕН!")
 	end
 	
-	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
 	button.MouseButton1Click:Connect(function()
 		if isActive then
 			stopUpdate()
@@ -1272,7 +1231,6 @@ local script = G2L["1a"];
 		end
 	end)
 	
-	-- ====== ПРИ РЕСПАВНЕ ======
 	player.CharacterAdded:Connect(function()
 		task.wait(0.5)
 		fetchRoles()
@@ -1714,11 +1672,11 @@ local script = G2L["2b"];
 	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
 end;
 task.spawn(C_2b);
--- StarterGui.MM2_Gui.MainFrame.Settings_Hide.LocalScript
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
 local function C_30()
 local script = G2L["30"];
 	-- ==========================================
-	-- Settings_BindHide (НАЗНАЧЕНИЕ БИНДА)
+	-- MM2_Settings_Hide (НАЗНАЧЕНИЕ БИНДА)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -1726,12 +1684,13 @@ local script = G2L["30"];
 	
 	local isListening = false
 	local hideKey = nil
-	local gui = button.Parent.Parent  -- ПОДНИМАЕМСЯ К MAINFRAME
+	local gui = button.Parent.Parent  -- ПОДНИМАЕМСЯ К MAINFRAME (MM2_Gui)
 	
-	-- ТОГГЛ ГУЯ
+	-- ТОГГЛ ГУЯ (используем Enabled вместо Visible)
 	local function toggleGui()
 		if not gui then return end
-		gui.Visible = not gui.Visible
+		gui.Enabled = not gui.Enabled
+		print("🟢 MM2 GUI:", gui.Enabled and "ОТКРЫТ" or "ЗАКРЫТ")
 	end
 	
 	-- НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ)
@@ -1739,6 +1698,7 @@ local script = G2L["30"];
 		if isListening then return end
 	
 		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
 	
 		local connection
 		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
@@ -1760,7 +1720,7 @@ local script = G2L["30"];
 		end
 	end)
 	
-	print("✅ Settings_BindHide ЗАГРУЖЕНА!")
+	print("✅ MM2_Settings_Hide ЗАГРУЖЕНА!")
 end;
 task.spawn(C_30);
 
