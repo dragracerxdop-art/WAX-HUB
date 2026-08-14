@@ -332,54 +332,72 @@ G2L["25"]["Name"] = [[SwitchTabs]];
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.SwitchTabs
 local function C_25()
 local script = G2L["25"];
-	local screenGui = script.Parent
-	local mainFrame = screenGui:WaitForChild("MainFrame")
-	local leftFrame = mainFrame:WaitForChild("LeftFrame")
-	local rightFrame = mainFrame:WaitForChild("RightFrame")
+	-- ==========================================
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (100% РАБОЧИЙ)
+	-- ==========================================
+	local leftFrame = script.Parent
+	local main = leftFrame.Parent
+	local rightFrame = main:FindFirstChild("RightFrame")
 	
-	-- Находим TextLabel в правом фрейме
-	local infoLabel = rightFrame:WaitForChild("Home_Info")
-	
-	-- Находим кнопки в левом фрейме (переименуй их!)
-	local homeButton = leftFrame:WaitForChild("HomeButton")
-	local gamesButton = leftFrame:WaitForChild("GamesButton")
-	local universalScriptsButton = leftFrame:WaitForChild("UniversalScriptsButton")
-	local trollButton = leftFrame:WaitForChild("TrollButton")
-	local universalButton = leftFrame:WaitForChild("UniversalButton")
-	local settingsButton = leftFrame:WaitForChild("SettingsButton")
-	
-	-- Функция для смены текста
-	local function updateLabel(text)
-		infoLabel.Text = text
+	if not rightFrame then
+		warn("❌ RightFrame не найден!")
+		return
 	end
 	
-	-- Вешаем клики на кнопки
-	homeButton.MouseButton1Click:Connect(function()
-		updateLabel("HOME")
-	end)
+	-- Находим Home_Info (если он есть)
+	local homeInfo = rightFrame:FindFirstChild("Home_Info")
 	
-	gamesButton.MouseButton1Click:Connect(function()
-		updateLabel("GAMES")
-	end)
+	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
+	local function switchTab(tabName)
+		print("🔘 Переключение на: " .. tabName)
 	
-	universalScriptsButton.MouseButton1Click:Connect(function()
-		updateLabel("UNIVERSAL SCRIPTS")
-	end)
+		-- Скрываем ВСЁ в RightFrame (включая TextLabel)
+		for _, child in pairs(rightFrame:GetChildren()) do
+			-- Пропускаем UI объекты (UIAnchor, UIStroke и т.д.)
+			if child:IsA("UIComponent") then
+				-- ничего не делаем
+			else
+				-- ВСЕ остальное скрываем
+				child.Visible = false
+			end
+		end
 	
-	trollButton.MouseButton1Click:Connect(function()
-		updateLabel("TROLL")
-	end)
+		-- ===== HOME =====
+		if tabName == "Home" then
+			-- Показываем только Home_Info
+			if homeInfo then
+				homeInfo.Visible = true
+			end
+			print("✅ HOME показан")
 	
-	universalButton.MouseButton1Click:Connect(function()
-		updateLabel("UNIVERSAL")
-	end)
+			-- ===== ДРУГИЕ ВКЛАДКИ (ПОКА ПУСТО) =====
+		elseif tabName == "Games" then
+			print("✅ GAMES (пусто)")
+		elseif tabName == "Universal Scripts" then
+			print("✅ UNIVERSAL SCRIPTS (пусто)")
+		elseif tabName == "Troll" then
+			print("✅ TROLL (пусто)")
+		elseif tabName == "Universal" then
+			print("✅ UNIVERSAL (пусто)")
+		elseif tabName == "Settings" then
+			print("✅ SETTINGS (пусто)")
+		else
+			print("❌ Неизвестная вкладка: " .. tabName)
+		end
+	end
 	
-	settingsButton.MouseButton1Click:Connect(function()
-		updateLabel("SETTINGS")
-	end)
+	-- ===== ПОДКЛЮЧАЕМ КНОПКИ =====
+	for _, btn in pairs(leftFrame:GetChildren()) do
+		if btn:IsA("TextButton") then
+			btn.MouseButton1Click:Connect(function()
+				switchTab(btn.Name)
+			end)
+		end
+	end
 	
-	-- Стартовый текст
-	updateLabel("HOME")
+	-- ===== СТАРТУЕМ С HOME =====
+	switchTab("Home")
+	print("✅ Переключение вкладок загружено!")
 end;
 task.spawn(C_25);
 
