@@ -498,7 +498,7 @@ task.spawn(C_13);
 local function C_29()
 local script = G2L["29"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С Settings_Hide)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (РАБОЧАЯ ВЕРСИЯ)
 	-- ==========================================
 	
 	local leftFrame = script.Parent
@@ -510,51 +510,49 @@ local script = G2L["29"];
 		return
 	end
 	
-	local homeInfo = rightFrame:FindFirstChild("Home_Info")
+	print("✅ RightFrame найден!")
 	
+	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
 	local function switchTab(tabName)
 		print("🔘 Переключение на: " .. tabName)
 	
-		-- Скрываем ВСЁ в RightFrame
+		-- Скрываем ВСЁ в RightFrame (кроме UI объектов)
 		for _, child in pairs(rightFrame:GetChildren()) do
 			if not child:IsA("UIComponent") then
 				child.Visible = false
+				print("🔹 Скрыт: " .. child.Name)
 			end
 		end
 	
 		-- ===== HOME =====
 		if tabName == "Home" then
+			local homeInfo = rightFrame:FindFirstChild("Home_Info")
 			if homeInfo then
 				homeInfo.Visible = true
+				print("✅ HOME показан")
+			else
+				warn("❌ Home_Info не найден!")
 			end
-			print("✅ HOME")
-	
-			-- ===== GAMES =====
-		elseif tabName == "Games" then
-			print("✅ GAMES (пусто)")
-	
-			-- ===== UNIVERSAL SCRIPTS =====
-		elseif tabName == "Universal Scripts" then
-			print("✅ UNIVERSAL SCRIPTS (пусто)")
-	
-			-- ===== TROLL =====
-		elseif tabName == "Troll" then
-			print("✅ TROLL (пусто)")
-	
-			-- ===== UNIVERSAL =====
-		elseif tabName == "Universal" then
-			print("✅ UNIVERSAL (пусто)")
 	
 			-- ===== SETTINGS =====
 		elseif tabName == "Settings" then
-			-- Показываем кнопку Settings_Hide
-			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and child.Name == "Settings_Hide" then
-					child.Visible = true
-				end
+			local settingsHide = rightFrame:FindFirstChild("Settings_Hide")
+			if settingsHide then
+				settingsHide.Visible = true
+				print("✅ SETTINGS (Settings_Hide показан)")
+			else
+				warn("❌ Settings_Hide не найден!")
 			end
-			print("✅ SETTINGS (Settings_Hide показана)")
 	
+			-- ===== ДРУГИЕ ВКЛАДКИ =====
+		elseif tabName == "Games" then
+			print("✅ GAMES (пусто)")
+		elseif tabName == "Universal Scripts" then
+			print("✅ UNIVERSAL SCRIPTS (пусто)")
+		elseif tabName == "Troll" then
+			print("✅ TROLL (пусто)")
+		elseif tabName == "Universal" then
+			print("✅ UNIVERSAL (пусто)")
 		else
 			print("❌ Неизвестная вкладка: " .. tabName)
 		end
