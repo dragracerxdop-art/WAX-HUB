@@ -731,29 +731,128 @@ task.spawn(C_13);
 -- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_CntrlDel.LocalScript
 local function C_18()
 local script = G2L["18"];
+	-- ==========================================
+	-- Universal_CntrlDel (Ctrl+Click Delete)
+	-- ==========================================
 	local button = script.Parent
 	local isEnabled = false
 	
+	local Plr = game.Players.LocalPlayer
+	local Mouse = Plr:GetMouse()
+	local UserInputService = game:GetService("UserInputService")
+	
+	-- Функция удаления
+	local function deletePart()
+		if not Mouse.Target then return end
+	
+		-- Проверка, чтобы не удалить важные объекты (опционально)
+		local target = Mouse.Target
+		if target:IsA("BasePart") then
+			target:Destroy()
+			print("🗑️ Удален: " .. target.Name)
+		else
+			print("⚠️ Это не BasePart!")
+		end
+	end
+	
+	-- Обработка клика с Ctrl
+	local function onInputBegan(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 and UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+			if isEnabled then
+				deletePart()
+			end
+		end
+	end
+	
+	-- Включаем/выключаем при нажатии на кнопку
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
 		_G.Misc = _G.Misc or {}
 		_G.Misc.CtrlDel = isEnabled
-		print("🔴 Ctrl+Del:", isEnabled and "ВКЛ" or "ВЫКЛ")
+		print("🔴 Ctrl+Click Delete:", isEnabled and "ВКЛ" or "ВЫКЛ")
 	end)
+	
+	-- Подключаем событие
+	UserInputService.InputBegan:Connect(onInputBegan)
+	
+	-- Уведомление при первом запуске
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = "CTRL + Click Delete",
+		Text = "Hold Ctrl + click to delete parts! (rejoin if mistake)",
+		Duration = 6,
+	})
+	
+	print("✅ Universal_CntrlDel загружен!")
 end;
 task.spawn(C_18);
 -- StarterGui.ScreenGui.MainFrame.RightFrame.Universal_Cntrl.LocalScript
 local function C_1d()
 local script = G2L["1d"];
+	-- ==========================================
+	-- Universal_Cntrl (Ctrl+Click Teleport)
+	-- ==========================================
 	local button = script.Parent
 	local isEnabled = false
 	
+	local Plr = game.Players.LocalPlayer
+	local Mouse = Plr:GetMouse()
+	local UserInputService = game:GetService("UserInputService")
+	
+	local speed = 100
+	local bodyvelocityenabled = true
+	
+	-- Функция телепортации
+	local function To(position)
+		local Chr = Plr.Character
+		if Chr ~= nil then
+			local ts = game:GetService("TweenService")
+			local char = game.Players.LocalPlayer.Character
+			local hm = char.HumanoidRootPart
+			local dist = (hm.Position - position).magnitude
+			local tweenspeed = dist / tonumber(speed)
+			local ti = TweenInfo.new(tonumber(tweenspeed), Enum.EasingStyle.Linear)
+			local tp = {CFrame = CFrame.new(position)}
+			ts:Create(hm, ti, tp):Play()
+	
+			if bodyvelocityenabled == true then
+				local bv = Instance.new("BodyVelocity")
+				bv.Parent = hm
+				bv.MaxForce = Vector3.new(100000, 100000, 100000)
+				bv.Velocity = Vector3.new(0, 0, 0)
+				wait(tonumber(tweenspeed))
+				bv:Destroy()
+			end
+		end
+	end
+	
+	-- Обработка клика с Ctrl
+	local function onInputBegan(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 and UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+			if isEnabled and Mouse.Target then
+				To(Mouse.Hit.p)
+			end
+		end
+	end
+	
+	-- Включаем/выключаем при нажатии на кнопку
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
 		_G.Misc = _G.Misc or {}
 		_G.Misc.CtrlClick = isEnabled
-		print("🖱️ Ctrl+Click:", isEnabled and "ВКЛ" or "ВЫКЛ")
+		print("🖱️ Ctrl+Click TP:", isEnabled and "ВКЛ" or "ВЫКЛ")
 	end)
+	
+	-- Подключаем событие
+	UserInputService.InputBegan:Connect(onInputBegan)
+	
+	-- Уведомление при первом запуске
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = "CTRL click tp",
+		Text = "Hold Ctrl + click to teleport",
+		Duration = 6,
+	})
+	
+	print("✅ Universal_Cntrl загружен!")
 end;
 task.spawn(C_1d);
 -- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
