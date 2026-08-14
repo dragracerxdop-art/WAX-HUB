@@ -152,7 +152,7 @@ G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["f"]["Position"] = UDim2.new(0.91872, 0, 0.20513, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color
 G2L["10"] = Instance.new("TextButton", G2L["5"]);
 G2L["10"]["BorderSizePixel"] = 0;
 G2L["10"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -163,27 +163,27 @@ G2L["10"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["10"]["Size"] = UDim2.new(0, 406, 0, 39);
 G2L["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["10"]["Text"] = [[      Change Color]];
-G2L["10"]["Name"] = [[Settings_Hide]];
+G2L["10"]["Name"] = [[Settings_Color]];
 G2L["10"]["Position"] = UDim2.new(0.01891, 0, 0.07752, 0);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.UICorner
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color.UICorner
 G2L["11"] = Instance.new("UICorner", G2L["10"]);
 G2L["11"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.UIStroke
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color.UIStroke
 G2L["12"] = Instance.new("UIStroke", G2L["10"]);
 G2L["12"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["12"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color.LocalScript
 G2L["13"] = Instance.new("LocalScript", G2L["10"]);
 
 
 
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.ImageLabel
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color.ImageLabel
 G2L["14"] = Instance.new("ImageLabel", G2L["10"]);
 G2L["14"]["BorderSizePixel"] = 0;
 G2L["14"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -455,7 +455,7 @@ local script = G2L["e"];
 	print("✅ Settings_BindHide ЗАГРУЖЕНА!")
 end;
 task.spawn(C_e);
--- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Hide.LocalScript
+-- StarterGui.ScreenGui.MainFrame.RightFrame.Settings_Color.LocalScript
 local function C_13()
 local script = G2L["13"];
 	-- ==========================================
@@ -639,7 +639,7 @@ task.spawn(C_18);
 local function C_2e()
 local script = G2L["2e"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (РАБОЧАЯ ВЕРСИЯ)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С Settings_Color)
 	-- ==========================================
 	
 	local leftFrame = script.Parent
@@ -677,13 +677,17 @@ local script = G2L["2e"];
 	
 			-- ===== SETTINGS =====
 		elseif tabName == "Settings" then
-			local settingsHide = rightFrame:FindFirstChild("Settings_Hide")
-			if settingsHide then
-				settingsHide.Visible = true
-				print("✅ SETTINGS (Settings_Hide показан)")
-			else
-				warn("❌ Settings_Hide не найден!")
+			-- Показываем ВСЕ кнопки для Settings
+			for _, child in pairs(rightFrame:GetChildren()) do
+				if child:IsA("TextButton") and (
+					child.Name == "Settings_Hide" or
+						child.Name == "Settings_Color"
+					) then
+					child.Visible = true
+					print("🔹 Показан: " .. child.Name)
+				end
 			end
+			print("✅ SETTINGS")
 	
 			-- ===== ДРУГИЕ ВКЛАДКИ =====
 		elseif tabName == "Games" then
