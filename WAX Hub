@@ -333,44 +333,39 @@ G2L["25"]["Name"] = [[SwitchTabs]];
 local function C_25()
 local script = G2L["25"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (100% РАБОЧИЙ)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ИСПРАВЛЕННЫЙ)
 	-- ==========================================
 	local leftFrame = script.Parent
-	local main = leftFrame.Parent
-	local rightFrame = main:FindFirstChild("RightFrame")
+	local mainFrame = leftFrame.Parent  -- MainFrame (родитель LeftFrame)
+	local rightFrame = mainFrame:FindFirstChild("RightFrame")  -- Ищем RightFrame внутри MainFrame
 	
 	if not rightFrame then
 		warn("❌ RightFrame не найден!")
 		return
 	end
 	
-	-- Находим Home_Info (если он есть)
+	-- Находим Home_Info
 	local homeInfo = rightFrame:FindFirstChild("Home_Info")
 	
 	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
 	local function switchTab(tabName)
 		print("🔘 Переключение на: " .. tabName)
 	
-		-- Скрываем ВСЁ в RightFrame (включая TextLabel)
+		-- Скрываем ВСЁ в RightFrame (кроме UI объектов)
 		for _, child in pairs(rightFrame:GetChildren()) do
-			-- Пропускаем UI объекты (UIAnchor, UIStroke и т.д.)
-			if child:IsA("UIComponent") then
-				-- ничего не делаем
-			else
-				-- ВСЕ остальное скрываем
+			if not child:IsA("UIComponent") then
 				child.Visible = false
 			end
 		end
 	
 		-- ===== HOME =====
 		if tabName == "Home" then
-			-- Показываем только Home_Info
 			if homeInfo then
 				homeInfo.Visible = true
 			end
 			print("✅ HOME показан")
 	
-			-- ===== ДРУГИЕ ВКЛАДКИ (ПОКА ПУСТО) =====
+			-- ===== ДРУГИЕ ВКЛАДКИ =====
 		elseif tabName == "Games" then
 			print("✅ GAMES (пусто)")
 		elseif tabName == "Universal Scripts" then
