@@ -337,31 +337,68 @@ G2L["26"]["Name"] = [[SwitchTabs]];
 -- StarterGui.ScreenGui.MainFrame.TextLabel.Dragable
 local function C_10()
 local script = G2L["10"];
-	local textLabel = script.Parent  -- Твой TextLabel в MainFrame
-	local mainFrame = textLabel.Parent  -- MainFrame
+	-- ==========================================
+	-- ПЕРЕТАСКИВАНИЕ (ПЛАВНОЕ + РЕЗКОЕ)
+	-- ==========================================
+	local frame = script.Parent
+	local uis = game:GetService("UserInputService")
 	
 	local dragging = false
 	local dragStart = nil
 	local startPos = nil
+	local connection = nil
 	
-	textLabel.InputBegan:Connect(function(input)
+	local function startDrag(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = true
 			dragStart = input.Position
-			startPos = mainFrame.Position
-		end
-	end)
+			startPos = frame.Position
 	
-	textLabel.InputEnded:Connect(function(input)
+			-- Отключаем стандартное поведение
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+	
+			connection = uis.InputChanged:Connect(function(input)
+				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					local delta = input.Position - dragStart
+					frame.Position = UDim2.new(
+						startPos.X.Scale,
+						startPos.X.Offset + delta.X,
+						startPos.Y.Scale,
+						startPos.Y.Offset + delta.Y
+					)
+				end
+			end)
+		end
+	end
+	
+	local function endDrag(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = false
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
 		end
+	end
+	
+	-- Подключаем события
+	frame.InputBegan:Connect(startDrag)
+	uis.InputEnded:Connect(endDrag)
+	
+	-- Для сенсорных экранов
+	frame.TouchBegan:Connect(function(input)
+		dragging = true
+		dragStart = input.Position
+		startPos = frame.Position
 	end)
 	
-	game:GetService("UserInputService").InputChanged:Connect(function(input)
-		if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+	frame.TouchMoved:Connect(function(input)
+		if dragging then
 			local delta = input.Position - dragStart
-			mainFrame.Position = UDim2.new(
+			frame.Position = UDim2.new(
 				startPos.X.Scale,
 				startPos.X.Offset + delta.X,
 				startPos.Y.Scale,
@@ -369,6 +406,12 @@ local script = G2L["10"];
 			)
 		end
 	end)
+	
+	frame.TouchEnded:Connect(function()
+		dragging = false
+	end)
+	
+	print("✅ Перетаскивание обновлено!")
 end;
 task.spawn(C_10);
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.SwitchTabs
