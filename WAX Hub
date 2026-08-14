@@ -498,47 +498,69 @@ task.spawn(C_13);
 local function C_29()
 local script = G2L["29"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ТОЧНО РАБОТАЕТ)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С Settings_Hide)
 	-- ==========================================
 	
-	local leftFrame = script.Parent  -- SwitchTabs находится в LeftFrame
-	local mainFrame = leftFrame.Parent  -- MainFrame
-	local rightFrame = mainFrame:FindFirstChild("RightFrame")  -- Ищем RightFrame
+	local leftFrame = script.Parent
+	local mainFrame = leftFrame.Parent
+	local rightFrame = mainFrame:FindFirstChild("RightFrame")
 	
 	if not rightFrame then
 		warn("❌ RightFrame не найден!")
 		return
 	end
 	
-	-- Находим Home_Info в правой панели
 	local homeInfo = rightFrame:FindFirstChild("Home_Info")
-	if not homeInfo then
-		warn("❌ Home_Info не найден в RightFrame!")
-	end
 	
-	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
 	local function switchTab(tabName)
 		print("🔘 Переключение на: " .. tabName)
 	
-		-- Скрываем ВСЁ в RightFrame (кроме UIComponent)
+		-- Скрываем ВСЁ в RightFrame
 		for _, child in pairs(rightFrame:GetChildren()) do
 			if not child:IsA("UIComponent") then
 				child.Visible = false
 			end
 		end
 	
-		-- Если выбрана вкладка HOME — показываем Home_Info
+		-- ===== HOME =====
 		if tabName == "Home" then
 			if homeInfo then
 				homeInfo.Visible = true
-				print("✅ HOME показан")
 			end
+			print("✅ HOME")
+	
+			-- ===== GAMES =====
+		elseif tabName == "Games" then
+			print("✅ GAMES (пусто)")
+	
+			-- ===== UNIVERSAL SCRIPTS =====
+		elseif tabName == "Universal Scripts" then
+			print("✅ UNIVERSAL SCRIPTS (пусто)")
+	
+			-- ===== TROLL =====
+		elseif tabName == "Troll" then
+			print("✅ TROLL (пусто)")
+	
+			-- ===== UNIVERSAL =====
+		elseif tabName == "Universal" then
+			print("✅ UNIVERSAL (пусто)")
+	
+			-- ===== SETTINGS =====
+		elseif tabName == "Settings" then
+			-- Показываем кнопку Settings_Hide
+			for _, child in pairs(rightFrame:GetChildren()) do
+				if child:IsA("TextButton") and child.Name == "Settings_Hide" then
+					child.Visible = true
+				end
+			end
+			print("✅ SETTINGS (Settings_Hide показана)")
+	
 		else
-			print("✅ " .. tabName .. " (пока пусто)")
+			print("❌ Неизвестная вкладка: " .. tabName)
 		end
 	end
 	
-	-- ===== ПОДКЛЮЧАЕМ ВСЕ КНОПКИ В LEFTFRAME =====
+	-- ===== ПОДКЛЮЧАЕМ КНОПКИ =====
 	for _, btn in pairs(leftFrame:GetChildren()) do
 		if btn:IsA("TextButton") then
 			btn.MouseButton1Click:Connect(function()
