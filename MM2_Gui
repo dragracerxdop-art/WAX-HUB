@@ -572,7 +572,7 @@ task.spawn(C_6);
 local function C_16()
 local script = G2L["16"];
 	-- ==========================================
-	-- MM2_ESP (ВКЛ/ВЫКЛ) - ИСПРАВЛЕННЫЙ
+	-- MM2_ESP (СТАБИЛЬНАЯ ВЕРСИЯ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -656,25 +656,8 @@ local script = G2L["16"];
 		return {highlight = highlight, billboard = billboard, text = textLabel}
 	end
 	
-	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP ======
 	local function clearESP()
-		-- Проходим по всем игрокам и удаляем подсветки
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr.Character then
-				for _, child in pairs(plr.Character:GetChildren()) do
-					if child:IsA("Highlight") then
-						child:Destroy()
-					end
-				end
-				for _, child in pairs(plr.Character:GetDescendants()) do
-					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
-						child:Destroy()
-					end
-				end
-			end
-		end
-	
-		-- Очищаем таблицу
 		for name, data in pairs(espObjects) do
 			if data.highlight and data.highlight.Parent then
 				data.highlight:Destroy()
@@ -782,22 +765,6 @@ local script = G2L["16"];
 			stopESP()
 		else
 			startESP()
-		end
-	end)
-	
-	Players.PlayerAdded:Connect(function()
-		if isActive then
-			task.wait(0.5)
-			updateESP()
-		end
-	end)
-	
-	player.CharacterAdded:Connect(function()
-		task.wait(0.5)
-		if isActive then
-			clearESP()
-			task.wait(0.5)
-			updateESP()
 		end
 	end)
 	
