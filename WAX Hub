@@ -333,55 +333,47 @@ G2L["25"]["Name"] = [[SwitchTabs]];
 local function C_25()
 local script = G2L["25"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ИСПРАВЛЕННЫЙ)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ТОЧНО РАБОТАЕТ)
 	-- ==========================================
-	local leftFrame = script.Parent
-	local mainFrame = leftFrame.Parent  -- MainFrame (родитель LeftFrame)
-	local rightFrame = mainFrame:FindFirstChild("RightFrame")  -- Ищем RightFrame внутри MainFrame
+	
+	local leftFrame = script.Parent  -- SwitchTabs находится в LeftFrame
+	local mainFrame = leftFrame.Parent  -- MainFrame
+	local rightFrame = mainFrame:FindFirstChild("RightFrame")  -- Ищем RightFrame
 	
 	if not rightFrame then
 		warn("❌ RightFrame не найден!")
 		return
 	end
 	
-	-- Находим Home_Info
+	-- Находим Home_Info в правой панели
 	local homeInfo = rightFrame:FindFirstChild("Home_Info")
+	if not homeInfo then
+		warn("❌ Home_Info не найден в RightFrame!")
+	end
 	
 	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
 	local function switchTab(tabName)
 		print("🔘 Переключение на: " .. tabName)
 	
-		-- Скрываем ВСЁ в RightFrame (кроме UI объектов)
+		-- Скрываем ВСЁ в RightFrame (кроме UIComponent)
 		for _, child in pairs(rightFrame:GetChildren()) do
 			if not child:IsA("UIComponent") then
 				child.Visible = false
 			end
 		end
 	
-		-- ===== HOME =====
+		-- Если выбрана вкладка HOME — показываем Home_Info
 		if tabName == "Home" then
 			if homeInfo then
 				homeInfo.Visible = true
+				print("✅ HOME показан")
 			end
-			print("✅ HOME показан")
-	
-			-- ===== ДРУГИЕ ВКЛАДКИ =====
-		elseif tabName == "Games" then
-			print("✅ GAMES (пусто)")
-		elseif tabName == "Universal Scripts" then
-			print("✅ UNIVERSAL SCRIPTS (пусто)")
-		elseif tabName == "Troll" then
-			print("✅ TROLL (пусто)")
-		elseif tabName == "Universal" then
-			print("✅ UNIVERSAL (пусто)")
-		elseif tabName == "Settings" then
-			print("✅ SETTINGS (пусто)")
 		else
-			print("❌ Неизвестная вкладка: " .. tabName)
+			print("✅ " .. tabName .. " (пока пусто)")
 		end
 	end
 	
-	-- ===== ПОДКЛЮЧАЕМ КНОПКИ =====
+	-- ===== ПОДКЛЮЧАЕМ ВСЕ КНОПКИ В LEFTFRAME =====
 	for _, btn in pairs(leftFrame:GetChildren()) do
 		if btn:IsA("TextButton") then
 			btn.MouseButton1Click:Connect(function()
