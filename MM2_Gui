@@ -1,198 +1,1730 @@
--- ==========================================
--- MM2_ESP (СТАБИЛЬНАЯ ВЕРСИЯ)
--- ==========================================
-local button = script.Parent
-local player = game.Players.LocalPlayer
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
 
-local isActive = false
-local updateLoop = nil
-local espObjects = {}
+-- Instances: 51 | Scripts: 9 | Modules: 0 | Tags: 0
+local G2L = {};
 
-local COLORS = {
-	Murderer = Color3.fromRGB(255, 0, 0),
-	Sheriff = Color3.fromRGB(0, 100, 255),
-	Hero = Color3.fromRGB(255, 200, 0),
-	Default = Color3.fromRGB(0, 255, 0)
-}
+-- StarterGui.MM2_Gui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[MM2_Gui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
 
--- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
-local function fetchRoles()
-	local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
-	if not getPlayerData then return {} end
 
-	local success, data = pcall(function()
-		return getPlayerData:InvokeServer()
-	end)
+-- StarterGui.MM2_Gui.MainFrame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Size"] = UDim2.new(0, 297, 0, 375);
+G2L["2"]["Position"] = UDim2.new(0.71104, 0, 0.33827, 0);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Name"] = [[MainFrame]];
+G2L["2"]["BackgroundTransparency"] = 0.25;
 
-	if not success or not data then return {} end
 
-	local roles = {}
-	for name, info in pairs(data) do
-		roles[name] = info.Role
-	end
-	return roles
-end
+-- StarterGui.MM2_Gui.MainFrame.WAX_MM2
+G2L["3"] = Instance.new("TextLabel", G2L["2"]);
+G2L["3"]["BorderSizePixel"] = 0;
+G2L["3"]["TextSize"] = 24;
+G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3"]["BackgroundTransparency"] = 0.65;
+G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
+G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["Text"] = [[WAX MM2]];
+G2L["3"]["Name"] = [[WAX_MM2]];
 
--- ====== СОЗДАНИЕ ESP ======
-local function createESP(playerObj, role)
-	local char = playerObj.Character
-	if not char then return nil end
 
-	local hrp = char:FindFirstChild("HumanoidRootPart")
-	if not hrp then return nil end
+-- StarterGui.MM2_Gui.MainFrame.WAX_MM2.UICorner
+G2L["4"] = Instance.new("UICorner", G2L["3"]);
+G2L["4"]["CornerRadius"] = UDim.new(0, 20);
 
-	local color = COLORS[role] or COLORS.Default
 
-	local highlight = Instance.new("Highlight")
-	highlight.Parent = char
-	highlight.FillColor = color
-	highlight.FillTransparency = 0.5
-	highlight.OutlineColor = color
-	highlight.OutlineTransparency = 0
-	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+-- StarterGui.MM2_Gui.MainFrame.WAX_MM2.UIStroke
+G2L["5"] = Instance.new("UIStroke", G2L["3"]);
+G2L["5"]["Thickness"] = 2;
+G2L["5"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
-	local billboard = Instance.new("BillboardGui")
-	billboard.Parent = hrp
-	billboard.Size = UDim2.new(0, 200, 0, 30)
-	billboard.StudsOffset = Vector3.new(0, 2.5, 0)
-	billboard.AlwaysOnTop = true
 
-	local textLabel = Instance.new("TextLabel")
-	textLabel.Parent = billboard
-	textLabel.Size = UDim2.new(1, 0, 1, 0)
-	textLabel.BackgroundTransparency = 1
-	textLabel.Text = playerObj.Name
-	textLabel.TextColor3 = color
-	textLabel.TextSize = 16
-	textLabel.Font = Enum.Font.GothamBold
-	textLabel.TextStrokeTransparency = 0.3
-	textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+-- StarterGui.MM2_Gui.MainFrame.WAX_MM2.LocalScript
+G2L["6"] = Instance.new("LocalScript", G2L["3"]);
 
-	if role and role ~= "" then
-		local roleNames = {
-			Murderer = "🔴 Убийца",
-			Sheriff = "🔵 Шериф",
-			Hero = "🟡 Герой"
-		}
-		textLabel.Text = playerObj.Name .. " (" .. (roleNames[role] or role) .. ")"
-	end
 
-	return {highlight = highlight, billboard = billboard, text = textLabel}
-end
 
--- ====== УДАЛЕНИЕ ВСЕГО ESP ======
-local function clearESP()
-	for name, data in pairs(espObjects) do
-		if data.highlight and data.highlight.Parent then
-			data.highlight:Destroy()
+-- StarterGui.MM2_Gui.MainFrame.UICorner
+G2L["7"] = Instance.new("UICorner", G2L["2"]);
+G2L["7"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.MM2_Gui.MainFrame.UIStroke
+G2L["8"] = Instance.new("UIStroke", G2L["2"]);
+G2L["8"]["Thickness"] = 2;
+G2L["8"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["8"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Hero
+G2L["9"] = Instance.new("TextLabel", G2L["2"]);
+G2L["9"]["BorderSizePixel"] = 0;
+G2L["9"]["TextSize"] = 14;
+G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["Size"] = UDim2.new(0, 215, 0, 21);
+G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["Name"] = [[MM2_Hero]];
+G2L["9"]["Position"] = UDim2.new(0.13805, 0, 0.20619, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Sheriff
+G2L["a"] = Instance.new("TextLabel", G2L["2"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["TextSize"] = 14;
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["a"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Size"] = UDim2.new(0, 215, 0, 21);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Name"] = [[MM2_Sheriff]];
+G2L["a"]["Position"] = UDim2.new(0.13805, 0, 0.2921, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Murder
+G2L["b"] = Instance.new("TextLabel", G2L["2"]);
+G2L["b"]["BorderSizePixel"] = 0;
+G2L["b"]["TextSize"] = 14;
+G2L["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["b"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["b"]["Size"] = UDim2.new(0, 215, 0, 21);
+G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["b"]["Name"] = [[MM2_Murder]];
+G2L["b"]["Position"] = UDim2.new(0.138, 0, 0.379, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP
+G2L["c"] = Instance.new("TextButton", G2L["2"]);
+G2L["c"]["BorderSizePixel"] = 0;
+G2L["c"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["c"]["TextSize"] = 20;
+G2L["c"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["c"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["c"]["Text"] = [[    ESP]];
+G2L["c"]["Name"] = [[MM2_ESP]];
+G2L["c"]["Position"] = UDim2.new(0.0202, 0, 0.51203, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.ImageLabel
+G2L["d"] = Instance.new("ImageLabel", G2L["c"]);
+G2L["d"]["BorderSizePixel"] = 0;
+G2L["d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["d"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["d"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["d"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.UIStroke
+G2L["e"] = Instance.new("UIStroke", G2L["c"]);
+G2L["e"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.UICorner
+G2L["f"] = Instance.new("UICorner", G2L["c"]);
+G2L["f"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.LocalScript
+G2L["10"] = Instance.new("LocalScript", G2L["c"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm
+G2L["11"] = Instance.new("TextButton", G2L["2"]);
+G2L["11"]["BorderSizePixel"] = 0;
+G2L["11"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["11"]["TextSize"] = 20;
+G2L["11"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["11"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["11"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["Text"] = [[    AutoFarm]];
+G2L["11"]["Name"] = [[MM2_Autofarm]];
+G2L["11"]["Position"] = UDim2.new(0.0202, 0, 0.6424, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.ImageLabel
+G2L["12"] = Instance.new("ImageLabel", G2L["11"]);
+G2L["12"]["BorderSizePixel"] = 0;
+G2L["12"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["12"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["12"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["12"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.UIStroke
+G2L["13"] = Instance.new("UIStroke", G2L["11"]);
+G2L["13"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["13"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.UICorner
+G2L["14"] = Instance.new("UICorner", G2L["11"]);
+G2L["14"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.LocalScript
+G2L["15"] = Instance.new("LocalScript", G2L["11"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles
+G2L["16"] = Instance.new("TextButton", G2L["2"]);
+G2L["16"]["BorderSizePixel"] = 0;
+G2L["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["16"]["TextSize"] = 20;
+G2L["16"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["16"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["16"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["16"]["Text"] = [[    Info]];
+G2L["16"]["Name"] = [[MM2_ShowRoles]];
+G2L["16"]["Position"] = UDim2.new(0.50505, 0, 0.51203, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.ImageLabel
+G2L["17"] = Instance.new("ImageLabel", G2L["16"]);
+G2L["17"]["BorderSizePixel"] = 0;
+G2L["17"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["17"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["17"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["17"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UIStroke
+G2L["18"] = Instance.new("UIStroke", G2L["16"]);
+G2L["18"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["18"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.UICorner
+G2L["19"] = Instance.new("UICorner", G2L["16"]);
+G2L["19"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
+G2L["1a"] = Instance.new("LocalScript", G2L["16"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP
+G2L["1b"] = Instance.new("TextButton", G2L["2"]);
+G2L["1b"]["BorderSizePixel"] = 0;
+G2L["1b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["1b"]["TextSize"] = 20;
+G2L["1b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1b"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["Text"] = [[    GunESP]];
+G2L["1b"]["Name"] = [[MM2_GunESP]];
+G2L["1b"]["Position"] = UDim2.new(0.50505, 0, 0.63963, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.ImageLabel
+G2L["1c"] = Instance.new("ImageLabel", G2L["1b"]);
+G2L["1c"]["BorderSizePixel"] = 0;
+G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1c"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["1c"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1c"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.UIStroke
+G2L["1d"] = Instance.new("UIStroke", G2L["1b"]);
+G2L["1d"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1d"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.UICorner
+G2L["1e"] = Instance.new("UICorner", G2L["1b"]);
+G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.LocalScript
+G2L["1f"] = Instance.new("LocalScript", G2L["1b"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer
+G2L["20"] = Instance.new("TextButton", G2L["2"]);
+G2L["20"]["BorderSizePixel"] = 0;
+G2L["20"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["20"]["TextSize"] = 20;
+G2L["20"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["20"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Text"] = [[   MurderWIN]];
+G2L["20"]["Name"] = [[MM2_KillMurderer]];
+G2L["20"]["Position"] = UDim2.new(0.0202, 0, 0.76706, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.ImageLabel
+G2L["21"] = Instance.new("ImageLabel", G2L["20"]);
+G2L["21"]["BorderSizePixel"] = 0;
+G2L["21"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["21"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["21"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["21"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.UIStroke
+G2L["22"] = Instance.new("UIStroke", G2L["20"]);
+G2L["22"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["22"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.UICorner
+G2L["23"] = Instance.new("UICorner", G2L["20"]);
+G2L["23"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.LocalScript
+G2L["24"] = Instance.new("LocalScript", G2L["20"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun
+G2L["25"] = Instance.new("TextButton", G2L["2"]);
+G2L["25"]["BorderSizePixel"] = 0;
+G2L["25"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["25"]["TextSize"] = 20;
+G2L["25"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["25"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["25"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["25"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["25"]["Text"] = [[    PickUpGun]];
+G2L["25"]["Name"] = [[MM2_PickGun]];
+G2L["25"]["Position"] = UDim2.new(0.50505, 0, 0.76429, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.ImageLabel
+G2L["26"] = Instance.new("ImageLabel", G2L["25"]);
+G2L["26"]["BorderSizePixel"] = 0;
+G2L["26"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["26"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
+G2L["27"] = Instance.new("LocalScript", G2L["25"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UIStroke
+G2L["28"] = Instance.new("UIStroke", G2L["25"]);
+G2L["28"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["28"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.UICorner
+G2L["29"] = Instance.new("UICorner", G2L["25"]);
+G2L["29"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color
+G2L["2a"] = Instance.new("TextButton", G2L["2"]);
+G2L["2a"]["BorderSizePixel"] = 0;
+G2L["2a"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["2a"]["TextSize"] = 20;
+G2L["2a"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["2a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2a"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2a"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["2a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2a"]["Text"] = [[      Color]];
+G2L["2a"]["Name"] = [[Settings_Color]];
+G2L["2a"]["Position"] = UDim2.new(0.01891, 0, 0.88915, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.LocalScript
+G2L["2b"] = Instance.new("LocalScript", G2L["2a"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.ImageLabel
+G2L["2c"] = Instance.new("ImageLabel", G2L["2a"]);
+G2L["2c"]["BorderSizePixel"] = 0;
+G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2c"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["2c"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2c"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.UICorner
+G2L["2d"] = Instance.new("UICorner", G2L["2a"]);
+G2L["2d"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.UIStroke
+G2L["2e"] = Instance.new("UIStroke", G2L["2a"]);
+G2L["2e"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["2e"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide
+G2L["2f"] = Instance.new("TextButton", G2L["2"]);
+G2L["2f"]["BorderSizePixel"] = 0;
+G2L["2f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["2f"]["TextSize"] = 20;
+G2L["2f"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["2f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2f"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2f"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["2f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2f"]["Text"] = [[      Hide Gui]];
+G2L["2f"]["Name"] = [[MM2_Settings_Hide]];
+G2L["2f"]["Position"] = UDim2.new(0.50385, 0, 0.88421, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
+G2L["30"] = Instance.new("LocalScript", G2L["2f"]);
+
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.ImageLabel
+G2L["31"] = Instance.new("ImageLabel", G2L["2f"]);
+G2L["31"]["BorderSizePixel"] = 0;
+G2L["31"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["31"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["31"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["31"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["31"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UICorner
+G2L["32"] = Instance.new("UICorner", G2L["2f"]);
+G2L["32"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.UIStroke
+G2L["33"] = Instance.new("UIStroke", G2L["2f"]);
+G2L["33"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["33"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.MM2_Gui.MainFrame.WAX_MM2.LocalScript
+local function C_6()
+local script = G2L["6"];
+	-- ==========================================
+	-- ПЕРЕТАСКИВАНИЕ (ТОЛЬКО МЫШЬ)
+	-- ==========================================
+	local textLabel = script.Parent
+	local frame = textLabel.Parent
+	
+	local uis = game:GetService("UserInputService")
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	local connection = nil
+	
+	local function startDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+	
+			connection = uis.InputChanged:Connect(function(input)
+				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					local delta = input.Position - dragStart
+					frame.Position = UDim2.new(
+						startPos.X.Scale,
+						startPos.X.Offset + delta.X,
+						startPos.Y.Scale,
+						startPos.Y.Offset + delta.Y
+					)
+				end
+			end)
 		end
-		if data.billboard and data.billboard.Parent then
-			data.billboard:Destroy()
+	end
+	
+	local function endDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = false
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
 		end
-		espObjects[name] = nil
 	end
-	espObjects = {}
-end
-
--- ====== ОБНОВЛЕНИЕ ESP ======
-local function updateESP()
-	if not isActive then
-		clearESP()
-		return
+	
+	textLabel.InputBegan:Connect(startDrag)
+	uis.InputEnded:Connect(endDrag)
+	
+	print("✅ Перетаскивание загружено (только мышь)")
+end;
+task.spawn(C_6);
+-- StarterGui.MM2_Gui.MainFrame.MM2_ESP.LocalScript
+local function C_10()
+local script = G2L["10"];
+	-- ==========================================
+	-- MM2_ESP (ВКЛ/ВЫКЛ) - ИСПРАВЛЕННЫЙ
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local RunService = game:GetService("RunService")
+	local Players = game:GetService("Players")
+	
+	local isActive = false
+	local updateLoop = nil
+	local espObjects = {}
+	
+	local COLORS = {
+		Murderer = Color3.fromRGB(255, 0, 0),
+		Sheriff = Color3.fromRGB(0, 100, 255),
+		Hero = Color3.fromRGB(255, 200, 0),
+		Default = Color3.fromRGB(0, 255, 0)
+	}
+	
+	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
+	local function fetchRoles()
+		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+		if not getPlayerData then return {} end
+	
+		local success, data = pcall(function()
+			return getPlayerData:InvokeServer()
+		end)
+	
+		if not success or not data then return {} end
+	
+		local roles = {}
+		for name, info in pairs(data) do
+			roles[name] = info.Role
+		end
+		return roles
 	end
-
-	local roles = fetchRoles() or {}
-
-	for _, plr in pairs(Players:GetPlayers()) do
-		if plr == player then continue end
-
-		if not plr.Character or not plr.Character:FindFirstChild("HumanoidRootPart") then
+	
+	-- ====== СОЗДАНИЕ ESP ======
+	local function createESP(playerObj, role)
+		local char = playerObj.Character
+		if not char then return nil end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then return nil end
+	
+		local color = COLORS[role] or COLORS.Default
+	
+		local highlight = Instance.new("Highlight")
+		highlight.Parent = char
+		highlight.FillColor = color
+		highlight.FillTransparency = 0.5
+		highlight.OutlineColor = color
+		highlight.OutlineTransparency = 0
+		highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	
+		local billboard = Instance.new("BillboardGui")
+		billboard.Parent = hrp
+		billboard.Size = UDim2.new(0, 200, 0, 30)
+		billboard.StudsOffset = Vector3.new(0, 2.5, 0)
+		billboard.AlwaysOnTop = true
+	
+		local textLabel = Instance.new("TextLabel")
+		textLabel.Parent = billboard
+		textLabel.Size = UDim2.new(1, 0, 1, 0)
+		textLabel.BackgroundTransparency = 1
+		textLabel.Text = playerObj.Name
+		textLabel.TextColor3 = color
+		textLabel.TextSize = 16
+		textLabel.Font = Enum.Font.GothamBold
+		textLabel.TextStrokeTransparency = 0.3
+		textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	
+		if role and role ~= "" then
+			local roleNames = {
+				Murderer = "🔴 Убийца",
+				Sheriff = "🔵 Шериф",
+				Hero = "🟡 Герой"
+			}
+			textLabel.Text = playerObj.Name .. " (" .. (roleNames[role] or role) .. ")"
+		end
+	
+		return {highlight = highlight, billboard = billboard, text = textLabel}
+	end
+	
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
+	local function clearESP()
+		-- Проходим по всем игрокам и удаляем подсветки
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character then
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
+						child:Destroy()
+					end
+				end
+			end
+		end
+	
+		-- Очищаем таблицу
+		for name, data in pairs(espObjects) do
+			if data.highlight and data.highlight.Parent then
+				data.highlight:Destroy()
+			end
+			if data.billboard and data.billboard.Parent then
+				data.billboard:Destroy()
+			end
+			espObjects[name] = nil
+		end
+		espObjects = {}
+	end
+	
+	-- ====== ОБНОВЛЕНИЕ ESP ======
+	local function updateESP()
+		if not isActive then
+			clearESP()
+			return
+		end
+	
+		local roles = fetchRoles() or {}
+	
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr == player then continue end
+	
+			if not plr.Character or not plr.Character:FindFirstChild("HumanoidRootPart") then
+				if espObjects[plr.Name] then
+					if espObjects[plr.Name].highlight then
+						espObjects[plr.Name].highlight:Destroy()
+					end
+					if espObjects[plr.Name].billboard then
+						espObjects[plr.Name].billboard:Destroy()
+					end
+					espObjects[plr.Name] = nil
+				end
+				continue
+			end
+	
 			if espObjects[plr.Name] then
+				local role = roles[plr.Name]
+				local color = COLORS[role] or COLORS.Default
 				if espObjects[plr.Name].highlight then
-					espObjects[plr.Name].highlight:Destroy()
+					espObjects[plr.Name].highlight.FillColor = color
+					espObjects[plr.Name].highlight.OutlineColor = color
 				end
-				if espObjects[plr.Name].billboard then
-					espObjects[plr.Name].billboard:Destroy()
+				if espObjects[plr.Name].text then
+					espObjects[plr.Name].text.TextColor3 = color
+					if role and role ~= "" then
+						local roleNames = {
+							Murderer = "🔴 Убийца",
+							Sheriff = "🔵 Шериф",
+							Hero = "🟡 Герой"
+						}
+						espObjects[plr.Name].text.Text = plr.Name .. " (" .. (roleNames[role] or role) .. ")"
+					else
+						espObjects[plr.Name].text.Text = plr.Name
+					end
 				end
-				espObjects[plr.Name] = nil
+				continue
 			end
-			continue
-		end
-
-		if espObjects[plr.Name] then
+	
 			local role = roles[plr.Name]
-			local color = COLORS[role] or COLORS.Default
-			if espObjects[plr.Name].highlight then
-				espObjects[plr.Name].highlight.FillColor = color
-				espObjects[plr.Name].highlight.OutlineColor = color
+			local esp = createESP(plr, role)
+			if esp then
+				espObjects[plr.Name] = esp
 			end
-			if espObjects[plr.Name].text then
-				espObjects[plr.Name].text.TextColor3 = color
-				if role and role ~= "" then
-					local roleNames = {
-						Murderer = "🔴 Убийца",
-						Sheriff = "🔵 Шериф",
-						Hero = "🟡 Герой"
-					}
-					espObjects[plr.Name].text.Text = plr.Name .. " (" .. (roleNames[role] or role) .. ")"
-				else
-					espObjects[plr.Name].text.Text = plr.Name
-				end
-			end
-			continue
-		end
-
-		local role = roles[plr.Name]
-		local esp = createESP(plr, role)
-		if esp then
-			espObjects[plr.Name] = esp
 		end
 	end
-end
-
--- ====== ЗАПУСК ======
-local function startESP()
-	if isActive then return end
-	isActive = true
-	print("🟢 MM2 ESP ВКЛЮЧЕН!")
-
-	if updateLoop then
-		updateLoop:Disconnect()
-		updateLoop = nil
+	
+	-- ====== ЗАПУСК ======
+	local function startESP()
+		if isActive then return end
+		isActive = true
+		print("🟢 MM2 ESP ВКЛЮЧЕН!")
+	
+		if updateLoop then
+			updateLoop:Disconnect()
+			updateLoop = nil
+		end
+	
+		updateESP()
+	
+		updateLoop = RunService.Heartbeat:Connect(function()
+			if isActive then
+				updateESP()
+			end
+		end)
 	end
-
-	updateESP()
-
-	updateLoop = RunService.Heartbeat:Connect(function()
+	
+	-- ====== ОСТАНОВКА ======
+	local function stopESP()
+		isActive = false
+	
+		if updateLoop then
+			updateLoop:Disconnect()
+			updateLoop = nil
+		end
+	
+		clearESP()
+		print("🔴 MM2 ESP ВЫКЛЮЧЕН!")
+	end
+	
+	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
+	button.MouseButton1Click:Connect(function()
 		if isActive then
+			stopESP()
+		else
+			startESP()
+		end
+	end)
+	
+	Players.PlayerAdded:Connect(function()
+		if isActive then
+			task.wait(0.5)
 			updateESP()
 		end
 	end)
-end
-
--- ====== ОСТАНОВКА ======
-local function stopESP()
-	isActive = false
-
-	if updateLoop then
-		updateLoop:Disconnect()
-		updateLoop = nil
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isActive then
+			clearESP()
+			task.wait(0.5)
+			updateESP()
+		end
+	end)
+	
+	print("✅ MM2_ESP загружена!")
+end;
+task.spawn(C_10);
+-- StarterGui.MM2_Gui.MainFrame.MM2_Autofarm.LocalScript
+local function C_15()
+local script = G2L["15"];
+	-- ==========================================
+	-- MM2_AutoFarm (РАБОЧАЯ ВЕРСИЯ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local TweenService = game:GetService("TweenService")
+	
+	local isActive = false
+	local farmConnection = nil
+	local safePoint = nil
+	local currentTarget = nil
+	local currentTween = nil
+	local isMoving = false
+	
+	-- ====== ОСТАНОВКА ТВИНА ======
+	local function stopTween()
+		if currentTween then
+			pcall(function() currentTween:Cancel() end)
+			currentTween = nil
+		end
+		isMoving = false
 	end
-
-	clearESP()
-	print("🔴 MM2 ESP ВЫКЛЮЧЕН!")
-end
-
--- ====== ПЕРЕКЛЮЧЕНИЕ ======
-button.MouseButton1Click:Connect(function()
-	if isActive then
-		stopESP()
-	else
-		startESP()
+	
+	-- ====== ПРОВЕРКА РАУНДА ======
+	local function isRoundActive()
+		local mainGui = player.PlayerGui:FindFirstChild("MainGUI")
+		if not mainGui then return false end
+		local gameFrame = mainGui:FindFirstChild("Game")
+		if not gameFrame then return false end
+		if gameFrame:FindFirstChild("Timer") and gameFrame.Timer.Visible then
+			return true
+		end
+		if player:GetAttribute("Alive") == true then
+			return true
+		end
+		return false
 	end
-end)
+	
+	-- ====== ПОИСК КАРТЫ ======
+	local function findMap()
+		for _, v in workspace:GetDescendants() do
+			if v.Name == "Spawns" and v.Parent and v.Parent.Name ~= "Lobby" then
+				return v.Parent
+			end
+		end
+		return nil
+	end
+	
+	-- ====== ПОИСК КОНТЕЙНЕРА ======
+	local function findCoinContainer()
+		local map = findMap()
+		if map then
+			return map:FindFirstChild("CoinContainer")
+		end
+		return nil
+	end
+	
+	-- ====== ПОИСК УБИЙЦЫ ======
+	local function findMurderer()
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player then
+				if plr.Backpack:FindFirstChild("Knife") then
+					return plr
+				end
+				if plr.Character and plr.Character:FindFirstChild("Knife") then
+					return plr
+				end
+			end
+		end
+		return nil
+	end
+	
+	-- ====== ПРОВЕРКА МОНЕТЫ ======
+	local function isCoinValid(coin)
+		if not coin then return false end
+		if not coin.Parent then return false end
+		if coin:FindFirstChild("TouchInterest") then
+			return true
+		end
+		return false
+	end
+	
+	-- ====== ПОЛУЧИТЬ ВСЕ МОНЕТЫ ======
+	local function getCoins(container)
+		local coins = {}
+		if not container then return coins end
+		for _, coin in pairs(container:GetChildren()) do
+			if isCoinValid(coin) then
+				table.insert(coins, coin)
+			end
+		end
+		return coins
+	end
+	
+	-- ====== ПОИСК БЛИЖАЙШЕЙ МОНЕТЫ ======
+	local function findNearestCoin(coins, position, murdererPos)
+		local nearest = nil
+		local nearestDist = math.huge
+		for _, coin in pairs(coins) do
+			local coinPos = coin.Position
+			if murdererPos then
+				local distToMurderer = (coinPos - murdererPos).Magnitude
+				if distToMurderer < 30 then
+					continue
+				end
+			end
+			local dist = (position - coinPos).Magnitude
+			if dist < nearestDist then
+				nearestDist = dist
+				nearest = coin
+			end
+		end
+		return nearest, nearestDist
+	end
+	
+	-- ====== ПОЛЕТ ======
+	local function flyTo(targetPos)
+		local char = player.Character
+		if not char then return false end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then return false end
+	
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if not humanoid or humanoid.Health <= 0 then return false end
+	
+		local distance = (hrp.Position - targetPos).Magnitude
+	
+		if distance < 5 then
+			return true
+		end
+	
+		local speed = 20
+		local duration = distance / speed
+		duration = math.max(duration, 0.3)
+		duration = math.min(duration, 2.5)
+	
+		stopTween()
+		isMoving = true
+	
+		local tweenInfo = TweenInfo.new(
+			duration,
+			Enum.EasingStyle.Linear,
+			Enum.EasingDirection.Out
+		)
+	
+		currentTween = TweenService:Create(hrp, tweenInfo, {
+			Position = targetPos
+		})
+	
+		local completed = false
+		currentTween.Completed:Connect(function()
+			completed = true
+			isMoving = false
+		end)
+	
+		currentTween:Play()
+	
+		local timeout = tick() + duration + 1
+		repeat
+			task.wait()
+	
+			if humanoid.Health <= 0 then
+				stopTween()
+				return false
+			end
+	
+			if currentTarget and not isCoinValid(currentTarget) then
+				stopTween()
+				return false
+			end
+	
+			if tick() > timeout then
+				stopTween()
+				return false
+			end
+	
+		until completed == true
+	
+		currentTween = nil
+		isMoving = false
+		return true
+	end
+	
+	-- ====== ПОДОБРАТЬ МОНЕТУ ======
+	local function pickCoin(coin)
+		if not coin or not isCoinValid(coin) then return false end
+		local char = player.Character
+		if not char then return false end
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then return false end
+		pcall(function()
+			firetouchinterest(hrp, coin, 0)
+			firetouchinterest(hrp, coin, 1)
+		end)
+		return true
+	end
+	
+	-- ====== ВЕРНУТЬСЯ В СЕЙВ ======
+	local function goToSafe()
+		if not safePoint then return end
+		local char = player.Character
+		if not char then return end
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then return end
+		local dist = (hrp.Position - safePoint).Magnitude
+		if dist < 5 then return end
+		flyTo(safePoint)
+	end
+	
+	-- ====== ОСНОВНОЙ ЦИКЛ ======
+	local function farmTick()
+		if not isRoundActive() then
+			return
+		end
+	
+		local char = player.Character
+		if not char then return end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then return end
+	
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if not humanoid or humanoid.Health <= 0 then return end
+	
+		local murderer = findMurderer()
+		local murdererPos = nil
+		if murderer and murderer.Character then
+			local mhrp = murderer.Character:FindFirstChild("HumanoidRootPart")
+			if mhrp then
+				murdererPos = mhrp.Position
+			end
+		end
+	
+		if murdererPos and safePoint then
+			local dist = (hrp.Position - murdererPos).Magnitude
+			if dist < 30 then
+				if not isMoving then
+					goToSafe()
+				end
+				return
+			end
+		end
+	
+		if isMoving then
+			return
+		end
+	
+		local container = findCoinContainer()
+		if not container then return end
+	
+		local coins = getCoins(container)
+		if #coins == 0 then
+			return
+		end
+	
+		local nearest, dist = findNearestCoin(coins, hrp.Position, murdererPos)
+	
+		if not nearest then
+			return
+		end
+	
+		currentTarget = nearest
+	
+		local success = flyTo(nearest.Position)
+	
+		if success then
+			pickCoin(nearest)
+			currentTarget = nil
+		end
+	end
+	
+	-- ====== ЗАПУСК ======
+	local function startFarming()
+		if isActive then return end
+	
+		local char = player.Character
+		if not char then return end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			safePoint = hrp.Position
+		end
+	
+		isActive = true
+	
+		if farmConnection then
+			farmConnection:Disconnect()
+			farmConnection = nil
+		end
+	
+		farmConnection = RunService.Heartbeat:Connect(function()
+			if not isActive then
+				if farmConnection then
+					farmConnection:Disconnect()
+					farmConnection = nil
+				end
+				return
+			end
+			farmTick()
+		end)
+	
+		print("🟢 MM2 AutoFarm: ВКЛ")
+	end
+	
+	-- ====== ОСТАНОВКА ======
+	local function stopFarming()
+		isActive = false
+	
+		if farmConnection then
+			farmConnection:Disconnect()
+			farmConnection = nil
+		end
+	
+		stopTween()
+	
+		local char = player.Character
+		if char then
+			local hrp = char:FindFirstChild("HumanoidRootPart")
+			if hrp then
+				hrp.Velocity = Vector3.zero
+				hrp.RotVelocity = Vector3.zero
+			end
+		end
+	
+		currentTarget = nil
+		print("🔴 MM2 AutoFarm: ВЫКЛ")
+	end
+	
+	-- ====== КНОПКА ======
+	button.MouseButton1Click:Connect(function()
+		if isActive then
+			stopFarming()
+		else
+			startFarming()
+		end
+	end)
+	
+	-- ====== РЕСПАВН ======
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isActive then
+			local char = player.Character
+			if char then
+				local hrp = char:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					safePoint = hrp.Position
+				end
+			end
+		end
+	end)
+	
+	print("✅ MM2_AutoFarm загружена!")
+end;
+task.spawn(C_15);
+-- StarterGui.MM2_Gui.MainFrame.MM2_ShowRoles.LocalScript
+local function C_1a()
+local script = G2L["1a"];
+	-- ==========================================
+	-- MM2_ShowRoles (ИСПРАВЛЕННЫЙ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local RunService = game:GetService("RunService")
+	
+	local isActive = false
+	local updateLoop = nil
+	
+	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ ======
+	local mainFrame = button.Parent.Parent
+	local murderText = mainFrame:FindFirstChild("MM2_Murder")
+	local sheriffText = mainFrame:FindFirstChild("MM2_Sheriff")
+	local heroText = mainFrame:FindFirstChild("MM2_Hero")
+	
+	if not murderText or not sheriffText then
+		warn("❌ Текстлейблы не найдены!")
+		return
+	end
+	
+	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ (С ДРУГИМ ПУТЁМ) ======
+	local function fetchRoles()
+		-- Пробуем через ReplicatedStorage
+		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+		if not getPlayerData then
+			-- Пробуем через RemoteEvent (если есть)
+			local remoteEvent = ReplicatedStorage:FindFirstChild("GetPlayerDataEvent", true)
+			if remoteEvent then
+				getPlayerData = remoteEvent
+			else
+				warn("❌ GetPlayerData не найден!")
+				return
+			end
+		end
+	
+		local data
+		local success, err = pcall(function()
+			if getPlayerData:IsA("RemoteFunction") then
+				data = getPlayerData:InvokeServer()
+			elseif getPlayerData:IsA("RemoteEvent") then
+				-- Для RemoteEvent нужно использовать OnClientEvent
+				warn("⚠️ Это RemoteEvent, а не RemoteFunction!")
+				return
+			end
+		end)
+	
+		if not success then
+			warn("❌ Ошибка вызова:", err)
+			return
+		end
+	
+		if not data or type(data) ~= "table" then
+			warn("❌ Данные пустые или не таблица!")
+			return
+		end
+	
+		local Murder = ""
+		local Sheriff = ""
+		local Hero = ""
+	
+		for name, info in pairs(data) do
+			if info.Role == "Murderer" then
+				Murder = name
+			elseif info.Role == "Sheriff" then
+				Sheriff = name
+			elseif info.Role == "Hero" then
+				Hero = name
+			end
+		end
+	
+		-- Обновляем текстлейблы (принудительно)
+		if isActive then
+			if Murder ~= "" then
+				murderText.Text = "🔴 Маньяк: " .. Murder
+				murderText.TextColor3 = Color3.fromRGB(255, 50, 50)
+			else
+				murderText.Text = "🔴 Маньяк: ❓"
+				murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
+			end
+	
+			if Sheriff ~= "" then
+				sheriffText.Text = "🔵 Шериф: " .. Sheriff
+				sheriffText.TextColor3 = Color3.fromRGB(50, 150, 255)
+			else
+				sheriffText.Text = "🔵 Шериф: ❓"
+				sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
+			end
+	
+			if heroText then
+				if Hero ~= "" then
+					heroText.Text = "🟡 Герой: " .. Hero
+					heroText.TextColor3 = Color3.fromRGB(255, 200, 0)
+				else
+					heroText.Text = "🟡 Герой: ❓"
+					heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
+				end
+			end
+		end
+	end
+	
+	-- ====== ЗАПУСК ======
+	local function startUpdate()
+		if isActive then return end
+		isActive = true
+		print("🟢 Показ ролей ВКЛЮЧЕН!")
+	
+		if updateLoop then
+			updateLoop:Disconnect()
+			updateLoop = nil
+		end
+	
+		fetchRoles()
+	
+		updateLoop = RunService.Heartbeat:Connect(function()
+			if isActive then
+				fetchRoles()
+			end
+		end)
+	end
+	
+	local function stopUpdate()
+		isActive = false
+		if updateLoop then
+			updateLoop:Disconnect()
+			updateLoop = nil
+		end
+		print("🔴 Показ ролей ВЫКЛЮЧЕН!")
+	end
+	
+	button.MouseButton1Click:Connect(function()
+		if isActive then
+			stopUpdate()
+		else
+			startUpdate()
+		end
+	end)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if isActive then
+			fetchRoles()
+		end
+	end)
+	
+	print("✅ MM2_ShowRoles загружена!")
+end;
+task.spawn(C_1a);
+-- StarterGui.MM2_Gui.MainFrame.MM2_GunESP.LocalScript
+local function C_1f()
+local script = G2L["1f"];
+	-- ==========================================
+	-- MM2_GunESP (ПОДСВЕТКА GunDrop)
+	-- ==========================================
+	local button = script.Parent
+	local runService = game:GetService("RunService")
+	
+	local isEnabled = false
+	local highlight = nil
+	local lastCheck = 0
+	local connection = nil
+	
+	-- ===== ПОИСК ПИСТОЛЕТА НА ЗЕМЛЕ =====
+	local function findGun()
+		for _, obj in pairs(workspace:GetDescendants()) do
+			if obj.Name == "GunDrop" then
+				return obj
+			end
+		end
+		return nil
+	end
+	
+	-- ===== ОБНОВЛЕНИЕ =====
+	local function update()
+		if not isEnabled then
+			if highlight then
+				highlight:Destroy()
+				highlight = nil
+			end
+			return
+		end
+	
+		local now = tick()
+		if now - lastCheck < 2 then return end
+		lastCheck = now
+	
+		local gun = findGun()
+	
+		if gun then
+			if not highlight or highlight.Parent ~= gun then
+				if highlight then highlight:Destroy() end
+				highlight = Instance.new("Highlight")
+				highlight.Name = "GunHighlight"
+				highlight.FillColor = Color3.fromRGB(255, 215, 0)
+				highlight.FillTransparency = 0.3
+				highlight.OutlineColor = Color3.fromRGB(255, 215, 0)
+				highlight.OutlineTransparency = 0
+				highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+				highlight.Adornee = gun
+				highlight.Parent = gun
+				print("🔫 Пистолет подсвечен!")
+			end
+		else
+			if highlight then
+				highlight:Destroy()
+				highlight = nil
+			end
+		end
+	end
+	
+	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
+	local function toggle()
+		isEnabled = not isEnabled
+	
+		if isEnabled then
+			lastCheck = 0
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+			connection = runService.Heartbeat:Connect(update)
+			update()
+			print("🔫 GunESP включён!")
+		else
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+			if highlight then
+				highlight:Destroy()
+				highlight = nil
+			end
+			print("🔫 GunESP выключен!")
+		end
+	end
+	
+	button.MouseButton1Click:Connect(toggle)
+	
+	print("✅ MM2_GunESP загружена (подсветка GunDrop)!")
+end;
+task.spawn(C_1f);
+-- StarterGui.MM2_Gui.MainFrame.MM2_KillMurderer.LocalScript
+local function C_24()
+local script = G2L["24"];
+	-- ==========================================
+	-- MM2_KillMurderer (УБИТЬ УБИЙЦУ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local Players = game:GetService("Players")
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	
+	local isActive = false
+	
+	-- ====== ПОИСК УБИЙЦЫ ======
+	local function findMurderer()
+		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+		if not getPlayerData then return nil end
+	
+		local success, data = pcall(function()
+			return getPlayerData:InvokeServer()
+		end)
+	
+		if not success or not data then return nil end
+	
+		for name, info in pairs(data) do
+			if info.Role == "Murderer" then
+				local plr = Players:FindFirstChild(name)
+				if plr and plr:GetAttribute("Alive") == true then
+					return plr
+				end
+			end
+		end
+		return nil
+	end
+	
+	-- ====== УБИТЬ УБИЙЦУ ======
+	local function killMurderer()
+		local myChar = player.Character
+		if not myChar then return end
+	
+		local myHrp = myChar:FindFirstChild("HumanoidRootPart")
+		if not myHrp then return end
+	
+		local target = findMurderer()
+		if not target then
+			print("❌ Убийца не найден!")
+			return
+		end
+	
+		local char = target.Character
+		if not char then return end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+	
+		if not hrp or not humanoid then return end
+		if humanoid.Health <= 0 then
+			print("💀 Убийца уже мёртв!")
+			return
+		end
+	
+		-- Телепорт убийцы к тебе
+		local teleportPos = myHrp.Position + myHrp.CFrame.LookVector * 3 + Vector3.new(0, 0.5, 0)
+		hrp.CFrame = CFrame.new(teleportPos)
+	
+		for _, part in pairs(char:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CanCollide = false
+			end
+		end
+	
+		task.wait(0.1)
+	
+		pcall(function()
+			humanoid.Health = 0
+			humanoid.BreakJointsOnDeath = true
+		end)
+	
+		print("💀 Убийца " .. target.Name .. " убит!")
+	end
+	
+	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
+	button.MouseButton1Click:Connect(function()
+		isActive = not isActive
+	
+		if isActive then
+			print("🟢 Охота на убийцу ВКЛЮЧЕНА!")
+			while isActive do
+				killMurderer()
+				task.wait(0.5)
+			end
+		else
+			print("🔴 Охота на убийцу ВЫКЛЮЧЕНА!")
+		end
+	end)
+	
+	print("✅ MM2_KillMurderer загружена!")
+end;
+task.spawn(C_24);
+-- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
+local function C_27()
+local script = G2L["27"];
+	-- ==========================================
+	-- MM2_PickGun (ТЕЛЕПОРТ К ПИСТОЛЕТУ И ОБРАТНО)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	
+	button.MouseButton1Click:Connect(function()
+		local char = player.Character
+		if not char then
+			print("❌ Персонаж не найден!")
+			return
+		end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		if not hrp then
+			print("❌ HumanoidRootPart не найден!")
+			return
+		end
+	
+		-- ===== 1. ИЩЕМ ПИСТОЛЕТ =====
+		local gun = nil
+		for _, obj in pairs(workspace:GetDescendants()) do
+			if obj.Name == "GunDrop" then
+				gun = obj
+				break
+			end
+		end
+	
+		if not gun then
+			print("❌ Пистолет не найден!")
+			return
+		end
+	
+		-- ===== 2. ЗАПОМИНАЕМ ПОЗИЦИЮ =====
+		local savedPos = hrp.CFrame
+		print("📍 Позиция сохранена!")
+	
+		-- ===== 3. ТЕЛЕПОРТ К ПИСТОЛЕТУ =====
+		local gunPos = gun.Position
+		hrp.CFrame = CFrame.new(gunPos.X, gunPos.Y + 3, gunPos.Z)
+		print("🔫 Телепорт к пистолету!")
+	
+		-- ===== 4. ЖДЁМ 0.3 СЕКУНДЫ =====
+		task.wait(0.3)
+	
+		-- ===== 5. ВОЗВРАТ НА МЕСТО =====
+		hrp.CFrame = savedPos
+		print("↩️ Возврат на место!")
+	
+		print("✅ Пистолет подобран!")
+	end)
+	
+	print("✅ MM2_PickGun загружена!")
+end;
+task.spawn(C_27);
+-- StarterGui.MM2_Gui.MainFrame.Settings_Color.LocalScript
+local function C_2b()
+local script = G2L["2b"];
+	-- ==========================================
+	-- СМЕНА ЦВЕТОВОЙ ТЕМЫ ХАБА (С РАДУГОЙ)
+	-- ==========================================
+	local button = script.Parent
+	local mainFrame = button.Parent.Parent
+	
+	local rainbowActive = false
+	local rainbowConnection = nil
+	
+	-- ===== ЦВЕТА ДЛЯ ТЕМ =====
+	local themes = {
+		{
+			name = "Фиолетовый",
+			textColor = Color3.fromRGB(180, 80, 255),
+			strokeColor = Color3.fromRGB(130, 30, 200)
+		},
+		{
+			name = "Красный",
+			textColor = Color3.fromRGB(255, 50, 50),
+			strokeColor = Color3.fromRGB(200, 0, 0)
+		},
+		{
+			name = "Синий",
+			textColor = Color3.fromRGB(50, 150, 255),
+			strokeColor = Color3.fromRGB(0, 100, 200)
+		},
+		{
+			name = "Зеленый",
+			textColor = Color3.fromRGB(50, 255, 50),
+			strokeColor = Color3.fromRGB(0, 200, 0)
+		},
+		{
+			name = "Оранжевый",
+			textColor = Color3.fromRGB(255, 150, 50),
+			strokeColor = Color3.fromRGB(200, 100, 0)
+		},
+		{
+			name = "Желтый",
+			textColor = Color3.fromRGB(255, 255, 50),
+			strokeColor = Color3.fromRGB(200, 200, 0)
+		},
+		{
+			name = "Голубой",
+			textColor = Color3.fromRGB(50, 255, 255),
+			strokeColor = Color3.fromRGB(0, 200, 200)
+		},
+		{
+			name = "Розовый",
+			textColor = Color3.fromRGB(255, 100, 200),
+			strokeColor = Color3.fromRGB(200, 50, 150)
+		},
+		{
+			name = "Бирюзовый",
+			textColor = Color3.fromRGB(50, 200, 200),
+			strokeColor = Color3.fromRGB(0, 150, 150)
+		},
+		{
+			name = "Лайм",
+			textColor = Color3.fromRGB(150, 255, 50),
+			strokeColor = Color3.fromRGB(100, 200, 0)
+		},
+		{
+			name = "Коралловый",
+			textColor = Color3.fromRGB(255, 100, 80),
+			strokeColor = Color3.fromRGB(200, 50, 30)
+		},
+		{
+			name = "Белый",
+			textColor = Color3.fromRGB(255, 255, 255),
+			strokeColor = Color3.fromRGB(180, 180, 180)
+		},
+		{
+			name = "Серый",
+			textColor = Color3.fromRGB(180, 180, 180),
+			strokeColor = Color3.fromRGB(120, 120, 120)
+		},
+		{
+			name = "Неоновый",
+			textColor = Color3.fromRGB(0, 255, 200),
+			strokeColor = Color3.fromRGB(0, 200, 150)
+		},
+		{
+			name = "РАДУГА 🌈",
+			textColor = nil,
+			strokeColor = nil
+		}
+	}
+	
+	local currentTheme = 1
+	
+	-- ===== ФУНКЦИЯ ПРИМЕНЕНИЯ ТЕМЫ =====
+	local function applyTheme(themeIndex)
+		local theme = themes[themeIndex]
+		if not theme then return end
+	
+		if rainbowActive then
+			rainbowActive = false
+			if rainbowConnection then
+				rainbowConnection:Disconnect()
+				rainbowConnection = nil
+			end
+		end
+	
+		-- ===== РАДУГА =====
+		if theme.name == "РАДУГА 🌈" then
+			rainbowActive = true
+			print("🌈 РАДУГА АКТИВИРОВАНА!")
+	
+			local textObjects = {}
+			local strokeObjects = {}
+	
+			local function collectObjects(parent)
+				for _, child in pairs(parent:GetChildren()) do
+					if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+						table.insert(textObjects, child)
+					end
+					if child:IsA("UIStroke") then
+						table.insert(strokeObjects, child)
+					end
+					collectObjects(child)
+				end
+			end
+	
+			collectObjects(mainFrame)
+	
+			local hue = 0
+			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
+				hue = (hue + dt * 0.3) % 1
+	
+				local color = Color3.fromHSV(hue, 1, 1)
+	
+				for _, obj in pairs(textObjects) do
+					obj.TextColor3 = color
+				end
+	
+				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
+				for _, obj in pairs(strokeObjects) do
+					obj.Color = strokeColor
+				end
+			end)
+	
+			print("✅ РАДУГА включена!")
+			return
+		end
+	
+		-- ===== ОБЫЧНЫЕ ЦВЕТА =====
+		print("🎨 Применяем тему: " .. theme.name)
+	
+		local function applyToAll(parent)
+			for _, child in pairs(parent:GetChildren()) do
+				if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+					child.TextColor3 = theme.textColor
+				end
+	
+				if child:IsA("UIStroke") then
+					child.Color = theme.strokeColor
+				end
+	
+				applyToAll(child)
+			end
+		end
+	
+		applyToAll(mainFrame)
+		print("✅ Тема " .. theme.name .. " применена!")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ =====
+	button.MouseButton1Click:Connect(function()
+		currentTheme = currentTheme + 1
+		if currentTheme > #themes then
+			currentTheme = 1
+		end
+		applyTheme(currentTheme)
+	end)
+	
+	-- ===== СТАРТУЕМ С ПЕРВОЙ ТЕМОЙ =====
+	applyTheme(1)
+	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
+end;
+task.spawn(C_2b);
+-- StarterGui.MM2_Gui.MainFrame.MM2_Settings_Hide.LocalScript
+local function C_30()
+local script = G2L["30"];
+	-- ==========================================
+	-- MM2_Settings_Hide (НАЗНАЧЕНИЕ БИНДА)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
+	
+	local isListening = false
+	local hideKey = nil
+	local gui = button.Parent.Parent  -- ПОДНИМАЕМСЯ К MAINFRAME (MM2_Gui)
+	
+	-- ТОГГЛ ГУЯ (используем Enabled вместо Visible)
+	local function toggleGui()
+		if not gui then return end
+		gui.Enabled = not gui.Enabled
+		print("🟢 MM2 GUI:", gui.Enabled and "ОТКРЫТ" or "ЗАКРЫТ")
+	end
+	
+	-- НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ)
+	button.MouseButton1Click:Connect(function()
+		if isListening then return end
+	
+		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
+	
+		local connection
+		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if gameProcessed then return end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				hideKey = input.KeyCode
+				isListening = false
+				connection:Disconnect()
+				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
+			end
+		end)
+	end)
+	
+	-- ОБРАБОТКА НАЖАТИЯ КЛАВИШИ (ВЕЗДЕ)
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
+			toggleGui()
+		end
+	end)
+	
+	print("✅ MM2_Settings_Hide ЗАГРУЖЕНА!")
+end;
+task.spawn(C_30);
 
-print("✅ MM2_ESP загружена!")
+return G2L["1"], require;
