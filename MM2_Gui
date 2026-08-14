@@ -19,6 +19,7 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.MM2_Gui.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
@@ -572,7 +573,7 @@ task.spawn(C_6);
 local function C_16()
 local script = G2L["16"];
 	-- ==========================================
-	-- MM2_ESP (ВКЛ/ВЫКЛ) - ИСПРАВЛЕННЫЙ
+	-- MM2_ESP (ВКЛ/ВЫКЛ) - ПОЛНОСТЬЮ РАБОЧИЙ
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -656,25 +657,9 @@ local script = G2L["16"];
 		return {highlight = highlight, billboard = billboard, text = textLabel}
 	end
 	
-	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP ======
 	local function clearESP()
-		-- Проходим по всем игрокам и удаляем подсветки
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr.Character then
-				for _, child in pairs(plr.Character:GetChildren()) do
-					if child:IsA("Highlight") then
-						child:Destroy()
-					end
-				end
-				for _, child in pairs(plr.Character:GetDescendants()) do
-					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
-						child:Destroy()
-					end
-				end
-			end
-		end
-	
-		-- Очищаем таблицу
+		-- Удаляем всё из таблицы
 		for name, data in pairs(espObjects) do
 			if data.highlight and data.highlight.Parent then
 				data.highlight:Destroy()
@@ -685,6 +670,24 @@ local script = G2L["16"];
 			espObjects[name] = nil
 		end
 		espObjects = {}
+	
+		-- Дополнительная очистка: проходим по всем игрокам
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character then
+				-- Удаляем Highlight
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				-- Удаляем BillboardGui
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
+						child:Destroy()
+					end
+				end
+			end
+		end
 	end
 	
 	-- ====== ОБНОВЛЕНИЕ ESP ======
@@ -763,16 +766,20 @@ local script = G2L["16"];
 		end)
 	end
 	
-	-- ====== ОСТАНОВКА ======
+	-- ====== ОСТАНОВКА (ГАРАНТИРОВАННО) ======
 	local function stopESP()
+		-- Сначала отключаем флаг, чтобы updateESP перестал создавать новое
 		isActive = false
 	
+		-- Отключаем луп
 		if updateLoop then
 			updateLoop:Disconnect()
 			updateLoop = nil
 		end
 	
+		-- Удаляем всё ESP
 		clearESP()
+	
 		print("🔴 MM2 ESP ВЫКЛЮЧЕН!")
 	end
 	
