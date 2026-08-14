@@ -14,6 +14,7 @@ local G2L = {};
 G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
 G2L["1"]["Name"] = [[MM2_Gui]];
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
 
 
 -- StarterGui.MM2_Gui.MainFrame
@@ -441,13 +442,12 @@ G2L["33"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 local function C_6()
 local script = G2L["6"];
 	-- ==========================================
-	-- ПЕРЕТАСКИВАНИЕ (ТЯНЕТ ВЕСЬ MAINFRAME)
+	-- ПЕРЕТАСКИВАНИЕ (ТОЛЬКО МЫШЬ)
 	-- ==========================================
-	local textLabel = script.Parent  -- TextLabel (за который тянем)
-	local frame = textLabel.Parent   -- MainFrame (который двигаем)
+	local textLabel = script.Parent
+	local frame = textLabel.Parent
 	
 	local uis = game:GetService("UserInputService")
-	
 	local dragging = false
 	local dragStart = nil
 	local startPos = nil
@@ -488,41 +488,17 @@ local script = G2L["6"];
 		end
 	end
 	
-	-- Вешаем на TextLabel (за который тянем)
 	textLabel.InputBegan:Connect(startDrag)
 	uis.InputEnded:Connect(endDrag)
 	
-	-- Для сенсорных экранов
-	textLabel.TouchBegan:Connect(function(input)
-		dragging = true
-		dragStart = input.Position
-		startPos = frame.Position
-	end)
-	
-	textLabel.TouchMoved:Connect(function(input)
-		if dragging then
-			local delta = input.Position - dragStart
-			frame.Position = UDim2.new(
-				startPos.X.Scale,
-				startPos.X.Offset + delta.X,
-				startPos.Y.Scale,
-				startPos.Y.Offset + delta.Y
-			)
-		end
-	end)
-	
-	textLabel.TouchEnded:Connect(function()
-		dragging = false
-	end)
-	
-	print("✅ Перетаскивание обновлено! Тянет MainFrame")
+	print("✅ Перетаскивание загружено (только мышь)")
 end;
 task.spawn(C_6);
 -- StarterGui.MM2_Gui.MainFrame.MM2_ESP.LocalScript
 local function C_10()
 local script = G2L["10"];
 	-- ==========================================
-	-- MM2_ESP (ВКЛ/ВЫКЛ)
+	-- MM2_ESP (ВКЛ/ВЫКЛ) - ИСПРАВЛЕННЫЙ
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -534,7 +510,6 @@ local script = G2L["10"];
 	local updateLoop = nil
 	local espObjects = {}
 	
-	-- ====== ЦВЕТА РОЛЕЙ ======
 	local COLORS = {
 		Murderer = Color3.fromRGB(255, 0, 0),
 		Sheriff = Color3.fromRGB(0, 100, 255),
@@ -607,8 +582,25 @@ local script = G2L["10"];
 		return {highlight = highlight, billboard = billboard, text = textLabel}
 	end
 	
-	-- ====== УДАЛЕНИЕ ВСЕГО ESP ======
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
 	local function clearESP()
+		-- Проходим по всем игрокам и удаляем подсветки
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character then
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
+						child:Destroy()
+					end
+				end
+			end
+		end
+	
+		-- Очищаем таблицу
 		for name, data in pairs(espObjects) do
 			if data.highlight and data.highlight.Parent then
 				data.highlight:Destroy()
@@ -719,7 +711,6 @@ local script = G2L["10"];
 		end
 	end)
 	
-	-- ====== ПРИ РЕСПАВНЕ ======
 	Players.PlayerAdded:Connect(function()
 		if isActive then
 			task.wait(0.5)
@@ -1103,7 +1094,7 @@ task.spawn(C_15);
 local function C_1a()
 local script = G2L["1a"];
 	-- ==========================================
-	-- MM2_ShowRoles (С ОТЛАДКОЙ)
+	-- MM2_ShowRoles (ИСПРАВЛЕННЫЙ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -1119,39 +1110,46 @@ local script = G2L["1a"];
 	local sheriffText = mainFrame:FindFirstChild("MM2_Sheriff")
 	local heroText = mainFrame:FindFirstChild("MM2_Hero")
 	
-	print("🔍 MM2_Murder найден:", murderText ~= nil)
-	print("🔍 MM2_Sheriff найден:", sheriffText ~= nil)
-	print("🔍 MM2_Hero найден:", heroText ~= nil)
-	
 	if not murderText or not sheriffText then
 		warn("❌ Текстлейблы не найдены!")
 		return
 	end
 	
-	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
+	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ (С ДРУГИМ ПУТЁМ) ======
 	local function fetchRoles()
+		-- Пробуем через ReplicatedStorage
 		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
 		if not getPlayerData then
-			warn("❌ GetPlayerData не найден в ReplicatedStorage!")
-			return
+			-- Пробуем через RemoteEvent (если есть)
+			local remoteEvent = ReplicatedStorage:FindFirstChild("GetPlayerDataEvent", true)
+			if remoteEvent then
+				getPlayerData = remoteEvent
+			else
+				warn("❌ GetPlayerData не найден!")
+				return
+			end
 		end
 	
-		print("🔄 Вызов GetPlayerData...")
-		local success, data = pcall(function()
-			return getPlayerData:InvokeServer()
+		local data
+		local success, err = pcall(function()
+			if getPlayerData:IsA("RemoteFunction") then
+				data = getPlayerData:InvokeServer()
+			elseif getPlayerData:IsA("RemoteEvent") then
+				-- Для RemoteEvent нужно использовать OnClientEvent
+				warn("⚠️ Это RemoteEvent, а не RemoteFunction!")
+				return
+			end
 		end)
 	
 		if not success then
-			warn("❌ Ошибка InvokeServer:", data)
+			warn("❌ Ошибка вызова:", err)
 			return
 		end
 	
-		if not data then
-			warn("❌ Данные пустые!")
+		if not data or type(data) ~= "table" then
+			warn("❌ Данные пустые или не таблица!")
 			return
 		end
-	
-		print("📊 Данные получены:", data)
 	
 		local Murder = ""
 		local Sheriff = ""
@@ -1167,30 +1165,32 @@ local script = G2L["1a"];
 			end
 		end
 	
-		print("🔴 Маньяк:", Murder or "❓")
-		print("🔵 Шериф:", Sheriff or "❓")
-		print("🟡 Герой:", Hero or "❓")
-	
-		-- Обновляем текст
+		-- Обновляем текстлейблы (принудительно)
 		if isActive then
-			murderText.Text = Murder ~= "" and ("🔴 Маньяк: " .. Murder) or "🔴 Маньяк: ❓"
-			murderText.TextColor3 = Murder ~= "" and Color3.fromRGB(255, 50, 50) or Color3.fromRGB(255, 100, 100)
-	
-			sheriffText.Text = Sheriff ~= "" and ("🔵 Шериф: " .. Sheriff) or "🔵 Шериф: ❓"
-			sheriffText.TextColor3 = Sheriff ~= "" and Color3.fromRGB(50, 150, 255) or Color3.fromRGB(100, 150, 255)
-	
-			if heroText then
-				heroText.Text = Hero ~= "" and ("🟡 Герой: " .. Hero) or "🟡 Герой: ❓"
-				heroText.TextColor3 = Hero ~= "" and Color3.fromRGB(255, 200, 0) or Color3.fromRGB(200, 150, 0)
+			if Murder ~= "" then
+				murderText.Text = "🔴 Маньяк: " .. Murder
+				murderText.TextColor3 = Color3.fromRGB(255, 50, 50)
+			else
+				murderText.Text = "🔴 Маньяк: ❓"
+				murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
 			end
-		else
-			murderText.Text = "🔴 Маньяк: ❓"
-			murderText.TextColor3 = Color3.fromRGB(255, 100, 100)
-			sheriffText.Text = "🔵 Шериф: ❓"
-			sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
+	
+			if Sheriff ~= "" then
+				sheriffText.Text = "🔵 Шериф: " .. Sheriff
+				sheriffText.TextColor3 = Color3.fromRGB(50, 150, 255)
+			else
+				sheriffText.Text = "🔵 Шериф: ❓"
+				sheriffText.TextColor3 = Color3.fromRGB(100, 150, 255)
+			end
+	
 			if heroText then
-				heroText.Text = "🟡 Герой: ❓"
-				heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
+				if Hero ~= "" then
+					heroText.Text = "🟡 Герой: " .. Hero
+					heroText.TextColor3 = Color3.fromRGB(255, 200, 0)
+				else
+					heroText.Text = "🟡 Герой: ❓"
+					heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
+				end
 			end
 		end
 	end
@@ -1200,16 +1200,18 @@ local script = G2L["1a"];
 		if isActive then return end
 		isActive = true
 		print("🟢 Показ ролей ВКЛЮЧЕН!")
+	
+		if updateLoop then
+			updateLoop:Disconnect()
+			updateLoop = nil
+		end
+	
 		fetchRoles()
+	
 		updateLoop = RunService.Heartbeat:Connect(function()
-			if not isActive then
-				if updateLoop then
-					updateLoop:Disconnect()
-					updateLoop = nil
-				end
-				return
+			if isActive then
+				fetchRoles()
 			end
-			fetchRoles()
 		end)
 	end
 	
@@ -1219,7 +1221,6 @@ local script = G2L["1a"];
 			updateLoop:Disconnect()
 			updateLoop = nil
 		end
-		fetchRoles()
 		print("🔴 Показ ролей ВЫКЛЮЧЕН!")
 	end
 	
@@ -1233,7 +1234,9 @@ local script = G2L["1a"];
 	
 	player.CharacterAdded:Connect(function()
 		task.wait(0.5)
-		fetchRoles()
+		if isActive then
+			fetchRoles()
+		end
 	end)
 	
 	print("✅ MM2_ShowRoles загружена!")
