@@ -42,7 +42,7 @@ G2L["4"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["5"] = Instance.new("ScrollingFrame", G2L["2"]);
 G2L["5"]["Active"] = true;
 G2L["5"]["BorderSizePixel"] = 0;
-G2L["5"]["CanvasPosition"] = Vector2.new(0, 400);
+G2L["5"]["CanvasPosition"] = Vector2.new(0, 100);
 G2L["5"]["Name"] = [[RightFrame]];
 G2L["5"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["5"]["Size"] = UDim2.new(0, 423, 0, 335);
@@ -2672,8 +2672,6 @@ local script = G2L["64"];
 	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	
 	local player = Players.LocalPlayer
-	local flingLoop = nil
-	local flinging = false
 	
 	-- Создаём детектор
 	if not ReplicatedStorage:FindFirstChild("juisdfj0i32i0eidsuf0iok") then
@@ -2683,56 +2681,55 @@ local script = G2L["64"];
 	end
 	
 	-- ===== ФУНКЦИЯ ФЛИНГА =====
+	local function flingTarget(targetHrp)
+		if not targetHrp or not targetHrp.Parent then return end
+	
+		local vel = targetHrp.Velocity
+		targetHrp.Velocity = vel * 10000 + Vector3.new(0, 10000, 0)
+	
+		task.wait(0.05)
+	
+		if targetHrp and targetHrp.Parent then
+			targetHrp.Velocity = vel
+		end
+	
+		task.wait(0.05)
+	
+		if targetHrp and targetHrp.Parent then
+			targetHrp.Velocity = vel + Vector3.new(0, 1, 0) * (math.random(0, 10) / 10)
+		end
+	end
+	
+	-- ===== ОТСЛЕЖИВАНИЕ КАСАНИЙ =====
 	local function startFling()
-		local hrp, c, vel, movel = nil, nil, nil, 0.1
+		RunService.Heartbeat:Connect(function()
+			if not isEnabled then return end
 	
-		flingLoop = RunService.Heartbeat:Connect(function()
-			if not isEnabled then 
-				flingLoop:Disconnect()
-				flingLoop = nil
-				return 
-			end
+			local char = player.Character
+			if not char then return end
 	
-			-- Получаем персонажа
-			c = player.Character
-			if not c then return end
-	
-			hrp = c:FindFirstChild("HumanoidRootPart")
+			local hrp = char:FindFirstChild("HumanoidRootPart")
 			if not hrp then return end
 	
-			-- Проверяем, касается ли персонаж чего-то
-			local touching = false
+			-- Проходим по всем частям, которых касается игрок
 			for _, part in pairs(hrp:GetTouchingParts()) do
-				if part and part.Parent and part.Parent ~= c then
-					-- Проверяем, что это не триггер и не пуля
-					if part.CanCollide and not part:IsA("Terrain") then
-						touching = true
-						break
-					end
-				end
-			end
+				if not part or not part.Parent then continue end
 	
-			-- Если касается другого объекта - применяем флинг
-			if touching and not flinging then
-				flinging = true
-				vel = hrp.Velocity
-				hrp.Velocity = vel * 10000 + Vector3.new(0, 10000, 0)
+				-- Проверяем, что это не сам игрок
+				local targetChar = part.Parent
+				if targetChar == char then continue end
 	
-				task.wait(0.05)
+				-- Проверяем, что это игрок
+				local targetHrp = targetChar:FindFirstChild("HumanoidRootPart")
+				if not targetHrp then continue end
 	
-				if c and c.Parent and hrp and hrp.Parent then
-					hrp.Velocity = vel
-				end
+				-- Проверяем, что у цели есть Humanoid (это игрок)
+				local targetHumanoid = targetChar:FindFirstChildOfClass("Humanoid")
+				if not targetHumanoid then continue end
 	
-				task.wait(0.05)
-	
-				if c and c.Parent and hrp and hrp.Parent then
-					hrp.Velocity = vel + Vector3.new(0, movel, 0)
-					movel = movel * -1
-				end
-	
-				task.wait(0.1)
-				flinging = false
+				-- Флинг цель
+				flingTarget(targetHrp)
+				print("💥 Флингнул: " .. targetChar.Name)
 			end
 		end)
 	end
@@ -2740,36 +2737,16 @@ local script = G2L["64"];
 	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
-	
-		if isEnabled then
-			if flingLoop then
-				flingLoop:Disconnect()
-				flingLoop = nil
-			end
-			flinging = false
-			startFling()
-			print("💥 Touch Fling: ВКЛ")
-		else
-			if flingLoop then
-				flingLoop:Disconnect()
-				flingLoop = nil
-			end
-			flinging = false
-			print("💥 Touch Fling: ВЫКЛ")
-		end
+		print("💥 Touch Fling:", isEnabled and "ВКЛ" or "ВЫКЛ")
 	end)
+	
+	-- Запускаем
+	startFling()
 	
 	-- ===== ПРИ ПЕРЕРОЖДЕНИИ =====
 	player.CharacterAdded:Connect(function()
 		task.wait(0.5)
-		flinging = false
-		if isEnabled then
-			if flingLoop then
-				flingLoop:Disconnect()
-				flingLoop = nil
-			end
-			startFling()
-		end
+		print("🔄 Перерождение, Touch Fling активен:", isEnabled)
 	end)
 	
 	print("✅ Universal_TouchFling загружена!")
