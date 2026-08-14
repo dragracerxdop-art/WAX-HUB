@@ -418,9 +418,11 @@ task.spawn(C_e);
 local function C_13()
 local script = G2L["13"];
 	-- ==========================================
-	-- ПЕРЕТАСКИВАНИЕ (ПЛАВНОЕ + РЕЗКОЕ)
+	-- ПЕРЕТАСКИВАНИЕ (ТЯНЕТ ВЕСЬ MAINFRAME)
 	-- ==========================================
-	local frame = script.Parent
+	local textLabel = script.Parent  -- TextLabel (за который тянем)
+	local frame = textLabel.Parent   -- MainFrame (который двигаем)
+	
 	local uis = game:GetService("UserInputService")
 	
 	local dragging = false
@@ -434,7 +436,6 @@ local script = G2L["13"];
 			dragStart = input.Position
 			startPos = frame.Position
 	
-			-- Отключаем стандартное поведение
 			if connection then
 				connection:Disconnect()
 				connection = nil
@@ -464,18 +465,18 @@ local script = G2L["13"];
 		end
 	end
 	
-	-- Подключаем события
-	frame.InputBegan:Connect(startDrag)
+	-- Вешаем на TextLabel (за который тянем)
+	textLabel.InputBegan:Connect(startDrag)
 	uis.InputEnded:Connect(endDrag)
 	
 	-- Для сенсорных экранов
-	frame.TouchBegan:Connect(function(input)
+	textLabel.TouchBegan:Connect(function(input)
 		dragging = true
 		dragStart = input.Position
 		startPos = frame.Position
 	end)
 	
-	frame.TouchMoved:Connect(function(input)
+	textLabel.TouchMoved:Connect(function(input)
 		if dragging then
 			local delta = input.Position - dragStart
 			frame.Position = UDim2.new(
@@ -487,11 +488,11 @@ local script = G2L["13"];
 		end
 	end)
 	
-	frame.TouchEnded:Connect(function()
+	textLabel.TouchEnded:Connect(function()
 		dragging = false
 	end)
 	
-	print("✅ Перетаскивание обновлено!")
+	print("✅ Перетаскивание обновлено! Тянет MainFrame")
 end;
 task.spawn(C_13);
 -- StarterGui.ScreenGui.MainFrame.LeftFrame.SwitchTabs
