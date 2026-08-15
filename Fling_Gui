@@ -394,79 +394,154 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- ФЛИНГ (ТЕЛЕПОРТ ВНУТРЬ + ВЫБРОС)
+	-- KILASIK's MULTI-TARGET FLING (РАБОЧИЙ)
 	-- ==========================================
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	
 	local FlingActive = false
-	local flingLoop = nil
-	local queue = {}
-	local currentIndex = 1
+	local SelectedTargets = {}
 	
-	-- ===== СИЛА ВЫБРОСА =====
-	local POWER = 99999999
+	getgenv().OldPos = nil
+	getgenv().FPDH = workspace.FallenPartsDestroyHeight
 	
+	-- ===== УВЕДОМЛЕНИЕ =====
 	local function Message(Title, Text, Time)
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = Title,
 			Text = Text,
-			Duration = Time or 3
+			Duration = Time or 5
 		})
 	end
 	
-	local function flingOne(target)
-		local char = player.Character
-		if not char then
-			print("❌ Нет персонажа")
-			return false
+	-- ===== ФУНКЦИЯ ФЛИНГА =====
+	local function SkidFling(TargetPlayer)
+		local Character = player.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		local RootPart = Humanoid and Humanoid.RootPart
+	
+		local TCharacter = TargetPlayer.Character
+		if not TCharacter then return end
+	
+		local THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
+		local TRootPart = THumanoid and THumanoid.RootPart
+		local THead = TCharacter:FindFirstChild("Head")
+		local Accessory = TCharacter:FindFirstChildOfClass("Accessory")
+		local Handle = Accessory and Accessory:FindFirstChild("Handle")
+	
+		if Character and Humanoid and RootPart then
+			if RootPart.Velocity.Magnitude < 50 then
+				getgenv().OldPos = RootPart.CFrame
+			end
+	
+			if THumanoid and THumanoid.Sit then
+				return Message("Error", TargetPlayer.Name .. " is sitting", 2)
+			end
+	
+			if THead then
+				workspace.CurrentCamera.CameraSubject = THead
+			elseif Handle then
+				workspace.CurrentCamera.CameraSubject = Handle
+			end
+	
+			if not TCharacter:FindFirstChildWhichIsA("BasePart") then
+				return
+			end
+	
+			local function FPos(BasePart, Pos, Ang)
+				RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
+				Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
+				RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
+				RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+			end
+	
+			local function SFBasePart(BasePart)
+				local TimeToWait = 2
+				local Time = tick()
+				local Angle = 0
+				repeat
+					if RootPart and THumanoid then
+						if BasePart.Velocity.Magnitude < 50 then
+							Angle = Angle + 100
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+						else
+							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+							task.wait()
+						end
+					end
+				until Time + TimeToWait < tick() or not FlingActive
+			end
+	
+			workspace.FallenPartsDestroyHeight = 0/0
+	
+			local BV = Instance.new("BodyVelocity")
+			BV.Parent = RootPart
+			BV.Velocity = Vector3.new(0, 0, 0)
+			BV.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+	
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+	
+			if TRootPart then
+				SFBasePart(TRootPart)
+			elseif THead then
+				SFBasePart(THead)
+			elseif Handle then
+				SFBasePart(Handle)
+			else
+				return Message("Error", TargetPlayer.Name .. " has no valid parts", 2)
+			end
+	
+			BV:Destroy()
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+			workspace.CurrentCamera.CameraSubject = Humanoid
+	
+			if getgenv().OldPos then
+				repeat
+					RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+					Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+					Humanoid:ChangeState("GettingUp")
+					for _, part in pairs(Character:GetChildren()) do
+						if part:IsA("BasePart") then
+							part.Velocity, part.RotVelocity = Vector3.new(), Vector3.new()
+						end
+					end
+					task.wait()
+				until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+				workspace.FallenPartsDestroyHeight = getgenv().FPDH
+			end
+		else
+			return Message("Error", "Your character is not ready", 2)
 		end
-	
-		local hrp = char:FindFirstChild("HumanoidRootPart")
-		local humanoid = char:FindFirstChildOfClass("Humanoid")
-		if not hrp or not humanoid then
-			print("❌ Нет HRP")
-			return false
-		end
-	
-		local tChar = target.Character
-		if not tChar then
-			print("❌ Нет персонажа у цели")
-			return false
-		end
-	
-		local tHrp = tChar:FindFirstChild("HumanoidRootPart")
-		local tHumanoid = tChar:FindFirstChildOfClass("Humanoid")
-		if not tHrp or not tHumanoid or tHumanoid.Health <= 0 then
-			print("❌ Цель мертва")
-			return false
-		end
-	
-		-- Сохраняем позицию игрока
-		local savedPos = hrp.CFrame
-	
-		-- ===== ТЕЛЕПОРТ ВНУТРЬ ЦЕЛИ =====
-		hrp.CFrame = tHrp.CFrame * CFrame.new(0, 0, 0)  -- Точно в центр
-	
-		-- Задержка, чтобы телепорт сработал
-		task.wait(0.05)
-	
-		-- ===== ВЫКИДЫВАЕМ ЦЕЛЬ =====
-		local bv = Instance.new("BodyVelocity")
-		bv.Parent = tHrp
-		bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
-		bv.Velocity = Vector3.new(POWER, POWER * 2, POWER)
-	
-		-- ===== ВОЗВРАЩАЕМ ИГРОКА НА МЕСТО =====
-		task.wait(0.05)
-		hrp.CFrame = savedPos
-	
-		print("💥 Флинг выполнен: " .. target.Name)
-		return true
 	end
 	
-	local function startFling()
+	-- ===== ЗАПУСК =====
+	local function StartFling()
+		if FlingActive then return end
+	
 		local selected = _G.GetSelectedPlayers and _G.GetSelectedPlayers() or {}
 	
 		if #selected == 0 then
@@ -474,82 +549,58 @@ local script = G2L["d"];
 			return
 		end
 	
-		if FlingActive then
-			Message("Error", "Флинг уже запущен!", 2)
-			return
+		SelectedTargets = {}
+		for _, plr in pairs(selected) do
+			SelectedTargets[plr.Name] = plr
 		end
 	
 		FlingActive = true
-		queue = {}
-		for _, plr in pairs(selected) do
-			table.insert(queue, plr)
-		end
-		currentIndex = 1
+		Message("Started", "Флинг " .. #selected .. " игроков", 2)
 	
-		Message("Started", "Флинг " .. #queue .. " игроков", 2)
-		print("🚀 Флинг запущен! Игроков:", #queue)
+		spawn(function()
+			while FlingActive do
+				local validTargets = {}
 	
-		flingLoop = RunService.Heartbeat:Connect(function()
-			if not FlingActive then
-				flingLoop:Disconnect()
-				flingLoop = nil
-				print("🔴 Флинг остановлен")
-				return
-			end
-	
-			if currentIndex > #queue then
-				currentIndex = 1
-			end
-	
-			local target = queue[currentIndex]
-			if target then
-				flingOne(target)
-			else
-				table.remove(queue, currentIndex)
-				if #queue == 0 then
-					FlingActive = false
-					if flingLoop then
-						flingLoop:Disconnect()
-						flingLoop = nil
+				for name, player in pairs(SelectedTargets) do
+					if player and player.Parent then
+						validTargets[name] = player
+					else
+						SelectedTargets[name] = nil
 					end
-					Message("Stopped", "Все игроки недоступны", 2)
-					return
 				end
-				if currentIndex > #queue then
-					currentIndex = 1
-				end
-			end
 	
-			currentIndex = currentIndex + 1
-			if currentIndex > #queue then
-				currentIndex = 1
+				for _, player in pairs(validTargets) do
+					if FlingActive then
+						SkidFling(player)
+						wait(0.1)
+					else
+						break
+					end
+				end
+	
+				wait(0.5)
 			end
 		end)
 	end
 	
-	local function stopFling()
+	-- ===== ОСТАНОВКА =====
+	local function StopFling()
 		FlingActive = false
-		if flingLoop then
-			flingLoop:Disconnect()
-			flingLoop = nil
-		end
 		Message("Stopped", "Флинг остановлен", 2)
-		print("🔴 Флинг остановлен!")
 	end
 	
+	-- ===== КНОПКА =====
 	local button = script.Parent
 	
 	button.MouseButton1Click:Connect(function()
 		if FlingActive then
-			stopFling()
-			button.Text = "   Fling Start"
+			StopFling()
 		else
-			startFling()
-			button.Text = "   Fling Stop"
+			StartFling()
 		end
 	end)
 	
-	print("✅ Флинг (телепорт внутрь) загружен!")
+	print("✅ KILASIK Multi-Target Fling загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
