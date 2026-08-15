@@ -1746,56 +1746,20 @@ task.spawn(C_36);
 local function C_3b()
 local script = G2L["3b"];
 	-- ==========================================
-	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
+	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
-	
 		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
 	
 		if mm2Gui then
-			-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ =====
-			-- Проходим по всем скриптам в GUI и останавливаем лупы
-			for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
-				if scriptObj:IsA("LocalScript") then
-					-- Отключаем все лупы, которые могли быть запущены
-					pcall(function()
-						scriptObj.Disabled = true
-					end)
-				end
-			end
-	
-			-- ===== 2. УДАЛЯЕМ GUI =====
 			mm2Gui:Destroy()
-	
-			-- ===== 3. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
-			-- Очищаем все глобальные переменные, связанные с MM2
-			_G.MM2_ESP = nil
-			_G.MM2_AutoFarm = nil
-			_G.MM2_ShowRoles = nil
-			_G.MM2_GunESP = nil
-			_G.MM2_KillMurderer = nil
-			_G.MM2_PickGun = nil
-			_G.MM2_KillAll = nil
-	
-			print("🗑️ MM2_Gui удалён! Все функции остановлены.")
-	
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI удалён! Все функции остановлены.",
-				Duration = 3
-			})
+			print("🗑️ MM2_Gui удалён!")
 		else
-			print("❌ MM2_Gui не найден в PlayerGui!")
-	
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI не найден!",
-				Duration = 2
-			})
+			print("❌ MM2_Gui не найден!")
 		end
 	end)
 	
