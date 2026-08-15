@@ -394,18 +394,21 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- KILASIK's MULTI-TARGET FLING (С ЗАДЕРЖКОЙ)
+	-- KILASIK's MULTI-TARGET FLING (ФИКС ПОЗИЦИИ)
 	-- ==========================================
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	
 	local FlingActive = false
-	local FlingConnection = nil
 	local SelectedTargets = {}
 	
 	getgenv().OldPos = nil
 	getgenv().FPDH = workspace.FallenPartsDestroyHeight
+	
+	-- ===== НАСТРОЙКИ =====
+	local FLING_POWER = 9e7
+	local OFFSET = CFrame.new(0, 0, -3)  -- Телепорт перед жертвой (3 шага)
 	
 	-- ===== УВЕДОМЛЕНИЕ =====
 	local function Message(Title, Text, Time)
@@ -416,7 +419,7 @@ local script = G2L["d"];
 		})
 	end
 	
-	-- ===== ФУНКЦИЯ ФЛИНГА (ОРИГИНАЛ) =====
+	-- ===== ФУНКЦИЯ ФЛИНГА =====
 	local function SkidFling(TargetPlayer)
 		local Character = player.Character
 		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
@@ -452,14 +455,18 @@ local script = G2L["d"];
 			end
 	
 			local function FPos(BasePart, Pos, Ang)
-				RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
-				Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
-				RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
-				RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+				-- ФИКС: телепорт ПЕРЕД жертвой (в направлении её взгляда)
+				local targetCFrame = BasePart.CFrame
+				local teleportPos = targetCFrame * OFFSET
+	
+				RootPart.CFrame = teleportPos * Pos * Ang
+				Character:SetPrimaryPartCFrame(teleportPos * Pos * Ang)
+				RootPart.Velocity = Vector3.new(FLING_POWER, FLING_POWER * 10, FLING_POWER)
+				RootPart.RotVelocity = Vector3.new(FLING_POWER / 10, FLING_POWER / 10, FLING_POWER / 10)
 			end
 	
 			local function SFBasePart(BasePart)
-				local TimeToWait = 2.5  -- УВЕЛИЧИЛ ДО 2.5 СЕКУНД
+				local TimeToWait = 2.5
 				local Time = tick()
 				local Angle = 0
 				repeat
@@ -544,7 +551,7 @@ local script = G2L["d"];
 		end
 	end
 	
-	-- ===== ЗАПУСК ФЛИНГА =====
+	-- ===== ЗАПУСК =====
 	local function StartFling()
 		if FlingActive then return end
 	
@@ -578,18 +585,18 @@ local script = G2L["d"];
 				for _, player in pairs(validTargets) do
 					if FlingActive then
 						SkidFling(player)
-						wait(1.5)  -- ЖДЁМ 1.5 СЕКУНДЫ МЕЖДУ ИГРОКАМИ
+						wait(1.0)
 					else
 						break
 					end
 				end
 	
-				wait(1.0)  -- ПАУЗА МЕЖДУ ЦИКЛАМИ
+				wait(0.5)
 			end
 		end)
 	end
 	
-	-- ===== ОСТАНОВКА ФЛИНГА =====
+	-- ===== ОСТАНОВКА =====
 	local function StopFling()
 		FlingActive = false
 		Message("Stopped", "Флинг остановлен", 2)
