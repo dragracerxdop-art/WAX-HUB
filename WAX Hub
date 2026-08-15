@@ -3369,26 +3369,26 @@ local script = G2L["7e"];
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
 	
-		-- Проверяем, есть ли уже FlingGui
+		-- Проверяем, не загружен ли уже FlingGui
 		local existingGui = playerGui:FindFirstChild("FlingGui")
 	
 		if existingGui then
-			-- Если уже есть — УДАЛЯЕМ, чтобы пересоздать
+			-- Если есть — удаляем его (чтобы можно было пересоздать)
 			existingGui:Destroy()
-			print("🗑️ Старый FlingGui удалён, загружаем новый...")
+			print("🗑️ Старый FlingGui удалён")
 		end
 	
-		-- Загружаем свежую версию с GitHub
+		-- Загружаем GUI с GitHub
 		print("🔄 Загрузка Fling GUI...")
 	
 		local success, err = pcall(function()
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/dragracerxdop-art/WAX-HUB/refs/heads/main/Fling%20Gui"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/dragracerxdop-art/WAX-HUB/refs/heads/main/Fling_Gui"))()
 		end)
 	
 		if success then
 			print("✅ Fling GUI загружен!")
 		else
-			warn("❌ Ошибка загрузки Fling GUI:", err)
+			warn("❌ Ошибка загрузки:", err)
 		end
 	end)
 	
