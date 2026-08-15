@@ -961,5 +961,3 @@ local script = G2L["2d"];
 	print("✅ Список игроков загружен (без пустых квадратов)!")
 end;
 task.spawn(C_2d);
-
-return G2L["1"], require;
