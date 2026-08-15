@@ -1758,8 +1758,21 @@ local script = G2L["3b"];
 		if mm2Gui then
 			mm2Gui:Destroy()
 			print("🗑️ MM2_Gui удалён!")
+	
+			-- Уведомление
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "MM2 GUI",
+				Text = "MM2 GUI удалён!",
+				Duration = 2
+			})
 		else
 			print("❌ MM2_Gui не найден!")
+	
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "MM2 GUI",
+				Text = "MM2 GUI не найден!",
+				Duration = 2
+			})
 		end
 	end)
 	
