@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 45 | Scripts: 7 | Modules: 0 | Tags: 0
+-- Instances: 40 | Scripts: 6 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.FlingGui
@@ -81,9 +81,9 @@ G2L["9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["9"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["9"]["Text"] = [[   Fling Start]];
+G2L["9"]["Text"] = [[   Start/Stop]];
 G2L["9"]["Name"] = [[FlingGui_Start]];
-G2L["9"]["Position"] = UDim2.new(0.01684, 0, 0.67906, 0);
+G2L["9"]["Position"] = UDim2.new(0.26936, 0, 0.68135, 0);
 
 
 -- StarterGui.FlingGui.MainFrame.FlingGui_Start.ImageLabel
@@ -112,7 +112,7 @@ G2L["d"] = Instance.new("LocalScript", G2L["9"]);
 
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop
+-- StarterGui.FlingGui.MainFrame.Settings_Color
 G2L["e"] = Instance.new("TextButton", G2L["2"]);
 G2L["e"]["BorderSizePixel"] = 0;
 G2L["e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -122,38 +122,38 @@ G2L["e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["e"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["e"]["Text"] = [[    Fling Stop]];
-G2L["e"]["Name"] = [[FlingGui_Stop]];
-G2L["e"]["Position"] = UDim2.new(0.50168, 0, 0.67629, 0);
+G2L["e"]["Text"] = [[      Color]];
+G2L["e"]["Name"] = [[Settings_Color]];
+G2L["e"]["Position"] = UDim2.new(0.01555, 0, 0.78625, 0);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop.ImageLabel
+-- StarterGui.FlingGui.MainFrame.Settings_Color.ImageLabel
 G2L["f"] = Instance.new("ImageLabel", G2L["e"]);
 G2L["f"]["BorderSizePixel"] = 0;
 G2L["f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["f"]["Image"] = [[rbxassetid://71447950485901]];
 G2L["f"]["Size"] = UDim2.new(0, 23, 0, 23);
 G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["f"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+G2L["f"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop.UIStroke
-G2L["10"] = Instance.new("UIStroke", G2L["e"]);
-G2L["10"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["10"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+-- StarterGui.FlingGui.MainFrame.Settings_Color.UICorner
+G2L["10"] = Instance.new("UICorner", G2L["e"]);
+G2L["10"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop.UICorner
-G2L["11"] = Instance.new("UICorner", G2L["e"]);
-G2L["11"]["CornerRadius"] = UDim.new(0, 15);
+-- StarterGui.FlingGui.MainFrame.Settings_Color.UIStroke
+G2L["11"] = Instance.new("UIStroke", G2L["e"]);
+G2L["11"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["11"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop.LocalScript
+-- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
 G2L["12"] = Instance.new("LocalScript", G2L["e"]);
 
 
 
--- StarterGui.FlingGui.MainFrame.Settings_Color
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide
 G2L["13"] = Instance.new("TextButton", G2L["2"]);
 G2L["13"]["BorderSizePixel"] = 0;
 G2L["13"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -163,38 +163,38 @@ G2L["13"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["13"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["13"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["13"]["Text"] = [[      Color]];
-G2L["13"]["Name"] = [[Settings_Color]];
-G2L["13"]["Position"] = UDim2.new(0.01555, 0, 0.78625, 0);
+G2L["13"]["Text"] = [[      Hide Gui]];
+G2L["13"]["Name"] = [[FlingGui_Settings_Hide]];
+G2L["13"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
 
 
--- StarterGui.FlingGui.MainFrame.Settings_Color.ImageLabel
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.ImageLabel
 G2L["14"] = Instance.new("ImageLabel", G2L["13"]);
 G2L["14"]["BorderSizePixel"] = 0;
 G2L["14"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["14"]["Image"] = [[rbxassetid://71447950485901]];
 G2L["14"]["Size"] = UDim2.new(0, 23, 0, 23);
 G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["14"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+G2L["14"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.FlingGui.MainFrame.Settings_Color.UICorner
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UICorner
 G2L["15"] = Instance.new("UICorner", G2L["13"]);
 G2L["15"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.FlingGui.MainFrame.Settings_Color.UIStroke
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UIStroke
 G2L["16"] = Instance.new("UIStroke", G2L["13"]);
 G2L["16"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["16"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.LocalScript
 G2L["17"] = Instance.new("LocalScript", G2L["13"]);
 
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui
 G2L["18"] = Instance.new("TextButton", G2L["2"]);
 G2L["18"]["BorderSizePixel"] = 0;
 G2L["18"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -204,12 +204,12 @@ G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["18"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["18"]["Text"] = [[      Hide Gui]];
-G2L["18"]["Name"] = [[FlingGui_Settings_Hide]];
-G2L["18"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
+G2L["18"]["Text"] = [[    Delete Gui]];
+G2L["18"]["Name"] = [[FlingGui_DeleteGui]];
+G2L["18"]["Position"] = UDim2.new(0.26816, 0, 0.89139, 0);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.ImageLabel
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.ImageLabel
 G2L["19"] = Instance.new("ImageLabel", G2L["18"]);
 G2L["19"]["BorderSizePixel"] = 0;
 G2L["19"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -219,159 +219,118 @@ G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["19"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UICorner
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UICorner
 G2L["1a"] = Instance.new("UICorner", G2L["18"]);
 G2L["1a"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UIStroke
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UIStroke
 G2L["1b"] = Instance.new("UIStroke", G2L["18"]);
 G2L["1b"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["1b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
 G2L["1c"] = Instance.new("LocalScript", G2L["18"]);
 
 
 
--- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui
-G2L["1d"] = Instance.new("TextButton", G2L["2"]);
-G2L["1d"]["BorderSizePixel"] = 0;
-G2L["1d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
-G2L["1d"]["TextSize"] = 20;
-G2L["1d"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1d"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1d"]["Size"] = UDim2.new(0, 137, 0, 37);
-G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1d"]["Text"] = [[    Delete Gui]];
-G2L["1d"]["Name"] = [[FlingGui_DeleteGui]];
-G2L["1d"]["Position"] = UDim2.new(0.26816, 0, 0.89139, 0);
-
-
--- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.ImageLabel
-G2L["1e"] = Instance.new("ImageLabel", G2L["1d"]);
-G2L["1e"]["BorderSizePixel"] = 0;
-G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1e"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["1e"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1e"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
-
-
--- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UICorner
-G2L["1f"] = Instance.new("UICorner", G2L["1d"]);
-G2L["1f"]["CornerRadius"] = UDim.new(0, 15);
-
-
--- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UIStroke
-G2L["20"] = Instance.new("UIStroke", G2L["1d"]);
-G2L["20"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["20"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
--- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
-G2L["21"] = Instance.new("LocalScript", G2L["1d"]);
-
-
-
 -- StarterGui.FlingGui.MainFrame.PlayerList
-G2L["22"] = Instance.new("ScrollingFrame", G2L["2"]);
-G2L["22"]["Active"] = true;
-G2L["22"]["BorderSizePixel"] = 0;
-G2L["22"]["Name"] = [[PlayerList]];
-G2L["22"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["22"]["Size"] = UDim2.new(0, 277, 0, 222);
-G2L["22"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["22"]["Position"] = UDim2.new(0.03164, 0, 0.13773, 0);
-G2L["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["22"]["ScrollBarThickness"] = 0;
+G2L["1d"] = Instance.new("ScrollingFrame", G2L["2"]);
+G2L["1d"]["Active"] = true;
+G2L["1d"]["BorderSizePixel"] = 0;
+G2L["1d"]["Name"] = [[PlayerList]];
+G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Size"] = UDim2.new(0, 277, 0, 222);
+G2L["1d"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Position"] = UDim2.new(0.03164, 0, 0.13773, 0);
+G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["ScrollBarThickness"] = 0;
 
 
 -- StarterGui.FlingGui.MainFrame.PlayerList.UICorner
-G2L["23"] = Instance.new("UICorner", G2L["22"]);
-G2L["23"]["CornerRadius"] = UDim.new(0, 15);
+G2L["1e"] = Instance.new("UICorner", G2L["1d"]);
+G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.FlingGui.MainFrame.PlayerList.UIStroke
-G2L["24"] = Instance.new("UIStroke", G2L["22"]);
+G2L["1f"] = Instance.new("UIStroke", G2L["1d"]);
+G2L["1f"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate
+G2L["20"] = Instance.new("Frame", G2L["1d"]);
+G2L["20"]["Visible"] = false;
+G2L["20"]["BorderSizePixel"] = 0;
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Size"] = UDim2.new(0, 277, 0, 47);
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Name"] = [[PlayerTemplate]];
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UICorner
+G2L["21"] = Instance.new("UICorner", G2L["20"]);
+G2L["21"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UIStroke
+G2L["22"] = Instance.new("UIStroke", G2L["20"]);
+G2L["22"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["22"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn
+G2L["23"] = Instance.new("TextButton", G2L["20"]);
+G2L["23"]["BorderSizePixel"] = 0;
+G2L["23"]["TextSize"] = 14;
+G2L["23"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["23"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["23"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["23"]["Size"] = UDim2.new(0, 25, 0, 26);
+G2L["23"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["23"]["Text"] = [[]];
+G2L["23"]["Name"] = [[SelectBtn]];
+G2L["23"]["Position"] = UDim2.new(0.01444, 0, 0.21277, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn.UIStroke
+G2L["24"] = Instance.new("UIStroke", G2L["23"]);
 G2L["24"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["24"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate
-G2L["25"] = Instance.new("Frame", G2L["22"]);
-G2L["25"]["Visible"] = false;
-G2L["25"]["BorderSizePixel"] = 0;
-G2L["25"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["25"]["Size"] = UDim2.new(0, 277, 0, 47);
-G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["25"]["Name"] = [[PlayerTemplate]];
-
-
--- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UICorner
-G2L["26"] = Instance.new("UICorner", G2L["25"]);
-G2L["26"]["CornerRadius"] = UDim.new(0, 15);
-
-
--- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UIStroke
-G2L["27"] = Instance.new("UIStroke", G2L["25"]);
-G2L["27"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["27"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
--- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn
-G2L["28"] = Instance.new("TextButton", G2L["25"]);
-G2L["28"]["BorderSizePixel"] = 0;
-G2L["28"]["TextSize"] = 14;
-G2L["28"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["28"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["28"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["28"]["Size"] = UDim2.new(0, 25, 0, 26);
-G2L["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["28"]["Text"] = [[]];
-G2L["28"]["Name"] = [[SelectBtn]];
-G2L["28"]["Position"] = UDim2.new(0.01444, 0, 0.21277, 0);
-
-
--- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn.UIStroke
-G2L["29"] = Instance.new("UIStroke", G2L["28"]);
-G2L["29"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["29"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
 -- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn.UICorner
-G2L["2a"] = Instance.new("UICorner", G2L["28"]);
-G2L["2a"]["CornerRadius"] = UDim.new(0, 15);
+G2L["25"] = Instance.new("UICorner", G2L["23"]);
+G2L["25"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.Name
-G2L["2b"] = Instance.new("TextLabel", G2L["25"]);
-G2L["2b"]["BorderSizePixel"] = 0;
-G2L["2b"]["TextSize"] = 14;
-G2L["2b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["2b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
-G2L["2b"]["Size"] = UDim2.new(0, 182, 0, 24);
-G2L["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2b"]["Name"] = [[Name]];
-G2L["2b"]["Position"] = UDim2.new(0.29964, 0, 0.23404, 0);
+G2L["26"] = Instance.new("TextLabel", G2L["20"]);
+G2L["26"]["BorderSizePixel"] = 0;
+G2L["26"]["TextSize"] = 14;
+G2L["26"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["26"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["26"]["Size"] = UDim2.new(0, 182, 0, 24);
+G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["Name"] = [[Name]];
+G2L["26"]["Position"] = UDim2.new(0.29964, 0, 0.23404, 0);
 
 
 -- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.Avatar
-G2L["2c"] = Instance.new("ImageLabel", G2L["25"]);
-G2L["2c"]["BorderSizePixel"] = 0;
-G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2c"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
-G2L["2c"]["Size"] = UDim2.new(0, 40, 0, 41);
-G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2c"]["Name"] = [[Avatar]];
-G2L["2c"]["Position"] = UDim2.new(0.12534, 0, 0.0343, 0);
+G2L["27"] = Instance.new("ImageLabel", G2L["20"]);
+G2L["27"]["BorderSizePixel"] = 0;
+G2L["27"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["27"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
+G2L["27"]["Size"] = UDim2.new(0, 40, 0, 41);
+G2L["27"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["27"]["Name"] = [[Avatar]];
+G2L["27"]["Position"] = UDim2.new(0.12534, 0, 0.0343, 0);
 
 
 -- StarterGui.FlingGui.MainFrame.PlayerList.LocalScript
-G2L["2d"] = Instance.new("LocalScript", G2L["22"]);
+G2L["28"] = Instance.new("LocalScript", G2L["1d"]);
 
 
 
@@ -435,16 +394,16 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- FLING START
+	-- FLING (СТАРТ / СТОП В ОДНОЙ КНОПКЕ)
 	-- ==========================================
+	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	local RunService = game:GetService("RunService")
 	
-	local FlingActive = false
+	local isFlinging = false
 	local flingLoop = nil
 	local queue = {}
 	local currentIndex = 1
-	
 	local FLING_POWER = 9e7
 	
 	-- ===== ФЛИНГ ОДНОГО ИГРОКА =====
@@ -463,10 +422,10 @@ local script = G2L["d"];
 		local tHumanoid = tChar:FindFirstChildOfClass("Humanoid")
 		if not tHrp or not tHumanoid or tHumanoid.Health <= 0 then return false end
 	
-		-- Сохраняем позицию игрока
+		-- Сохраняем позицию
 		local savedPos = hrp.CFrame
 	
-		-- Телепортируемся к жертве
+		-- Телепорт к жертве
 		hrp.CFrame = tHrp.CFrame * CFrame.new(0, 2, 3)
 	
 		-- Выкидываем жертву
@@ -475,26 +434,18 @@ local script = G2L["d"];
 		bv.MaxForce = Vector3.new(1/0, 1/0, 1/0)
 		bv.Velocity = Vector3.new(FLING_POWER, FLING_POWER * 2, FLING_POWER)
 	
-		-- Ждём 0.3 секунды
 		task.wait(0.3)
 	
-		-- Удаляем BodyVelocity
 		bv:Destroy()
 	
-		-- Возвращаем игрока на место
+		-- Возврат на место
 		hrp.CFrame = savedPos
 	
-		print("✅ Флинг завершён для:", target.Name)
 		return true
 	end
 	
 	-- ===== ЗАПУСК ФЛИНГА =====
-	local function StartFling()
-		if FlingActive then
-			print("⚠️ Флинг уже запущен!")
-			return
-		end
-	
+	local function startFling()
 		local selected = _G.GetSelectedPlayers and _G.GetSelectedPlayers() or {}
 	
 		if #selected == 0 then
@@ -502,7 +453,7 @@ local script = G2L["d"];
 			return
 		end
 	
-		FlingActive = true
+		isFlinging = true
 		queue = {}
 		for _, plr in pairs(selected) do
 			table.insert(queue, plr)
@@ -512,10 +463,9 @@ local script = G2L["d"];
 		print("🚀 Флинг запущен! Игроков:", #queue)
 	
 		flingLoop = RunService.Heartbeat:Connect(function()
-			if not FlingActive then
+			if not isFlinging then
 				flingLoop:Disconnect()
 				flingLoop = nil
-				print("🔴 Флинг остановлен")
 				return
 			end
 	
@@ -527,10 +477,9 @@ local script = G2L["d"];
 			if target and target.Character and target.Character:FindFirstChildOfClass("Humanoid") then
 				flingTarget(target)
 			else
-				-- Удаляем мёртвого или вышедшего игрока
 				table.remove(queue, currentIndex)
 				if #queue == 0 then
-					FlingActive = false
+					isFlinging = false
 					if flingLoop then
 						flingLoop:Disconnect()
 						flingLoop = nil
@@ -550,41 +499,33 @@ local script = G2L["d"];
 		end)
 	end
 	
-	-- ===== КНОПКА =====
-	local button = script.Parent
+	-- ===== ОСТАНОВКА ФЛИНГА =====
+	local function stopFling()
+		isFlinging = false
+		if flingLoop then
+			flingLoop:Disconnect()
+			flingLoop = nil
+		end
+		print("🔴 Флинг остановлен!")
+	end
 	
+	-- ===== КНОПКА =====
 	button.MouseButton1Click:Connect(function()
-		StartFling()
+		if isFlinging then
+			stopFling()
+			button.Text = "   Fling Start"
+		else
+			startFling()
+			button.Text = "   Fling Stop"
+		end
 	end)
 	
-	print("✅ FLING START загружен!")
+	print("✅ FLING START/STOP загружен!")
 end;
 task.spawn(C_d);
--- StarterGui.FlingGui.MainFrame.FlingGui_Stop.LocalScript
+-- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
 local function C_12()
 local script = G2L["12"];
-	-- ==========================================
-	-- FLING STOP
-	-- ==========================================
-	local button = script.Parent
-	
-	button.MouseButton1Click:Connect(function()
-		FlingActive = false
-		print("🔴 Флинг остановлен!")
-	
-		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "Fling",
-			Text = "Флинг остановлен!",
-			Duration = 2
-		})
-	end)
-	
-	print("✅ FLING STOP загружен!")
-end;
-task.spawn(C_12);
--- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
-local function C_17()
-local script = G2L["17"];
 	-- ==========================================
 	-- СМЕНА ЦВЕТА (КАК В ОСНОВНОМ ХАБЕ)
 	-- ==========================================
@@ -705,10 +646,10 @@ local script = G2L["17"];
 	applyTheme(1)
 	print("✅ Settings_Color загружен!")
 end;
-task.spawn(C_17);
+task.spawn(C_12);
 -- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.LocalScript
-local function C_1c()
-local script = G2L["1c"];
+local function C_17()
+local script = G2L["17"];
 	-- ==========================================
 	-- HIDE GUI
 	-- ==========================================
@@ -722,10 +663,10 @@ local script = G2L["1c"];
 	
 	print("✅ Hide GUI загружен!")
 end;
-task.spawn(C_1c);
+task.spawn(C_17);
 -- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
-local function C_21()
-local script = G2L["21"];
+local function C_1c()
+local script = G2L["1c"];
 	-- ==========================================
 	-- DELETE GUI
 	-- ==========================================
@@ -739,10 +680,10 @@ local script = G2L["21"];
 	
 	print("✅ Delete GUI загружен!")
 end;
-task.spawn(C_21);
+task.spawn(C_1c);
 -- StarterGui.FlingGui.MainFrame.PlayerList.LocalScript
-local function C_2d()
-local script = G2L["2d"];
+local function C_28()
+local script = G2L["28"];
 	-- ==========================================
 	-- СПИСОК ИГРОКОВ (БЕЗ ПУСТЫХ КВАДРАТОВ)
 	-- ==========================================
@@ -868,6 +809,6 @@ local script = G2L["2d"];
 	
 	print("✅ Список игроков загружен (без пустых квадратов)!")
 end;
-task.spawn(C_2d);
+task.spawn(C_28);
 
 return G2L["1"], require;
