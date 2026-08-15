@@ -380,10 +380,10 @@ G2L["2d"] = Instance.new("LocalScript", G2L["22"]);
 local function C_6()
 local script = G2L["6"];
 	-- ==========================================
-	-- ПЕРЕТАСКИВАНИЕ (ВЕШАЙ В WAX_FlingGui)
+	-- ПЕРЕТАСКИВАНИЕ (ИСПРАВЛЕННОЕ)
 	-- ==========================================
 	local textLabel = script.Parent
-	local frame = textLabel.Parent  -- MainFrame
+	local frame = textLabel.Parent
 	local uis = game:GetService("UserInputService")
 	
 	local dragging = false
@@ -391,8 +391,8 @@ local script = G2L["6"];
 	local startPos = nil
 	local connection = nil
 	
-	textLabel.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+	local function startDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			dragStart = input.Position
 			startPos = frame.Position
@@ -403,7 +403,7 @@ local script = G2L["6"];
 			end
 	
 			connection = uis.InputChanged:Connect(function(input)
-				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+				if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 					local delta = input.Position - dragStart
 					frame.Position = UDim2.new(
 						startPos.X.Scale,
@@ -414,17 +414,20 @@ local script = G2L["6"];
 				end
 			end)
 		end
-	end)
+	end
 	
-	uis.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+	local function endDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 			if connection then
 				connection:Disconnect()
 				connection = nil
 			end
 		end
-	end)
+	end
+	
+	textLabel.InputBegan:Connect(startDrag)
+	uis.InputEnded:Connect(endDrag)
 	
 	print("✅ Перетаскивание загружено")
 end;
