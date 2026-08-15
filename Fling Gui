@@ -18,6 +18,7 @@ G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 -- StarterGui.FlingGui.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
@@ -431,7 +432,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- KILASIK's MULTI-TARGET FLING (СТАРТ/СТОП)
+	-- KILASIK's MULTI-TARGET FLING (ТОЛЬКО СТАРТ)
 	-- ==========================================
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
@@ -578,7 +579,10 @@ local script = G2L["d"];
 	
 	-- ===== ЗАПУСК ФЛИНГА =====
 	local function StartFling()
-		if FlingActive then return end
+		if FlingActive then
+			Message("Error", "Флинг уже запущен!", 2)
+			return
+		end
 	
 		local selected = _G.GetSelectedPlayers and _G.GetSelectedPlayers() or {}
 	
@@ -621,24 +625,14 @@ local script = G2L["d"];
 		end)
 	end
 	
-	-- ===== ОСТАНОВКА ФЛИНГА =====
-	local function StopFling()
-		FlingActive = false
-		Message("Stopped", "Флинг остановлен", 2)
-	end
-	
 	-- ===== КНОПКА =====
 	local button = script.Parent
 	
 	button.MouseButton1Click:Connect(function()
-		if FlingActive then
-			StopFling()
-		else
-			StartFling()
-		end
+		StartFling()
 	end)
 	
-	print("✅ KILASIK Multi-Target Fling загружен!")
+	print("✅ KILASIK Multi-Target Fling (Старт) загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.FlingGui.MainFrame.FlingGui_Stop.LocalScript
