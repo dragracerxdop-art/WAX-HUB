@@ -3399,11 +3399,10 @@ task.spawn(C_7e);
 local function C_83()
 local script = G2L["83"];
 	-- ==========================================
-	-- ПЕРЕТАСКИВАНИЕ (ТЯНЕТ ВЕСЬ MAINFRAME)
+	-- ПЕРЕТАСКИВАНИЕ (РАБОТАЕТ ВЕЗДЕ)
 	-- ==========================================
-	local textLabel = script.Parent  -- TextLabel (за который тянем)
-	local frame = textLabel.Parent   -- MainFrame (который двигаем)
-	
+	local textLabel = script.Parent
+	local frame = textLabel.Parent
 	local uis = game:GetService("UserInputService")
 	
 	local dragging = false
@@ -3412,7 +3411,7 @@ local script = G2L["83"];
 	local connection = nil
 	
 	local function startDrag(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			dragStart = input.Position
 			startPos = frame.Position
@@ -3423,7 +3422,7 @@ local script = G2L["83"];
 			end
 	
 			connection = uis.InputChanged:Connect(function(input)
-				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+				if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 					local delta = input.Position - dragStart
 					frame.Position = UDim2.new(
 						startPos.X.Scale,
@@ -3437,7 +3436,7 @@ local script = G2L["83"];
 	end
 	
 	local function endDrag(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 			if connection then
 				connection:Disconnect()
@@ -3446,34 +3445,10 @@ local script = G2L["83"];
 		end
 	end
 	
-	-- Вешаем на TextLabel (за который тянем)
 	textLabel.InputBegan:Connect(startDrag)
 	uis.InputEnded:Connect(endDrag)
 	
-	-- Для сенсорных экранов
-	textLabel.TouchBegan:Connect(function(input)
-		dragging = true
-		dragStart = input.Position
-		startPos = frame.Position
-	end)
-	
-	textLabel.TouchMoved:Connect(function(input)
-		if dragging then
-			local delta = input.Position - dragStart
-			frame.Position = UDim2.new(
-				startPos.X.Scale,
-				startPos.X.Offset + delta.X,
-				startPos.Y.Scale,
-				startPos.Y.Offset + delta.Y
-			)
-		end
-	end)
-	
-	textLabel.TouchEnded:Connect(function()
-		dragging = false
-	end)
-	
-	print("✅ Перетаскивание обновлено! Тянет MainFrame")
+	print("✅ Перетаскивание загружено")
 end;
 task.spawn(C_83);
 -- StarterGui.Wax_Hub.MainFrame.LeftFrame.SwitchTabs
