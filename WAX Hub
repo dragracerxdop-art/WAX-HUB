@@ -3369,16 +3369,16 @@ local script = G2L["7e"];
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
 	
-		-- Проверяем, не загружен ли уже FlingGui
+		-- Проверяем, есть ли уже FlingGui
 		local existingGui = playerGui:FindFirstChild("FlingGui")
+	
 		if existingGui then
-			-- Если уже есть — просто переключаем видимость
-			existingGui.Enabled = not existingGui.Enabled
-			print("🟢 Fling GUI:", existingGui.Enabled and "ОТКРЫТ" or "ЗАКРЫТ")
-			return
+			-- Если уже есть — УДАЛЯЕМ, чтобы пересоздать
+			existingGui:Destroy()
+			print("🗑️ Старый FlingGui удалён, загружаем новый...")
 		end
 	
-		-- Если нет — загружаем с GitHub
+		-- Загружаем свежую версию с GitHub
 		print("🔄 Загрузка Fling GUI...")
 	
 		local success, err = pcall(function()
@@ -3386,7 +3386,7 @@ local script = G2L["7e"];
 		end)
 	
 		if success then
-			print("✅ Fling GUI загружен и открыт!")
+			print("✅ Fling GUI загружен!")
 		else
 			warn("❌ Ошибка загрузки Fling GUI:", err)
 		end
