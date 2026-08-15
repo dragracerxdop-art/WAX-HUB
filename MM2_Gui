@@ -19,11 +19,10 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.MM2_Gui.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
-G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
-G2L["2"]["Position"] = UDim2.new(0.70667, 0, 0.1337, 0);
+G2L["2"]["Position"] = UDim2.new(0.49176, 0, 0.1482, 0);
 G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Name"] = [[MainFrame]];
 G2L["2"]["BackgroundTransparency"] = 0.25;
@@ -573,7 +572,7 @@ task.spawn(C_6);
 local function C_16()
 local script = G2L["16"];
 	-- ==========================================
-	-- MM2_ESP (СТАБИЛЬНАЯ ВЕРСИЯ)
+	-- MM2_ESP (С РАБОЧИМ ВЫКЛЮЧЕНИЕМ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -657,8 +656,9 @@ local script = G2L["16"];
 		return {highlight = highlight, billboard = billboard, text = textLabel}
 	end
 	
-	-- ====== УДАЛЕНИЕ ВСЕГО ESP ======
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
 	local function clearESP()
+		-- Удаляем всё из таблицы
 		for name, data in pairs(espObjects) do
 			if data.highlight and data.highlight.Parent then
 				data.highlight:Destroy()
@@ -669,6 +669,24 @@ local script = G2L["16"];
 			espObjects[name] = nil
 		end
 		espObjects = {}
+	
+		-- Дополнительная очистка: проходим по всем игрокам
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr.Character then
+				-- Удаляем Highlight
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				-- Удаляем BillboardGui
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
+						child:Destroy()
+					end
+				end
+			end
+		end
 	end
 	
 	-- ====== ОБНОВЛЕНИЕ ESP ======
@@ -747,16 +765,20 @@ local script = G2L["16"];
 		end)
 	end
 	
-	-- ====== ОСТАНОВКА ======
+	-- ====== ОСТАНОВКА (ГАРАНТИРОВАННО) ======
 	local function stopESP()
+		-- Сначала отключаем флаг
 		isActive = false
 	
+		-- Отключаем луп
 		if updateLoop then
 			updateLoop:Disconnect()
 			updateLoop = nil
 		end
 	
+		-- Удаляем всё ESP
 		clearESP()
+	
 		print("🔴 MM2 ESP ВЫКЛЮЧЕН!")
 	end
 	
@@ -1136,7 +1158,7 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- MM2_ShowRoles (ИСПРАВЛЕННЫЙ ПОИСК)
+	-- MM2_ShowRoles (ТИХАЯ ВЕРСИЯ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -1145,46 +1167,29 @@ local script = G2L["20"];
 	
 	local isActive = false
 	local updateLoop = nil
+	local fetchedOnce = false
 	
-	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ (ПРЯМО В MAINFRAME) ======
-	local mainFrame = button.Parent  -- Кнопка находится в MainFrame
+	-- ====== ПОИСК ТЕКСТОВЫХ ПОЛЕЙ ======
+	local mainFrame = button.Parent
 	local murderText = mainFrame:FindFirstChild("MM2_Murder")
 	local sheriffText = mainFrame:FindFirstChild("MM2_Sheriff")
 	local heroText = mainFrame:FindFirstChild("MM2_Hero")
-	
-	print("🔍 MM2_Murder найден:", murderText ~= nil)
-	print("🔍 MM2_Sheriff найден:", sheriffText ~= nil)
-	print("🔍 MM2_Hero найден:", heroText ~= nil)
 	
 	if not murderText or not sheriffText then
 		warn("❌ Текстлейблы не найдены в MainFrame!")
 		return
 	end
 	
-	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ ======
+	-- ====== ПОЛУЧЕНИЕ РОЛЕЙ (БЕЗ СПАМА) ======
 	local function fetchRoles()
 		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
-		if not getPlayerData then
-			warn("❌ GetPlayerData не найден в ReplicatedStorage!")
-			return
-		end
+		if not getPlayerData then return end
 	
-		print("🔄 Вызов GetPlayerData...")
 		local success, data = pcall(function()
 			return getPlayerData:InvokeServer()
 		end)
 	
-		if not success then
-			warn("❌ Ошибка InvokeServer:", data)
-			return
-		end
-	
-		if not data then
-			warn("❌ Данные пустые!")
-			return
-		end
-	
-		print("📊 Данные получены!")
+		if not success or not data then return end
 	
 		local Murder = ""
 		local Sheriff = ""
@@ -1200,11 +1205,7 @@ local script = G2L["20"];
 			end
 		end
 	
-		print("🔴 Маньяк:", Murder or "❓")
-		print("🔵 Шериф:", Sheriff or "❓")
-		print("🟡 Герой:", Hero or "❓")
-	
-		-- Обновляем текст
+		-- Обновляем текст (без лишних логов)
 		if isActive then
 			murderText.Text = Murder ~= "" and ("🔴 Маньяк: " .. Murder) or "🔴 Маньяк: ❓"
 			murderText.TextColor3 = Murder ~= "" and Color3.fromRGB(255, 50, 50) or Color3.fromRGB(255, 100, 100)
@@ -1225,6 +1226,12 @@ local script = G2L["20"];
 				heroText.Text = "🟡 Герой: ❓"
 				heroText.TextColor3 = Color3.fromRGB(200, 150, 0)
 			end
+		end
+	
+		-- Лог только один раз при первом получении
+		if not fetchedOnce then
+			fetchedOnce = true
+			print("📊 Роли получены! Маньяк:", Murder or "❓", "Шериф:", Sheriff or "❓", "Герой:", Hero or "❓")
 		end
 	end
 	
@@ -1254,6 +1261,7 @@ local script = G2L["20"];
 			updateLoop:Disconnect()
 			updateLoop = nil
 		end
+		fetchedOnce = false
 		print("🔴 Показ ролей ВЫКЛЮЧЕН!")
 	end
 	
@@ -1372,81 +1380,64 @@ task.spawn(C_25);
 local function C_2a()
 local script = G2L["2a"];
 	-- ==========================================
-	-- MM2_KillMurderer (УБИТЬ УБИЙЦУ)
+	-- MM2_KillAll (УБИТЬ ВСЕХ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
-	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+	local VirtualInputManager = game:GetService("VirtualInputManager")
 	
 	local isActive = false
 	
-	-- ====== ПОИСК УБИЙЦЫ ======
-	local function findMurderer()
-		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
-		if not getPlayerData then return nil end
-	
-		local success, data = pcall(function()
-			return getPlayerData:InvokeServer()
-		end)
-	
-		if not success or not data then return nil end
-	
-		for name, info in pairs(data) do
-			if info.Role == "Murderer" then
-				local plr = Players:FindFirstChild(name)
-				if plr and plr:GetAttribute("Alive") == true then
-					return plr
-				end
-			end
-		end
-		return nil
-	end
-	
-	-- ====== УБИТЬ УБИЙЦУ ======
-	local function killMurderer()
+	-- ====== УБИТЬ ВСЕХ ======
+	local function killAll()
 		local myChar = player.Character
 		if not myChar then return end
+	
+		-- Ищем нож
+		local knife = myChar:FindFirstChild("Knife")
+		if not knife then
+			knife = player.Backpack:FindFirstChild("Knife")
+			if knife then
+				knife.Parent = myChar
+			else
+				print("❌ Нож не найден!")
+				return
+			end
+		end
 	
 		local myHrp = myChar:FindFirstChild("HumanoidRootPart")
 		if not myHrp then return end
 	
-		local target = findMurderer()
-		if not target then
-			print("❌ Убийца не найден!")
-			return
-		end
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player then
+				local char = plr.Character
+				if char then
+					local hrp = char:FindFirstChild("HumanoidRootPart")
+					local humanoid = char:FindFirstChildOfClass("Humanoid")
+					if hrp and humanoid and humanoid.Health > 0 then
+						-- Отключаем коллизии
+						for _, part in pairs(char:GetDescendants()) do
+							if part:IsA("BasePart") then
+								part.CanCollide = false
+							end
+						end
 	
-		local char = target.Character
-		if not char then return end
+						-- Телепортируем к тебе
+						local teleportPos = myHrp.CFrame + myHrp.CFrame.LookVector * 3
+						hrp.CFrame = teleportPos
+						hrp.Size = Vector3.new(5, 5, 5)
+						hrp.Anchored = true
 	
-		local hrp = char:FindFirstChild("HumanoidRootPart")
-		local humanoid = char:FindFirstChildOfClass("Humanoid")
+						-- Имитируем удар
+						VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+						VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
 	
-		if not hrp or not humanoid then return end
-		if humanoid.Health <= 0 then
-			print("💀 Убийца уже мёртв!")
-			return
-		end
-	
-		-- Телепорт убийцы к тебе
-		local teleportPos = myHrp.Position + myHrp.CFrame.LookVector * 3 + Vector3.new(0, 0.5, 0)
-		hrp.CFrame = CFrame.new(teleportPos)
-	
-		for _, part in pairs(char:GetDescendants()) do
-			if part:IsA("BasePart") then
-				part.CanCollide = false
+						task.wait(0.05)
+					end
+				end
 			end
 		end
-	
-		task.wait(0.1)
-	
-		pcall(function()
-			humanoid.Health = 0
-			humanoid.BreakJointsOnDeath = true
-		end)
-	
-		print("💀 Убийца " .. target.Name .. " убит!")
 	end
 	
 	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
@@ -1454,17 +1445,17 @@ local script = G2L["2a"];
 		isActive = not isActive
 	
 		if isActive then
-			print("🟢 Охота на убийцу ВКЛЮЧЕНА!")
+			print("🟢 Kill All ВКЛЮЧЕН!")
 			while isActive do
-				killMurderer()
+				killAll()
 				task.wait(0.5)
 			end
 		else
-			print("🔴 Охота на убийцу ВЫКЛЮЧЕНА!")
+			print("🔴 Kill All ВЫКЛЮЧЕН!")
 		end
 	end)
 	
-	print("✅ MM2_KillMurderer загружена!")
+	print("✅ MM2_KillAll загружена!")
 end;
 task.spawn(C_2a);
 -- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
@@ -1763,36 +1754,81 @@ task.spawn(C_36);
 local function C_3b()
 local script = G2L["3b"];
 	-- ==========================================
-	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI)
+	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
-	
-		-- Ищем MM2_Gui
 		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
 	
-		if mm2Gui then
-			mm2Gui:Destroy()
-			print("🗑️ MM2_Gui удалён из игры!")
-	
-			-- Уведомление
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI удалён!",
-				Duration = 2
-			})
-		else
+		if not mm2Gui then
 			print("❌ MM2_Gui не найден в PlayerGui!")
-	
 			game:GetService("StarterGui"):SetCore("SendNotification", {
 				Title = "MM2 GUI",
 				Text = "MM2 GUI не найден!",
 				Duration = 2
 			})
+			return
 		end
+	
+		print("🔄 Отключаем все функции MM2...")
+	
+		-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ И ФУНКЦИИ =====
+		-- Проходим по всем скриптам в GUI и отключаем их
+		for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
+			if scriptObj:IsA("LocalScript") then
+				-- Отключаем скрипт (останавливаем его работу)
+				pcall(function()
+					scriptObj.Disabled = true
+				end)
+			end
+		end
+	
+		-- ===== 2. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
+		-- Сбрасываем все активные флаги
+		_G.MM2_ESP_Active = nil
+		_G.MM2_AutoFarm_Active = nil
+		_G.MM2_KillAll_Active = nil
+		_G.MM2_GunESP_Active = nil
+		_G.MM2_ShowRoles_Active = nil
+		_G.MM2_KillMurderer_Active = nil
+	
+		-- ===== 3. ОСТАНАВЛИВАЕМ ВСЕ СОЗДАННЫЕ ОБЪЕКТЫ (ESP, Highlight и т.д.) =====
+		-- Удаляем Highlight у всех игроков
+		for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
+			if plr.Character then
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") then
+						child:Destroy()
+					end
+				end
+			end
+		end
+	
+		-- Удаляем подсветку пистолета
+		for _, obj in pairs(workspace:GetDescendants()) do
+			if obj.Name == "GunHighlight" then
+				obj:Destroy()
+			end
+		end
+	
+		-- ===== 4. УДАЛЯЕМ GUI =====
+		task.wait(0.2)  -- Даём время на отключение
+		mm2Gui:Destroy()
+		print("🗑️ MM2_Gui удалён из игры!")
+	
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "MM2 GUI",
+			Text = "MM2 GUI удалён! Все функции остановлены.",
+			Duration = 3
+		})
 	end)
 	
 	print("✅ MM2_DeleteGui загружена!")
