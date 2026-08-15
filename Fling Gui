@@ -432,15 +432,17 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- KILASIK's MULTI-TARGET FLING (ТОЛЬКО СТАРТ)
+	-- KILASIK's MULTI-TARGET FLING (СТАРТ)
 	-- ==========================================
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	
 	local FlingActive = false
-	local FlingConnection = nil
+	local flingLoop = nil
 	local SelectedTargets = {}
+	local queue = {}
+	local currentIndex = 1
 	
 	getgenv().OldPos = nil
 	getgenv().FPDH = workspace.FallenPartsDestroyHeight
@@ -454,7 +456,7 @@ local script = G2L["d"];
 		})
 	end
 	
-	-- ===== ФУНКЦИЯ ФЛИНГА (ОРИГИНАЛ) =====
+	-- ===== ФУНКЦИЯ ФЛИНГА =====
 	local function SkidFling(TargetPlayer)
 		local Character = player.Character
 		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
@@ -591,36 +593,51 @@ local script = G2L["d"];
 			return
 		end
 	
-		SelectedTargets = {}
-		for _, plr in pairs(selected) do
-			SelectedTargets[plr.Name] = plr
-		end
-	
 		FlingActive = true
-		Message("Started", "Флинг " .. #selected .. " игроков", 2)
+		queue = {}
+		for _, plr in pairs(selected) do
+			table.insert(queue, plr)
+		end
+		currentIndex = 1
 	
-		spawn(function()
-			while FlingActive do
-				local validTargets = {}
+		Message("Started", "Флинг " .. #queue .. " игроков", 2)
+		print("🚀 Флинг запущен! Игроков:", #queue)
 	
-				for name, player in pairs(SelectedTargets) do
-					if player and player.Parent then
-						validTargets[name] = player
-					else
-						SelectedTargets[name] = nil
+		flingLoop = RunService.Heartbeat:Connect(function()
+			if not FlingActive then
+				flingLoop:Disconnect()
+				flingLoop = nil
+				print("🔴 Флинг остановлен")
+				return
+			end
+	
+			if currentIndex > #queue then
+				currentIndex = 1
+			end
+	
+			local target = queue[currentIndex]
+			if target and target.Character and target.Character:FindFirstChildOfClass("Humanoid") then
+				SkidFling(target)
+			else
+				-- Удаляем мёртвого или вышедшего игрока
+				table.remove(queue, currentIndex)
+				if #queue == 0 then
+					FlingActive = false
+					if flingLoop then
+						flingLoop:Disconnect()
+						flingLoop = nil
 					end
+					Message("Stopped", "Все игроки недоступны!", 2)
+					return
 				end
-	
-				for _, player in pairs(validTargets) do
-					if FlingActive then
-						SkidFling(player)
-						wait(0.1)
-					else
-						break
-					end
+				if currentIndex > #queue then
+					currentIndex = 1
 				end
+			end
 	
-				wait(0.5)
+			currentIndex = currentIndex + 1
+			if currentIndex > #queue then
+				currentIndex = 1
 			end
 		end)
 	end
