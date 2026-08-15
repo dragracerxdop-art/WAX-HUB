@@ -1372,64 +1372,81 @@ task.spawn(C_25);
 local function C_2a()
 local script = G2L["2a"];
 	-- ==========================================
-	-- MM2_KillAll (УБИТЬ ВСЕХ)
+	-- MM2_KillMurderer (УБИТЬ УБИЙЦУ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
-	local VirtualInputManager = game:GetService("VirtualInputManager")
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
 	
 	local isActive = false
 	
-	-- ====== УБИТЬ ВСЕХ ======
-	local function killAll()
-		local myChar = player.Character
-		if not myChar then return end
+	-- ====== ПОИСК УБИЙЦЫ ======
+	local function findMurderer()
+		local getPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+		if not getPlayerData then return nil end
 	
-		-- Ищем нож
-		local knife = myChar:FindFirstChild("Knife")
-		if not knife then
-			knife = player.Backpack:FindFirstChild("Knife")
-			if knife then
-				knife.Parent = myChar
-			else
-				print("❌ Нож не найден!")
-				return
+		local success, data = pcall(function()
+			return getPlayerData:InvokeServer()
+		end)
+	
+		if not success or not data then return nil end
+	
+		for name, info in pairs(data) do
+			if info.Role == "Murderer" then
+				local plr = Players:FindFirstChild(name)
+				if plr and plr:GetAttribute("Alive") == true then
+					return plr
+				end
 			end
 		end
+		return nil
+	end
+	
+	-- ====== УБИТЬ УБИЙЦУ ======
+	local function killMurderer()
+		local myChar = player.Character
+		if not myChar then return end
 	
 		local myHrp = myChar:FindFirstChild("HumanoidRootPart")
 		if not myHrp then return end
 	
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr ~= player then
-				local char = plr.Character
-				if char then
-					local hrp = char:FindFirstChild("HumanoidRootPart")
-					local humanoid = char:FindFirstChildOfClass("Humanoid")
-					if hrp and humanoid and humanoid.Health > 0 then
-						-- Отключаем коллизии
-						for _, part in pairs(char:GetDescendants()) do
-							if part:IsA("BasePart") then
-								part.CanCollide = false
-							end
-						end
+		local target = findMurderer()
+		if not target then
+			print("❌ Убийца не найден!")
+			return
+		end
 	
-						-- Телепортируем к тебе
-						local teleportPos = myHrp.CFrame + myHrp.CFrame.LookVector * 3
-						hrp.CFrame = teleportPos
-						hrp.Size = Vector3.new(5, 5, 5)
-						hrp.Anchored = true
+		local char = target.Character
+		if not char then return end
 	
-						-- Имитируем удар
-						VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-						VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
 	
-						task.wait(0.05)
-					end
-				end
+		if not hrp or not humanoid then return end
+		if humanoid.Health <= 0 then
+			print("💀 Убийца уже мёртв!")
+			return
+		end
+	
+		-- Телепорт убийцы к тебе
+		local teleportPos = myHrp.Position + myHrp.CFrame.LookVector * 3 + Vector3.new(0, 0.5, 0)
+		hrp.CFrame = CFrame.new(teleportPos)
+	
+		for _, part in pairs(char:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CanCollide = false
 			end
 		end
+	
+		task.wait(0.1)
+	
+		pcall(function()
+			humanoid.Health = 0
+			humanoid.BreakJointsOnDeath = true
+		end)
+	
+		print("💀 Убийца " .. target.Name .. " убит!")
 	end
 	
 	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
@@ -1437,17 +1454,17 @@ local script = G2L["2a"];
 		isActive = not isActive
 	
 		if isActive then
-			print("🟢 Kill All ВКЛЮЧЕН!")
+			print("🟢 Охота на убийцу ВКЛЮЧЕНА!")
 			while isActive do
-				killAll()
+				killMurderer()
 				task.wait(0.5)
 			end
 		else
-			print("🔴 Kill All ВЫКЛЮЧЕН!")
+			print("🔴 Охота на убийцу ВЫКЛЮЧЕНА!")
 		end
 	end)
 	
-	print("✅ MM2_KillAll загружена!")
+	print("✅ MM2_KillMurderer загружена!")
 end;
 task.spawn(C_2a);
 -- StarterGui.MM2_Gui.MainFrame.MM2_PickGun.LocalScript
@@ -1753,11 +1770,13 @@ local script = G2L["3b"];
 	
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
+	
+		-- Ищем MM2_Gui
 		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
 	
 		if mm2Gui then
 			mm2Gui:Destroy()
-			print("🗑️ MM2_Gui удалён!")
+			print("🗑️ MM2_Gui удалён из игры!")
 	
 			-- Уведомление
 			game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -1766,7 +1785,7 @@ local script = G2L["3b"];
 				Duration = 2
 			})
 		else
-			print("❌ MM2_Gui не найден!")
+			print("❌ MM2_Gui не найден в PlayerGui!")
 	
 			game:GetService("StarterGui"):SetCore("SendNotification", {
 				Title = "MM2 GUI",
