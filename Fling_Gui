@@ -394,7 +394,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- KILASIK's MULTI-TARGET FLING (СТАРТ/СТОП)
+	-- KILASIK's MULTI-TARGET FLING (С ЗАДЕРЖКОЙ)
 	-- ==========================================
 	local player = game.Players.LocalPlayer
 	local Players = game:GetService("Players")
@@ -423,7 +423,7 @@ local script = G2L["d"];
 		local RootPart = Humanoid and Humanoid.RootPart
 	
 		local TCharacter = TargetPlayer.Character
-		if not TCharacter then return end
+		if not TCharacter then return false end
 	
 		local THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
 		local TRootPart = THumanoid and THumanoid.RootPart
@@ -437,7 +437,8 @@ local script = G2L["d"];
 			end
 	
 			if THumanoid and THumanoid.Sit then
-				return Message("Error", TargetPlayer.Name .. " is sitting", 2)
+				Message("Error", TargetPlayer.Name .. " is sitting", 2)
+				return false
 			end
 	
 			if THead then
@@ -447,7 +448,7 @@ local script = G2L["d"];
 			end
 	
 			if not TCharacter:FindFirstChildWhichIsA("BasePart") then
-				return
+				return false
 			end
 	
 			local function FPos(BasePart, Pos, Ang)
@@ -458,7 +459,7 @@ local script = G2L["d"];
 			end
 	
 			local function SFBasePart(BasePart)
-				local TimeToWait = 2
+				local TimeToWait = 2.5  -- УВЕЛИЧИЛ ДО 2.5 СЕКУНД
 				local Time = tick()
 				local Angle = 0
 				repeat
@@ -466,32 +467,32 @@ local script = G2L["d"];
 						if BasePart.Velocity.Magnitude < 50 then
 							Angle = Angle + 100
 							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle),0 ,0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle), 0, 0))
-							task.wait()
+							task.wait(0.1)
 						else
 							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
-							task.wait()
+							task.wait(0.1)
 							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
-							task.wait()
+							task.wait(0.1)
 						end
 					end
 				until Time + TimeToWait < tick() or not FlingActive
@@ -513,7 +514,9 @@ local script = G2L["d"];
 			elseif Handle then
 				SFBasePart(Handle)
 			else
-				return Message("Error", TargetPlayer.Name .. " has no valid parts", 2)
+				Message("Error", TargetPlayer.Name .. " has no valid parts", 2)
+				BV:Destroy()
+				return false
 			end
 	
 			BV:Destroy()
@@ -530,12 +533,14 @@ local script = G2L["d"];
 							part.Velocity, part.RotVelocity = Vector3.new(), Vector3.new()
 						end
 					end
-					task.wait()
+					task.wait(0.1)
 				until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
 				workspace.FallenPartsDestroyHeight = getgenv().FPDH
 			end
+			return true
 		else
-			return Message("Error", "Your character is not ready", 2)
+			Message("Error", "Your character is not ready", 2)
+			return false
 		end
 	end
 	
@@ -573,13 +578,13 @@ local script = G2L["d"];
 				for _, player in pairs(validTargets) do
 					if FlingActive then
 						SkidFling(player)
-						wait(0.1)
+						wait(1.5)  -- ЖДЁМ 1.5 СЕКУНДЫ МЕЖДУ ИГРОКАМИ
 					else
 						break
 					end
 				end
 	
-				wait(0.5)
+				wait(1.0)  -- ПАУЗА МЕЖДУ ЦИКЛАМИ
 			end
 		end)
 	end
