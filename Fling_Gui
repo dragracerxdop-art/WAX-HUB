@@ -735,17 +735,57 @@ task.spawn(C_12);
 local function C_17()
 local script = G2L["17"];
 	-- ==========================================
-	-- HIDE GUI
+	-- FLING HIDE GUI (С БИНДИНГОМ)
 	-- ==========================================
 	local button = script.Parent
-	local screenGui = button.Parent.Parent  -- FlingGui
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
 	
+	local isListening = false
+	local hideKey = nil
+	local gui = button.Parent.Parent  -- FlingGui
+	
+	-- ===== ТОГГЛ ГУЯ =====
+	local function toggleGui()
+		if not gui then return end
+		gui.Enabled = not gui.Enabled
+		print("🔄 FlingGui:", gui.Enabled and "открыт" or "скрыт")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ) =====
 	button.MouseButton1Click:Connect(function()
-		screenGui.Enabled = not screenGui.Enabled
-		print("🔄 FlingGui:", screenGui.Enabled and "открыт" or "скрыт")
+		if isListening then return end
+	
+		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
+	
+		local connection
+		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if gameProcessed then return end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				hideKey = input.KeyCode
+				isListening = false
+				connection:Disconnect()
+				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
+	
+				game:GetService("StarterGui"):SetCore("SendNotification", {
+					Title = "Hide GUI",
+					Text = "Бинд установлен: " .. hideKey.Name,
+					Duration = 3
+				})
+			end
+		end)
 	end)
 	
-	print("✅ Hide GUI загружен!")
+	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ =====
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
+			toggleGui()
+		end
+	end)
+	
+	print("✅ FlingGui_Settings_Hide загружен!")
 end;
 task.spawn(C_17);
 -- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
