@@ -572,7 +572,7 @@ task.spawn(C_6);
 local function C_16()
 local script = G2L["16"];
 	-- ==========================================
-	-- MM2_ESP (С РАБОЧИМ ВЫКЛЮЧЕНИЕМ)
+	-- MM2_ESP (ГАРАНТИРОВАННОЕ ВЫКЛЮЧЕНИЕ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -656,7 +656,7 @@ local script = G2L["16"];
 		return {highlight = highlight, billboard = billboard, text = textLabel}
 	end
 	
-	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ГАРАНТИРОВАННО) ======
+	-- ====== УДАЛЕНИЕ ВСЕГО ESP (ПОЛНАЯ ОЧИСТКА) ======
 	local function clearESP()
 		-- Удаляем всё из таблицы
 		for name, data in pairs(espObjects) do
@@ -670,7 +670,7 @@ local script = G2L["16"];
 		end
 		espObjects = {}
 	
-		-- Дополнительная очистка: проходим по всем игрокам
+		-- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА: проходим по ВСЕМ игрокам
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr.Character then
 				-- Удаляем Highlight
@@ -681,10 +681,17 @@ local script = G2L["16"];
 				end
 				-- Удаляем BillboardGui
 				for _, child in pairs(plr.Character:GetDescendants()) do
-					if child:IsA("BillboardGui") and child.Parent and child.Parent:FindFirstChild("HumanoidRootPart") then
+					if child:IsA("BillboardGui") then
 						child:Destroy()
 					end
 				end
+			end
+		end
+	
+		-- ОЧИСТКА В WORKSPACE (на всякий случай)
+		for _, obj in pairs(workspace:GetDescendants()) do
+			if obj:IsA("Highlight") or obj:IsA("BillboardGui") then
+				obj:Destroy()
 			end
 		end
 	end
@@ -765,7 +772,7 @@ local script = G2L["16"];
 		end)
 	end
 	
-	-- ====== ОСТАНОВКА (ГАРАНТИРОВАННО) ======
+	-- ====== ОСТАНОВКА ======
 	local function stopESP()
 		-- Сначала отключаем флаг
 		isActive = false
