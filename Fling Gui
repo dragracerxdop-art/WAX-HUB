@@ -1,1 +1,953 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
 
+-- Instances: 45 | Scripts: 7 | Modules: 0 | Tags: 0
+local G2L = {};
+
+-- StarterGui.FlingGui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[FlingGui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+
+
+-- StarterGui.FlingGui.MainFrame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
+G2L["2"]["Position"] = UDim2.new(0.49176, 0, 0.1482, 0);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Name"] = [[MainFrame]];
+G2L["2"]["BackgroundTransparency"] = 0.25;
+
+
+-- StarterGui.FlingGui.MainFrame.WAX_FlingGui
+G2L["3"] = Instance.new("TextLabel", G2L["2"]);
+G2L["3"]["BorderSizePixel"] = 0;
+G2L["3"]["TextSize"] = 24;
+G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3"]["BackgroundTransparency"] = 0.65;
+G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
+G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["Text"] = [[WAX Fling Gui]];
+G2L["3"]["Name"] = [[WAX_FlingGui]];
+
+
+-- StarterGui.FlingGui.MainFrame.WAX_FlingGui.UICorner
+G2L["4"] = Instance.new("UICorner", G2L["3"]);
+G2L["4"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.FlingGui.MainFrame.WAX_FlingGui.UIStroke
+G2L["5"] = Instance.new("UIStroke", G2L["3"]);
+G2L["5"]["Thickness"] = 2;
+G2L["5"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.WAX_FlingGui.LocalScript
+G2L["6"] = Instance.new("LocalScript", G2L["3"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.UICorner
+G2L["7"] = Instance.new("UICorner", G2L["2"]);
+G2L["7"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.FlingGui.MainFrame.UIStroke
+G2L["8"] = Instance.new("UIStroke", G2L["2"]);
+G2L["8"]["Thickness"] = 2;
+G2L["8"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["8"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start
+G2L["9"] = Instance.new("TextButton", G2L["2"]);
+G2L["9"]["BorderSizePixel"] = 0;
+G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["9"]["TextSize"] = 20;
+G2L["9"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["Text"] = [[   Fling Start]];
+G2L["9"]["Name"] = [[FlingGui_Start]];
+G2L["9"]["Position"] = UDim2.new(0.01684, 0, 0.67906, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start.ImageLabel
+G2L["a"] = Instance.new("ImageLabel", G2L["9"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["a"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start.UIStroke
+G2L["b"] = Instance.new("UIStroke", G2L["9"]);
+G2L["b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start.UICorner
+G2L["c"] = Instance.new("UICorner", G2L["9"]);
+G2L["c"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start.LocalScript
+G2L["d"] = Instance.new("LocalScript", G2L["9"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop
+G2L["e"] = Instance.new("TextButton", G2L["2"]);
+G2L["e"]["BorderSizePixel"] = 0;
+G2L["e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["e"]["TextSize"] = 20;
+G2L["e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["e"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["Text"] = [[    Fling Stop]];
+G2L["e"]["Name"] = [[FlingGui_Stop]];
+G2L["e"]["Position"] = UDim2.new(0.50168, 0, 0.67629, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop.ImageLabel
+G2L["f"] = Instance.new("ImageLabel", G2L["e"]);
+G2L["f"]["BorderSizePixel"] = 0;
+G2L["f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["f"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["Position"] = UDim2.new(0.75065, 0, 0.1781, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop.UIStroke
+G2L["10"] = Instance.new("UIStroke", G2L["e"]);
+G2L["10"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["10"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop.UICorner
+G2L["11"] = Instance.new("UICorner", G2L["e"]);
+G2L["11"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop.LocalScript
+G2L["12"] = Instance.new("LocalScript", G2L["e"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.Settings_Color
+G2L["13"] = Instance.new("TextButton", G2L["2"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["13"]["TextSize"] = 20;
+G2L["13"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["13"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Text"] = [[      Color]];
+G2L["13"]["Name"] = [[Settings_Color]];
+G2L["13"]["Position"] = UDim2.new(0.01555, 0, 0.78625, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.Settings_Color.ImageLabel
+G2L["14"] = Instance.new("ImageLabel", G2L["13"]);
+G2L["14"]["BorderSizePixel"] = 0;
+G2L["14"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["14"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.Settings_Color.UICorner
+G2L["15"] = Instance.new("UICorner", G2L["13"]);
+G2L["15"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.Settings_Color.UIStroke
+G2L["16"] = Instance.new("UIStroke", G2L["13"]);
+G2L["16"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["16"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
+G2L["17"] = Instance.new("LocalScript", G2L["13"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide
+G2L["18"] = Instance.new("TextButton", G2L["2"]);
+G2L["18"]["BorderSizePixel"] = 0;
+G2L["18"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["18"]["TextSize"] = 20;
+G2L["18"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["18"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Text"] = [[      Hide Gui]];
+G2L["18"]["Name"] = [[FlingGui_Settings_Hide]];
+G2L["18"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.ImageLabel
+G2L["19"] = Instance.new("ImageLabel", G2L["18"]);
+G2L["19"]["BorderSizePixel"] = 0;
+G2L["19"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["19"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["19"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["19"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UICorner
+G2L["1a"] = Instance.new("UICorner", G2L["18"]);
+G2L["1a"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.UIStroke
+G2L["1b"] = Instance.new("UIStroke", G2L["18"]);
+G2L["1b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+G2L["1c"] = Instance.new("LocalScript", G2L["18"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui
+G2L["1d"] = Instance.new("TextButton", G2L["2"]);
+G2L["1d"]["BorderSizePixel"] = 0;
+G2L["1d"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["1d"]["TextSize"] = 20;
+G2L["1d"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1d"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Text"] = [[    Delete Gui]];
+G2L["1d"]["Name"] = [[FlingGui_DeleteGui]];
+G2L["1d"]["Position"] = UDim2.new(0.26816, 0, 0.89139, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.ImageLabel
+G2L["1e"] = Instance.new("ImageLabel", G2L["1d"]);
+G2L["1e"]["BorderSizePixel"] = 0;
+G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1e"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["1e"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1e"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UICorner
+G2L["1f"] = Instance.new("UICorner", G2L["1d"]);
+G2L["1f"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.UIStroke
+G2L["20"] = Instance.new("UIStroke", G2L["1d"]);
+G2L["20"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["20"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
+G2L["21"] = Instance.new("LocalScript", G2L["1d"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList
+G2L["22"] = Instance.new("ScrollingFrame", G2L["2"]);
+G2L["22"]["Active"] = true;
+G2L["22"]["BorderSizePixel"] = 0;
+G2L["22"]["Name"] = [[PlayerList]];
+G2L["22"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Size"] = UDim2.new(0, 277, 0, 222);
+G2L["22"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Position"] = UDim2.new(0.03164, 0, 0.13773, 0);
+G2L["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["ScrollBarThickness"] = 0;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.UICorner
+G2L["23"] = Instance.new("UICorner", G2L["22"]);
+G2L["23"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.UIStroke
+G2L["24"] = Instance.new("UIStroke", G2L["22"]);
+G2L["24"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["24"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate
+G2L["25"] = Instance.new("Frame", G2L["22"]);
+G2L["25"]["Visible"] = false;
+G2L["25"]["BorderSizePixel"] = 0;
+G2L["25"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["25"]["Size"] = UDim2.new(0, 277, 0, 47);
+G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["25"]["Name"] = [[PlayerTemplate]];
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UICorner
+G2L["26"] = Instance.new("UICorner", G2L["25"]);
+G2L["26"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.UIStroke
+G2L["27"] = Instance.new("UIStroke", G2L["25"]);
+G2L["27"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["27"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn
+G2L["28"] = Instance.new("TextButton", G2L["25"]);
+G2L["28"]["BorderSizePixel"] = 0;
+G2L["28"]["TextSize"] = 14;
+G2L["28"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["28"]["Size"] = UDim2.new(0, 25, 0, 26);
+G2L["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["Text"] = [[]];
+G2L["28"]["Name"] = [[SelectBtn]];
+G2L["28"]["Position"] = UDim2.new(0.01444, 0, 0.21277, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn.UIStroke
+G2L["29"] = Instance.new("UIStroke", G2L["28"]);
+G2L["29"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["29"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.SelectBtn.UICorner
+G2L["2a"] = Instance.new("UICorner", G2L["28"]);
+G2L["2a"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.Name
+G2L["2b"] = Instance.new("TextLabel", G2L["25"]);
+G2L["2b"]["BorderSizePixel"] = 0;
+G2L["2b"]["TextSize"] = 14;
+G2L["2b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["2b"]["Size"] = UDim2.new(0, 182, 0, 24);
+G2L["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2b"]["Name"] = [[Name]];
+G2L["2b"]["Position"] = UDim2.new(0.29964, 0, 0.23404, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.PlayerTemplate.Avatar
+G2L["2c"] = Instance.new("ImageLabel", G2L["25"]);
+G2L["2c"]["BorderSizePixel"] = 0;
+G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2c"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
+G2L["2c"]["Size"] = UDim2.new(0, 40, 0, 41);
+G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2c"]["Name"] = [[Avatar]];
+G2L["2c"]["Position"] = UDim2.new(0.12534, 0, 0.0343, 0);
+
+
+-- StarterGui.FlingGui.MainFrame.PlayerList.LocalScript
+G2L["2d"] = Instance.new("LocalScript", G2L["22"]);
+
+
+
+-- StarterGui.FlingGui.MainFrame.WAX_FlingGui.LocalScript
+local function C_6()
+local script = G2L["6"];
+	-- ==========================================
+	-- ПЕРЕТАСКИВАНИЕ (ВЕШАЙ В WAX_FlingGui)
+	-- ==========================================
+	local textLabel = script.Parent
+	local frame = textLabel.Parent  -- MainFrame
+	local uis = game:GetService("UserInputService")
+	
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	local connection = nil
+	
+	textLabel.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+	
+			connection = uis.InputChanged:Connect(function(input)
+				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					local delta = input.Position - dragStart
+					frame.Position = UDim2.new(
+						startPos.X.Scale,
+						startPos.X.Offset + delta.X,
+						startPos.Y.Scale,
+						startPos.Y.Offset + delta.Y
+					)
+				end
+			end)
+		end
+	end)
+	
+	uis.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = false
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+		end
+	end)
+	
+	print("✅ Перетаскивание загружено")
+end;
+task.spawn(C_6);
+-- StarterGui.FlingGui.MainFrame.FlingGui_Start.LocalScript
+local function C_d()
+local script = G2L["d"];
+	-- ==========================================
+	-- KILASIK's MULTI-TARGET FLING (СТАРТ/СТОП)
+	-- ==========================================
+	local player = game.Players.LocalPlayer
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	
+	local FlingActive = false
+	local FlingConnection = nil
+	local SelectedTargets = {}
+	
+	getgenv().OldPos = nil
+	getgenv().FPDH = workspace.FallenPartsDestroyHeight
+	
+	-- ===== УВЕДОМЛЕНИЕ =====
+	local function Message(Title, Text, Time)
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = Title,
+			Text = Text,
+			Duration = Time or 5
+		})
+	end
+	
+	-- ===== ФУНКЦИЯ ФЛИНГА (ОРИГИНАЛ) =====
+	local function SkidFling(TargetPlayer)
+		local Character = player.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		local RootPart = Humanoid and Humanoid.RootPart
+	
+		local TCharacter = TargetPlayer.Character
+		if not TCharacter then return end
+	
+		local THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
+		local TRootPart = THumanoid and THumanoid.RootPart
+		local THead = TCharacter:FindFirstChild("Head")
+		local Accessory = TCharacter:FindFirstChildOfClass("Accessory")
+		local Handle = Accessory and Accessory:FindFirstChild("Handle")
+	
+		if Character and Humanoid and RootPart then
+			if RootPart.Velocity.Magnitude < 50 then
+				getgenv().OldPos = RootPart.CFrame
+			end
+	
+			if THumanoid and THumanoid.Sit then
+				return Message("Error", TargetPlayer.Name .. " is sitting", 2)
+			end
+	
+			if THead then
+				workspace.CurrentCamera.CameraSubject = THead
+			elseif Handle then
+				workspace.CurrentCamera.CameraSubject = Handle
+			end
+	
+			if not TCharacter:FindFirstChildWhichIsA("BasePart") then
+				return
+			end
+	
+			local function FPos(BasePart, Pos, Ang)
+				RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
+				Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
+				RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
+				RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+			end
+	
+			local function SFBasePart(BasePart)
+				local TimeToWait = 2
+				local Time = tick()
+				local Angle = 0
+				repeat
+					if RootPart and THumanoid then
+						if BasePart.Velocity.Magnitude < 50 then
+							Angle = Angle + 100
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle),0 ,0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection, CFrame.Angles(math.rad(Angle), 0, 0))
+							task.wait()
+						else
+							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+							task.wait()
+							FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+							task.wait()
+						end
+					end
+				until Time + TimeToWait < tick() or not FlingActive
+			end
+	
+			workspace.FallenPartsDestroyHeight = 0/0
+	
+			local BV = Instance.new("BodyVelocity")
+			BV.Parent = RootPart
+			BV.Velocity = Vector3.new(0, 0, 0)
+			BV.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+	
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+	
+			if TRootPart then
+				SFBasePart(TRootPart)
+			elseif THead then
+				SFBasePart(THead)
+			elseif Handle then
+				SFBasePart(Handle)
+			else
+				return Message("Error", TargetPlayer.Name .. " has no valid parts", 2)
+			end
+	
+			BV:Destroy()
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+			workspace.CurrentCamera.CameraSubject = Humanoid
+	
+			if getgenv().OldPos then
+				repeat
+					RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+					Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+					Humanoid:ChangeState("GettingUp")
+					for _, part in pairs(Character:GetChildren()) do
+						if part:IsA("BasePart") then
+							part.Velocity, part.RotVelocity = Vector3.new(), Vector3.new()
+						end
+					end
+					task.wait()
+				until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+				workspace.FallenPartsDestroyHeight = getgenv().FPDH
+			end
+		else
+			return Message("Error", "Your character is not ready", 2)
+		end
+	end
+	
+	-- ===== ЗАПУСК ФЛИНГА =====
+	local function StartFling()
+		if FlingActive then return end
+	
+		local selected = _G.GetSelectedPlayers and _G.GetSelectedPlayers() or {}
+	
+		if #selected == 0 then
+			Message("Error", "Нет выбранных игроков!", 2)
+			return
+		end
+	
+		SelectedTargets = {}
+		for _, plr in pairs(selected) do
+			SelectedTargets[plr.Name] = plr
+		end
+	
+		FlingActive = true
+		Message("Started", "Флинг " .. #selected .. " игроков", 2)
+	
+		spawn(function()
+			while FlingActive do
+				local validTargets = {}
+	
+				for name, player in pairs(SelectedTargets) do
+					if player and player.Parent then
+						validTargets[name] = player
+					else
+						SelectedTargets[name] = nil
+					end
+				end
+	
+				for _, player in pairs(validTargets) do
+					if FlingActive then
+						SkidFling(player)
+						wait(0.1)
+					else
+						break
+					end
+				end
+	
+				wait(0.5)
+			end
+		end)
+	end
+	
+	-- ===== ОСТАНОВКА ФЛИНГА =====
+	local function StopFling()
+		FlingActive = false
+		Message("Stopped", "Флинг остановлен", 2)
+	end
+	
+	-- ===== КНОПКА =====
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		if FlingActive then
+			StopFling()
+		else
+			StartFling()
+		end
+	end)
+	
+	print("✅ KILASIK Multi-Target Fling загружен!")
+end;
+task.spawn(C_d);
+-- StarterGui.FlingGui.MainFrame.FlingGui_Stop.LocalScript
+local function C_12()
+local script = G2L["12"];
+	-- ==========================================
+	-- FLING STOP
+	-- ==========================================
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		FlingActive = false
+		print("🔴 Флинг остановлен")
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Fling",
+			Text = "Флинг остановлен!",
+			Duration = 2
+		})
+	end)
+	
+	print("✅ FLING STOP загружен!")
+end;
+task.spawn(C_12);
+-- StarterGui.FlingGui.MainFrame.Settings_Color.LocalScript
+local function C_17()
+local script = G2L["17"];
+	-- ==========================================
+	-- СМЕНА ЦВЕТА (КАК В ОСНОВНОМ ХАБЕ)
+	-- ==========================================
+	local button = script.Parent
+	local mainFrame = button.Parent  -- MainFrame
+	
+	local rainbowActive = false
+	local rainbowConnection = nil
+	
+	-- ===== ЦВЕТА =====
+	local themes = {
+		{ name = "Фиолетовый", textColor = Color3.fromRGB(180, 80, 255), strokeColor = Color3.fromRGB(130, 30, 200) },
+		{ name = "Красный", textColor = Color3.fromRGB(255, 50, 50), strokeColor = Color3.fromRGB(200, 0, 0) },
+		{ name = "Синий", textColor = Color3.fromRGB(50, 150, 255), strokeColor = Color3.fromRGB(0, 100, 200) },
+		{ name = "Зеленый", textColor = Color3.fromRGB(50, 255, 50), strokeColor = Color3.fromRGB(0, 200, 0) },
+		{ name = "Оранжевый", textColor = Color3.fromRGB(255, 150, 50), strokeColor = Color3.fromRGB(200, 100, 0) },
+		{ name = "Желтый", textColor = Color3.fromRGB(255, 255, 50), strokeColor = Color3.fromRGB(200, 200, 0) },
+		{ name = "Голубой", textColor = Color3.fromRGB(50, 255, 255), strokeColor = Color3.fromRGB(0, 200, 200) },
+		{ name = "Розовый", textColor = Color3.fromRGB(255, 100, 200), strokeColor = Color3.fromRGB(200, 50, 150) },
+		{ name = "Бирюзовый", textColor = Color3.fromRGB(50, 200, 200), strokeColor = Color3.fromRGB(0, 150, 150) },
+		{ name = "Лайм", textColor = Color3.fromRGB(150, 255, 50), strokeColor = Color3.fromRGB(100, 200, 0) },
+		{ name = "Коралловый", textColor = Color3.fromRGB(255, 100, 80), strokeColor = Color3.fromRGB(200, 50, 30) },
+		{ name = "Белый", textColor = Color3.fromRGB(255, 255, 255), strokeColor = Color3.fromRGB(180, 180, 180) },
+		{ name = "Серый", textColor = Color3.fromRGB(180, 180, 180), strokeColor = Color3.fromRGB(120, 120, 120) },
+		{ name = "Неоновый", textColor = Color3.fromRGB(0, 255, 200), strokeColor = Color3.fromRGB(0, 200, 150) },
+		{ name = "РАДУГА 🌈", textColor = nil, strokeColor = nil }
+	}
+	
+	local currentTheme = 1
+	
+	-- ===== ПРИМЕНЕНИЕ ТЕМЫ =====
+	local function applyTheme(themeIndex)
+		local theme = themes[themeIndex]
+		if not theme then return end
+	
+		-- Выключаем радугу
+		if rainbowActive then
+			rainbowActive = false
+			if rainbowConnection then
+				rainbowConnection:Disconnect()
+				rainbowConnection = nil
+			end
+		end
+	
+		-- ===== РАДУГА =====
+		if theme.name == "РАДУГА 🌈" then
+			rainbowActive = true
+			print("🌈 РАДУГА АКТИВИРОВАНА!")
+	
+			local textObjects = {}
+			local strokeObjects = {}
+	
+			local function collectObjects(parent)
+				for _, child in pairs(parent:GetChildren()) do
+					if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+						table.insert(textObjects, child)
+					end
+					if child:IsA("UIStroke") then
+						table.insert(strokeObjects, child)
+					end
+					collectObjects(child)
+				end
+			end
+	
+			collectObjects(mainFrame)
+	
+			local hue = 0
+			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
+				hue = (hue + dt * 0.3) % 1
+	
+				local color = Color3.fromHSV(hue, 1, 1)
+	
+				for _, obj in pairs(textObjects) do
+					obj.TextColor3 = color
+				end
+	
+				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
+				for _, obj in pairs(strokeObjects) do
+					obj.Color = strokeColor
+				end
+			end)
+	
+			print("✅ РАДУГА включена!")
+			return
+		end
+	
+		-- ===== ОБЫЧНЫЕ ЦВЕТА =====
+		print("🎨 Применяем тему: " .. theme.name)
+	
+		local function applyToAll(parent)
+			for _, child in pairs(parent:GetChildren()) do
+				if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+					child.TextColor3 = theme.textColor
+				end
+	
+				if child:IsA("UIStroke") then
+					child.Color = theme.strokeColor
+				end
+	
+				applyToAll(child)
+			end
+		end
+	
+		applyToAll(mainFrame)
+		print("✅ Тема " .. theme.name .. " применена!")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ =====
+	button.MouseButton1Click:Connect(function()
+		currentTheme = currentTheme + 1
+		if currentTheme > #themes then
+			currentTheme = 1
+		end
+		applyTheme(currentTheme)
+	end)
+	
+	-- ===== СТАРТУЕМ С ПЕРВОЙ ТЕМЫ =====
+	applyTheme(1)
+	print("✅ Settings_Color загружен!")
+end;
+task.spawn(C_17);
+-- StarterGui.FlingGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+local function C_1c()
+local script = G2L["1c"];
+	-- ==========================================
+	-- HIDE GUI
+	-- ==========================================
+	local button = script.Parent
+	local screenGui = button.Parent.Parent  -- FlingGui
+	
+	button.MouseButton1Click:Connect(function()
+		screenGui.Enabled = not screenGui.Enabled
+		print("🔄 FlingGui:", screenGui.Enabled and "открыт" or "скрыт")
+	end)
+	
+	print("✅ Hide GUI загружен!")
+end;
+task.spawn(C_1c);
+-- StarterGui.FlingGui.MainFrame.FlingGui_DeleteGui.LocalScript
+local function C_21()
+local script = G2L["21"];
+	-- ==========================================
+	-- DELETE GUI
+	-- ==========================================
+	local button = script.Parent
+	local screenGui = button.Parent.Parent  -- FlingGui
+	
+	button.MouseButton1Click:Connect(function()
+		screenGui:Destroy()
+		print("🗑️ FlingGui удалён!")
+	end)
+	
+	print("✅ Delete GUI загружен!")
+end;
+task.spawn(C_21);
+-- StarterGui.FlingGui.MainFrame.PlayerList.LocalScript
+local function C_2d()
+local script = G2L["2d"];
+	-- ==========================================
+	-- СПИСОК ИГРОКОВ (БЕЗ ПУСТЫХ КВАДРАТОВ)
+	-- ==========================================
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	
+	local container = script.Parent
+	local template = container:FindFirstChild("PlayerTemplate")
+	
+	if not template then
+		warn("❌ PlayerTemplate не найден!")
+		return
+	end
+	
+	template.Visible = false
+	
+	local selectedPlayers = {}
+	local selectedIds = {}
+	
+	local function updateList()
+		for _, child in pairs(container:GetChildren()) do
+			if child ~= template then
+				child:Destroy()
+			end
+		end
+	
+		selectedPlayers = {}
+		for _, id in pairs(selectedIds) do
+			local plr = Players:GetPlayerByUserId(id)
+			if plr then
+				table.insert(selectedPlayers, plr)
+			end
+		end
+	
+		local y = 0
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player then
+				local new = template:Clone()
+				new.Visible = true
+				new.Position = UDim2.new(0, 0, 0, y)
+				new.Parent = container
+	
+				local avatar = new:FindFirstChild("Avatar")
+				local nameLabel = new:FindFirstChild("Name")
+				local selectBtn = new:FindFirstChild("SelectBtn")
+	
+				if avatar then
+					avatar.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. plr.UserId .. "&width=100&height=100&format=png"
+				end
+	
+				if nameLabel then
+					nameLabel.Text = plr.Name
+				end
+	
+				if selectBtn then
+					-- Проверяем, выбран ли игрок
+					local isSelected = false
+					for _, id in pairs(selectedIds) do
+						if id == plr.UserId then
+							isSelected = true
+							break
+						end
+					end
+	
+					-- ТЕКСТ: пусто или крестик
+					if isSelected then
+						selectBtn.Text = "✖"
+						selectBtn.TextColor3 = Color3.fromRGB(255, 0, 0)  -- красный
+					else
+						selectBtn.Text = ""   -- пусто
+						selectBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+					end
+	
+					selectBtn.MouseButton1Click:Connect(function()
+						isSelected = not isSelected
+	
+						if isSelected then
+							table.insert(selectedPlayers, plr)
+							table.insert(selectedIds, plr.UserId)
+							selectBtn.Text = "✖"
+							selectBtn.TextColor3 = Color3.fromRGB(255, 0, 0)
+							print("✅ Выбран:", plr.Name)
+						else
+							for i, p in ipairs(selectedPlayers) do
+								if p == plr then
+									table.remove(selectedPlayers, i)
+									break
+								end
+							end
+							for i, id in ipairs(selectedIds) do
+								if id == plr.UserId then
+									table.remove(selectedIds, i)
+									break
+								end
+							end
+							selectBtn.Text = ""
+							print("❌ Отменён:", plr.Name)
+						end
+					end)
+				end
+	
+				y = y + 47
+			end
+		end
+	
+		container.CanvasSize = UDim2.new(0, 0, 0, y + 10)
+	end
+	
+	_G.GetSelectedPlayers = function()
+		return selectedPlayers
+	end
+	
+	Players.PlayerAdded:Connect(function()
+		task.wait(0.5)
+		updateList()
+	end)
+	
+	Players.PlayerRemoving:Connect(function()
+		updateList()
+	end)
+	
+	updateList()
+	
+	print("✅ Список игроков загружен (без пустых квадратов)!")
+end;
+task.spawn(C_2d);
+
+return G2L["1"], require;
