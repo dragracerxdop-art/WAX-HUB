@@ -735,7 +735,7 @@ task.spawn(C_12);
 local function C_17()
 local script = G2L["17"];
 	-- ==========================================
-	-- FLING HIDE GUI (С БИНДИНГОМ)
+	-- FLING HIDE GUI (КАК В ОСНОВНОМ ХАБЕ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -767,17 +767,11 @@ local script = G2L["17"];
 				isListening = false
 				connection:Disconnect()
 				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
-	
-				game:GetService("StarterGui"):SetCore("SendNotification", {
-					Title = "Hide GUI",
-					Text = "Бинд установлен: " .. hideKey.Name,
-					Duration = 3
-				})
 			end
 		end)
 	end)
 	
-	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ =====
+	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ (ВЕЗДЕ) =====
 	UserInputService.InputBegan:Connect(function(input, gameProcessed)
 		if gameProcessed then return end
 		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
