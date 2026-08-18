@@ -377,114 +377,164 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- ESP_Players (ПОДСВЕТКА ИГРОКОВ)
+	-- ESP_Players (ПОДСВЕТКА + ИМЯ + ДИСТАНЦИЯ + ЗДОРОВЬЕ)
 	-- ==========================================
 	local button = script.Parent
-	local player = game.Players.LocalPlayer
-	local runService = game:GetService("RunService")
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+	local RunService = game:GetService("RunService")
 	
 	local isEnabled = false
-	local highlightedPlayers = {}
-	
-	_G.ESP_Color = _G.ESP_Color or Color3.fromRGB(138, 43, 226)
+	local espLoop = nil
 	
 	-- ===== СОЗДАНИЕ ПОДСВЕТКИ =====
-	local function createHighlight(plr)
-		if plr == player then return end
-		if not plr.Character then return end
-	
-		local char = plr.Character
-		if not char:FindFirstChild("HumanoidRootPart") then
-			task.delay(0.5, function()
-				createHighlight(plr)
-			end)
-			return
-		end
-	
-		local highlight = Instance.new("Highlight")
-		highlight.Adornee = char
-		highlight.FillColor = _G.ESP_Color
-		highlight.FillTransparency = 0.5
-		highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-		highlight.OutlineTransparency = 0.3
-		highlight.Enabled = isEnabled
-		highlight.Name = "ESPBox_Highlight"
-		highlight.Parent = char
-	
-		highlightedPlayers[plr] = highlight
-	end
-	
-	-- ===== УДАЛЕНИЕ ПОДСВЕТКИ =====
-	local function removeHighlight(plr)
-		if highlightedPlayers[plr] then
-			highlightedPlayers[plr]:Destroy()
-			highlightedPlayers[plr] = nil
+	local function createHighlight(player)
+		if player.Character and not player.Character:FindFirstChild("ESPHighlight") then
+			local highlight = Instance.new("Highlight")
+			highlight.Name = "ESPHighlight"
+			highlight.FillColor = Color3.fromRGB(255, 0, 0)
+			highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+			highlight.FillTransparency = 0.6
+			highlight.OutlineTransparency = 0
+			highlight.Adornee = player.Character
+			highlight.Parent = player.Character
+			highlight.Enabled = isEnabled
 		end
 	end
 	
-	-- ===== ОБНОВЛЕНИЕ ESP =====
-	local function updateESP()
-		if not isEnabled then
-			for _, plr in pairs(game.Players:GetPlayers()) do
-				removeHighlight(plr)
-			end
-			return
-		end
+	-- ===== СОЗДАНИЕ ИМЕНИ НАД ГОЛОВОЙ =====
+	local function createNameTag(player)
+		if player.Character and player.Character:FindFirstChild("Head") and not player.Character.Head:FindFirstChild("NameTag") then
+			local billboard = Instance.new("BillboardGui")
+			billboard.Name = "NameTag"
+			billboard.Adornee = player.Character.Head
+			billboard.Size = UDim2.new(0, 130, 0, 25)
+			billboard.StudsOffset = Vector3.new(0, 2, 0)
+			billboard.AlwaysOnTop = true
+			billboard.Parent = player.Character.Head
 	
-		for _, plr in pairs(game.Players:GetPlayers()) do
-			if plr ~= player and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-				if not highlightedPlayers[plr] then
-					createHighlight(plr)
-				end
-				if highlightedPlayers[plr] then
-					highlightedPlayers[plr].Enabled = true
-					highlightedPlayers[plr].FillColor = _G.ESP_Color
-				end
+			local textLabel = Instance.new("TextLabel")
+			textLabel.Name = "TagLabel"
+			textLabel.Size = UDim2.new(1, 0, 1, 0)
+			textLabel.BackgroundTransparency = 1
+			textLabel.TextColor3 = Color3.new(1, 1, 1)
+			textLabel.Font = Enum.Font.Cartoon
+			textLabel.TextScaled = true
+			textLabel.TextStrokeTransparency = 0.6
+			textLabel.Text = ""
+			textLabel.Parent = billboard
+		end
+	end
+	
+	-- ===== ОБНОВЛЕНИЕ ИМЕНИ =====
+	local function updateNameTag(player)
+		if player.Character and player.Character:FindFirstChild("Head") and player.Character.Head:FindFirstChild("NameTag") and player.Character:FindFirstChild("Humanoid") and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("PrimaryPart") then
+			local tag = player.Character.Head.NameTag.TagLabel
+			local distance = (LocalPlayer.Character.PrimaryPart.Position - player.Character.PrimaryPart.Position).Magnitude
+			local health = math.floor(player.Character.Humanoid.Health)
+			tag.Text = player.Name .. " | " .. string.format("%.0f", distance) .. "m | ❤️" .. health
+		end
+	end
+	
+	-- ===== ОБНОВЛЕНИЕ ЦВЕТА ПОДСВЕТКИ =====
+	local function updateHighlight(player)
+		if player.Character and player.Character:FindFirstChild("ESPHighlight") and player.Character:FindFirstChild("Humanoid") then
+			if player.Character.Humanoid.Health <= 0 then
+				player.Character.ESPHighlight.FillColor = Color3.fromRGB(120, 0, 0)
 			else
-				removeHighlight(plr)
+				player.Character.ESPHighlight.FillColor = Color3.fromRGB(255, 0, 0)
 			end
 		end
 	end
 	
-	-- ===== ПЕРЕКЛЮЧЕНИЕ =====
-	local function toggleESP()
-		isEnabled = not isEnabled
-	
-		if isEnabled then
-			updateESP()
-			print("📦 ESP включён!")
-		else
-			for _, plr in pairs(game.Players:GetPlayers()) do
-				removeHighlight(plr)
+	-- ===== НАСТРОЙКА ESP ДЛЯ ИГРОКА =====
+	local function setupESP(player)
+		if player ~= LocalPlayer then
+			player.CharacterAdded:Connect(function()
+				task.wait(0.1)
+				if isEnabled then
+					createHighlight(player)
+					createNameTag(player)
+				end
+			end)
+			if player.Character and isEnabled then
+				createHighlight(player)
+				createNameTag(player)
 			end
-			print("📦 ESP выключен!")
 		end
+	end
+	
+	-- ===== ВКЛЮЧЕНИЕ ESP =====
+	local function startESP()
+		if isEnabled then return end
+		isEnabled = true
+		print("🟢 ESP включён!")
+	
+		-- Создаём ESP для всех игроков
+		for _, player in ipairs(Players:GetPlayers()) do
+			setupESP(player)
+		end
+	
+		-- Запускаем обновление
+		espLoop = RunService.Heartbeat:Connect(function()
+			if not isEnabled then
+				espLoop:Disconnect()
+				espLoop = nil
+				return
+			end
+	
+			for _, player in ipairs(Players:GetPlayers()) do
+				if player ~= LocalPlayer then
+					if player.Character and player.Character:FindFirstChild("Humanoid") then
+						updateNameTag(player)
+						updateHighlight(player)
+					end
+				end
+			end
+		end)
+	end
+	
+	-- ===== ВЫКЛЮЧЕНИЕ ESP =====
+	local function stopESP()
+		isEnabled = false
+		if espLoop then
+			espLoop:Disconnect()
+			espLoop = nil
+		end
+	
+		-- Удаляем всё ESP
+		for _, player in ipairs(Players:GetPlayers()) do
+			if player.Character then
+				local highlight = player.Character:FindFirstChild("ESPHighlight")
+				if highlight then highlight:Destroy() end
+				local head = player.Character:FindFirstChild("Head")
+				if head then
+					local tag = head:FindFirstChild("NameTag")
+					if tag then tag:Destroy() end
+				end
+			end
+		end
+		print("🔴 ESP выключен!")
 	end
 	
 	-- ===== КНОПКА =====
-	button.MouseButton1Click:Connect(toggleESP)
+	button.MouseButton1Click:Connect(function()
+		if isEnabled then
+			stopESP()
+		else
+			startESP()
+		end
+	end)
 	
 	-- ===== НОВЫЕ ИГРОКИ =====
-	game.Players.PlayerAdded:Connect(function(plr)
+	Players.PlayerAdded:Connect(function(player)
 		if isEnabled then
 			task.wait(0.5)
-			createHighlight(plr)
+			setupESP(player)
 		end
 	end)
 	
-	-- ===== ВЫШЕДШИЕ ИГРОКИ =====
-	game.Players.PlayerRemoving:Connect(function(plr)
-		removeHighlight(plr)
-	end)
-	
-	-- ===== ОБНОВЛЕНИЕ В РЕАЛЬНОМ ВРЕМЕНИ =====
-	runService.Heartbeat:Connect(function()
-		if isEnabled then
-			updateESP()
-		end
-	end)
-	
-	print("✅ ESP_Players загружена!")
+	print("✅ ESP_Players загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.ESP_Hub.MainFrame.Aimbot.LocalScript
@@ -788,15 +838,47 @@ task.spawn(C_14);
 local function C_19()
 local script = G2L["19"];
 	-- ==========================================
-	-- ESP_Hide_Gui
+	-- ESP_Hide_Gui (СКРЫТЬ/ПОКАЗАТЬ GUI ПО БИНДУ)
 	-- ==========================================
 	local button = script.Parent
-	local gui = button.Parent.Parent  -- ESP_Gui
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
 	
+	local isListening = false
+	local hideKey = nil
+	local gui = button.Parent.Parent  -- ESP_Hub
+	
+	-- ===== ТОГГЛ ГУЯ =====
+	local function toggleGui()
+		if not gui then return end
+		gui.Enabled = not gui.Enabled
+		print("🔄 ESP GUI:", gui.Enabled and "открыт" or "скрыт")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ) =====
 	button.MouseButton1Click:Connect(function()
-		if gui then
-			gui.Enabled = not gui.Enabled
-			print("🔄 ESP GUI:", gui.Enabled and "открыт" or "скрыт")
+		if isListening then return end
+	
+		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
+	
+		local connection
+		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if gameProcessed then return end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				hideKey = input.KeyCode
+				isListening = false
+				connection:Disconnect()
+				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
+			end
+		end)
+	end)
+	
+	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ (ВЕЗДЕ) =====
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
+			toggleGui()
 		end
 	end)
 	
