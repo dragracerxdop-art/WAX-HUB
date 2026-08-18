@@ -179,7 +179,7 @@ G2L["15"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["15"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui
 G2L["16"] = Instance.new("TextButton", G2L["2"]);
 G2L["16"]["BorderSizePixel"] = 0;
 G2L["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -190,16 +190,16 @@ G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["16"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["16"]["Text"] = [[      Hide Gui]];
-G2L["16"]["Name"] = [[ESP_Hide_Gui]];
+G2L["16"]["Name"] = [[ZO_Hide_Gui]];
 G2L["16"]["Position"] = UDim2.new(0.49711, 0, 0.74153, 0);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.LocalScript
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui.LocalScript
 G2L["17"] = Instance.new("LocalScript", G2L["16"]);
 
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.ImageLabel
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui.ImageLabel
 G2L["18"] = Instance.new("ImageLabel", G2L["16"]);
 G2L["18"]["BorderSizePixel"] = 0;
 G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -209,18 +209,18 @@ G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["18"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.UICorner
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui.UICorner
 G2L["19"] = Instance.new("UICorner", G2L["16"]);
 G2L["19"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.UIStroke
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui.UIStroke
 G2L["1a"] = Instance.new("UIStroke", G2L["16"]);
 G2L["1a"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["1a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui
 G2L["1b"] = Instance.new("TextButton", G2L["2"]);
 G2L["1b"]["BorderSizePixel"] = 0;
 G2L["1b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -231,16 +231,16 @@ G2L["1b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.jso
 G2L["1b"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1b"]["Text"] = [[    Delete Gui]];
-G2L["1b"]["Name"] = [[ESP_Delete_Gui]];
+G2L["1b"]["Name"] = [[ZO_Delete_Gui]];
 G2L["1b"]["Position"] = UDim2.new(0.01227, 0, 0.74452, 0);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.LocalScript
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui.LocalScript
 G2L["1c"] = Instance.new("LocalScript", G2L["1b"]);
 
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.ImageLabel
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui.ImageLabel
 G2L["1d"] = Instance.new("ImageLabel", G2L["1b"]);
 G2L["1d"]["BorderSizePixel"] = 0;
 G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -250,12 +250,12 @@ G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["1d"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.UICorner
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui.UICorner
 G2L["1e"] = Instance.new("UICorner", G2L["1b"]);
 G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.UIStroke
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui.UIStroke
 G2L["1f"] = Instance.new("UIStroke", G2L["1b"]);
 G2L["1f"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["1f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
@@ -592,11 +592,11 @@ local script = G2L["12"];
 	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
 end;
 task.spawn(C_12);
--- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.LocalScript
+-- StarterGui.Zo_Gui.MainFrame.ZO_Hide_Gui.LocalScript
 local function C_17()
 local script = G2L["17"];
 	-- ==========================================
-	-- ESP_Hide_Gui (СКРЫТЬ/ПОКАЗАТЬ GUI ПО БИНДУ)
+	-- ZO_Hide_Gui (СКРЫТЬ/ПОКАЗАТЬ GUI ПО БИНДУ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -604,13 +604,13 @@ local script = G2L["17"];
 	
 	local isListening = false
 	local hideKey = nil
-	local gui = button.Parent.Parent  -- ESP_Hub
+	local gui = button.Parent.Parent  -- Zo_Gui
 	
 	-- ===== ТОГГЛ ГУЯ =====
 	local function toggleGui()
 		if not gui then return end
 		gui.Enabled = not gui.Enabled
-		print("🔄 ESP GUI:", gui.Enabled and "открыт" or "скрыт")
+		print("🔄 Zo GUI:", gui.Enabled and "открыт" or "скрыт")
 	end
 	
 	-- ===== НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ) =====
@@ -640,91 +640,40 @@ local script = G2L["17"];
 		end
 	end)
 	
-	print("✅ ESP_Hide_Gui загружен!")
+	print("✅ ZO_Hide_Gui загружен!")
 end;
 task.spawn(C_17);
--- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.LocalScript
+-- StarterGui.Zo_Gui.MainFrame.ZO_Delete_Gui.LocalScript
 local function C_1c()
 local script = G2L["1c"];
 	-- ==========================================
-	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
+	-- ZO_Delete_Gui (УДАЛИТЬ GUI)
 	-- ==========================================
 	local button = script.Parent
-	local player = game.Players.LocalPlayer
+	local gui = button.Parent.Parent  -- Zo_Gui
 	
 	button.MouseButton1Click:Connect(function()
-		local playerGui = player:WaitForChild("PlayerGui")
-		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
+		if gui then
+			gui:Destroy()
+			print("🗑️ Zo GUI удалён!")
 	
-		if not mm2Gui then
-			print("❌ MM2_Gui не найден в PlayerGui!")
 			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI не найден!",
+				Title = "Zo GUI",
+				Text = "Zo GUI удалён!",
 				Duration = 2
 			})
-			return
+		else
+			print("❌ Zo_Gui не найден!")
+	
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Zo GUI",
+				Text = "Zo GUI не найден!",
+				Duration = 2
+			})
 		end
-	
-		print("🔄 Отключаем все функции MM2...")
-	
-		-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ И ФУНКЦИИ =====
-		-- Проходим по всем скриптам в GUI и отключаем их
-		for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
-			if scriptObj:IsA("LocalScript") then
-				-- Отключаем скрипт (останавливаем его работу)
-				pcall(function()
-					scriptObj.Disabled = true
-				end)
-			end
-		end
-	
-		-- ===== 2. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
-		-- Сбрасываем все активные флаги
-		_G.MM2_ESP_Active = nil
-		_G.MM2_AutoFarm_Active = nil
-		_G.MM2_KillAll_Active = nil
-		_G.MM2_GunESP_Active = nil
-		_G.MM2_ShowRoles_Active = nil
-		_G.MM2_KillMurderer_Active = nil
-	
-		-- ===== 3. ОСТАНАВЛИВАЕМ ВСЕ СОЗДАННЫЕ ОБЪЕКТЫ (ESP, Highlight и т.д.) =====
-		-- Удаляем Highlight у всех игроков
-		for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
-			if plr.Character then
-				for _, child in pairs(plr.Character:GetChildren()) do
-					if child:IsA("Highlight") then
-						child:Destroy()
-					end
-				end
-				for _, child in pairs(plr.Character:GetDescendants()) do
-					if child:IsA("BillboardGui") then
-						child:Destroy()
-					end
-				end
-			end
-		end
-	
-		-- Удаляем подсветку пистолета
-		for _, obj in pairs(workspace:GetDescendants()) do
-			if obj.Name == "GunHighlight" then
-				obj:Destroy()
-			end
-		end
-	
-		-- ===== 4. УДАЛЯЕМ GUI =====
-		task.wait(0.2)  -- Даём время на отключение
-		mm2Gui:Destroy()
-		print("🗑️ MM2_Gui удалён из игры!")
-	
-		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "MM2 GUI",
-			Text = "MM2 GUI удалён! Все функции остановлены.",
-			Duration = 3
-		})
 	end)
 	
-	print("✅ MM2_DeleteGui загружена!")
+	print("✅ ZO_Delete_Gui загружен!")
 end;
 task.spawn(C_1c);
 -- StarterGui.Zo_Gui.MainFrame.HBE_Visual.LocalScript
