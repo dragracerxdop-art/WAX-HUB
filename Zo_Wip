@@ -357,7 +357,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HBE_Toggle (УВЕЛИЧЕНИЕ ХИТБОКСА)
+	-- HBE_Toggle (БЕЗ CanCollide)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -400,7 +400,7 @@ local script = G2L["d"];
 		return parts
 	end
 	
-	-- ===== ПРИМЕНЕНИЕ =====
+	-- ===== ПРИМЕНЕНИЕ (БЕЗ CanCollide) =====
 	local function applyHitbox()
 		local size = math.clamp(hitboxSize, 1, 7)
 		local parts = findWeaponParts()
@@ -412,7 +412,7 @@ local script = G2L["d"];
 					originalSize = part.Size
 				end
 				part.Size = originalSize * size
-				part.CanCollide = false
+				-- ❌ УБРАЛ part.CanCollide = false
 			end)
 		end
 	end
@@ -429,7 +429,6 @@ local script = G2L["d"];
 				part.Transparency = 0
 				part.BrickColor = BrickColor.new("Medium stone grey")
 				part.Material = Enum.Material.Plastic
-				part.CanCollide = false
 			end)
 		end
 	end
@@ -459,7 +458,7 @@ local script = G2L["d"];
 		if hitboxEnabled then applyHitbox() end
 	end)
 	
-	print("✅ HBE_Toggle загружен!")
+	print("✅ HBE_Toggle (без CanCollide) загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.Zo_Gui.MainFrame.Settings_Color.LocalScript
