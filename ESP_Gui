@@ -38,7 +38,7 @@ G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["3"]["BackgroundTransparency"] = 0.65;
 G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
 G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["Text"] = [[WAX MM2]];
+G2L["3"]["Text"] = [[WAX Esp GUI]];
 G2L["3"]["Name"] = [[WAX_MM2]];
 
 
