@@ -1,0 +1,751 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
+
+-- Instances: 36 | Scripts: 7 | Modules: 0 | Tags: 0
+local G2L = {};
+
+-- StarterGui.Zo_Gui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[Zo_Gui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
+
+
+-- StarterGui.Zo_Gui.MainFrame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Size"] = UDim2.new(0, 297, 0, 199);
+G2L["2"]["Position"] = UDim2.new(0.54055, 0, 0.48486, 0);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Name"] = [[MainFrame]];
+G2L["2"]["BackgroundTransparency"] = 0.25;
+
+
+-- StarterGui.Zo_Gui.MainFrame.WAX_MM2
+G2L["3"] = Instance.new("TextLabel", G2L["2"]);
+G2L["3"]["BorderSizePixel"] = 0;
+G2L["3"]["TextSize"] = 24;
+G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3"]["BackgroundTransparency"] = 0.65;
+G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
+G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["Text"] = [[WAX Zo WIp]];
+G2L["3"]["Name"] = [[WAX_MM2]];
+
+
+-- StarterGui.Zo_Gui.MainFrame.WAX_MM2.UICorner
+G2L["4"] = Instance.new("UICorner", G2L["3"]);
+G2L["4"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.Zo_Gui.MainFrame.WAX_MM2.UIStroke
+G2L["5"] = Instance.new("UIStroke", G2L["3"]);
+G2L["5"]["Thickness"] = 2;
+G2L["5"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.WAX_MM2.LocalScript
+G2L["6"] = Instance.new("LocalScript", G2L["3"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.UICorner
+G2L["7"] = Instance.new("UICorner", G2L["2"]);
+G2L["7"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.Zo_Gui.MainFrame.UIStroke
+G2L["8"] = Instance.new("UIStroke", G2L["2"]);
+G2L["8"]["Thickness"] = 2;
+G2L["8"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["8"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle
+G2L["9"] = Instance.new("TextButton", G2L["2"]);
+G2L["9"]["BorderSizePixel"] = 0;
+G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["9"]["TextSize"] = 20;
+G2L["9"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]["Size"] = UDim2.new(0, 280, 0, 37);
+G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["Text"] = [[   HBE ]];
+G2L["9"]["Name"] = [[HBE_Toggle]];
+G2L["9"]["Position"] = UDim2.new(0.01347, 0, 0.2762, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.ImageLabel
+G2L["a"] = Instance.new("ImageLabel", G2L["9"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["a"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Position"] = UDim2.new(0.88994, 0, 0.1781, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.UIStroke
+G2L["b"] = Instance.new("UIStroke", G2L["9"]);
+G2L["b"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["b"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.UICorner
+G2L["c"] = Instance.new("UICorner", G2L["9"]);
+G2L["c"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.LocalScript
+G2L["d"] = Instance.new("LocalScript", G2L["9"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.HBE_Size
+G2L["e"] = Instance.new("TextBox", G2L["9"]);
+G2L["e"]["CursorPosition"] = -1;
+G2L["e"]["Name"] = [[HBE_Size]];
+G2L["e"]["BorderSizePixel"] = 0;
+G2L["e"]["TextSize"] = 14;
+G2L["e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["e"]["Size"] = UDim2.new(0, 53, 0, 16);
+G2L["e"]["Position"] = UDim2.new(0.23214, 0, 0.27027, 0);
+G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["Text"] = [[]];
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.HBE_Size.UIStroke
+G2L["f"] = Instance.new("UIStroke", G2L["e"]);
+G2L["f"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.HBE_Size.LocalScript
+G2L["10"] = Instance.new("LocalScript", G2L["e"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color
+G2L["11"] = Instance.new("TextButton", G2L["2"]);
+G2L["11"]["BorderSizePixel"] = 0;
+G2L["11"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["11"]["TextSize"] = 20;
+G2L["11"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["11"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["11"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["11"]["Text"] = [[      Color]];
+G2L["11"]["Name"] = [[Settings_Color]];
+G2L["11"]["Position"] = UDim2.new(0.01218, 0, 0.50458, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color.LocalScript
+G2L["12"] = Instance.new("LocalScript", G2L["11"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color.ImageLabel
+G2L["13"] = Instance.new("ImageLabel", G2L["11"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["13"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color.UICorner
+G2L["14"] = Instance.new("UICorner", G2L["11"]);
+G2L["14"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color.UIStroke
+G2L["15"] = Instance.new("UIStroke", G2L["11"]);
+G2L["15"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["15"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui
+G2L["16"] = Instance.new("TextButton", G2L["2"]);
+G2L["16"]["BorderSizePixel"] = 0;
+G2L["16"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["16"]["TextSize"] = 20;
+G2L["16"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["16"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["16"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["16"]["Text"] = [[      Hide Gui]];
+G2L["16"]["Name"] = [[ESP_Hide_Gui]];
+G2L["16"]["Position"] = UDim2.new(0.49711, 0, 0.74153, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.LocalScript
+G2L["17"] = Instance.new("LocalScript", G2L["16"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.ImageLabel
+G2L["18"] = Instance.new("ImageLabel", G2L["16"]);
+G2L["18"]["BorderSizePixel"] = 0;
+G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["18"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.UICorner
+G2L["19"] = Instance.new("UICorner", G2L["16"]);
+G2L["19"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.UIStroke
+G2L["1a"] = Instance.new("UIStroke", G2L["16"]);
+G2L["1a"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui
+G2L["1b"] = Instance.new("TextButton", G2L["2"]);
+G2L["1b"]["BorderSizePixel"] = 0;
+G2L["1b"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["1b"]["TextSize"] = 20;
+G2L["1b"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1b"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["Text"] = [[    Delete Gui]];
+G2L["1b"]["Name"] = [[ESP_Delete_Gui]];
+G2L["1b"]["Position"] = UDim2.new(0.01227, 0, 0.74452, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.LocalScript
+G2L["1c"] = Instance.new("LocalScript", G2L["1b"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.ImageLabel
+G2L["1d"] = Instance.new("ImageLabel", G2L["1b"]);
+G2L["1d"]["BorderSizePixel"] = 0;
+G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["1d"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.UICorner
+G2L["1e"] = Instance.new("UICorner", G2L["1b"]);
+G2L["1e"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.UIStroke
+G2L["1f"] = Instance.new("UIStroke", G2L["1b"]);
+G2L["1f"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual
+G2L["20"] = Instance.new("TextButton", G2L["2"]);
+G2L["20"]["BorderSizePixel"] = 0;
+G2L["20"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["20"]["TextSize"] = 20;
+G2L["20"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["20"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Text"] = [[      HBEShow]];
+G2L["20"]["Name"] = [[HBE_Visual]];
+G2L["20"]["Position"] = UDim2.new(0.49711, 0, 0.50033, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual.LocalScript
+G2L["21"] = Instance.new("LocalScript", G2L["20"]);
+
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual.ImageLabel
+G2L["22"] = Instance.new("ImageLabel", G2L["20"]);
+G2L["22"]["BorderSizePixel"] = 0;
+G2L["22"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["22"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["22"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual.UICorner
+G2L["23"] = Instance.new("UICorner", G2L["20"]);
+G2L["23"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual.UIStroke
+G2L["24"] = Instance.new("UIStroke", G2L["20"]);
+G2L["24"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["24"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.Zo_Gui.MainFrame.WAX_MM2.LocalScript
+local function C_6()
+local script = G2L["6"];
+	-- ==========================================
+	-- ПЕРЕТАСКИВАНИЕ (ТОЛЬКО МЫШЬ)
+	-- ==========================================
+	local textLabel = script.Parent
+	local frame = textLabel.Parent
+	
+	local uis = game:GetService("UserInputService")
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	local connection = nil
+	
+	local function startDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+	
+			connection = uis.InputChanged:Connect(function(input)
+				if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+					local delta = input.Position - dragStart
+					frame.Position = UDim2.new(
+						startPos.X.Scale,
+						startPos.X.Offset + delta.X,
+						startPos.Y.Scale,
+						startPos.Y.Offset + delta.Y
+					)
+				end
+			end)
+		end
+	end
+	
+	local function endDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = false
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+		end
+	end
+	
+	textLabel.InputBegan:Connect(startDrag)
+	uis.InputEnded:Connect(endDrag)
+	
+	print("✅ Перетаскивание загружено (только мышь)")
+end;
+task.spawn(C_6);
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.LocalScript
+local function C_d()
+local script = G2L["d"];
+	-- ==========================================
+	-- HBE_Toggle (ВКЛ/ВЫКЛ ХИТБОКСА)
+	-- ==========================================
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().HBE and getgenv().HBE.toggle then
+			getgenv().HBE.toggle()
+		else
+			warn("❌ HBE не загружен!")
+		end
+	end)
+	
+	print("✅ HBE_Toggle загружен!")
+end;
+task.spawn(C_d);
+-- StarterGui.Zo_Gui.MainFrame.HBE_Toggle.HBE_Size.LocalScript
+local function C_10()
+local script = G2L["10"];
+	-- ==========================================
+	-- HBE_Size (УСТАНОВКА РАЗМЕРА)
+	-- ==========================================
+	local textBox = script.Parent
+	
+	textBox.FocusLost:Connect(function(enterPressed)
+		if not enterPressed then return end
+	
+		local value = tonumber(textBox.Text)
+		if not value then
+			textBox.Text = "1.0"
+			return
+		end
+	
+		-- Ограничение от 0 до 7
+		value = math.clamp(value, 0, 7)
+		textBox.Text = string.format("%.1f", value)
+	
+		if getgenv().HBE and getgenv().HBE.size then
+			getgenv().HBE.size(value)
+			print("📏 Размер хитбокса:", value)
+		else
+			warn("❌ HBE не загружен!")
+		end
+	end)
+	
+	print("✅ HBE_Size загружен!")
+end;
+task.spawn(C_10);
+-- StarterGui.Zo_Gui.MainFrame.Settings_Color.LocalScript
+local function C_12()
+local script = G2L["12"];
+	-- ==========================================
+	-- СМЕНА ЦВЕТОВОЙ ТЕМЫ ХАБА (С РАДУГОЙ)
+	-- ==========================================
+	local button = script.Parent
+	local mainFrame = button.Parent.Parent
+	
+	local rainbowActive = false
+	local rainbowConnection = nil
+	
+	-- ===== ЦВЕТА ДЛЯ ТЕМ =====
+	local themes = {
+		{
+			name = "Фиолетовый",
+			textColor = Color3.fromRGB(180, 80, 255),
+			strokeColor = Color3.fromRGB(130, 30, 200)
+		},
+		{
+			name = "Красный",
+			textColor = Color3.fromRGB(255, 50, 50),
+			strokeColor = Color3.fromRGB(200, 0, 0)
+		},
+		{
+			name = "Синий",
+			textColor = Color3.fromRGB(50, 150, 255),
+			strokeColor = Color3.fromRGB(0, 100, 200)
+		},
+		{
+			name = "Зеленый",
+			textColor = Color3.fromRGB(50, 255, 50),
+			strokeColor = Color3.fromRGB(0, 200, 0)
+		},
+		{
+			name = "Оранжевый",
+			textColor = Color3.fromRGB(255, 150, 50),
+			strokeColor = Color3.fromRGB(200, 100, 0)
+		},
+		{
+			name = "Желтый",
+			textColor = Color3.fromRGB(255, 255, 50),
+			strokeColor = Color3.fromRGB(200, 200, 0)
+		},
+		{
+			name = "Голубой",
+			textColor = Color3.fromRGB(50, 255, 255),
+			strokeColor = Color3.fromRGB(0, 200, 200)
+		},
+		{
+			name = "Розовый",
+			textColor = Color3.fromRGB(255, 100, 200),
+			strokeColor = Color3.fromRGB(200, 50, 150)
+		},
+		{
+			name = "Бирюзовый",
+			textColor = Color3.fromRGB(50, 200, 200),
+			strokeColor = Color3.fromRGB(0, 150, 150)
+		},
+		{
+			name = "Лайм",
+			textColor = Color3.fromRGB(150, 255, 50),
+			strokeColor = Color3.fromRGB(100, 200, 0)
+		},
+		{
+			name = "Коралловый",
+			textColor = Color3.fromRGB(255, 100, 80),
+			strokeColor = Color3.fromRGB(200, 50, 30)
+		},
+		{
+			name = "Белый",
+			textColor = Color3.fromRGB(255, 255, 255),
+			strokeColor = Color3.fromRGB(180, 180, 180)
+		},
+		{
+			name = "Серый",
+			textColor = Color3.fromRGB(180, 180, 180),
+			strokeColor = Color3.fromRGB(120, 120, 120)
+		},
+		{
+			name = "Неоновый",
+			textColor = Color3.fromRGB(0, 255, 200),
+			strokeColor = Color3.fromRGB(0, 200, 150)
+		},
+		{
+			name = "РАДУГА 🌈",
+			textColor = nil,
+			strokeColor = nil
+		}
+	}
+	
+	local currentTheme = 1
+	
+	-- ===== ФУНКЦИЯ ПРИМЕНЕНИЯ ТЕМЫ =====
+	local function applyTheme(themeIndex)
+		local theme = themes[themeIndex]
+		if not theme then return end
+	
+		if rainbowActive then
+			rainbowActive = false
+			if rainbowConnection then
+				rainbowConnection:Disconnect()
+				rainbowConnection = nil
+			end
+		end
+	
+		-- ===== РАДУГА =====
+		if theme.name == "РАДУГА 🌈" then
+			rainbowActive = true
+			print("🌈 РАДУГА АКТИВИРОВАНА!")
+	
+			local textObjects = {}
+			local strokeObjects = {}
+	
+			local function collectObjects(parent)
+				for _, child in pairs(parent:GetChildren()) do
+					if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+						table.insert(textObjects, child)
+					end
+					if child:IsA("UIStroke") then
+						table.insert(strokeObjects, child)
+					end
+					collectObjects(child)
+				end
+			end
+	
+			collectObjects(mainFrame)
+	
+			local hue = 0
+			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
+				hue = (hue + dt * 0.3) % 1
+	
+				local color = Color3.fromHSV(hue, 1, 1)
+	
+				for _, obj in pairs(textObjects) do
+					obj.TextColor3 = color
+				end
+	
+				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
+				for _, obj in pairs(strokeObjects) do
+					obj.Color = strokeColor
+				end
+			end)
+	
+			print("✅ РАДУГА включена!")
+			return
+		end
+	
+		-- ===== ОБЫЧНЫЕ ЦВЕТА =====
+		print("🎨 Применяем тему: " .. theme.name)
+	
+		local function applyToAll(parent)
+			for _, child in pairs(parent:GetChildren()) do
+				if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+					child.TextColor3 = theme.textColor
+				end
+	
+				if child:IsA("UIStroke") then
+					child.Color = theme.strokeColor
+				end
+	
+				applyToAll(child)
+			end
+		end
+	
+		applyToAll(mainFrame)
+		print("✅ Тема " .. theme.name .. " применена!")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ =====
+	button.MouseButton1Click:Connect(function()
+		currentTheme = currentTheme + 1
+		if currentTheme > #themes then
+			currentTheme = 1
+		end
+		applyTheme(currentTheme)
+	end)
+	
+	-- ===== СТАРТУЕМ С ПЕРВОЙ ТЕМОЙ =====
+	applyTheme(1)
+	print("✅ Скрипт смены тем загружен! (14 цветов + РАДУГА)")
+end;
+task.spawn(C_12);
+-- StarterGui.Zo_Gui.MainFrame.ESP_Hide_Gui.LocalScript
+local function C_17()
+local script = G2L["17"];
+	-- ==========================================
+	-- ESP_Hide_Gui (СКРЫТЬ/ПОКАЗАТЬ GUI ПО БИНДУ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
+	
+	local isListening = false
+	local hideKey = nil
+	local gui = button.Parent.Parent  -- ESP_Hub
+	
+	-- ===== ТОГГЛ ГУЯ =====
+	local function toggleGui()
+		if not gui then return end
+		gui.Enabled = not gui.Enabled
+		print("🔄 ESP GUI:", gui.Enabled and "открыт" or "скрыт")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ) =====
+	button.MouseButton1Click:Connect(function()
+		if isListening then return end
+	
+		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
+	
+		local connection
+		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if gameProcessed then return end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				hideKey = input.KeyCode
+				isListening = false
+				connection:Disconnect()
+				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
+			end
+		end)
+	end)
+	
+	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ (ВЕЗДЕ) =====
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
+			toggleGui()
+		end
+	end)
+	
+	print("✅ ESP_Hide_Gui загружен!")
+end;
+task.spawn(C_17);
+-- StarterGui.Zo_Gui.MainFrame.ESP_Delete_Gui.LocalScript
+local function C_1c()
+local script = G2L["1c"];
+	-- ==========================================
+	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	
+	button.MouseButton1Click:Connect(function()
+		local playerGui = player:WaitForChild("PlayerGui")
+		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
+	
+		if not mm2Gui then
+			print("❌ MM2_Gui не найден в PlayerGui!")
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "MM2 GUI",
+				Text = "MM2 GUI не найден!",
+				Duration = 2
+			})
+			return
+		end
+	
+		print("🔄 Отключаем все функции MM2...")
+	
+		-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ И ФУНКЦИИ =====
+		-- Проходим по всем скриптам в GUI и отключаем их
+		for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
+			if scriptObj:IsA("LocalScript") then
+				-- Отключаем скрипт (останавливаем его работу)
+				pcall(function()
+					scriptObj.Disabled = true
+				end)
+			end
+		end
+	
+		-- ===== 2. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
+		-- Сбрасываем все активные флаги
+		_G.MM2_ESP_Active = nil
+		_G.MM2_AutoFarm_Active = nil
+		_G.MM2_KillAll_Active = nil
+		_G.MM2_GunESP_Active = nil
+		_G.MM2_ShowRoles_Active = nil
+		_G.MM2_KillMurderer_Active = nil
+	
+		-- ===== 3. ОСТАНАВЛИВАЕМ ВСЕ СОЗДАННЫЕ ОБЪЕКТЫ (ESP, Highlight и т.д.) =====
+		-- Удаляем Highlight у всех игроков
+		for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
+			if plr.Character then
+				for _, child in pairs(plr.Character:GetChildren()) do
+					if child:IsA("Highlight") then
+						child:Destroy()
+					end
+				end
+				for _, child in pairs(plr.Character:GetDescendants()) do
+					if child:IsA("BillboardGui") then
+						child:Destroy()
+					end
+				end
+			end
+		end
+	
+		-- Удаляем подсветку пистолета
+		for _, obj in pairs(workspace:GetDescendants()) do
+			if obj.Name == "GunHighlight" then
+				obj:Destroy()
+			end
+		end
+	
+		-- ===== 4. УДАЛЯЕМ GUI =====
+		task.wait(0.2)  -- Даём время на отключение
+		mm2Gui:Destroy()
+		print("🗑️ MM2_Gui удалён из игры!")
+	
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "MM2 GUI",
+			Text = "MM2 GUI удалён! Все функции остановлены.",
+			Duration = 3
+		})
+	end)
+	
+	print("✅ MM2_DeleteGui загружена!")
+end;
+task.spawn(C_1c);
+-- StarterGui.Zo_Gui.MainFrame.HBE_Visual.LocalScript
+local function C_21()
+local script = G2L["21"];
+	-- ==========================================
+	-- HBE_Visual (ВКЛ/ВЫКЛ ВИЗУАЛА)
+	-- ==========================================
+	local button = script.Parent
+	
+	button.MouseButton1Click:Connect(function()
+		if getgenv().HBE_CONFIG then
+			getgenv().HBE_CONFIG.VisualFeedback = not getgenv().HBE_CONFIG.VisualFeedback
+			print("🔄 Визуал:", getgenv().HBE_CONFIG.VisualFeedback and "ВКЛ" or "ВЫКЛ")
+		else
+			warn("❌ HBE_CONFIG не найден!")
+		end
+	end)
+	
+	print("✅ HBE_Visual загружен!")
+end;
+task.spawn(C_21);
+
+return G2L["1"], require;
