@@ -1118,49 +1118,37 @@ task.spawn(C_23);
 local function C_28()
 local script = G2L["28"];
 	-- ==========================================
-	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
+	-- Violence_District_delete_Gui (УДАЛИТЬ GUI)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	
 	button.MouseButton1Click:Connect(function()
 		local playerGui = player:WaitForChild("PlayerGui")
-		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
+		local gui = playerGui:FindFirstChild("ViolenceDistrict_Gui")
 	
-		if not mm2Gui then
-			print("❌ MM2_Gui не найден в PlayerGui!")
+		if not gui then
+			print("❌ ViolenceDistrict_Gui не найден в PlayerGui!")
 			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI не найден!",
+				Title = "Violence District",
+				Text = "GUI не найден!",
 				Duration = 2
 			})
 			return
 		end
 	
-		print("🔄 Отключаем все функции MM2...")
+		print("🔄 Удаляем ViolenceDistrict_Gui...")
 	
-		-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ И ФУНКЦИИ =====
-		-- Проходим по всем скриптам в GUI и отключаем их
-		for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
+		-- Останавливаем все скрипты внутри GUI
+		for _, scriptObj in pairs(gui:GetDescendants()) do
 			if scriptObj:IsA("LocalScript") then
-				-- Отключаем скрипт (останавливаем его работу)
 				pcall(function()
 					scriptObj.Disabled = true
 				end)
 			end
 		end
 	
-		-- ===== 2. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
-		-- Сбрасываем все активные флаги
-		_G.MM2_ESP_Active = nil
-		_G.MM2_AutoFarm_Active = nil
-		_G.MM2_KillAll_Active = nil
-		_G.MM2_GunESP_Active = nil
-		_G.MM2_ShowRoles_Active = nil
-		_G.MM2_KillMurderer_Active = nil
-	
-		-- ===== 3. ОСТАНАВЛИВАЕМ ВСЕ СОЗДАННЫЕ ОБЪЕКТЫ (ESP, Highlight и т.д.) =====
-		-- Удаляем Highlight у всех игроков
+		-- Удаляем Highlight и BillboardGui
 		for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
 			if plr.Character then
 				for _, child in pairs(plr.Character:GetChildren()) do
@@ -1176,26 +1164,18 @@ local script = G2L["28"];
 			end
 		end
 	
-		-- Удаляем подсветку пистолета
-		for _, obj in pairs(workspace:GetDescendants()) do
-			if obj.Name == "GunHighlight" then
-				obj:Destroy()
-			end
-		end
-	
-		-- ===== 4. УДАЛЯЕМ GUI =====
-		task.wait(0.2)  -- Даём время на отключение
-		mm2Gui:Destroy()
-		print("🗑️ MM2_Gui удалён из игры!")
+		task.wait(0.2)
+		gui:Destroy()
+		print("🗑️ ViolenceDistrict_Gui удалён!")
 	
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "MM2 GUI",
-			Text = "MM2 GUI удалён! Все функции остановлены.",
+			Title = "Violence District",
+			Text = "GUI удалён!",
 			Duration = 3
 		})
 	end)
 	
-	print("✅ MM2_DeleteGui загружена!")
+	print("✅ Violence_District_delete_Gui загружен!")
 end;
 task.spawn(C_28);
 
