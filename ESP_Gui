@@ -889,84 +889,87 @@ task.spawn(C_19);
 local function C_1e()
 local script = G2L["1e"];
 	-- ==========================================
-	-- MM2_DeleteGui (УДАЛИТЬ MM2 GUI ПОЛНОСТЬЮ)
+	-- ESP_DELETE (КАК В ММ2 ГУЕ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	
-	button.MouseButton1Click:Connect(function()
-		local playerGui = player:WaitForChild("PlayerGui")
-		local mm2Gui = playerGui:FindFirstChild("MM2_Gui")
+	-- ИНДИКАТОР НА КНОПКЕ
+	local label = button:FindFirstChild("ButtonText")
+	if not label then
+		label = Instance.new("TextLabel")
+		label.Name = "ButtonText"
+		label.Size = UDim2.new(1, 0, 1, 0)
+		label.BackgroundTransparency = 1
+		label.Text = "🗑️ УДАЛИТЬ ESP"
+		label.TextColor3 = Color3.fromRGB(255, 100, 100)
+		label.TextSize = 14
+		label.Font = Enum.Font.SourceSansBold
+		label.ZIndex = 2
+		label.Parent = button
+	end
 	
-		if not mm2Gui then
-			print("❌ MM2_Gui не найден в PlayerGui!")
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "MM2 GUI",
-				Text = "MM2 GUI не найден!",
-				Duration = 2
-			})
-			return
-		end
-	
-		print("🔄 Отключаем все функции MM2...")
-	
-		-- ===== 1. ОСТАНАВЛИВАЕМ ВСЕ ЛУПЫ И ФУНКЦИИ =====
-		-- Проходим по всем скриптам в GUI и отключаем их
-		for _, scriptObj in pairs(mm2Gui:GetDescendants()) do
-			if scriptObj:IsA("LocalScript") then
-				-- Отключаем скрипт (останавливаем его работу)
-				pcall(function()
-					scriptObj.Disabled = true
-				end)
-			end
-		end
-	
-		-- ===== 2. ОЧИЩАЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
-		-- Сбрасываем все активные флаги
-		_G.MM2_ESP_Active = nil
-		_G.MM2_AutoFarm_Active = nil
-		_G.MM2_KillAll_Active = nil
-		_G.MM2_GunESP_Active = nil
-		_G.MM2_ShowRoles_Active = nil
-		_G.MM2_KillMurderer_Active = nil
-	
-		-- ===== 3. ОСТАНАВЛИВАЕМ ВСЕ СОЗДАННЫЕ ОБЪЕКТЫ (ESP, Highlight и т.д.) =====
-		-- Удаляем Highlight у всех игроков
-		for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
+	-- ====== ОЧИСТКА ESP (КАК В ММ2) ======
+	local function clearESP()
+		-- 1. УДАЛЯЕМ HIGHLIGHT (ПОДСВЕТКУ)
+		for _, plr in pairs(game.Players:GetPlayers()) do
 			if plr.Character then
-				for _, child in pairs(plr.Character:GetChildren()) do
+				local highlight = plr.Character:FindFirstChild("MM2Highlight")
+				if highlight then
+					highlight:Destroy()
+				end
+				-- УДАЛЯЕМ ВСЕ HIGHLIGHT
+				for _, child in pairs(plr.Character:GetDescendants()) do
 					if child:IsA("Highlight") then
 						child:Destroy()
 					end
 				end
-				for _, child in pairs(plr.Character:GetDescendants()) do
-					if child:IsA("BillboardGui") then
-						child:Destroy()
-					end
+			end
+		end
+	
+		-- 2. УДАЛЯЕМ ESP КНОПКИ (КАК В ММ2)
+		local coreGui = game:GetService("CoreGui")
+		for _, gui in pairs(coreGui:GetChildren()) do
+			if gui:IsA("ScreenGui") then
+				-- УДАЛЯЕМ ESP GUI (КАК В ММ2)
+				if string.find(gui.Name, "CorePosition_") or string.find(gui.Name, "ESP") then
+					gui:Destroy()
 				end
 			end
 		end
 	
-		-- Удаляем подсветку пистолета
-		for _, obj in pairs(workspace:GetDescendants()) do
-			if obj.Name == "GunHighlight" then
-				obj:Destroy()
-			end
+		-- 3. УДАЛЯЕМ ПЕРЕМЕННУЮ ESP
+		if _G.ESP_Enabled ~= nil then
+			_G.ESP_Enabled = false
 		end
 	
-		-- ===== 4. УДАЛЯЕМ GUI =====
-		task.wait(0.2)  -- Даём время на отключение
-		mm2Gui:Destroy()
-		print("🗑️ MM2_Gui удалён из игры!")
+		-- 4. УДАЛЯЕМ ВСЕ КОННЕКТЫ (ЕСЛИ ОНИ ЕСТЬ В _G)
+		if _G.ESP_Connections then
+			for _, conn in pairs(_G.ESP_Connections) do
+				pcall(function() conn:Disconnect() end)
+			end
+			_G.ESP_Connections = {}
+		end
 	
-		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "MM2 GUI",
-			Text = "MM2 GUI удалён! Все функции остановлены.",
-			Duration = 3
-		})
-	end)
+		-- 5. УДАЛЯЕМ DRAWING
+		pcall(function()
+			local drawings = getdrawings or getobjects or function() return {} end
+			for _, d in pairs(drawings()) do
+				if d:IsA("Line") or d:IsA("Text") or d:IsA("Square") or d:IsA("Circle") then
+					if d.Visible then
+						d:Remove()
+					end
+				end
+			end
+		end)
 	
-	print("✅ MM2_DeleteGui загружена!")
+		print("🗑️ ESP GUI И КОННЕКТЫ УДАЛЕНЫ!")
+	end
+	
+	-- ====== КНОПКА ======
+	button.MouseButton1Click:Connect(clearESP)
+	
+	print("✅ ESP_DELETE ЗАГРУЖЕНА (КАК В ММ2)!")
 end;
 task.spawn(C_1e);
 -- StarterGui.ESP_Hub.MainFrame.Settings_AimBind.LocalScript
