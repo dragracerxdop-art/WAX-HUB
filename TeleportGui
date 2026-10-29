@@ -527,7 +527,7 @@ local script = G2L["12"];
 		end
 	end)
 	
-	print("✅ FlingGui_Settings_Hide загружен!")
+	print("✅ TeleportGUI_Settings_Hide загружен!")
 end;
 task.spawn(C_12);
 -- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.LocalScript
@@ -552,55 +552,36 @@ task.spawn(C_17);
 local function C_23()
 local script = G2L["23"];
 	-- ==========================================
-	-- TELEPORT_LIST (ФИНАЛЬНЫЙ ФИКС)
+	-- TELEPORT_LIST (ЧИСТЫЙ)
 	-- ==========================================
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	
-	local container = script.Parent -- Это PlayerList (ScrollingFrame)
-	
-	-- ИЩЕМ ШАБЛОН (даже если он в папке)
+	local container = script.Parent
 	local template = container:FindFirstChild("PlayerTemplate")
-	if not template then
-		template = container:FindFirstChild("PlayerTemplate", true) -- Рекурсивный поиск
-	end
 	
 	if not template then
-		warn("❌ PlayerTemplate НЕ НАЙДЕН ВНУТРИ PlayerList!")
+		warn("❌ PlayerTemplate не найден!")
 		return
 	end
 	
-	print("✅ Шаблон найден:", template.Name)
-	template.Visible = false -- Прячем шаблон
+	template.Visible = false
 	
 	-- ФУНКЦИЯ ТЕЛЕПОРТА
 	local function teleportTo(target)
 		local char = player.Character
 		if not char then return end
-	
 		local hrp = char:FindFirstChild("HumanoidRootPart")
 		local tHrp = target.Character and target.Character:FindFirstChild("HumanoidRootPart")
-	
 		if hrp and tHrp then
-			-- НОКЛИП НА МИГ
-			for _, part in pairs(char:GetDescendants()) do
-				if part:IsA("BasePart") then part.CanCollide = false end
-			end
-	
 			hrp.CFrame = tHrp.CFrame + Vector3.new(0, 3, 0)
-			hrp.Velocity = Vector3.zero
 			print("✅ ТП к:", target.Name)
-	
-			task.wait(0.3)
-			for _, part in pairs(char:GetDescendants()) do
-				if part:IsA("BasePart") then part.CanCollide = true end
-			end
 		end
 	end
 	
 	-- ОБНОВЛЕНИЕ СПИСКА
 	local function updateList()
-		-- Чистим старых игроков (оставляем только шаблон)
+		-- Чистим старых
 		for _, child in pairs(container:GetChildren()) do
 			if child:IsA("Frame") and child ~= template then
 				child:Destroy()
@@ -610,51 +591,37 @@ local script = G2L["23"];
 		local y = 0
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player then
-				-- КЛОНИРУЕМ
 				local newItem = template:Clone()
-				newItem.Name = plr.Name
 				newItem.Visible = true
 				newItem.Position = UDim2.new(0, 0, 0, y)
 	
-				-- АВАТАРКА
-				local avatar = newItem:FindFirstChild("Avatar")
-				if avatar and avatar:IsA("ImageLabel") then
-					avatar.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. plr.UserId .. "&width=100&height=100&format=png"
-				end
+				-- Аватарка
+				local av = newItem:FindFirstChild("Avatar")
+				if av then av.Image = "https://www.roblox.com/headshot-thumbnail/image?userId="..plr.UserId.."&width=100&height=100&format=png" end
 	
-				-- ИМЯ
-				local nameLabel = newItem:FindFirstChild("Name")
-				if nameLabel and nameLabel:IsA("TextLabel") then
-					nameLabel.Text = plr.Name
-				end
+				-- Имя
+				local nm = newItem:FindFirstChild("Name")
+				if nm then nm.Text = plr.Name end
 	
-				-- КНОПКА ТП
+				-- Кнопка
 				local btn = newItem:FindFirstChild("TPButton")
 				if btn then
-					btn.MouseButton1Click:Connect(function()
-						teleportTo(plr)
-					end)
+					btn.MouseButton1Click:Connect(function() teleportTo(plr) end)
 				else
 					warn("❌ В шаблоне нет кнопки TPButton!")
 				end
 	
 				newItem.Parent = container
-				y = y + 50 -- Высота между игроками (можешь поменять)
+				y = y + 50
 			end
 		end
-	
-		-- РАСТЯГИВАЕМ СКРОЛЛ
-		container.CanvasSize = UDim2.new(0, 0, 0, y + 10)
+		container.CanvasSize = UDim2.new(0,0,0,y+10)
 	end
 	
-	-- ОБНОВЛЕНИЕ ПРИ ЗАХОДЕ/ВЫХОДЕ
 	Players.PlayerAdded:Connect(function() task.wait(1) updateList() end)
 	Players.PlayerRemoving:Connect(updateList)
-	
-	-- ЗАПУСКАЕМ
-	task.wait(1) -- Даем гую прогрузиться
 	updateList()
-	print("✅ TeleportList (игроки) загружен!")
+	print("✅ Список игроков загружен!")
 end;
 task.spawn(C_23);
 
