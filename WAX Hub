@@ -4006,7 +4006,7 @@ task.spawn(C_a1);
 local function C_b7()
 local script = G2L["b7"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ФИНАЛ)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С Hitbox)
 	-- ==========================================
 	
 	local leftFrame = script.Parent
@@ -4085,7 +4085,8 @@ local script = G2L["b7"];
 						child.Name == "Script_AntiFling" or
 						child.Name == "Script_OpenFling" or
 						child.Name == "Script_OpenESP" or
-						child.Name == "Script_OpenTeleport" -- ТУТ ТВОЯ НОВАЯ КНОПКА
+						child.Name == "Script_OpenTeleport" or
+						child.Name == "Script_OpenHitbox" -- ДОБАВИЛ СЮДА
 					) then
 					child.Visible = true
 				end
