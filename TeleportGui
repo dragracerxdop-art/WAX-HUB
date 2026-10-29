@@ -19,6 +19,7 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.TeleportGui.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
@@ -272,6 +273,7 @@ G2L["20"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]
 G2L["20"]["BackgroundTransparency"] = 1;
 G2L["20"]["Size"] = UDim2.new(0, 277, 0, 47);
 G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Text"] = [[]];
 G2L["20"]["Name"] = [[TPButton]];
 
 
