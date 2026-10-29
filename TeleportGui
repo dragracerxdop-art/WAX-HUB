@@ -19,7 +19,6 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.TeleportGui.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
-G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
@@ -29,7 +28,7 @@ G2L["2"]["Name"] = [[MainFrame]];
 G2L["2"]["BackgroundTransparency"] = 0.25;
 
 
--- StarterGui.TeleportGui.MainFrame.WAX_FlingGui
+-- StarterGui.TeleportGui.MainFrame.WAX_TeleportGUI
 G2L["3"] = Instance.new("TextLabel", G2L["2"]);
 G2L["3"]["BorderSizePixel"] = 0;
 G2L["3"]["TextSize"] = 24;
@@ -39,23 +38,23 @@ G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
 G2L["3"]["BackgroundTransparency"] = 0.65;
 G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
 G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["Text"] = [[WAX Fling Gui]];
-G2L["3"]["Name"] = [[WAX_FlingGui]];
+G2L["3"]["Text"] = [[WAX Teleport GUI]];
+G2L["3"]["Name"] = [[WAX_TeleportGUI]];
 
 
--- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.UICorner
+-- StarterGui.TeleportGui.MainFrame.WAX_TeleportGUI.UICorner
 G2L["4"] = Instance.new("UICorner", G2L["3"]);
 G2L["4"]["CornerRadius"] = UDim.new(0, 20);
 
 
--- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.UIStroke
+-- StarterGui.TeleportGui.MainFrame.WAX_TeleportGUI.UIStroke
 G2L["5"] = Instance.new("UIStroke", G2L["3"]);
 G2L["5"]["Thickness"] = 2;
 G2L["5"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["5"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.LocalScript
+-- StarterGui.TeleportGui.MainFrame.WAX_TeleportGUI.LocalScript
 G2L["6"] = Instance.new("LocalScript", G2L["3"]);
 
 
@@ -113,7 +112,7 @@ G2L["d"] = Instance.new("LocalScript", G2L["9"]);
 
 
 
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide
 G2L["e"] = Instance.new("TextButton", G2L["2"]);
 G2L["e"]["BorderSizePixel"] = 0;
 G2L["e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
@@ -124,11 +123,11 @@ G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json
 G2L["e"]["Size"] = UDim2.new(0, 137, 0, 37);
 G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["e"]["Text"] = [[      Hide Gui]];
-G2L["e"]["Name"] = [[FlingGui_Settings_Hide]];
+G2L["e"]["Name"] = [[TeleportGUI_Settings_Hide]];
 G2L["e"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
 
 
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.ImageLabel
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide.ImageLabel
 G2L["f"] = Instance.new("ImageLabel", G2L["e"]);
 G2L["f"]["BorderSizePixel"] = 0;
 G2L["f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
@@ -138,18 +137,18 @@ G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["f"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.UICorner
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide.UICorner
 G2L["10"] = Instance.new("UICorner", G2L["e"]);
 G2L["10"]["CornerRadius"] = UDim.new(0, 15);
 
 
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.UIStroke
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide.UIStroke
 G2L["11"] = Instance.new("UIStroke", G2L["e"]);
 G2L["11"]["Color"] = Color3.fromRGB(180, 4, 255);
 G2L["11"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide.LocalScript
 G2L["12"] = Instance.new("LocalScript", G2L["e"]);
 
 
@@ -293,7 +292,7 @@ G2L["23"] = Instance.new("LocalScript", G2L["18"]);
 
 
 
--- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.LocalScript
+-- StarterGui.TeleportGui.MainFrame.WAX_TeleportGUI.LocalScript
 local function C_6()
 local script = G2L["6"];
 	-- ==========================================
@@ -473,7 +472,7 @@ local script = G2L["d"];
 	print("✅ Settings_Color загружен!")
 end;
 task.spawn(C_d);
--- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+-- StarterGui.TeleportGui.MainFrame.TeleportGUI_Settings_Hide.LocalScript
 local function C_12()
 local script = G2L["12"];
 	-- ==========================================
