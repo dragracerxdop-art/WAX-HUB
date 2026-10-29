@@ -356,7 +356,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (КАК В СТАРОМ ХАБЕ)
+	-- HITBOX EXPANDER (ФИНАЛ ИЗ СТАРОГО ХАБА)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
@@ -379,7 +379,7 @@ local script = G2L["d"];
 				local hitboxPart = plr.Character:FindFirstChild("CustomHitboxPart")
 	
 				if _G.HitboxEnabled and currentSize > 1 and hrp then
-					-- Создаем невидимую деталь (хитбокс)
+					-- Создаем невидимую деталь для хитбокса (чтобы пули попадали)
 					if not hitboxPart then
 						hitboxPart = Instance.new("Part")
 						hitboxPart.Name = "CustomHitboxPart"
@@ -409,15 +409,16 @@ local script = G2L["d"];
 	
 					highlight.Adornee = hitboxPart
 	
-					-- Настройки видимости
 					if _G.HitboxVisible then
-						highlight.OutlineColor = Color3.fromRGB(180, 4, 255) -- Фиолетовый
-						highlight.OutlineTransparency = 0 -- ВИДНО
+						-- Фиолетовый неоновый каркас
+						highlight.OutlineColor = Color3.fromRGB(180, 4, 255)
+						highlight.OutlineTransparency = 0
 					else
-						highlight.OutlineTransparency = 1 -- НЕВИДИМО (но хитбокс работает)
+						-- Невидимый каркас (просто хитбокс работает)
+						highlight.OutlineTransparency = 1
 					end
 				else
-					-- Удаляем всё, если выключено
+					-- Удаляем всё если выключено
 					if highlight then highlight:Destroy() end
 					if hitboxPart then hitboxPart:Destroy() end
 				end
@@ -724,7 +725,7 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- HITBOX VISUAL
+	-- HITBOX VISUAL (ФИНАЛ ИЗ СТАРОГО ХАБА)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
@@ -743,9 +744,9 @@ local script = G2L["20"];
 				if highlight then
 					if isVisualOn then
 						highlight.OutlineColor = Color3.fromRGB(180, 4, 255)
-						highlight.OutlineTransparency = 0 -- Показываем каркас
+						highlight.OutlineTransparency = 0
 					else
-						highlight.OutlineTransparency = 1 -- Скрываем каркас
+						highlight.OutlineTransparency = 1
 					end
 				end
 			end
