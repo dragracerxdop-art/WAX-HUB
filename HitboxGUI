@@ -356,77 +356,66 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (С ТВОИМИ ЦВЕТАМИ)
+	-- HITBOX EXPANDER (НЕВИДИМЫЙ КВАДРАТ)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
+	local runService = game:GetService("RunService")
 	
 	local textBox = button:FindFirstChild("Hitbox_Size")
-	
 	local isEnabled = false
-	local currentSize = 0
-	_G.HitboxVisible = false 
+	local currentSize = 10
+	local updateLoop = nil
+	
+	_G.HitboxVisible = false
 	_G.HitboxEnabled = false
 	
-	local function applyHitbox()
+	-- Функция обновления квадрата
+	local function updateHitboxes()
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
-				-- Ищем торс (R15 или R6)
-				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso") or plr.Character:FindFirstChild("HumanoidRootPart")
+				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+				local hitbox = plr.Character:FindFirstChild("CustomHitbox")
 	
-				if torso then
-					if _G.HitboxEnabled and currentSize > 1 then
-						torso.Size = Vector3.new(currentSize, currentSize, currentSize)
+				if _G.HitboxEnabled and currentSize > 1 and hrp then
+					-- Если квадрата нет, создаем
+					if not hitbox then
+						hitbox = Instance.new("Part")
+						hitbox.Name = "CustomHitbox"
+						hitbox.CanCollide = false -- Чтобы не откидывал
+						hitbox.Massless = true
+						hitbox.Parent = plr.Character
 	
-						-- ТВОИ НАСТРОЙКИ ВИЗУАЛА
-						if _G.HitboxVisible then
-							torso.Transparency = 0.4
-							torso.Color = Color3.fromRGB(75, 0, 130)
-							torso.Material = Enum.Material.Neon
-						else
-							torso.Transparency = 1
-							torso.Color = Color3.fromRGB(128, 128, 128)
-							torso.Material = Enum.Material.Plastic
-						end
-	
-						-- Чтобы не застревали (отключаем коллизию)
-						torso.CanCollide = false
-	
-						-- Чиним моторы, чтобы не застывали
-						for _, joint in pairs(torso:GetChildren()) do
-							if joint:IsA("Motor6D") then
-								if joint.Name == "Right Shoulder" then joint.C0 = CFrame.new(currentSize/2, 0.5, 0) 
-								elseif joint.Name == "Left Shoulder" then joint.C0 = CFrame.new(-currentSize/2, 0.5, 0)
-								elseif joint.Name == "Right Hip" then joint.C0 = CFrame.new(currentSize/3, -currentSize/2, 0)
-								elseif joint.Name == "Left Hip" then joint.C0 = CFrame.new(-currentSize/3, -currentSize/2, 0)
-								end
-							end
-						end
-					else
-						-- ВОЗВРАТ В СТАНДАРТ
-						torso.Size = (torso.Name == "Torso") and Vector3.new(2, 2, 1) or Vector3.new(2, 2, 1)
-						torso.Transparency = 0
-						torso.Color = Color3.fromRGB(128, 128, 128)
-						torso.Material = Enum.Material.Plastic
-						torso.CanCollide = true
-	
-						for _, joint in pairs(torso:GetChildren()) do
-							if joint:IsA("Motor6D") then
-								if joint.Name == "Right Shoulder" then joint.C0 = CFrame.new(1, 0.5, 0) 
-								elseif joint.Name == "Left Shoulder" then joint.C0 = CFrame.new(-1, 0.5, 0)
-								elseif joint.Name == "Right Hip" then joint.C0 = CFrame.new(0.5, -1, 0)
-								elseif joint.Name == "Left Hip" then joint.C0 = CFrame.new(-0.5, -1, 0)
-								end
-							end
-						end
+						local weld = Instance.new("WeldConstraint")
+						weld.Part0 = hrp
+						weld.Part1 = hitbox
+						weld.Parent = hitbox
 					end
+	
+					-- Настраиваем размер и позицию
+					hitbox.Size = Vector3.new(currentSize, currentSize, currentSize)
+					hitbox.CFrame = hrp.CFrame -- Привязка к игроку
+	
+					-- Настройки из твоего запроса
+					if _G.HitboxVisible then
+						hitbox.Transparency = 0.4
+						hitbox.Color = Color3.fromRGB(75, 0, 130)
+						hitbox.Material = Enum.Material.Neon
+					else
+						hitbox.Transparency = 1
+						hitbox.Color = Color3.fromRGB(128, 128, 128)
+						hitbox.Material = Enum.Material.Plastic
+					end
+				else
+					-- Если выключено, удаляем
+					if hitbox then hitbox:Destroy() end
 				end
 			end
 		end
 	end
 	
-	-- Клик по кнопке (ВКЛ/ВЫКЛ)
+	-- Клик по кнопке
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
 		_G.HitboxEnabled = isEnabled
@@ -436,31 +425,30 @@ local script = G2L["d"];
 				local val = tonumber(textBox.Text)
 				currentSize = (val and val >= 0 and val <= 100) and val or 10
 			end
-			applyHitbox()
+			if updateLoop then updateLoop:Disconnect() end
+			updateLoop = runService.RenderStepped:Connect(updateHitboxes)
 			print("✅ Хитбокс ВКЛ, размер:", currentSize)
 		else
-			applyHitbox()
+			if updateLoop then updateLoop:Disconnect() updateLoop = nil end
+			updateHitboxes()
 			print("❌ Хитбокс ВЫКЛ")
 		end
 	end)
 	
-	-- Ввод в текстбокс (Enter)
+	-- Ввод в текстбокс
 	if textBox then
 		textBox.FocusLost:Connect(function(enterPressed)
 			if enterPressed then
 				local val = tonumber(textBox.Text)
 				if val and val >= 0 and val <= 100 then
 					currentSize = val
-					if isEnabled then applyHitbox() end
-					print("✅ Размер изменен на:", val)
-				else
-					print("❌ Введи число от 0 до 100!")
+					if isEnabled then updateHitboxes() end
 				end
 			end
 		end)
 	end
 	
-	print("✅ Hitbox Expander загружен!")
+	print("✅ Hitbox Expander (квадрат) загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.Hitbox_Gui.MainFrame.Settings_Color.LocalScript
@@ -743,29 +731,25 @@ local script = G2L["20"];
 		isVisualOn = not isVisualOn
 		_G.HitboxVisible = isVisualOn
 	
-		-- Меняем прозрачность, цвет и материал только если хитбокс включен
+		-- Проходимся по всем игрокам и меняем вид квадрата
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
-				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso") or plr.Character:FindFirstChild("HumanoidRootPart")
-	
-				if torso and _G.HitboxEnabled then
-					if _G.HitboxVisible then
-						torso.Transparency = 0.4
-						torso.Color = Color3.fromRGB(75, 0, 130)
-						torso.Material = Enum.Material.Neon
+				local hitbox = plr.Character:FindFirstChild("CustomHitbox")
+				if hitbox then
+					if isVisualOn then
+						hitbox.Transparency = 0.4
+						hitbox.Color = Color3.fromRGB(75, 0, 130)
+						hitbox.Material = Enum.Material.Neon
 					else
-						torso.Transparency = 1
-						torso.Color = Color3.fromRGB(128, 128, 128)
-						torso.Material = Enum.Material.Plastic
+						hitbox.Transparency = 1
+						hitbox.Color = Color3.fromRGB(128, 128, 128)
+						hitbox.Material = Enum.Material.Plastic
 					end
 				end
 			end
 		end
-	
 		print("👁️ Визуал хитбокса:", isVisualOn and "ВКЛ" or "ВЫКЛ")
 	end)
-	
-	print("✅ Hitbox Visual загружен!")
 end;
 task.spawn(C_20);
 
