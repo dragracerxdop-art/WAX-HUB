@@ -1,0 +1,656 @@
+--[=[
+ d888b  db    db d888888b      .d888b.      db      db    db  .d8b.  
+88' Y8b 88    88   `88'        VP  `8D      88      88    88 d8' `8b 
+88      88    88    88            odD'      88      88    88 88ooo88 
+88  ooo 88    88    88          .88'        88      88    88 88~~~88 
+88. ~8~ 88b  d88   .88.        j88.         88booo. 88b  d88 88   88    @uniquadev
+ Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
+]=]
+
+-- Instances: 35 | Scripts: 5 | Modules: 0 | Tags: 0
+local G2L = {};
+
+-- StarterGui.TeleportGui
+G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+G2L["1"]["Name"] = [[TeleportGui]];
+G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+G2L["1"]["ResetOnSpawn"] = false;
+
+
+-- StarterGui.TeleportGui.MainFrame
+G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["BorderSizePixel"] = 0;
+G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Size"] = UDim2.new(0, 297, 0, 436);
+G2L["2"]["Position"] = UDim2.new(0.11117, 0, 0.1643, 0);
+G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2"]["Name"] = [[MainFrame]];
+G2L["2"]["BackgroundTransparency"] = 0.25;
+
+
+-- StarterGui.TeleportGui.MainFrame.WAX_FlingGui
+G2L["3"] = Instance.new("TextLabel", G2L["2"]);
+G2L["3"]["BorderSizePixel"] = 0;
+G2L["3"]["TextSize"] = 24;
+G2L["3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/LuckiestGuy.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["3"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["3"]["BackgroundTransparency"] = 0.65;
+G2L["3"]["Size"] = UDim2.new(0, 297, 0, 46);
+G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["3"]["Text"] = [[WAX Fling Gui]];
+G2L["3"]["Name"] = [[WAX_FlingGui]];
+
+
+-- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.UICorner
+G2L["4"] = Instance.new("UICorner", G2L["3"]);
+G2L["4"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.UIStroke
+G2L["5"] = Instance.new("UIStroke", G2L["3"]);
+G2L["5"]["Thickness"] = 2;
+G2L["5"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["5"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.LocalScript
+G2L["6"] = Instance.new("LocalScript", G2L["3"]);
+
+
+
+-- StarterGui.TeleportGui.MainFrame.UICorner
+G2L["7"] = Instance.new("UICorner", G2L["2"]);
+G2L["7"]["CornerRadius"] = UDim.new(0, 20);
+
+
+-- StarterGui.TeleportGui.MainFrame.UIStroke
+G2L["8"] = Instance.new("UIStroke", G2L["2"]);
+G2L["8"]["Thickness"] = 2;
+G2L["8"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["8"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.Settings_Color
+G2L["9"] = Instance.new("TextButton", G2L["2"]);
+G2L["9"]["BorderSizePixel"] = 0;
+G2L["9"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["9"]["TextSize"] = 20;
+G2L["9"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["9"]["Text"] = [[      Color]];
+G2L["9"]["Name"] = [[Settings_Color]];
+G2L["9"]["Position"] = UDim2.new(0.01555, 0, 0.78625, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.Settings_Color.ImageLabel
+G2L["a"] = Instance.new("ImageLabel", G2L["9"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["a"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Position"] = UDim2.new(0.75084, 0, 0.15107, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.Settings_Color.UICorner
+G2L["b"] = Instance.new("UICorner", G2L["9"]);
+G2L["b"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.Settings_Color.UIStroke
+G2L["c"] = Instance.new("UIStroke", G2L["9"]);
+G2L["c"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["c"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.Settings_Color.LocalScript
+G2L["d"] = Instance.new("LocalScript", G2L["9"]);
+
+
+
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide
+G2L["e"] = Instance.new("TextButton", G2L["2"]);
+G2L["e"]["BorderSizePixel"] = 0;
+G2L["e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["e"]["TextSize"] = 20;
+G2L["e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["e"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["Text"] = [[      Hide Gui]];
+G2L["e"]["Name"] = [[FlingGui_Settings_Hide]];
+G2L["e"]["Position"] = UDim2.new(0.50048, 0, 0.7813, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.ImageLabel
+G2L["f"] = Instance.new("ImageLabel", G2L["e"]);
+G2L["f"]["BorderSizePixel"] = 0;
+G2L["f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["f"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["f"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.UICorner
+G2L["10"] = Instance.new("UICorner", G2L["e"]);
+G2L["10"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.UIStroke
+G2L["11"] = Instance.new("UIStroke", G2L["e"]);
+G2L["11"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["11"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+G2L["12"] = Instance.new("LocalScript", G2L["e"]);
+
+
+
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete
+G2L["13"] = Instance.new("TextButton", G2L["2"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+G2L["13"]["TextSize"] = 20;
+G2L["13"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["FontFace"] = Font.new([[rbxasset://fonts/families/PermanentMarker.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["13"]["Size"] = UDim2.new(0, 137, 0, 37);
+G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Text"] = [[    Delete Gui]];
+G2L["13"]["Name"] = [[TELEPORTGUI_delete]];
+G2L["13"]["Position"] = UDim2.new(0.26816, 0, 0.89139, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.ImageLabel
+G2L["14"] = Instance.new("ImageLabel", G2L["13"]);
+G2L["14"]["BorderSizePixel"] = 0;
+G2L["14"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["14"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["14"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.UICorner
+G2L["15"] = Instance.new("UICorner", G2L["13"]);
+G2L["15"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.UIStroke
+G2L["16"] = Instance.new("UIStroke", G2L["13"]);
+G2L["16"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["16"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.LocalScript
+G2L["17"] = Instance.new("LocalScript", G2L["13"]);
+
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList
+G2L["18"] = Instance.new("ScrollingFrame", G2L["2"]);
+G2L["18"]["Active"] = true;
+G2L["18"]["BorderSizePixel"] = 0;
+G2L["18"]["Name"] = [[PlayerList]];
+G2L["18"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Size"] = UDim2.new(0, 277, 0, 224);
+G2L["18"]["ScrollBarImageColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["Position"] = UDim2.new(0.03164, 0, 0.13773, 0);
+G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["18"]["ScrollBarThickness"] = 0;
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.UICorner
+G2L["19"] = Instance.new("UICorner", G2L["18"]);
+G2L["19"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.UIStroke
+G2L["1a"] = Instance.new("UIStroke", G2L["18"]);
+G2L["1a"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate
+G2L["1b"] = Instance.new("Frame", G2L["18"]);
+G2L["1b"]["BorderSizePixel"] = 0;
+G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["Size"] = UDim2.new(0, 277, 0, 47);
+G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["Name"] = [[PlayerTemplate]];
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.UICorner
+G2L["1c"] = Instance.new("UICorner", G2L["1b"]);
+G2L["1c"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.UIStroke
+G2L["1d"] = Instance.new("UIStroke", G2L["1b"]);
+G2L["1d"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["1d"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.Name
+G2L["1e"] = Instance.new("TextLabel", G2L["1b"]);
+G2L["1e"]["BorderSizePixel"] = 0;
+G2L["1e"]["TextSize"] = 14;
+G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1e"]["TextColor3"] = Color3.fromRGB(180, 4, 255);
+G2L["1e"]["Size"] = UDim2.new(0, 182, 0, 24);
+G2L["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1e"]["Name"] = [[Name]];
+G2L["1e"]["Position"] = UDim2.new(0.29964, 0, 0.23404, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.Avatar
+G2L["1f"] = Instance.new("ImageLabel", G2L["1b"]);
+G2L["1f"]["BorderSizePixel"] = 0;
+G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1f"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
+G2L["1f"]["Size"] = UDim2.new(0, 40, 0, 41);
+G2L["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1f"]["Name"] = [[Avatar]];
+G2L["1f"]["Position"] = UDim2.new(0.12534, 0, 0.0343, 0);
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.TPButton
+G2L["20"] = Instance.new("TextButton", G2L["1b"]);
+G2L["20"]["BorderSizePixel"] = 0;
+G2L["20"]["TextSize"] = 14;
+G2L["20"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["20"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["20"]["BackgroundTransparency"] = 1;
+G2L["20"]["Size"] = UDim2.new(0, 277, 0, 47);
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Name"] = [[TPButton]];
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.TPButton.UIStroke
+G2L["21"] = Instance.new("UIStroke", G2L["20"]);
+G2L["21"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["21"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.PlayerTemplate.TPButton.UICorner
+G2L["22"] = Instance.new("UICorner", G2L["20"]);
+G2L["22"]["CornerRadius"] = UDim.new(0, 15);
+
+
+-- StarterGui.TeleportGui.MainFrame.PlayerList.LocalScript
+G2L["23"] = Instance.new("LocalScript", G2L["18"]);
+
+
+
+-- StarterGui.TeleportGui.MainFrame.WAX_FlingGui.LocalScript
+local function C_6()
+local script = G2L["6"];
+	-- ==========================================
+	-- ПЕРЕТАСКИВАНИЕ (ИСПРАВЛЕННОЕ)
+	-- ==========================================
+	local textLabel = script.Parent
+	local frame = textLabel.Parent
+	local uis = game:GetService("UserInputService")
+	
+	local dragging = false
+	local dragStart = nil
+	local startPos = nil
+	local connection = nil
+	
+	local function startDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+	
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+	
+			connection = uis.InputChanged:Connect(function(input)
+				if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+					local delta = input.Position - dragStart
+					frame.Position = UDim2.new(
+						startPos.X.Scale,
+						startPos.X.Offset + delta.X,
+						startPos.Y.Scale,
+						startPos.Y.Offset + delta.Y
+					)
+				end
+			end)
+		end
+	end
+	
+	local function endDrag(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = false
+			if connection then
+				connection:Disconnect()
+				connection = nil
+			end
+		end
+	end
+	
+	textLabel.InputBegan:Connect(startDrag)
+	uis.InputEnded:Connect(endDrag)
+	
+	print("✅ Перетаскивание загружено")
+end;
+task.spawn(C_6);
+-- StarterGui.TeleportGui.MainFrame.Settings_Color.LocalScript
+local function C_d()
+local script = G2L["d"];
+	-- ==========================================
+	-- СМЕНА ЦВЕТА (С РАДУГОЙ)
+	-- ==========================================
+	local button = script.Parent
+	local mainFrame = button.Parent  -- MainFrame (там где лежат все кнопки)
+	
+	local rainbowActive = false
+	local rainbowConnection = nil
+	
+	-- ===== ЦВЕТА =====
+	local themes = {
+		{ name = "Фиолетовый", textColor = Color3.fromRGB(180, 80, 255), strokeColor = Color3.fromRGB(130, 30, 200) },
+		{ name = "Красный", textColor = Color3.fromRGB(255, 50, 50), strokeColor = Color3.fromRGB(200, 0, 0) },
+		{ name = "Синий", textColor = Color3.fromRGB(50, 150, 255), strokeColor = Color3.fromRGB(0, 100, 200) },
+		{ name = "Зеленый", textColor = Color3.fromRGB(50, 255, 50), strokeColor = Color3.fromRGB(0, 200, 0) },
+		{ name = "Оранжевый", textColor = Color3.fromRGB(255, 150, 50), strokeColor = Color3.fromRGB(200, 100, 0) },
+		{ name = "Желтый", textColor = Color3.fromRGB(255, 255, 50), strokeColor = Color3.fromRGB(200, 200, 0) },
+		{ name = "Голубой", textColor = Color3.fromRGB(50, 255, 255), strokeColor = Color3.fromRGB(0, 200, 200) },
+		{ name = "Розовый", textColor = Color3.fromRGB(255, 100, 200), strokeColor = Color3.fromRGB(200, 50, 150) },
+		{ name = "Бирюзовый", textColor = Color3.fromRGB(50, 200, 200), strokeColor = Color3.fromRGB(0, 150, 150) },
+		{ name = "Лайм", textColor = Color3.fromRGB(150, 255, 50), strokeColor = Color3.fromRGB(100, 200, 0) },
+		{ name = "Коралловый", textColor = Color3.fromRGB(255, 100, 80), strokeColor = Color3.fromRGB(200, 50, 30) },
+		{ name = "Белый", textColor = Color3.fromRGB(255, 255, 255), strokeColor = Color3.fromRGB(180, 180, 180) },
+		{ name = "Серый", textColor = Color3.fromRGB(180, 180, 180), strokeColor = Color3.fromRGB(120, 120, 120) },
+		{ name = "Неоновый", textColor = Color3.fromRGB(0, 255, 200), strokeColor = Color3.fromRGB(0, 200, 150) },
+		{ name = "РАДУГА 🌈", textColor = nil, strokeColor = nil }
+	}
+	
+	local currentTheme = 1
+	
+	-- ===== ПРИМЕНЕНИЕ ТЕМЫ =====
+	local function applyTheme(themeIndex)
+		local theme = themes[themeIndex]
+		if not theme then return end
+	
+		-- Выключаем радугу, если она была
+		if rainbowActive then
+			rainbowActive = false
+			if rainbowConnection then
+				rainbowConnection:Disconnect()
+				rainbowConnection = nil
+			end
+		end
+	
+		-- ===== РАДУГА =====
+		if theme.name == "РАДУГА 🌈" then
+			rainbowActive = true
+			print("🌈 РАДУГА АКТИВИРОВАНА!")
+	
+			local textObjects = {}
+			local strokeObjects = {}
+	
+			local function collectObjects(parent)
+				for _, child in pairs(parent:GetChildren()) do
+					if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+						table.insert(textObjects, child)
+					end
+					if child:IsA("UIStroke") then
+						table.insert(strokeObjects, child)
+					end
+					collectObjects(child)
+				end
+			end
+	
+			collectObjects(mainFrame)
+	
+			local hue = 0
+			rainbowConnection = game:GetService("RunService").Heartbeat:Connect(function(dt)
+				hue = (hue + dt * 0.3) % 1
+	
+				local color = Color3.fromHSV(hue, 1, 1)
+	
+				for _, obj in pairs(textObjects) do
+					obj.TextColor3 = color
+				end
+	
+				local strokeColor = Color3.fromHSV((hue + 0.5) % 1, 1, 0.7)
+				for _, obj in pairs(strokeObjects) do
+					obj.Color = strokeColor
+				end
+			end)
+	
+			print("✅ РАДУГА включена!")
+			return
+		end
+	
+		-- ===== ОБЫЧНЫЕ ЦВЕТА =====
+		print("🎨 Применяем тему: " .. theme.name)
+	
+		local function applyToAll(parent)
+			for _, child in pairs(parent:GetChildren()) do
+				if child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("TextBox") then
+					child.TextColor3 = theme.textColor
+				end
+	
+				if child:IsA("UIStroke") then
+					child.Color = theme.strokeColor
+				end
+	
+				applyToAll(child)
+			end
+		end
+	
+		applyToAll(mainFrame)
+		print("✅ Тема " .. theme.name .. " применена!")
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ =====
+	button.MouseButton1Click:Connect(function()
+		currentTheme = currentTheme + 1
+		if currentTheme > #themes then
+			currentTheme = 1
+		end
+		applyTheme(currentTheme)
+	end)
+	
+	-- ===== СТАРТУЕМ С ПЕРВОЙ ТЕМЫ =====
+	applyTheme(1)
+	print("✅ Settings_Color загружен!")
+end;
+task.spawn(C_d);
+-- StarterGui.TeleportGui.MainFrame.FlingGui_Settings_Hide.LocalScript
+local function C_12()
+local script = G2L["12"];
+	-- ==========================================
+	-- TELEPORT HIDE GUI (КАК В ОСНОВНОМ ХАБЕ)
+	-- ==========================================
+	local button = script.Parent
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
+	
+	local isListening = false
+	local hideKey = nil
+	local gui = button.Parent.Parent  -- Добираемся до ScreenGui (TeleportGui)
+	
+	-- ===== ТОГГЛ ГУЯ =====
+	local function toggleGui()
+		if not gui then return end
+	
+		-- Если это ScreenGui, используем Enabled. Если Frame - Visible.
+		if gui:IsA("ScreenGui") then
+			gui.Enabled = not gui.Enabled
+			print("🔄 TeleportGui:", gui.Enabled and "открыт" or "скрыт")
+		elseif gui:IsA("Frame") then
+			gui.Visible = not gui.Visible
+			print("🔄 TeleportGui:", gui.Visible and "открыт" or "скрыт")
+		end
+	end
+	
+	-- ===== НАЖАТИЕ НА КНОПКУ (НАЧАЛО ПРОСЛУШКИ ДЛЯ БИНДА) =====
+	button.MouseButton1Click:Connect(function()
+		if isListening then return end
+	
+		isListening = true
+		print("⌨️ Нажми любую клавишу для установки бинда...")
+	
+		local connection
+		connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if gameProcessed then return end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				hideKey = input.KeyCode
+				isListening = false
+				connection:Disconnect()
+				print("🔑 БИНД УСТАНОВЛЕН:", hideKey.Name)
+			end
+		end)
+	end)
+	
+	-- ===== ОБРАБОТКА НАЖАТИЯ КЛАВИШИ (ВЕЗДЕ) =====
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if hideKey and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == hideKey then
+			toggleGui()
+		end
+	end)
+	
+	print("✅ FlingGui_Settings_Hide загружен!")
+end;
+task.spawn(C_12);
+-- StarterGui.TeleportGui.MainFrame.TELEPORTGUI_delete.LocalScript
+local function C_17()
+local script = G2L["17"];
+	-- ==========================================
+	-- DELETE GUI
+	-- ==========================================
+	local button = script.Parent
+	-- Добираемся до самого первого контейнера (ScreenGui)
+	local screenGui = button.Parent.Parent 
+	
+	button.MouseButton1Click:Connect(function()
+		if screenGui then
+			screenGui:Destroy()
+			print("🗑️ Teleport GUI удален")
+		end
+	end)
+end;
+task.spawn(C_17);
+-- StarterGui.TeleportGui.MainFrame.PlayerList.LocalScript
+local function C_23()
+local script = G2L["23"];
+	-- ==========================================
+	-- TELEPORT_LIST (С TPButton)
+	-- ==========================================
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	
+	local container = script.Parent
+	local template = container:FindFirstChild("PlayerTemplate")
+	
+	if not template then
+		warn("❌ PlayerTemplate не найден!")
+		return
+	end
+	
+	template.Visible = false -- Прячем шаблон
+	
+	-- ====== ФУНКЦИЯ ТЕЛЕПОРТА ======
+	local function teleportTo(targetPlayer)
+		local char = player.Character
+		if not char then return end
+	
+		local hrp = char:FindFirstChild("HumanoidRootPart")
+		local targetHrp = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+	
+		if hrp and targetHrp then
+			-- ВКЛЮЧАЕМ НОКЛИП НА МИГ, ЧТОБЫ НЕ ЗАСТРЯТЬ В СТЕНАХ
+			for _, part in pairs(char:GetDescendants()) do
+				if part:IsA("BasePart") then part.CanCollide = false end
+			end
+	
+			-- ТЕЛЕПОРТ
+			hrp.CFrame = targetHrp.CFrame + Vector3.new(0, 3, 0)
+			hrp.Velocity = Vector3.zero
+			hrp.RotVelocity = Vector3.zero
+			print("✅ Телепорт к:", targetPlayer.Name)
+	
+			-- ВОЗВРАЩАЕМ КОЛЛИЗИИ ОБРАТНО
+			task.wait(0.3)
+			for _, part in pairs(char:GetDescendants()) do
+				if part:IsA("BasePart") then part.CanCollide = true end
+			end
+		end
+	end
+	
+	-- ====== ОБНОВЛЕНИЕ СПИСКА ======
+	local function updateList()
+		-- Очищаем старые таблички (оставляем только шаблон)
+		for _, child in pairs(container:GetChildren()) do
+			if child:IsA("Frame") and child ~= template then
+				child:Destroy()
+			end
+		end
+	
+		local y = 0
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player then
+				-- КЛОНИРУЕМ ТАБЛИЧКУ
+				local newItem = template:Clone()
+				newItem.Name = plr.Name
+				newItem.Visible = true
+				newItem.Position = UDim2.new(0, 0, 0, y)
+	
+				-- СТАВИМ АВАТАРКУ
+				local avatar = newItem:FindFirstChild("Avatar")
+				if avatar and avatar:IsA("ImageLabel") then
+					avatar.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. plr.UserId .. "&width=100&height=100&format=png"
+				end
+	
+				-- СТАВИМ ИМЯ
+				local nameLabel = newItem:FindFirstChild("Name")
+				if nameLabel and nameLabel:IsA("TextLabel") then
+					nameLabel.Text = plr.Name
+				end
+	
+				-- ВЕШАЕМ ТЕЛЕПОРТ НА ТВОЮ КНОПКУ TPButton
+				local clickBtn = newItem:FindFirstChild("TPButton")
+				if clickBtn then
+					clickBtn.MouseButton1Click:Connect(function()
+						teleportTo(plr)
+					end)
+				else
+					warn("❌ Кнопка TPButton не найдена внутри PlayerTemplate!")
+				end
+	
+				newItem.Parent = container
+				y = y + 45 -- РАССТОЯНИЕ МЕЖДУ ИГРОКАМИ (если таблички слипаются или далеко - поменяй это число)
+			end
+		end
+	
+		-- РАСТЯГИВАЕМ SCROLLING FRAME ПОД РАЗМЕР СПИСКА
+		container.CanvasSize = UDim2.new(0, 0, 0, y + 10)
+	end
+	
+	-- ====== ОБНОВЛЕНИЕ ПРИ ЗАХОДЕ/ВЫХОДЕ ======
+	Players.PlayerAdded:Connect(function() task.wait(1) updateList() end)
+	Players.PlayerRemoving:Connect(updateList)
+	
+	-- ПЕРВЫЙ ЗАПУСК
+	updateList()
+	print("✅ TeleportList загружен!")
+end;
+task.spawn(C_23);
+
+return G2L["1"], require;
