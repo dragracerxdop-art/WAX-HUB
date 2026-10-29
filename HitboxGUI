@@ -356,7 +356,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (ПОЛУПРОЗРАЧНЫЙ КВАДРАТ)
+	-- HITBOX EXPANDER (С HIGHLIGHT)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
@@ -376,16 +376,16 @@ local script = G2L["d"];
 			if plr ~= player and plr.Character then
 				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
 				local hitboxPart = plr.Character:FindFirstChild("CustomHitboxPart")
+				local highlight = plr.Character:FindFirstChild("CustomHitboxHighlight")
 	
 				if _G.HitboxEnabled and currentSize > 1 and hrp then
-					-- Создаем деталь
+					-- 1. Создаем невидимую деталь (ФИЗИЧЕСКИЙ ХИТБОКС)
 					if not hitboxPart then
 						hitboxPart = Instance.new("Part")
 						hitboxPart.Name = "CustomHitboxPart"
 						hitboxPart.CanCollide = false
 						hitboxPart.Massless = true
-						hitboxPart.Color = Color3.fromRGB(180, 4, 255) -- Фиолетовый
-						hitboxPart.Material = Enum.Material.Neon
+						hitboxPart.Transparency = 1 -- САМА ДЕТАЛЬ НЕВИДИМА
 						hitboxPart.Parent = plr.Character
 	
 						local weld = Instance.new("WeldConstraint")
@@ -396,15 +396,28 @@ local script = G2L["d"];
 					hitboxPart.Size = Vector3.new(currentSize, currentSize, currentSize)
 					hitboxPart.CFrame = hrp.CFrame
 	
-					-- УПРАВЛЕНИЕ ВИДИМОСТЬЮ
+					-- 2. Создаем Highlight (ВИЗУАЛЬНЫЙ КАРКАС)
+					if not highlight then
+						highlight = Instance.new("Highlight")
+						highlight.Name = "CustomHitboxHighlight"
+						highlight.Adornee = hitboxPart
+						highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+						highlight.FillTransparency = 1 -- ВНУТРИ ПУСТО, ИГРОК ВИДЕН
+						highlight.OutlineTransparency = 0
+						highlight.Parent = plr.Character
+					end
+	
+					highlight.Adornee = hitboxPart
+	
 					if _G.HitboxVisible then
-						hitboxPart.Transparency = 0.5 -- ПОЛУПРОЗРАЧНЫЙ КВАДРАТ (ИГРОК ВИДЕН)
+						highlight.OutlineColor = Color3.fromRGB(180, 4, 255) -- ФИОЛЕТОВЫЙ
+						highlight.OutlineTransparency = 0
 					else
-						hitboxPart.Transparency = 1   -- НЕВИДИМЫЙ (НО ФИЗИЧЕСКИ ЕСТЬ)
+						highlight.OutlineTransparency = 1 -- КАРКАС СКРЫТ
 					end
 				else
-					-- Если выключено - удаляем
 					if hitboxPart then hitboxPart:Destroy() end
+					if highlight then highlight:Destroy() end
 				end
 			end
 		end
@@ -709,7 +722,7 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- HITBOX VISUAL (ПОКАЗАТЬ/СКРЫТЬ КВАДРАТ)
+	-- HITBOX VISUAL (КАРКАС)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
@@ -724,12 +737,13 @@ local script = G2L["20"];
 	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
-				local hitboxPart = plr.Character:FindFirstChild("CustomHitboxPart")
-				if hitboxPart then
+				local highlight = plr.Character:FindFirstChild("CustomHitboxHighlight")
+				if highlight then
 					if isVisualOn then
-						hitboxPart.Transparency = 0.5 -- ВКЛЮЧАЕМ КВАДРАТ
+						highlight.OutlineColor = Color3.fromRGB(180, 4, 255)
+						highlight.OutlineTransparency = 0
 					else
-						hitboxPart.Transparency = 1   -- ВЫКЛЮЧАЕМ КВАДРАТ
+						highlight.OutlineTransparency = 1
 					end
 				end
 			end
