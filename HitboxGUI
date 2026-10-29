@@ -356,97 +356,120 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (ФИЗИЧЕСКИЙ КВАДРАТ)
+	-- HITBOX EXPANDER (КАК В РАБОЧЕМ СКРИПТЕ)
 	-- ==========================================
 	local button = script.Parent
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
+	local player = game.Players.LocalPlayer
 	local runService = game:GetService("RunService")
-	
 	local textBox = button:FindFirstChild("Hitbox_Size")
-	local isEnabled = false
-	local currentSize = 10
-	local updateLoop = nil
 	
-	-- Глобальные флаги для связи с кнопкой визуала
-	_G.HitboxVisible = false
+	local hitboxEnabled = false
+	local hitboxSize = 10
+	local hitboxLoop = nil
 	_G.HitboxEnabled = false
+	_G.HitboxVisible = false
 	
-	local function updateHitboxes()
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr ~= player and plr.Character then
-				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
-				local hitboxPart = plr.Character:FindFirstChild("CustomHitboxPart")
+	-- ====== ПОИСК ВСЕХ ДЕТАЛЕЙ ИГРОКА ======
+	local function findPlayerParts()
+		local parts = {}
+		local char = player.Character
+		if not char then return parts end
 	
-				if _G.HitboxEnabled and currentSize > 1 and hrp then
-					-- Создаем физическую деталь (квадрат)
-					if not hitboxPart then
-						hitboxPart = Instance.new("Part")
-						hitboxPart.Name = "CustomHitboxPart"
-						hitboxPart.CanCollide = false
-						hitboxPart.Massless = true
-						hitboxPart.Parent = plr.Character
+		for _, part in pairs(char:GetDescendants()) do
+			if part:IsA("BasePart") or part:IsA("MeshPart") then
+				table.insert(parts, part)
+			end
+		end
+		return parts
+	end
 	
-						local weld = Instance.new("WeldConstraint")
-						weld.Part0 = hrp
-						weld.Part1 = hitboxPart
-						weld.Parent = hitboxPart
-					end
+	-- ====== ПРИМЕНЕНИЕ ======
+	local function applyHitbox()
+		local parts = findPlayerParts()
+		for _, part in pairs(parts) do
+			pcall(function()
+				-- Сохраняем оригинальный размер
+				local originalSize = part:GetAttribute("OriginalSize")
+				if not originalSize then
+					part:SetAttribute("OriginalSize", part.Size)
+					originalSize = part.Size
+				end
 	
-					-- Размер и позиция
-					hitboxPart.Size = Vector3.new(currentSize, currentSize, currentSize)
-					hitboxPart.CFrame = hrp.CFrame
+				if hitboxEnabled then
+					-- Увеличиваем
+					part.Size = originalSize * hitboxSize
+					part.CanCollide = false
 	
-					-- ВИЗУАЛ (ТОЧНО КАК В ТВОЁМ КОДЕ)
+					-- ВИЗУАЛ
 					if _G.HitboxVisible then
-						-- ТЕМНО-ФИОЛЕТОВЫЙ ПОЛУПРОЗРАЧНЫЙ
-						hitboxPart.Transparency = 0.4
-						hitboxPart.Color = Color3.fromRGB(75, 0, 130)
-						hitboxPart.Material = Enum.Material.Neon
+						part.Transparency = 0.4
+						part.Color = Color3.fromRGB(75, 0, 130)
+						part.Material = Enum.Material.Neon
 					else
-						-- НЕВИДИМЫЙ, НО ХИТБОКС РАБОТАЕТ
-						hitboxPart.Transparency = 1
-						hitboxPart.Color = Color3.fromRGB(128, 128, 128)
-						hitboxPart.Material = Enum.Material.Plastic
+						part.Transparency = 1
+						part.Color = Color3.fromRGB(128, 128, 128)
+						part.Material = Enum.Material.Plastic
 					end
 				else
-					-- Если выключено - удаляем деталь
-					if hitboxPart then hitboxPart:Destroy() end
+					-- Восстановление
+					part.Size = originalSize
+					part.Transparency = 0
+					part.Color = Color3.fromRGB(128, 128, 128)
+					part.Material = Enum.Material.Plastic
+					part.CanCollide = true
 				end
-			end
+			end)
 		end
 	end
 	
-	button.MouseButton1Click:Connect(function()
-		isEnabled = not isEnabled
-		_G.HitboxEnabled = isEnabled
-	
-		if isEnabled then
-			if textBox then
-				local val = tonumber(textBox.Text)
-				currentSize = (val and val >= 0 and val <= 100) and val or 10
+	-- ====== ЦИКЛ ======
+	local function startLoop()
+		if hitboxLoop then hitboxLoop:Disconnect() end
+		hitboxLoop = runService.RenderStepped:Connect(function()
+			if hitboxEnabled then
+				applyHitbox()
 			end
-			if updateLoop then updateLoop:Disconnect() end
-			updateLoop = runService.RenderStepped:Connect(updateHitboxes)
-			print("✅ Хитбокс ВКЛ")
-		else
-			if updateLoop then updateLoop:Disconnect() updateLoop = nil end
-			updateHitboxes()
-			print("❌ Хитбокс ВЫКЛ")
-		end
-	end)
+		end)
+	end
 	
+	-- ====== ТЕКСТБОКС ======
 	if textBox then
+		textBox.PlaceholderText = "Size"
+		textBox.Text = tostring(hitboxSize)
 		textBox.FocusLost:Connect(function(enterPressed)
 			if enterPressed then
 				local val = tonumber(textBox.Text)
-				if val and val >= 0 and val <= 100 then
-					currentSize = val
-					if isEnabled then updateHitboxes() end
+				if val then
+					hitboxSize = math.clamp(val, 1, 100)
+					textBox.Text = tostring(hitboxSize)
+					if hitboxEnabled then applyHitbox() end
 				end
 			end
 		end)
 	end
+	
+	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
+	button.MouseButton1Click:Connect(function()
+		hitboxEnabled = not hitboxEnabled
+		_G.HitboxEnabled = hitboxEnabled
+	
+		if hitboxEnabled then
+			applyHitbox()
+			startLoop()
+			print("✅ Хитбокс ВКЛ (размер: " .. hitboxSize .. ")")
+		else
+			if hitboxLoop then hitboxLoop:Disconnect() hitboxLoop = nil end
+			applyHitbox()
+			print("❌ Хитбокс ВЫКЛ")
+		end
+	end)
+	
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if hitboxEnabled then applyHitbox() end
+	end)
+	
+	print("✅ Hitbox_Toggle загружена")
 end;
 task.spawn(C_d);
 -- StarterGui.Hitbox_Gui.MainFrame.Settings_Color.LocalScript
@@ -716,41 +739,70 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- HB_Visible (ВКЛ/ВЫКЛ ВИЗУАЛА)
+	-- HB_Visible (ВИЗУАЛ)
 	-- ==========================================
 	local button = script.Parent
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
+	local player = game.Players.LocalPlayer
+	local runService = game:GetService("RunService")
 	
-	local isVisualOn = false
 	_G.HitboxVisible = false
+	local visualLoop = nil
 	
-	button.MouseButton1Click:Connect(function()
-		isVisualOn = not isVisualOn
-		_G.HitboxVisible = isVisualOn
+	-- ====== ПОИСК ДЕТАЛЕЙ ======
+	local function findPlayerParts()
+		local parts = {}
+		local char = player.Character
+		if not char then return parts end
 	
-		-- Проходим по всем игрокам и меняем вид квадрата (без цикла, моментально)
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr ~= player and plr.Character then
-				local hitboxPart = plr.Character:FindFirstChild("CustomHitboxPart")
-				if hitboxPart then
-					if isVisualOn then
-						-- ТЕМНО-ФИОЛЕТОВЫЙ
-						hitboxPart.Transparency = 0.4
-						hitboxPart.Color = Color3.fromRGB(75, 0, 130)
-						hitboxPart.Material = Enum.Material.Neon
-					else
-						-- НЕВИДИМЫЙ
-						hitboxPart.Transparency = 1
-						hitboxPart.Color = Color3.fromRGB(128, 128, 128)
-						hitboxPart.Material = Enum.Material.Plastic
-					end
-				end
+		for _, part in pairs(char:GetDescendants()) do
+			if part:IsA("BasePart") or part:IsA("MeshPart") then
+				table.insert(parts, part)
 			end
 		end
+		return parts
+	end
 	
-		print("👁️ Визуал хитбокса:", isVisualOn and "ВКЛ" or "ВЫКЛ")
+	-- ====== ПРИМЕНЕНИЕ ВИЗУАЛА ======
+	local function applyVisual()
+		if not _G.HitboxEnabled then return end -- Если хитбокс выключен, визуал не трогаем
+	
+		local parts = findPlayerParts()
+		for _, part in pairs(parts) do
+			pcall(function()
+				if _G.HitboxVisible then
+					part.Transparency = 0.4
+					part.Color = Color3.fromRGB(75, 0, 130)
+					part.Material = Enum.Material.Neon
+				else
+					part.Transparency = 1
+					part.Color = Color3.fromRGB(128, 128, 128)
+					part.Material = Enum.Material.Plastic
+				end
+			end)
+		end
+	end
+	
+	-- ====== ЦИКЛ ======
+	local function startVisualLoop()
+		if visualLoop then visualLoop:Disconnect() end
+		visualLoop = runService.RenderStepped:Connect(function()
+			applyVisual()
+		end)
+	end
+	
+	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
+	button.MouseButton1Click:Connect(function()
+		_G.HitboxVisible = not _G.HitboxVisible
+		applyVisual()
+	
+		if not visualLoop then startVisualLoop() end
+	
+		print("👁️ Хитбокс ВИДИМ" or "👁️ Хитбокс СКРЫТ")
 	end)
+	
+	-- Запуск цикла
+	startVisualLoop()
+	print("✅ Hitbox_Visual загружена")
 end;
 task.spawn(C_20);
 
