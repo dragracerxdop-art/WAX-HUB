@@ -356,25 +356,24 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (КАК В РАБОЧЕМ СКРИПТЕ)
+	-- Hitbox_Toggle (ВКЛ/ВЫКЛ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	local runService = game:GetService("RunService")
-	local textBox = button:FindFirstChild("Hitbox_Size")
 	
 	local hitboxEnabled = false
-	local hitboxSize = 10
 	local hitboxLoop = nil
 	_G.HitboxEnabled = false
 	_G.HitboxVisible = false
 	
-	-- ====== ПОИСК ВСЕХ ДЕТАЛЕЙ ИГРОКА ======
-	local function findPlayerParts()
+	-- Ищем текстбокс строго внутри кнопки
+	local textBox = button:FindFirstChild("Hitbox_Size")
+	
+	local function findParts()
 		local parts = {}
 		local char = player.Character
 		if not char then return parts end
-	
 		for _, part in pairs(char:GetDescendants()) do
 			if part:IsA("BasePart") or part:IsA("MeshPart") then
 				table.insert(parts, part)
@@ -383,93 +382,74 @@ local script = G2L["d"];
 		return parts
 	end
 	
-	-- ====== ПРИМЕНЕНИЕ ======
 	local function applyHitbox()
-		local parts = findPlayerParts()
+		if not hitboxEnabled then return end
+		local size = 1
+		if textBox then
+			local val = tonumber(textBox.Text)
+			size = (val and val >= 0 and val <= 100) and val or 1
+		end
+	
+		local parts = findParts()
 		for _, part in pairs(parts) do
 			pcall(function()
-				-- Сохраняем оригинальный размер
-				local originalSize = part:GetAttribute("OriginalSize")
-				if not originalSize then
+				local original = part:GetAttribute("OriginalSize")
+				if not original then
 					part:SetAttribute("OriginalSize", part.Size)
-					originalSize = part.Size
+					original = part.Size
 				end
 	
-				if hitboxEnabled then
-					-- Увеличиваем
-					part.Size = originalSize * hitboxSize
-					part.CanCollide = false
+				part.Size = original * size
+				part.CanCollide = false
 	
-					-- ВИЗУАЛ
-					if _G.HitboxVisible then
-						part.Transparency = 0.4
-						part.Color = Color3.fromRGB(75, 0, 130)
-						part.Material = Enum.Material.Neon
-					else
-						part.Transparency = 1
-						part.Color = Color3.fromRGB(128, 128, 128)
-						part.Material = Enum.Material.Plastic
-					end
+				if _G.HitboxVisible then
+					part.Transparency = 0.4
+					part.Color = Color3.fromRGB(75, 0, 130)
+					part.Material = Enum.Material.Neon
 				else
-					-- Восстановление
-					part.Size = originalSize
-					part.Transparency = 0
+					part.Transparency = 1
 					part.Color = Color3.fromRGB(128, 128, 128)
 					part.Material = Enum.Material.Plastic
-					part.CanCollide = true
 				end
 			end)
 		end
 	end
 	
-	-- ====== ЦИКЛ ======
-	local function startLoop()
-		if hitboxLoop then hitboxLoop:Disconnect() end
-		hitboxLoop = runService.RenderStepped:Connect(function()
-			if hitboxEnabled then
-				applyHitbox()
-			end
-		end)
+	local function restoreHitbox()
+		local parts = findParts()
+		for _, part in pairs(parts) do
+			pcall(function()
+				local original = part:GetAttribute("OriginalSize")
+				if original then part.Size = original end
+				part.Transparency = 0
+				part.Color = Color3.fromRGB(128, 128, 128)
+				part.Material = Enum.Material.Plastic
+				part.CanCollide = true
+			end)
+		end
 	end
 	
-	-- ====== ТЕКСТБОКС ======
 	if textBox then
-		textBox.PlaceholderText = "Size"
-		textBox.Text = tostring(hitboxSize)
 		textBox.FocusLost:Connect(function(enterPressed)
-			if enterPressed then
-				local val = tonumber(textBox.Text)
-				if val then
-					hitboxSize = math.clamp(val, 1, 100)
-					textBox.Text = tostring(hitboxSize)
-					if hitboxEnabled then applyHitbox() end
-				end
-			end
+			if enterPressed and hitboxEnabled then applyHitbox() end
 		end)
 	end
 	
-	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
 	button.MouseButton1Click:Connect(function()
 		hitboxEnabled = not hitboxEnabled
 		_G.HitboxEnabled = hitboxEnabled
 	
 		if hitboxEnabled then
+			if hitboxLoop then hitboxLoop:Disconnect() end
 			applyHitbox()
-			startLoop()
-			print("✅ Хитбокс ВКЛ (размер: " .. hitboxSize .. ")")
+			hitboxLoop = runService.RenderStepped:Connect(applyHitbox)
+			print("✅ Хитбокс ВКЛ")
 		else
 			if hitboxLoop then hitboxLoop:Disconnect() hitboxLoop = nil end
-			applyHitbox()
+			restoreHitbox()
 			print("❌ Хитбокс ВЫКЛ")
 		end
 	end)
-	
-	player.CharacterAdded:Connect(function()
-		task.wait(0.5)
-		if hitboxEnabled then applyHitbox() end
-	end)
-	
-	print("✅ Hitbox_Toggle загружена")
 end;
 task.spawn(C_d);
 -- StarterGui.Hitbox_Gui.MainFrame.Settings_Color.LocalScript
@@ -739,70 +719,34 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- HB_Visible (ВИЗУАЛ)
+	-- Hitbox_Visual (ВКЛ/ВЫКЛ ВИЗУАЛА)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
-	local runService = game:GetService("RunService")
 	
 	_G.HitboxVisible = false
-	local visualLoop = nil
 	
-	-- ====== ПОИСК ДЕТАЛЕЙ ======
-	local function findPlayerParts()
-		local parts = {}
-		local char = player.Character
-		if not char then return parts end
-	
-		for _, part in pairs(char:GetDescendants()) do
-			if part:IsA("BasePart") or part:IsA("MeshPart") then
-				table.insert(parts, part)
-			end
-		end
-		return parts
-	end
-	
-	-- ====== ПРИМЕНЕНИЕ ВИЗУАЛА ======
-	local function applyVisual()
-		if not _G.HitboxEnabled then return end -- Если хитбокс выключен, визуал не трогаем
-	
-		local parts = findPlayerParts()
-		for _, part in pairs(parts) do
-			pcall(function()
-				if _G.HitboxVisible then
-					part.Transparency = 0.4
-					part.Color = Color3.fromRGB(75, 0, 130)
-					part.Material = Enum.Material.Neon
-				else
-					part.Transparency = 1
-					part.Color = Color3.fromRGB(128, 128, 128)
-					part.Material = Enum.Material.Plastic
-				end
-			end)
-		end
-	end
-	
-	-- ====== ЦИКЛ ======
-	local function startVisualLoop()
-		if visualLoop then visualLoop:Disconnect() end
-		visualLoop = runService.RenderStepped:Connect(function()
-			applyVisual()
-		end)
-	end
-	
-	-- ====== ПЕРЕКЛЮЧЕНИЕ ======
 	button.MouseButton1Click:Connect(function()
 		_G.HitboxVisible = not _G.HitboxVisible
-		applyVisual()
 	
-		if not visualLoop then startVisualLoop() end
-	
-		print("👁️ Хитбокс ВИДИМ" or "👁️ Хитбокс СКРЫТ")
+		local char = player.Character
+		if char then
+			for _, part in pairs(char:GetDescendants()) do
+				if (part:IsA("BasePart") or part:IsA("MeshPart")) and part:GetAttribute("OriginalSize") then
+					if _G.HitboxVisible then
+						part.Transparency = 0.4
+						part.Color = Color3.fromRGB(75, 0, 130)
+						part.Material = Enum.Material.Neon
+					else
+						part.Transparency = 1
+						part.Color = Color3.fromRGB(128, 128, 128)
+						part.Material = Enum.Material.Plastic
+					end
+				end
+			end
+		end
+		print("👁️ Визуал хитбокса:", _G.HitboxVisible and "ВКЛ" or "ВЫКЛ")
 	end)
-	
-	-- Запуск цикла
-	startVisualLoop()
-	print("✅ Hitbox_Visual загружена")
 end;
 task.spawn(C_20);
 
