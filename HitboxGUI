@@ -356,88 +356,110 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (КНОПКА + ТЕКСТБОКС)
+	-- HITBOX EXPANDER (РАЗДУВАЕМ ТОРС)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	
-	-- Ищем текстбокс внутри кнопки
 	local textBox = button:FindFirstChild("Hitbox_Size")
-	
 	local isEnabled = false
 	local currentSize = 0
-	_G.HitboxVisual = false -- Флаг для второй кнопки
+	_G.HitboxVisual = false 
 	
-	-- Функция применения размера
 	local function applyHitbox()
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
 				-- Ищем торс
-				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso") or plr.Character:FindFirstChild("HumanoidRootPart")
+				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso")
+				local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
 	
-				if torso then
+				if torso and humanoid then
 					if isEnabled and currentSize > 0 then
+						-- 1. Раздуваем торс
 						torso.Size = Vector3.new(currentSize, currentSize, currentSize)
-						-- Если визуал включен, делаем красным, иначе невидимым
+	
+						-- 2. Отключаем коллизию торса, чтобы не застревал
+						torso.CanCollide = false
+	
+						-- 3. Визуал
 						if _G.HitboxVisual then
 							torso.Transparency = 0.5
 							torso.Color = Color3.fromRGB(255, 0, 0)
 						else
 							torso.Transparency = 1
+							torso.Color = Color3.fromRGB(255, 255, 255) -- Сбрасываем цвет
 						end
+	
+						-- 4. ФИКС АНИМАЦИЙ И МОТОРОВ (Чтобы не застывали)
+						-- Если это R6 (Torso), нужно пересчитать моторы
+						if torso.Name == "Torso" then
+							for _, joint in pairs(torso:GetChildren()) do
+								if joint:IsA("Motor6D") then
+									-- Сдвигаем конечности относительно нового размера (примерный фикс)
+									if joint.Name == "Right Shoulder" then joint.C0 = CFrame.new(currentSize/2, 0.5, 0) 
+									elseif joint.Name == "Left Shoulder" then joint.C0 = CFrame.new(-currentSize/2, 0.5, 0)
+									elseif joint.Name == "Right Hip" then joint.C0 = CFrame.new(currentSize/3, -currentSize/2, 0)
+									elseif joint.Name == "Left Hip" then joint.C0 = CFrame.new(-currentSize/3, -currentSize/2, 0)
+									end
+								end
+							end
+						end
+						-- Для R15 (UpperTorso) моторы ломаются сильнее, но Roblox сам пытается их чинить. 
+						-- Отключение PlatformStand помогает им не падать.
+						humanoid.PlatformStand = false 
+	
 					else
-						-- Возврат к стандартному размеру
-						torso.Size = Vector3.new(2, 2, 1)
+						-- Возврат к стандартному
+						torso.Size = (torso.Name == "Torso") and Vector3.new(2, 2, 1) or Vector3.new(2, 2, 1)
+						torso.CanCollide = true
 						torso.Transparency = 0
 						torso.Color = Color3.fromRGB(255, 255, 255)
+	
+						-- Возврат моторов
+						if torso.Name == "Torso" then
+							for _, joint in pairs(torso:GetChildren()) do
+								if joint:IsA("Motor6D") then
+									if joint.Name == "Right Shoulder" then joint.C0 = CFrame.new(1, 0.5, 0) 
+									elseif joint.Name == "Left Shoulder" then joint.C0 = CFrame.new(-1, 0.5, 0)
+									elseif joint.Name == "Right Hip" then joint.C0 = CFrame.new(0.5, -1, 0)
+									elseif joint.Name == "Left Hip" then joint.C0 = CFrame.new(-0.5, -1, 0)
+									end
+								end
+							end
+						end
 					end
 				end
 			end
 		end
 	end
 	
-	-- Клик по кнопке (вкл/выкл)
+	-- Клик по кнопке
 	button.MouseButton1Click:Connect(function()
 		isEnabled = not isEnabled
-	
 		if isEnabled then
-			-- Читаем размер из текстбокса
 			if textBox then
 				local val = tonumber(textBox.Text)
-				if val and val >= 0 and val <= 100 then
-					currentSize = val
-				else
-					currentSize = 10 -- Если ввели хуйню, ставим 10
-				end
+				currentSize = (val and val >= 0 and val <= 100) and val or 10
 			end
 			applyHitbox()
-			print("✅ Хитбокс ВКЛ, размер:", currentSize)
 		else
 			applyHitbox()
-			print("❌ Хитбокс ВЫКЛ")
 		end
 	end)
 	
-	-- Enter в текстбоксе (мгновенное применение)
+	-- Enter в текстбоксе
 	if textBox then
 		textBox.FocusLost:Connect(function(enterPressed)
 			if enterPressed then
 				local val = tonumber(textBox.Text)
 				if val and val >= 0 and val <= 100 then
 					currentSize = val
-					if isEnabled then
-						applyHitbox()
-						print("✅ Размер хитбокса изменен на:", val)
-					end
-				else
-					print("❌ Введи число от 0 до 100!")
+					if isEnabled then applyHitbox() end
 				end
 			end
 		end)
 	end
-	
-	print("✅ Скрипт кнопки хитбокса загружен!")
 end;
 task.spawn(C_d);
 -- StarterGui.Hitbox_Gui.MainFrame.Settings_Color.LocalScript
@@ -707,37 +729,25 @@ task.spawn(C_1b);
 local function C_20()
 local script = G2L["20"];
 	-- ==========================================
-	-- HITBOX VISUAL TOGGLE (ВИДИМОСТЬ)
+	-- HITBOX VISUAL TOGGLE
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	
 	local isVisualOn = false
-	_G.HitboxVisual = false -- Синхронизация с первой кнопкой
+	_G.HitboxVisual = false
 	
 	button.MouseButton1Click:Connect(function()
 		isVisualOn = not isVisualOn
 		_G.HitboxVisual = isVisualOn
 	
-		-- Находим первую кнопку (Hitbox_Toggle), чтобы узнать, включен ли хитбокс и какой размер
-		local hitboxBtn = button.Parent:FindFirstChild("Hitbox_Toggle") 
-		local currentSize = 0
-	
-		if hitboxBtn then
-			local tb = hitboxBtn:FindFirstChild("Hitbox_Size")
-			if tb then
-				currentSize = tonumber(tb.Text) or 0
-			end
-		end
-	
-		-- Применяем прозрачность ко всем текущим игрокам
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
-				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso") or plr.Character:FindFirstChild("HumanoidRootPart")
+				local torso = plr.Character:FindFirstChild("UpperTorso") or plr.Character:FindFirstChild("Torso")
 				if torso then
-					-- Если хитбокс активен (размер больше 1)
-					if currentSize > 1 and torso.Size.X > 1 then
+					-- Меняем визуал только если размер уже изменен
+					if torso.Size.X > 2 then
 						if isVisualOn then
 							torso.Transparency = 0.5
 							torso.Color = Color3.fromRGB(255, 0, 0)
@@ -748,11 +758,7 @@ local script = G2L["20"];
 				end
 			end
 		end
-	
-		print("👁️ Визуал хитбокса:", isVisualOn and "ВКЛ" or "ВЫКЛ")
 	end)
-	
-	print("✅ Скрипт кнопки визуала загружен!")
 end;
 task.spawn(C_20);
 
