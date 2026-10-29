@@ -19,6 +19,7 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.ESP_Hub.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
+G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 199);
@@ -889,36 +890,26 @@ task.spawn(C_19);
 local function C_1e()
 local script = G2L["1e"];
 	-- ==========================================
-	-- ESP_DELETE (КАК В ММ2 ГУЕ)
+	-- ESP DELETE GUI (ПОЛНОЕ УДАЛЕНИЕ)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
 	
-	-- ИНДИКАТОР НА КНОПКЕ
-	local label = button:FindFirstChild("ButtonText")
-	if not label then
-		label = Instance.new("TextLabel")
-		label.Name = "ButtonText"
-		label.Size = UDim2.new(1, 0, 1, 0)
-		label.BackgroundTransparency = 1
-		label.Text = "🗑️ УДАЛИТЬ ESP"
-		label.TextColor3 = Color3.fromRGB(255, 100, 100)
-		label.TextSize = 14
-		label.Font = Enum.Font.SourceSansBold
-		label.ZIndex = 2
-		label.Parent = button
-	end
+	button.MouseButton1Click:Connect(function()
+		-- 1. Добираемся до самого главного контейнера (ESP_Hub)
+		local espGui = button.Parent.Parent -- MainFrame.Parent = ESP_Hub
 	
-	-- ====== ОЧИСТКА ESP (КАК В ММ2) ======
-	local function clearESP()
-		-- 1. УДАЛЯЕМ HIGHLIGHT (ПОДСВЕТКУ)
+		if espGui then
+			-- Удаляем весь GUI ESP
+			espGui:Destroy()
+			print("🗑️ ESP GUI ПОЛНОСТЬЮ УДАЛЕН!")
+		else
+			warn("❌ Не удалось найти ESP_Hub для удаления!")
+		end
+	
+		-- 2. Дополнительно очищаем подсветки на игроках (если ESP их создавал)
 		for _, plr in pairs(game.Players:GetPlayers()) do
 			if plr.Character then
-				local highlight = plr.Character:FindFirstChild("MM2Highlight")
-				if highlight then
-					highlight:Destroy()
-				end
-				-- УДАЛЯЕМ ВСЕ HIGHLIGHT
 				for _, child in pairs(plr.Character:GetDescendants()) do
 					if child:IsA("Highlight") then
 						child:Destroy()
@@ -927,49 +918,13 @@ local script = G2L["1e"];
 			end
 		end
 	
-		-- 2. УДАЛЯЕМ ESP КНОПКИ (КАК В ММ2)
-		local coreGui = game:GetService("CoreGui")
-		for _, gui in pairs(coreGui:GetChildren()) do
-			if gui:IsA("ScreenGui") then
-				-- УДАЛЯЕМ ESP GUI (КАК В ММ2)
-				if string.find(gui.Name, "CorePosition_") or string.find(gui.Name, "ESP") then
-					gui:Destroy()
-				end
-			end
-		end
-	
-		-- 3. УДАЛЯЕМ ПЕРЕМЕННУЮ ESP
+		-- 3. Отключаем глобальный флаг ESP (если он был)
 		if _G.ESP_Enabled ~= nil then
 			_G.ESP_Enabled = false
 		end
+	end)
 	
-		-- 4. УДАЛЯЕМ ВСЕ КОННЕКТЫ (ЕСЛИ ОНИ ЕСТЬ В _G)
-		if _G.ESP_Connections then
-			for _, conn in pairs(_G.ESP_Connections) do
-				pcall(function() conn:Disconnect() end)
-			end
-			_G.ESP_Connections = {}
-		end
-	
-		-- 5. УДАЛЯЕМ DRAWING
-		pcall(function()
-			local drawings = getdrawings or getobjects or function() return {} end
-			for _, d in pairs(drawings()) do
-				if d:IsA("Line") or d:IsA("Text") or d:IsA("Square") or d:IsA("Circle") then
-					if d.Visible then
-						d:Remove()
-					end
-				end
-			end
-		end)
-	
-		print("🗑️ ESP GUI И КОННЕКТЫ УДАЛЕНЫ!")
-	end
-	
-	-- ====== КНОПКА ======
-	button.MouseButton1Click:Connect(clearESP)
-	
-	print("✅ ESP_DELETE ЗАГРУЖЕНА (КАК В ММ2)!")
+	print("✅ ESP_Delete_Gui загружена!")
 end;
 task.spawn(C_1e);
 -- StarterGui.ESP_Hub.MainFrame.Settings_AimBind.LocalScript
