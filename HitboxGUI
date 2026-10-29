@@ -356,7 +356,7 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- HITBOX EXPANDER (НЕВИДИМЫЙ КВАДРАТ)
+	-- HITBOX EXPANDER (КВАДРАТ + СКВОЗЬ СТЕНЫ)
 	-- ==========================================
 	local button = script.Parent
 	local Players = game:GetService("Players")
@@ -397,12 +397,14 @@ local script = G2L["d"];
 					hitbox.Size = Vector3.new(currentSize, currentSize, currentSize)
 					hitbox.CFrame = hrp.CFrame -- Привязка к игроку
 	
-					-- Настройки из твоего запроса
 					if _G.HitboxVisible then
-						hitbox.Transparency = 0.4
+						-- ОЧЕНЬ ПРОЗРАЧНЫЙ НЕОН (ВИДНО КАК ПРИЗРАК)
+						hitbox.Transparency = 0.85 
 						hitbox.Color = Color3.fromRGB(75, 0, 130)
 						hitbox.Material = Enum.Material.Neon
+						hitbox.CastShadow = false
 					else
+						-- ПОЛНОСТЬЮ НЕВИДИМЫЙ
 						hitbox.Transparency = 1
 						hitbox.Color = Color3.fromRGB(128, 128, 128)
 						hitbox.Material = Enum.Material.Plastic
@@ -731,13 +733,12 @@ local script = G2L["20"];
 		isVisualOn = not isVisualOn
 		_G.HitboxVisible = isVisualOn
 	
-		-- Проходимся по всем игрокам и меняем вид квадрата
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
 				local hitbox = plr.Character:FindFirstChild("CustomHitbox")
 				if hitbox then
 					if isVisualOn then
-						hitbox.Transparency = 0.4
+						hitbox.Transparency = 0.85
 						hitbox.Color = Color3.fromRGB(75, 0, 130)
 						hitbox.Material = Enum.Material.Neon
 					else
