@@ -3920,7 +3920,7 @@ task.spawn(C_9c);
 local function C_b2()
 local script = G2L["b2"];
 	-- ==========================================
-	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С Script_OpenTeleport)
+	-- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (ФИНАЛ)
 	-- ==========================================
 	
 	local leftFrame = script.Parent
@@ -3932,8 +3932,6 @@ local script = G2L["b2"];
 		return
 	end
 	
-	print("✅ RightFrame найден!")
-	
 	-- ===== ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ =====
 	local function switchTab(tabName)
 		print("🔘 Переключение на: " .. tabName)
@@ -3942,24 +3940,18 @@ local script = G2L["b2"];
 		for _, child in pairs(rightFrame:GetChildren()) do
 			if not child:IsA("UIComponent") then
 				child.Visible = false
-				-- print("🔹 Скрыт: " .. child.Name) -- Убрал спам в консоль
 			end
 		end
 	
 		-- ===== HOME =====
 		if tabName == "Home" then
 			local homeInfo = rightFrame:FindFirstChild("Home_Info")
-			if homeInfo then
-				homeInfo.Visible = true
-				print("✅ HOME показан")
-			else
-				warn("❌ Home_Info не найден!")
-			end
+			if homeInfo then homeInfo.Visible = true end
 	
 			-- ===== GAMES =====
 		elseif tabName == "Games" then
 			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and (
+				if (child:IsA("ImageButton") or child:IsA("TextButton")) and (
 					child.Name == "Games_OpenMM2" or
 						child.Name == "Games_OpenViolence" or
 						child.Name == "Games_OpenZo"
@@ -3967,12 +3959,11 @@ local script = G2L["b2"];
 					child.Visible = true
 				end
 			end
-			print("✅ GAMES")
 	
 			-- ===== UNIVERSAL =====
 		elseif tabName == "Universal" then
 			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and (
+				if (child:IsA("ImageButton") or child:IsA("TextButton")) and (
 					child.Name == "Universal_Cntrl" or
 						child.Name == "Universal_CntrlDel" or
 						child.Name == "Universal_AntiAFK" or
@@ -3989,7 +3980,6 @@ local script = G2L["b2"];
 					child.Visible = true
 				end
 			end
-	
 			for _, child in pairs(rightFrame:GetChildren()) do
 				if child:IsA("TextLabel") and (
 					child.Name == "Universal_World" or
@@ -4000,39 +3990,36 @@ local script = G2L["b2"];
 					child.Visible = true
 				end
 			end
-			print("✅ UNIVERSAL")
 	
 			-- ===== UNIVERSAL SCRIPTS =====
 		elseif tabName == "Universal Scripts" then
 			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and (
+				if (child:IsA("ImageButton") or child:IsA("TextButton")) and (
 					child.Name == "Script_TouchFling" or
 						child.Name == "Script_AntiFling" or
 						child.Name == "Script_OpenFling" or
 						child.Name == "Script_OpenESP" or
-						child.Name == "Script_OpenTeleport" -- ДОБАВИЛ СЮДА!
+						child.Name == "Script_OpenTeleport" -- ТУТ ТВОЯ НОВАЯ КНОПКА
 					) then
 					child.Visible = true
 				end
 			end
-			print("✅ UNIVERSAL SCRIPTS")
 	
 			-- ===== TROLL =====
 		elseif tabName == "Troll" then
 			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and (
+				if (child:IsA("ImageButton") or child:IsA("TextButton")) and (
 					child.Name == "Troll_DropKick" or
 						child.Name == "Troll_TennaKick"
 					) then
 					child.Visible = true
 				end
 			end
-			print("✅ TROLL")
 	
 			-- ===== SETTINGS =====
 		elseif tabName == "Settings" then
 			for _, child in pairs(rightFrame:GetChildren()) do
-				if child:IsA("TextButton") and (
+				if (child:IsA("ImageButton") or child:IsA("TextButton")) and (
 					child.Name == "Settings_Hide" or
 						child.Name == "Settings_Color" or
 						child.Name == "Settings_BindPlatformDelete" or
@@ -4041,7 +4028,6 @@ local script = G2L["b2"];
 					child.Visible = true
 				end
 			end
-			print("✅ SETTINGS")
 	
 		else
 			print("❌ Неизвестная вкладка: " .. tabName)
@@ -4050,14 +4036,13 @@ local script = G2L["b2"];
 	
 	-- ===== ПОДКЛЮЧАЕМ КНОПКИ В ЛЕВОЙ ПАНЕЛИ =====
 	for _, btn in pairs(leftFrame:GetChildren()) do
-		if btn:IsA("TextButton") then
+		if btn:IsA("TextButton") or btn:IsA("ImageButton") then
 			btn.MouseButton1Click:Connect(function()
 				switchTab(btn.Name)
 			end)
 		end
 	end
 	
-	-- ===== СТАРТУЕМ С HOME =====
 	switchTab("Home")
 	print("✅ Переключение вкладок загружено!")
 end;
