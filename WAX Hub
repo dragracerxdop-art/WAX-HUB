@@ -3826,7 +3826,7 @@ task.spawn(C_92);
 local function C_97()
 local script = G2L["97"];
 	-- ==========================================
-	-- Script_OpenTeleport (ЗАГРУЗКА TELEPORT GUI)
+	-- Script_OpenTeleport (ТОЧНАЯ КОПИЯ СТИЛЯ OpenZo)
 	-- ==========================================
 	local button = script.Parent
 	local player = game.Players.LocalPlayer
@@ -3838,12 +3838,12 @@ local script = G2L["97"];
 		local existingGui = playerGui:FindFirstChild("TeleportGui")
 	
 		if existingGui then
-			-- Если есть — удаляем его (чтобы можно было пересоздать)
+			-- Если уже есть — удаляем и пересоздаём
 			existingGui:Destroy()
 			print("🗑️ Старый TeleportGui удалён")
 		end
 	
-		-- Загружаем GUI с GitHub
+		-- Загружаем TeleportGui с GitHub
 		print("🔄 Загрузка Teleport GUI...")
 	
 		local success, err = pcall(function()
@@ -3852,8 +3852,15 @@ local script = G2L["97"];
 	
 		if success then
 			print("✅ Teleport GUI загружен!")
+	
+			-- Проверяем, создался ли GUI
+			local gui = playerGui:FindFirstChild("TeleportGui")
+			if gui then
+				gui.Enabled = true
+				print("✅ TeleportGui активирован!")
+			end
 		else
-			warn("❌ Ошибка загрузки:", err)
+			warn("❌ Ошибка загрузки Teleport GUI:", err)
 		end
 	end)
 	
