@@ -553,7 +553,7 @@ task.spawn(C_17);
 local function C_23()
 local script = G2L["23"];
 	-- ==========================================
-	-- TELEPORT_LIST (С TPButton)
+	-- TELEPORT_LIST (С TPButton БЕЗ ТЕКСТА)
 	-- ==========================================
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
@@ -577,7 +577,7 @@ local script = G2L["23"];
 		local targetHrp = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
 	
 		if hrp and targetHrp then
-			-- ВКЛЮЧАЕМ НОКЛИП НА МИГ, ЧТОБЫ НЕ ЗАСТРЯТЬ В СТЕНАХ
+			-- ВКЛЮЧАЕМ НОКЛИП НА МИГ
 			for _, part in pairs(char:GetDescendants()) do
 				if part:IsA("BasePart") then part.CanCollide = false end
 			end
@@ -588,7 +588,7 @@ local script = G2L["23"];
 			hrp.RotVelocity = Vector3.zero
 			print("✅ Телепорт к:", targetPlayer.Name)
 	
-			-- ВОЗВРАЩАЕМ КОЛЛИЗИИ ОБРАТНО
+			-- ВОЗВРАЩАЕМ КОЛЛИЗИИ
 			task.wait(0.3)
 			for _, part in pairs(char:GetDescendants()) do
 				if part:IsA("BasePart") then part.CanCollide = true end
@@ -598,7 +598,7 @@ local script = G2L["23"];
 	
 	-- ====== ОБНОВЛЕНИЕ СПИСКА ======
 	local function updateList()
-		-- Очищаем старые таблички (оставляем только шаблон)
+		-- Очищаем старые таблички
 		for _, child in pairs(container:GetChildren()) do
 			if child:IsA("Frame") and child ~= template then
 				child:Destroy()
@@ -626,9 +626,12 @@ local script = G2L["23"];
 					nameLabel.Text = plr.Name
 				end
 	
-				-- ВЕШАЕМ ТЕЛЕПОРТ НА ТВОЮ КНОПКУ TPButton
+				-- ВЕШАЕМ ТЕЛЕПОРТ И ОЧИЩАЕМ ТЕКСТ
 				local clickBtn = newItem:FindFirstChild("TPButton")
 				if clickBtn then
+					-- ОЧИЩАЕМ ТЕКСТ "Button", ЧТОБЫ НЕ ПЕРЕКРЫВАЛ ИМЯ
+					clickBtn.Text = "" 
+	
 					clickBtn.MouseButton1Click:Connect(function()
 						teleportTo(plr)
 					end)
@@ -637,11 +640,11 @@ local script = G2L["23"];
 				end
 	
 				newItem.Parent = container
-				y = y + 45 -- РАССТОЯНИЕ МЕЖДУ ИГРОКАМИ (если таблички слипаются или далеко - поменяй это число)
+				y = y + 45 -- РАССТОЯНИЕ МЕЖДУ ИГРОКАМИ
 			end
 		end
 	
-		-- РАСТЯГИВАЕМ SCROLLING FRAME ПОД РАЗМЕР СПИСКА
+		-- РАСТЯГИВАЕМ SCROLLING FRAME
 		container.CanvasSize = UDim2.new(0, 0, 0, y + 10)
 	end
 	
@@ -651,7 +654,7 @@ local script = G2L["23"];
 	
 	-- ПЕРВЫЙ ЗАПУСК
 	updateList()
-	print("✅ TeleportList загружен!")
+	print("✅ TeleportList загружен (текст кнопок убран)!")
 end;
 task.spawn(C_23);
 
