@@ -356,97 +356,92 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- Hitbox_Toggle (ВКЛ/ВЫКЛ)
+	-- Hitbox_Toggle (ХИТБОКС КУБ)
 	-- ==========================================
 	local button = script.Parent
-	local player = game.Players.LocalPlayer
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
 	local runService = game:GetService("RunService")
 	
 	local hitboxEnabled = false
-	local hitboxLoop = nil
+	local currentSize = 10
+	local updateLoop = nil
 	_G.HitboxEnabled = false
 	_G.HitboxVisible = false
 	
-	-- Ищем текстбокс строго внутри кнопки
+	-- Текстбокс внутри кнопки
 	local textBox = button:FindFirstChild("Hitbox_Size")
 	
-	local function findParts()
-		local parts = {}
-		local char = player.Character
-		if not char then return parts end
-		for _, part in pairs(char:GetDescendants()) do
-			if part:IsA("BasePart") or part:IsA("MeshPart") then
-				table.insert(parts, part)
+	local function updateHitboxes()
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player and plr.Character then
+				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+				local hitbox = plr.Character:FindFirstChild("CustomHitboxPart")
+	
+				if _G.HitboxEnabled and currentSize > 1 and hrp then
+					-- Создаем куб
+					if not hitbox then
+						hitbox = Instance.new("Part")
+						hitbox.Name = "CustomHitboxPart"
+						hitbox.CanCollide = false
+						hitbox.Massless = true
+						hitbox.Parent = plr.Character
+	
+						local weld = Instance.new("WeldConstraint")
+						weld.Part0 = hrp
+						weld.Part1 = hitbox
+						weld.Parent = hitbox
+					end
+	
+					hitbox.Size = Vector3.new(currentSize, currentSize, currentSize)
+					hitbox.CFrame = hrp.CFrame
+	
+					-- ВИЗУАЛ
+					if _G.HitboxVisible then
+						hitbox.Transparency = 0.4
+						hitbox.Color = Color3.fromRGB(75, 0, 130)
+						hitbox.Material = Enum.Material.Neon
+					else
+						hitbox.Transparency = 1
+						hitbox.Color = Color3.fromRGB(128, 128, 128)
+						hitbox.Material = Enum.Material.Plastic
+					end
+				else
+					if hitbox then hitbox:Destroy() end
+				end
 			end
 		end
-		return parts
 	end
 	
-	local function applyHitbox()
-		if not hitboxEnabled then return end
-		local size = 1
-		if textBox then
-			local val = tonumber(textBox.Text)
-			size = (val and val >= 0 and val <= 100) and val or 1
-		end
-	
-		local parts = findParts()
-		for _, part in pairs(parts) do
-			pcall(function()
-				local original = part:GetAttribute("OriginalSize")
-				if not original then
-					part:SetAttribute("OriginalSize", part.Size)
-					original = part.Size
-				end
-	
-				part.Size = original * size
-				part.CanCollide = false
-	
-				if _G.HitboxVisible then
-					part.Transparency = 0.4
-					part.Color = Color3.fromRGB(75, 0, 130)
-					part.Material = Enum.Material.Neon
-				else
-					part.Transparency = 1
-					part.Color = Color3.fromRGB(128, 128, 128)
-					part.Material = Enum.Material.Plastic
-				end
-			end)
-		end
-	end
-	
-	local function restoreHitbox()
-		local parts = findParts()
-		for _, part in pairs(parts) do
-			pcall(function()
-				local original = part:GetAttribute("OriginalSize")
-				if original then part.Size = original end
-				part.Transparency = 0
-				part.Color = Color3.fromRGB(128, 128, 128)
-				part.Material = Enum.Material.Plastic
-				part.CanCollide = true
-			end)
-		end
-	end
-	
+	-- Ввод в текстбокс
 	if textBox then
 		textBox.FocusLost:Connect(function(enterPressed)
-			if enterPressed and hitboxEnabled then applyHitbox() end
+			if enterPressed then
+				local val = tonumber(textBox.Text)
+				if val and val >= 0 and val <= 100 then
+					currentSize = val
+					if hitboxEnabled then updateHitboxes() end
+				end
+			end
 		end)
 	end
 	
+	-- Клик по кнопке
 	button.MouseButton1Click:Connect(function()
 		hitboxEnabled = not hitboxEnabled
 		_G.HitboxEnabled = hitboxEnabled
 	
 		if hitboxEnabled then
-			if hitboxLoop then hitboxLoop:Disconnect() end
-			applyHitbox()
-			hitboxLoop = runService.RenderStepped:Connect(applyHitbox)
+			if textBox then
+				local val = tonumber(textBox.Text)
+				currentSize = (val and val >= 0 and val <= 100) and val or 10
+			end
+			if updateLoop then updateLoop:Disconnect() end
+			updateLoop = runService.RenderStepped:Connect(updateHitboxes)
 			print("✅ Хитбокс ВКЛ")
 		else
-			if hitboxLoop then hitboxLoop:Disconnect() hitboxLoop = nil end
-			restoreHitbox()
+			if updateLoop then updateLoop:Disconnect() updateLoop = nil end
+			updateHitboxes()
 			print("❌ Хитбокс ВЫКЛ")
 		end
 	end)
@@ -722,25 +717,26 @@ local script = G2L["20"];
 	-- Hitbox_Visual (ВКЛ/ВЫКЛ ВИЗУАЛА)
 	-- ==========================================
 	local button = script.Parent
-	local player = game.Players.LocalPlayer
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
 	
 	_G.HitboxVisible = false
 	
 	button.MouseButton1Click:Connect(function()
 		_G.HitboxVisible = not _G.HitboxVisible
 	
-		local char = player.Character
-		if char then
-			for _, part in pairs(char:GetDescendants()) do
-				if (part:IsA("BasePart") or part:IsA("MeshPart")) and part:GetAttribute("OriginalSize") then
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player and plr.Character then
+				local hitbox = plr.Character:FindFirstChild("CustomHitboxPart")
+				if hitbox then
 					if _G.HitboxVisible then
-						part.Transparency = 0.4
-						part.Color = Color3.fromRGB(75, 0, 130)
-						part.Material = Enum.Material.Neon
+						hitbox.Transparency = 0.4
+						hitbox.Color = Color3.fromRGB(75, 0, 130)
+						hitbox.Material = Enum.Material.Neon
 					else
-						part.Transparency = 1
-						part.Color = Color3.fromRGB(128, 128, 128)
-						part.Material = Enum.Material.Plastic
+						hitbox.Transparency = 1
+						hitbox.Color = Color3.fromRGB(128, 128, 128)
+						hitbox.Material = Enum.Material.Plastic
 					end
 				end
 			end
