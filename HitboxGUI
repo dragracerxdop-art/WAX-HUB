@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 35 | Scripts: 6 | Modules: 0 | Tags: 0
+-- Instances: 34 | Scripts: 5 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.Hitbox_Gui
@@ -270,30 +270,25 @@ G2L["1f"]["Name"] = [[Hitbox_Visual]];
 G2L["1f"]["Position"] = UDim2.new(0.49711, 0, 0.50033, 0);
 
 
--- StarterGui.Hitbox_Gui.MainFrame.Hitbox_Visual.LocalScript
-G2L["20"] = Instance.new("LocalScript", G2L["1f"]);
-
-
-
 -- StarterGui.Hitbox_Gui.MainFrame.Hitbox_Visual.ImageLabel
-G2L["21"] = Instance.new("ImageLabel", G2L["1f"]);
-G2L["21"]["BorderSizePixel"] = 0;
-G2L["21"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["21"]["Image"] = [[rbxassetid://71447950485901]];
-G2L["21"]["Size"] = UDim2.new(0, 23, 0, 23);
-G2L["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["21"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
+G2L["20"] = Instance.new("ImageLabel", G2L["1f"]);
+G2L["20"]["BorderSizePixel"] = 0;
+G2L["20"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Image"] = [[rbxassetid://71447950485901]];
+G2L["20"]["Size"] = UDim2.new(0, 23, 0, 23);
+G2L["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["20"]["Position"] = UDim2.new(0.77273, 0, 0.1781, 0);
 
 
 -- StarterGui.Hitbox_Gui.MainFrame.Hitbox_Visual.UICorner
-G2L["22"] = Instance.new("UICorner", G2L["1f"]);
-G2L["22"]["CornerRadius"] = UDim.new(0, 15);
+G2L["21"] = Instance.new("UICorner", G2L["1f"]);
+G2L["21"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.Hitbox_Gui.MainFrame.Hitbox_Visual.UIStroke
-G2L["23"] = Instance.new("UIStroke", G2L["1f"]);
-G2L["23"]["Color"] = Color3.fromRGB(180, 4, 255);
-G2L["23"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["22"] = Instance.new("UIStroke", G2L["1f"]);
+G2L["22"]["Color"] = Color3.fromRGB(180, 4, 255);
+G2L["22"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
 
 
 -- StarterGui.Hitbox_Gui.MainFrame.WAX_Hitbox.LocalScript
@@ -356,93 +351,108 @@ task.spawn(C_6);
 local function C_d()
 local script = G2L["d"];
 	-- ==========================================
-	-- Hitbox_Toggle (ХИТБОКС КУБ)
+	-- ХИТБОКС (ДВЕ НЕЗАВИСИМЫЕ КНОПКИ)
 	-- ==========================================
-	local button = script.Parent
+	
 	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
 	local player = Players.LocalPlayer
-	local runService = game:GetService("RunService")
 	
-	local hitboxEnabled = false
-	local currentSize = 10
-	local updateLoop = nil
-	_G.HitboxEnabled = false
-	_G.HitboxVisible = false
+	-- Кнопка Toggle (скрипт лежит внутри неё)
+	local toggleButton = script.Parent
+	-- Кнопка Visual (лежит рядом)
+	local visualButton = toggleButton.Parent:WaitForChild("Hitbox_Visual")
 	
-	-- Текстбокс внутри кнопки
-	local textBox = button:FindFirstChild("Hitbox_Size")
+	-- TextBox (судя по скрину, он называется Hitbox_Size)
+	-- Если внутри Hitbox_Size есть еще TextBox, допиши :WaitForChild("Имя")
+	local textBox = toggleButton:WaitForChild("Hitbox_Size")
 	
+	-- Состояния
+	local hitboxEnabled = false -- Включен ли сам хитбокс
+	local visualEnabled = false -- Виден ли хитбокс (по умолчанию нет)
+	local activeLoop = nil
+	
+	-- Получение размера
+	local function getSize()
+		if not textBox or not textBox:IsA("TextBox") then return 5 end
+		local size = tonumber(textBox.Text) or 5
+		if size < 1 then size = 1 end
+		if size > 100 then size = 100 end
+		return size
+	end
+	
+	-- Применение хитбокса
 	local function updateHitboxes()
+		if not hitboxEnabled then return end
+	
+		local size = getSize()
+		local transparency = 1 -- По умолчанию невидимый
+	
+		if visualEnabled then
+			transparency = 0.5 -- Если визуал включен, делаем полупрозрачным
+		end
+	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Character then
 				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
-				local hitbox = plr.Character:FindFirstChild("CustomHitboxPart")
-	
-				if _G.HitboxEnabled and currentSize > 1 and hrp then
-					-- Создаем куб
-					if not hitbox then
-						hitbox = Instance.new("Part")
-						hitbox.Name = "CustomHitboxPart"
-						hitbox.CanCollide = false
-						hitbox.Massless = true
-						hitbox.Parent = plr.Character
-	
-						local weld = Instance.new("WeldConstraint")
-						weld.Part0 = hrp
-						weld.Part1 = hitbox
-						weld.Parent = hitbox
-					end
-	
-					hitbox.Size = Vector3.new(currentSize, currentSize, currentSize)
-					hitbox.CFrame = hrp.CFrame
-	
-					-- ВИЗУАЛ
-					if _G.HitboxVisible then
-						hitbox.Transparency = 0.4
-						hitbox.Color = Color3.fromRGB(75, 0, 130)
-						hitbox.Material = Enum.Material.Neon
-					else
-						hitbox.Transparency = 1
-						hitbox.Color = Color3.fromRGB(128, 128, 128)
-						hitbox.Material = Enum.Material.Plastic
-					end
-				else
-					if hitbox then hitbox:Destroy() end
+				if hrp then
+					hrp.Size = Vector3.new(size, size, size)
+					hrp.Transparency = transparency
+					hrp.BrickColor = BrickColor.new("Lilac")
+					hrp.Material = Enum.Material.Neon
+					hrp.CanCollide = false
 				end
 			end
 		end
 	end
 	
-	-- Ввод в текстбокс
-	if textBox then
-		textBox.FocusLost:Connect(function(enterPressed)
-			if enterPressed then
-				local val = tonumber(textBox.Text)
-				if val and val >= 0 and val <= 100 then
-					currentSize = val
-					if hitboxEnabled then updateHitboxes() end
+	-- Восстановление
+	local function restoreHitboxes()
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player and plr.Character then
+				local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					hrp.Size = Vector3.new(2, 2, 1)
+					hrp.Transparency = 1
+					hrp.BrickColor = BrickColor.new("Medium stone grey")
+					hrp.Material = Enum.Material.Plastic
+					hrp.CanCollide = false
 				end
 			end
-		end)
+		end
 	end
 	
-	-- Клик по кнопке
-	button.MouseButton1Click:Connect(function()
+	-- ===== КНОПКА 1: TOGGLE (ВКЛ/ВЫКЛ ХИТБОКС) =====
+	toggleButton.MouseButton1Click:Connect(function()
 		hitboxEnabled = not hitboxEnabled
-		_G.HitboxEnabled = hitboxEnabled
 	
 		if hitboxEnabled then
-			if textBox then
-				local val = tonumber(textBox.Text)
-				currentSize = (val and val >= 0 and val <= 100) and val or 10
-			end
-			if updateLoop then updateLoop:Disconnect() end
-			updateLoop = runService.RenderStepped:Connect(updateHitboxes)
-			print("✅ Хитбокс ВКЛ")
-		else
-			if updateLoop then updateLoop:Disconnect() updateLoop = nil end
 			updateHitboxes()
-			print("❌ Хитбокс ВЫКЛ")
+			if activeLoop then activeLoop:Disconnect() end
+			activeLoop = RunService.RenderStepped:Connect(updateHitboxes)
+		else
+			if activeLoop then
+				activeLoop:Disconnect()
+				activeLoop = nil
+			end
+			restoreHitboxes()
+		end
+	end)
+	
+	-- ===== КНОПКА 2: VISUAL (ВКЛ/ВЫКЛ ВИДИМОСТЬ) =====
+	visualButton.MouseButton1Click:Connect(function()
+		-- Переключаем видимость только если хитбокс включен
+		if not hitboxEnabled then return end
+	
+		visualEnabled = not visualEnabled
+		updateHitboxes() -- Сразу применяем изменения
+	end)
+	
+	-- Обновление при респавне
+	player.CharacterAdded:Connect(function()
+		task.wait(0.5)
+		if hitboxEnabled then
+			updateHitboxes()
 		end
 	end)
 end;
@@ -710,40 +720,5 @@ local script = G2L["1b"];
 	end)
 end;
 task.spawn(C_1b);
--- StarterGui.Hitbox_Gui.MainFrame.Hitbox_Visual.LocalScript
-local function C_20()
-local script = G2L["20"];
-	-- ==========================================
-	-- Hitbox_Visual (ВКЛ/ВЫКЛ ВИЗУАЛА)
-	-- ==========================================
-	local button = script.Parent
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	
-	_G.HitboxVisible = false
-	
-	button.MouseButton1Click:Connect(function()
-		_G.HitboxVisible = not _G.HitboxVisible
-	
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr ~= player and plr.Character then
-				local hitbox = plr.Character:FindFirstChild("CustomHitboxPart")
-				if hitbox then
-					if _G.HitboxVisible then
-						hitbox.Transparency = 0.4
-						hitbox.Color = Color3.fromRGB(75, 0, 130)
-						hitbox.Material = Enum.Material.Neon
-					else
-						hitbox.Transparency = 1
-						hitbox.Color = Color3.fromRGB(128, 128, 128)
-						hitbox.Material = Enum.Material.Plastic
-					end
-				end
-			end
-		end
-		print("👁️ Визуал хитбокса:", _G.HitboxVisible and "ВКЛ" or "ВЫКЛ")
-	end)
-end;
-task.spawn(C_20);
 
 return G2L["1"], require;
