@@ -19,11 +19,10 @@ G2L["1"]["ResetOnSpawn"] = false;
 
 -- StarterGui.ESP_Hub.MainFrame
 G2L["2"] = Instance.new("Frame", G2L["1"]);
-G2L["2"]["Visible"] = false;
 G2L["2"]["BorderSizePixel"] = 0;
 G2L["2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Size"] = UDim2.new(0, 297, 0, 199);
-G2L["2"]["Position"] = UDim2.new(0.49176, 0, 0.1482, 0);
+G2L["2"]["Position"] = UDim2.new(0.63685, 0, 0.28028, 0);
 G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["2"]["Name"] = [[MainFrame]];
 G2L["2"]["BackgroundTransparency"] = 0.25;
